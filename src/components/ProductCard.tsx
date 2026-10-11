@@ -89,7 +89,7 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
         <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
           <div>
             <div className="flex items-center justify-between gap-2 mb-1">
-              <span className="text-[11px] font-bold tracking-wider text-[#003882] uppercase bg-blue-50 px-2 py-0.5 rounded">
+              <span className="text-[11px] font-bold tracking-wider text-[#00873E] uppercase bg-emerald-50 px-2 py-0.5 rounded">
                 {displayBrand}
               </span>
               <div className="flex items-center text-amber-500 text-xs font-bold gap-1">
@@ -101,7 +101,7 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
 
             <h3
               onClick={() => viewProductDetails(product)}
-              className="text-sm sm:text-base font-semibold text-slate-800 hover:text-[#003882] cursor-pointer line-clamp-2 transition-colors mb-2"
+              className="text-sm sm:text-base font-semibold text-slate-800 hover:text-[#00873E] cursor-pointer line-clamp-2 transition-colors mb-2"
             >
               {title}
             </h3>
@@ -145,7 +145,7 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
                   e.stopPropagation();
                   viewProductDetails(product);
                 }}
-                className="py-2.5 px-4 bg-slate-900 hover:bg-[#003882] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer whitespace-nowrap"
+                className="py-2.5 px-4 bg-slate-900 hover:bg-[#00873E] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer whitespace-nowrap"
               >
                 <span>{language === 'bn' ? 'বিস্তারিত দেখুন' : 'View Details'}</span>
                 <ChevronRight className="w-4 h-4" />
@@ -220,7 +220,7 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
         <div>
           <div className="flex items-center justify-between text-[11px] mb-1.5 gap-1">
             <div className="flex items-center gap-1.5 overflow-hidden">
-              <span className="font-bold text-[#003882] bg-blue-50 px-2 py-0.5 rounded uppercase tracking-wider text-[10px] shrink-0">
+              <span className="font-bold text-[#00873E] bg-emerald-50 px-2 py-0.5 rounded uppercase tracking-wider text-[10px] shrink-0">
                 {displayBrand}
               </span>
               <span className="text-[10px] text-slate-400 font-mono truncate">
@@ -235,7 +235,7 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
           </div>
 
           <h3
-            className="text-xs sm:text-sm font-semibold text-slate-800 hover:text-[#003882] line-clamp-2 transition-colors min-h-[2.5rem] leading-snug"
+            className="text-xs sm:text-sm font-semibold text-slate-800 hover:text-[#00873E] line-clamp-2 transition-colors min-h-[2.5rem] leading-snug"
           >
             {title}
           </h3>
@@ -254,7 +254,7 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
               )}
             </div>
 
-            <span className="text-xs font-bold text-[#003882] group-hover:text-emerald-600 flex items-center gap-0.5 transition-colors">
+            <span className="text-xs font-bold text-[#00873E] group-hover:text-emerald-700 flex items-center gap-0.5 transition-colors">
               <span>{language === 'bn' ? 'বিস্তারিত' : 'Details'}</span>
               <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </span>

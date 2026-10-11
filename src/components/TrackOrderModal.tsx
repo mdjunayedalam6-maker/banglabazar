@@ -136,7 +136,7 @@ export const TrackOrderModal: React.FC = () => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-xs animate-in fade-in duration-200">
       <div className="relative w-full max-w-2xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#0A2540] to-[#003882] p-5 sm:p-6 text-white relative shrink-0">
+        <div className="bg-gradient-to-r from-[#062919] to-[#00873E] p-5 sm:p-6 text-white relative shrink-0">
           <button
             onClick={() => {
               setIsTrackOrderModalOpen(false);
@@ -429,7 +429,7 @@ export const TrackOrderModal: React.FC = () => {
                     setSearchedOrder(userOrders[0]);
                     setInputVal(userOrders[0].trackingNumber);
                   }}
-                  className="text-xs font-bold text-[#003882] hover:underline cursor-pointer"
+                  className="text-xs font-bold text-[#00873E] hover:underline cursor-pointer"
                 >
                   {language === 'bn' ? 'আপনার সাম্প্রতিক অর্ডারটি দেখুন' : 'View your recent order'}
                 </button>
@@ -438,7 +438,7 @@ export const TrackOrderModal: React.FC = () => {
           ) : (
             /* Initial State */
             <div className="py-8 text-center space-y-3">
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 text-[#003882] flex items-center justify-center mx-auto border border-blue-100">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#00873E] flex items-center justify-center mx-auto border border-emerald-100">
                 <Package className="w-7 h-7" />
               </div>
               <h4 className="text-sm font-black text-slate-800">
@@ -467,7 +467,7 @@ export const TrackOrderModal: React.FC = () => {
               setIsTrackOrderModalOpen(false);
               setCurrentPage('shop');
             }}
-            className="text-xs font-bold text-[#003882] hover:text-[#FF6B00] transition-colors flex items-center gap-1 cursor-pointer"
+            className="text-xs font-bold text-[#00873E] hover:text-[#DC2626] transition-colors flex items-center gap-1 cursor-pointer"
           >
             <span>{language === 'bn' ? 'আরও কেনাকাটা করুন' : 'Continue Shopping'}</span>
             <ChevronRight className="w-3.5 h-3.5" />

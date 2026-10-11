@@ -239,7 +239,7 @@ export const Header: React.FC = () => {
         <div ref={searchRef} className="relative flex-1 max-w-xl sm:max-w-2xl ml-auto">
           <form onSubmit={handleSearchSubmit} className="relative flex items-center group">
             {/* Animated Gradient Border wrapper */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 via-[#003882] to-emerald-500 rounded-2xl blur-xs opacity-30 group-hover:opacity-70 transition duration-500"></div>
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 via-[#00873E] to-emerald-500 rounded-2xl blur-xs opacity-30 group-hover:opacity-70 transition duration-500"></div>
             
             <div className="relative flex w-full bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
               {/* Category Select inside Search Input (Desktop) */}
@@ -281,7 +281,7 @@ export const Header: React.FC = () => {
               {/* Search Button */}
               <button
                 type="submit"
-                className="px-3.5 sm:px-6 bg-gradient-to-r from-[#003882] to-[#002a61] hover:from-[#002a61] hover:to-[#001b40] text-white font-bold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shrink-0"
+                className="px-3.5 sm:px-6 bg-gradient-to-r from-[#00873E] to-[#046A31] hover:from-[#007033] hover:to-[#035526] text-white font-bold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shrink-0 shadow-xs"
                 aria-label={language === 'bn' ? 'অনুসন্ধান' : 'Search'}
               >
                 <Search className="w-4 h-4 shrink-0" />
@@ -447,14 +447,14 @@ export const Header: React.FC = () => {
 
           <button
             onClick={() => setIsCartDrawerOpen(true)}
-            className="relative flex items-center gap-2 bg-[#003882] hover:bg-[#002a61] text-white px-4 py-2 rounded-xl transition-colors cursor-pointer shadow-md"
+            className="relative flex items-center gap-2 bg-[#00873E] hover:bg-[#007033] text-white px-4 py-2 rounded-xl transition-colors cursor-pointer shadow-md shadow-emerald-900/10"
           >
             <ShoppingCart className="w-5 h-5" />
             <span className="font-bold text-sm hidden lg:inline">
               {language === 'bn' ? 'কার্ট' : 'Cart'}
             </span>
             {cartItemsCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-[#FF6B00] text-white text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
+              <span className="absolute -top-1.5 -right-1.5 bg-[#DC2626] text-white text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
                 {cartItemsCount}
               </span>
             )}

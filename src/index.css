@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --theme-primary: #003882;
-  --theme-accent: #FF6B00;
-  --theme-primary-hover: #002c66;
-  --theme-accent-hover: #e55e00;
-  --theme-primary-light: rgba(0, 56, 130, 0.08);
-  --theme-accent-light: rgba(255, 107, 0, 0.12);
-  --theme-primary-gradient: linear-gradient(135deg, #0047AB 0%, #002868 100%);
-  --theme-accent-gradient: linear-gradient(135deg, #FF8C00 0%, #FF5100 100%);
-  --theme-accent-glow: 0 4px 16px rgba(255, 107, 0, 0.38);
-  --theme-primary-glow: 0 4px 16px rgba(0, 56, 130, 0.30);
+  --theme-primary: #00873E;
+  --theme-accent: #DC2626;
+  --theme-primary-hover: #007033;
+  --theme-accent-hover: #B91C1C;
+  --theme-primary-light: rgba(0, 135, 62, 0.08);
+  --theme-accent-light: rgba(220, 38, 38, 0.10);
+  --theme-primary-gradient: linear-gradient(135deg, #00873E 0%, #005F2B 100%);
+  --theme-accent-gradient: linear-gradient(135deg, #EF4444 0%, #DC2626 50%, #B91C1C 100%);
+  --theme-accent-glow: 0 4px 16px rgba(220, 38, 38, 0.35);
+  --theme-primary-glow: 0 4px 16px rgba(0, 135, 62, 0.28);
   --theme-radius: 1rem;
 }
 
@@ -86,12 +86,12 @@
   background: var(--theme-primary) !important;
   color: #ffffff !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 6px rgba(0, 56, 130, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 135, 62, 0.18);
 }
 
 .theme-btn-primary:hover {
   filter: brightness(1.08);
-  box-shadow: 0 4px 12px rgba(0, 56, 130, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 135, 62, 0.28);
   transform: translateY(-1px);
 }
 
@@ -103,12 +103,12 @@
   background: var(--theme-accent) !important;
   color: #ffffff !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 6px rgba(255, 107, 0, 0.20);
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.22);
 }
 
 .theme-btn-accent:hover {
   filter: brightness(1.06);
-  box-shadow: 0 4px 14px rgba(255, 107, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
   transform: translateY(-1px);
 }
 
@@ -116,54 +116,54 @@
   transform: scale(0.98);
 }
 
-/* Premium "Add to Cart" Button (অ্যাড টু কার্ট / কার্ট যোগ) */
+/* Premium "Add to Cart" Button (অ্যাড টু কার্ট / কার্ট যোগ) - Lush Forest Emerald */
 .theme-btn-cart {
-  background: linear-gradient(180deg, #0A2F6E 0%, #002660 100%) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.20);
+  background: linear-gradient(180deg, #00873E 0%, #006830 100%) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   color: #ffffff !important;
   font-weight: 700;
   letter-spacing: 0.01em;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 5px rgba(0, 38, 96, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 5px rgba(0, 135, 62, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.20);
   position: relative;
   overflow: hidden;
 }
 
 .theme-btn-cart:hover {
-  background: linear-gradient(180deg, #0d3882 0%, #002d72 100%) !important;
-  box-shadow: 0 4px 12px rgba(0, 38, 96, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: linear-gradient(180deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 0 4px 12px rgba(0, 135, 62, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
 }
 
 .theme-btn-cart:active {
   transform: scale(0.97);
-  box-shadow: 0 1px 2px rgba(0, 38, 96, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 135, 62, 0.2);
 }
 
-/* Premium "Buy Now" Button (এখনই কিনুন / অর্ডার করুন) */
+/* Premium "Buy Now" Button (এখনই কিনুন / অর্ডার করুন) - Vivid Crimson Red with gloss */
 .theme-btn-buy {
-  background: linear-gradient(135deg, #FF8C00 0%, #FF5A00 50%, #FF4500 100%) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.30);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 50%, #B91C1C 100%) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.20);
   color: #ffffff !important;
   font-weight: 800;
   letter-spacing: 0.01em;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(255, 90, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   position: relative;
   overflow: hidden;
 }
 
 .theme-btn-buy:hover {
-  background: linear-gradient(135deg, #FFA01A 0%, #FF6600 50%, #FF5100 100%) !important;
-  box-shadow: 0 6px 20px rgba(255, 90, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  background: linear-gradient(135deg, #F87171 0%, #EF4444 50%, #DC2626 100%) !important;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.35);
   transform: translateY(-1px);
 }
 
 .theme-btn-buy:active {
   transform: scale(0.97);
-  box-shadow: 0 2px 4px rgba(255, 90, 0, 0.25);
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.25);
 }
 
 /* Shimmer animation for eye-catching CTA highlights */

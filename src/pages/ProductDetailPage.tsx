@@ -371,7 +371,7 @@ export const ProductDetailPage: React.FC = () => {
           <div className="space-y-4">
             {/* Brand & SKU */}
             <div className="flex items-center justify-between gap-2 flex-wrap">
-              <span className="text-xs font-bold text-[#003882] uppercase bg-blue-50 border border-blue-200/60 px-3 py-1 rounded-lg tracking-wider">
+              <span className="text-xs font-bold text-[#00873E] uppercase bg-emerald-50 border border-emerald-200/60 px-3 py-1 rounded-lg tracking-wider">
                 {displayBrand}
               </span>
               <div className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1 rounded-lg text-xs font-mono font-medium border border-slate-200 transition-colors">
@@ -528,7 +528,7 @@ export const ProductDetailPage: React.FC = () => {
                             onClick={() => handleVariantSelect(v.type, opt)}
                             className={`px-3 py-1.5 text-xs font-semibold rounded-xl border transition-all ${
                               isChosen
-                                ? 'bg-[#003882] text-white border-[#003882] shadow-xs'
+                                ? 'bg-[#00873E] text-white border-[#00873E] shadow-xs'
                                 : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
                             }`}
                           >
@@ -694,7 +694,7 @@ export const ProductDetailPage: React.FC = () => {
             {description && (
               <div className="p-5 bg-slate-50/90 rounded-2xl border border-slate-200 space-y-2">
                 <h4 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <Info className="w-4 h-4 text-[#003882]" />
+                  <Info className="w-4 h-4 text-[#00873E]" />
                   <span>{language === 'bn' ? 'পণ্যের পূর্ণাঙ্গ বিবরণ (Product Description)' : 'Product Description'}</span>
                 </h4>
                 <div className="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line font-normal">

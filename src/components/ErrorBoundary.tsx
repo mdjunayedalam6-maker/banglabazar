@@ -47,7 +47,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   }
                 } catch (_) {}
               }}
-              className="w-full py-3 bg-[#003580] hover:bg-[#002860] text-white font-bold rounded-xl text-xs transition-all shadow-md cursor-pointer"
+              className="w-full py-3 bg-[#00873E] hover:bg-[#007033] text-white font-bold rounded-xl text-xs transition-all shadow-md cursor-pointer"
             >
               পেজ রিফ্রেশ করুন
             </button>

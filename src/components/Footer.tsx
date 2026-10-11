@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
   const { isInstallable, isInstalled, install } = usePWAInstall();
 
   return (
-    <footer className="bg-[#0A2540] text-white pt-12 pb-24 md:pb-12 border-t border-slate-800">
+    <footer className="bg-[#062316] text-white pt-12 pb-24 md:pb-12 border-t border-emerald-950/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div className="flex flex-col items-center justify-center space-y-6">
           {/* Brand Info */}
@@ -182,7 +182,7 @@ export const Footer: React.FC = () => {
               </div>
             ) : (!isInstalled && isInstallable) && (
               <div className="pt-3 pb-1 w-full max-w-lg">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-3.5 p-3.5 px-4 sm:px-5 bg-gradient-to-r from-slate-900/90 via-blue-950/60 to-slate-900/90 border border-blue-500/40 rounded-2xl shadow-xl shadow-blue-950/30">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-3.5 p-3.5 px-4 sm:px-5 bg-gradient-to-r from-slate-900/90 via-emerald-950/60 to-slate-900/90 border border-emerald-500/40 rounded-2xl shadow-xl shadow-emerald-950/30">
                   <div className="flex items-center gap-3 text-center sm:text-left">
                     <div className="w-10 h-10 rounded-xl overflow-hidden shadow-md flex items-center justify-center shrink-0">
                       <img src="/pwa-192x192.png" alt="বাংলা বাজার (Bangla Bazar)" className="w-full h-full object-cover rounded-xl" />
@@ -190,7 +190,7 @@ export const Footer: React.FC = () => {
                     <div>
                       <div className="text-xs font-black text-white flex items-center justify-center sm:justify-start gap-2">
                         <span>{language === 'bn' ? 'বাংলা বাজার অফিসিয়াল অ্যাপ' : 'Bangla Bazar Official App'}</span>
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-400/30">
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                           PWA App
                         </span>
                       </div>
@@ -201,7 +201,7 @@ export const Footer: React.FC = () => {
                   </div>
                   <button
                     onClick={() => install()}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-400 hover:to-indigo-400 text-white font-black text-xs rounded-xl shadow-md transition-all hover:scale-105 cursor-pointer shrink-0"
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs rounded-xl shadow-md transition-all hover:scale-105 cursor-pointer shrink-0"
                   >
                     <Download className="w-4 h-4" />
                     <span>{language === 'bn' ? 'ইনস্টল করুন' : 'Install App'}</span>

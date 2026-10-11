@@ -3,8 +3,8 @@ import eidBannerImg from '../assets/images/oneroof_eid_banner_1789265637891.jpg'
 import techBannerImg from '../assets/images/oneroof_tech_banner_1789265651663.jpg';
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  primaryColor: '#003882',
-  accentColor: '#FF6B00',
+  primaryColor: '#00873E',
+  accentColor: '#DC2626',
   themePreset: 'classic',
   showAnnouncementBar: false,
   announcementTextBn: '',

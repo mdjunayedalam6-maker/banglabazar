@@ -380,7 +380,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [siteSettings, setSiteSettings] = useState<SiteSettings>(() => {
     try {
       const saved = safeLocalStorage.getItem('oneroof_site_settings');
-      return saved ? { ...DEFAULT_SITE_SETTINGS, ...JSON.parse(saved) } : DEFAULT_SITE_SETTINGS;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.primaryColor === '#003882' || !parsed.primaryColor) {
+          parsed.primaryColor = '#00873E';
+        }
+        if (parsed.accentColor === '#FF6B00' || !parsed.accentColor) {
+          parsed.accentColor = '#DC2626';
+        }
+        return { ...DEFAULT_SITE_SETTINGS, ...parsed };
+      }
+      return DEFAULT_SITE_SETTINGS;
     } catch {
       return DEFAULT_SITE_SETTINGS;
     }
@@ -986,8 +996,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Synchronize CSS Root Variables for dynamic branding
   useEffect(() => {
-    const primary = siteSettings.primaryColor || '#003882';
-    const accent = siteSettings.accentColor || '#FF6B00';
+    const primary = siteSettings.primaryColor || '#00873E';
+    const accent = siteSettings.accentColor || '#DC2626';
     document.documentElement.style.setProperty('--theme-primary', primary);
     document.documentElement.style.setProperty('--theme-accent', accent);
     document.documentElement.style.setProperty('--color-primary', primary);
@@ -1047,8 +1057,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Apply dynamic theme colors and layout style to :root across the entire website
   useEffect(() => {
     const root = document.documentElement;
-    const primary = siteSettings.primaryColor || '#003882';
-    const accent = siteSettings.accentColor || '#FF6B00';
+    const primary = siteSettings.primaryColor || '#00873E';
+    const accent = siteSettings.accentColor || '#DC2626';
 
     root.style.setProperty('--theme-primary', primary);
     root.style.setProperty('--theme-accent', accent);

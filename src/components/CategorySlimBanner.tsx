@@ -63,12 +63,12 @@ export const CategorySlimBanner: React.FC<CategorySlimBannerProps> = ({
     <div className="space-y-2.5 select-none pt-1">
       {/* Search Filter Chip (Shown only when user is searching) */}
       {searchQuery && (
-        <div className="flex items-center justify-between bg-blue-50/90 border border-blue-200/80 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800">
+        <div className="flex items-center justify-between bg-emerald-50/90 border border-emerald-200/80 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800">
           <div className="flex items-center gap-2">
             <span className="text-slate-500 font-normal">
               {language === 'bn' ? 'অনুসন্ধানকৃত ফলাফল:' : 'Search results for:'}
             </span>
-            <span className="font-bold text-[#003882]">"{searchQuery}"</span>
+            <span className="font-bold text-[#00873E]">"{searchQuery}"</span>
             <span className="text-[11px] text-slate-500 bg-white px-2 py-0.5 rounded-full border border-slate-200">
               {language === 'bn' ? toBengaliNumber(productsCount) : productsCount} {language === 'bn' ? 'টি পণ্য' : 'products'}
             </span>
@@ -239,7 +239,7 @@ export const CategorySlimBanner: React.FC<CategorySlimBannerProps> = ({
             }}
             className={`shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               currentCategory === 'all'
-                ? 'bg-[#003882] text-white shadow-xs scale-[1.02]'
+                ? 'bg-[#00873E] text-white shadow-xs scale-[1.02]'
                 : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200/80 hover:border-slate-300'
             }`}
           >

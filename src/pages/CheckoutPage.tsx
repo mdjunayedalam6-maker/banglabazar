@@ -628,7 +628,7 @@ export const CheckoutPage: React.FC = () => {
 
               <div className="flex justify-between text-base sm:text-lg font-black text-slate-900 pt-3 border-t border-slate-200">
                 <span>{t.total}</span>
-                <span className="text-[#003882] font-black">{formatPrice(calculatedTotal)}</span>
+                <span className="text-[#00873E] font-black">{formatPrice(calculatedTotal)}</span>
               </div>
             </div>
 

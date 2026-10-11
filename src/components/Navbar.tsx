@@ -52,7 +52,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#0A2540] border-t border-slate-800 text-white select-none hidden md:block">
+    <div className="bg-[#062919] border-t border-emerald-900/60 text-white select-none hidden md:block shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <div className="flex items-center space-x-1">
           {/* Category Mega Dropdown Button */}
@@ -68,7 +68,7 @@ export const Navbar: React.FC = () => {
 
             {/* Category Dropdown List */}
             {isCategoryOpen && (
-              <div className="absolute top-full left-0 w-72 bg-white text-slate-800 shadow-2xl rounded-b-xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute top-full left-0 w-72 bg-white text-slate-800 shadow-2xl rounded-b-xl border border-emerald-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
@@ -76,13 +76,13 @@ export const Navbar: React.FC = () => {
                       openCategory(cat.id);
                       setIsCategoryOpen(false);
                     }}
-                    className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-blue-50 hover:text-[#003882] text-xs font-semibold text-slate-700 transition-colors text-left group"
+                    className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-emerald-50 hover:text-[#00873E] text-xs font-semibold text-slate-700 transition-colors text-left group"
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#003882] opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00873E] opacity-0 group-hover:opacity-100 transition-opacity" />
                       <span>{language === 'bn' ? cat.nameBn : cat.nameEn}</span>
                     </div>
-                    <span className="text-[11px] text-slate-400 group-hover:text-[#003882] font-normal transition-colors">
+                    <span className="text-[11px] text-slate-400 group-hover:text-[#00873E] font-normal transition-colors">
                       {language === 'bn' ? `${toBengaliNumber(cat.itemCount)}টি পণ্য` : `${cat.itemCount} items`}
                     </span>
                   </button>
@@ -94,7 +94,7 @@ export const Navbar: React.FC = () => {
                       setCurrentPage('shop');
                       setIsCategoryOpen(false);
                     }}
-                    className="text-xs text-[#003882] font-bold flex items-center gap-1 hover:underline"
+                    className="text-xs text-[#00873E] font-bold flex items-center gap-1 hover:underline"
                   >
                     <span>{language === 'bn' ? 'সব পণ্য এক সাথে দেখুন' : 'Browse All Products'}</span>
                     <ArrowRight className="w-3 h-3" />

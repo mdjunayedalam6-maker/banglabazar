@@ -490,10 +490,10 @@ export const AdminPage: React.FC = () => {
   // Color theme presets
   const THEME_PRESETS = [
     {
-      id: 'classic',
-      name: 'বাংলা বাজার ক্লাসিক (রয়্যাল ব্লু ও কমলা)',
-      primary: '#003882',
-      accent: '#FF6B00',
+      id: 'brand',
+      name: 'বাংলা বাজার অফিসিয়াল (সবুজ ও লাল)',
+      primary: '#00873E',
+      accent: '#DC2626',
     },
     {
       id: 'emerald',

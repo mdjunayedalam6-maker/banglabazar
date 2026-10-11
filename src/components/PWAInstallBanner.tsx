@@ -76,7 +76,7 @@ export const PWAInstallBanner: React.FC = () => {
           <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={handleInstallClick}
-              className="flex items-center gap-1.5 bg-[#003580] hover:bg-[#002860] active:scale-95 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer whitespace-nowrap"
+              className="flex items-center gap-1.5 bg-[#00873E] hover:bg-[#007033] active:scale-95 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer whitespace-nowrap"
             >
               <Download className="w-3.5 h-3.5" />
               <span>{language === 'bn' ? 'ইনস্টল' : 'Install'}</span>
@@ -163,7 +163,7 @@ export const PWAInstallBanner: React.FC = () => {
 
             <button
               onClick={() => setShowIOSModal(false)}
-              className="mt-5 w-full rounded-xl bg-[#003580] py-2.5 text-xs font-bold text-white hover:bg-[#002860] transition-colors cursor-pointer"
+              className="mt-5 w-full rounded-xl bg-[#00873E] py-2.5 text-xs font-bold text-white hover:bg-[#007033] transition-colors cursor-pointer"
             >
               {language === 'bn' ? 'বুঝেছি / বন্ধ করুন' : 'Got it / Close'}
             </button>

@@ -123,7 +123,7 @@ export const ProfilePage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* User Greeting Card */}
-      <div className="bg-gradient-to-r from-[#0A2540] via-[#0F365F] to-emerald-900 rounded-3xl p-6 sm:p-8 text-white flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-md">
+      <div className="bg-gradient-to-r from-[#062919] via-[#0A3D24] to-[#046A31] rounded-3xl p-6 sm:p-8 text-white flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-md border border-emerald-800/30">
         <div className="flex items-center gap-4">
           <img
             src={currentUser.avatar}
@@ -256,7 +256,7 @@ export const ProfilePage: React.FC = () => {
                   </span>
                   <button
                     onClick={() => setCurrentPage('admin')}
-                    className="px-3.5 py-1.5 bg-[#003882] hover:bg-[#002860] text-white rounded-xl font-bold text-xs cursor-pointer shadow-xs transition-colors"
+                    className="px-3.5 py-1.5 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl font-bold text-xs cursor-pointer shadow-xs transition-colors"
                   >
                     {language === 'bn' ? 'এডমিন ড্যাশবোর্ড' : 'Admin Dashboard'}
                   </button>

@@ -141,7 +141,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
       {/* Drawer */}
       <div className="relative w-4/5 max-w-sm bg-white h-full shadow-2xl flex flex-col z-10 overflow-y-auto">
         {/* Drawer Header */}
-        <div className="p-4 bg-[#0A2540] text-white flex items-center justify-between">
+        <div className="p-4 bg-[#062919] text-white flex items-center justify-between border-b border-emerald-900/40">
           <BrandLogo size="sm" textColor="light" />
           <button
             onClick={onClose}
@@ -220,14 +220,14 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
             </a>
           </div>
         ) : (!isInstalled && (isInstallable || isIOS)) && (
-          <div className="p-3 bg-gradient-to-r from-[#003580] to-[#002860] text-white flex items-center justify-between gap-2 shadow-inner">
+          <div className="p-3 bg-gradient-to-r from-[#00873E] to-[#056830] text-white flex items-center justify-between gap-2 shadow-inner">
             <div className="flex items-center gap-2.5 min-w-0">
               <img src="/pwa-192x192.png" alt="বাংলা বাজার (Bangla Bazar)" className="w-8 h-8 rounded-lg object-cover shrink-0 shadow-xs" />
               <div className="min-w-0">
                 <div className="text-xs font-bold truncate">
                   {language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar Mobile App'}
                 </div>
-                <div className="text-[10px] text-blue-100 truncate">
+                <div className="text-[10px] text-emerald-100 truncate">
                   {language === 'bn' ? 'দ্রুত কেনাকাটায় ইনস্টল করুন' : 'Install for faster shopping'}
                 </div>
               </div>
@@ -241,9 +241,9 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
                   onClose();
                 }
               }}
-              className="px-2.5 py-1 bg-white text-[#003580] rounded-lg text-xs font-black hover:bg-blue-50 transition-colors shrink-0 shadow-xs flex items-center gap-1 cursor-pointer"
+              className="px-2.5 py-1 bg-white text-[#00873E] rounded-lg text-xs font-black hover:bg-emerald-50 transition-colors shrink-0 shadow-xs flex items-center gap-1 cursor-pointer"
             >
-              <Download className="w-3 h-3 text-[#003580]" />
+              <Download className="w-3 h-3 text-[#00873E]" />
               <span>{language === 'bn' ? 'ইনস্টল' : 'Install'}</span>
             </button>
           </div>
@@ -344,7 +344,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
                   <Smartphone className="w-4 h-4 text-blue-600" />
                   <span>{language === 'bn' ? 'মোবাইল অ্যাপ ইনস্টল করুন' : 'Install Mobile App'}</span>
                 </div>
-                <span className="text-[10px] bg-[#003580] text-white px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                <span className="text-[10px] bg-[#00873E] text-white px-2 py-0.5 rounded font-bold flex items-center gap-1">
                   <Download className="w-3 h-3" />
                   <span>App</span>
                 </span>
@@ -388,7 +388,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
 
         {/* Drawer Footer Hotline */}
         <div className="p-4 bg-slate-100 text-xs text-slate-600 space-y-2">
-          <div className="flex items-center gap-2 font-semibold text-[#0A2540]">
+          <div className="flex items-center gap-2 font-semibold text-[#062919]">
             <PhoneCall className="w-4 h-4 text-emerald-600" />
             <a href="tel:01929637253" className="hover:underline">
               হটলাইন: <span className="font-mono">01929637253</span>

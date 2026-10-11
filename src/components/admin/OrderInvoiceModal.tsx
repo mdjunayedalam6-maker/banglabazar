@@ -2,6 +2,7 @@ import React from 'react';
 import { X, Printer, CheckCircle2, Clock, Truck, Package, ShieldCheck } from 'lucide-react';
 import { Order } from '../../types';
 import { useApp } from '../../context/AppContext';
+import { BrandLogo } from '../BrandLogo';
 
 interface OrderInvoiceModalProps {
   order: Order | null;
@@ -54,11 +55,11 @@ export const OrderInvoiceModal: React.FC<OrderInvoiceModalProps> = ({ order, onC
           {/* Brand & Invoice Details */}
           <div className="flex flex-col sm:flex-row justify-between items-start gap-4 pb-4 border-b border-slate-200">
             <div>
-              <div className="text-xl font-black text-[#003882]">
-                বাংলা<span className="text-[#FF6B00]"> বাজার</span> (Bangla Bazar)
+              <div className="mb-2">
+                <BrandLogo size="md" />
               </div>
-              <div className="text-[11px] text-slate-500 mt-0.5">সেরা অনলাইন মার্কেটপ্লেস</div>
-              <div className="text-[11px] text-slate-400 mt-1">
+              <div className="text-[11px] text-slate-500 mt-1">সেরা অনলাইন মার্কেটপ্লেস</div>
+              <div className="text-[11px] text-slate-400 mt-0.5">
                 হটলাইন: 01929637253 | support@banglabazar.com.bd
               </div>
             </div>
@@ -182,7 +183,7 @@ export const OrderInvoiceModal: React.FC<OrderInvoiceModalProps> = ({ order, onC
             )}
             <div className="flex justify-between text-sm font-black text-slate-900 pt-2 border-t border-slate-200">
               <span>সর্বমোট প্রদেয় (Total Payable):</span>
-              <span className="text-[#003882] text-base">{formatPrice(order.total)}</span>
+              <span className="text-[#00873E] text-base">{formatPrice(order.total)}</span>
             </div>
           </div>
 

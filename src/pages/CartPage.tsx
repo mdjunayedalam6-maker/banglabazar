@@ -258,7 +258,7 @@ export const CartPage: React.FC = () => {
                   />
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-[#0A2540] hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-colors"
+                    className="px-4 py-2 bg-[#062919] hover:bg-[#00873E] text-white text-xs font-bold rounded-xl transition-colors"
                   >
                     {language === 'bn' ? 'প্রয়োগ' : 'Apply'}
                   </button>
@@ -301,7 +301,7 @@ export const CartPage: React.FC = () => {
 
               <div className="flex justify-between text-base sm:text-lg font-black text-slate-900 pt-3 border-t border-slate-200">
                 <span>{t.total}</span>
-                <span className="text-[#003882] font-black">{formatPrice(cartTotal)}</span>
+                <span className="text-[#00873E] font-black">{formatPrice(cartTotal)}</span>
               </div>
             </div>
 
@@ -357,7 +357,7 @@ export const CartDrawer: React.FC = () => {
       {/* Drawer */}
       <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-200">
         {/* Header */}
-        <div className="p-4 bg-[#0A2540] text-white flex items-center justify-between">
+        <div className="p-4 bg-[#062919] text-white flex items-center justify-between border-b border-emerald-900/40">
           <div className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-emerald-400" />
             <span className="font-bold text-sm">

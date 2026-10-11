@@ -1,4 +1,5 @@
 import React from 'react';
+import brandAppIcon from '../assets/images/bangla_bazar_app_icon_1791721630543.jpg';
 
 interface BrandLogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -254,9 +255,15 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       } ${sizeStyles.gap} ${className}`}
       title="বাংলা বাজার (Bangla Bazar) - সেরা অনলাইন মার্কেটপ্লেস"
     >
-      {/* 1. Dynamic Logo Emblem Mark */}
-      <div className="relative shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-1">
-        <BanglaBazarEmblem className={sizeStyles.emblem} isLight={isLight} />
+      {/* 1. Dynamic Logo Emblem Mark (User's Official 3D Cart App Icon) */}
+      <div className={`relative shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-1 overflow-hidden rounded-2xl shadow-sm ${
+        isLight ? 'bg-white/10 ring-1 ring-white/20 p-0.5' : 'bg-white ring-1 ring-slate-200/80 p-0.5'
+      }`}>
+        <img
+          src={brandAppIcon}
+          alt="বাংলা বাজার (Bangla Bazar)"
+          className={`${sizeStyles.emblem} object-cover rounded-xl shrink-0`}
+        />
       </div>
 
       {/* 2. Custom Designed Brand Typography reproducing the exact uploaded design */}

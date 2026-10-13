@@ -214,48 +214,107 @@ export const deduplicateProducts = (list: Product[]): Product[] => {
     if (rawItem && rawItem.id) {
       if (!seen.has(rawItem.id)) {
         seen.add(rawItem.id);
+
+        // Clean titles of any residual "OneRoof", "OneRoof Mart", "Bangla Bazar Mart", etc.
+        const cleanTitleBn = (rawItem.titleBn || '')
+          .replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার')
+          .replace(/Bangla\s*Bazar\s*Mart/gi, 'বাংলা বাজার')
+          .replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার')
+          .replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার')
+          .replace(/OneRoof/gi, 'বাংলা বাজার');
+
+        const cleanTitleEn = (rawItem.titleEn || '')
+          .replace(/OneRoof\s*Mart/gi, 'Bangla Bazar')
+          .replace(/Bangla\s*Bazar\s*Mart/gi, 'Bangla Bazar')
+          .replace(/বাংলা\s*বাজার\s*Mart/gi, 'Bangla Bazar')
+          .replace(/OneRoof/gi, 'Bangla Bazar');
+
+        // Clean description of any "Mart" and suppliers
+        let descBn = (rawItem.descriptionBn || '')
+          .replace(/OneRoof\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য')
+          .replace(/ShopBase\s*BD\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য')
+          .replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার')
+          .replace(/Bangla\s*Bazar\s*Mart/gi, 'বাংলা বাজার')
+          .replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার')
+          .replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার')
+          .replace(/ShopBaseBD\s*Official/gi, 'Bangla Bazar Official')
+          .replace(/OneRoof\s*Official/gi, 'Bangla Bazar Official')
+          .replace(/OneRoof/gi, 'বাংলা বাজার')
+          .replace(/ShopBase\s*BD/gi, 'বাংলা বাজার')
+          .replace(/ShopBase/gi, 'বাংলা বাজার');
+
+        // Clean specifications: brand is ALWAYS 'বাংলা বাজার'
+        const cleanSpecs: Record<string, string> = {
+          'ব্র্যান্ড': 'বাংলা বাজার',
+          'কোয়ালিটি': '১০০% প্রিমিয়াম এক্সপোর্ট স্ট্যান্ডার্ড',
+          'ডেলিভারি': 'সারাদেশে ক্যাশ অন ডেলিভারি (২-৪ দিন)',
+          'ওয়ারেন্টি': '৭ দিনের রিটার্ন ও রিপ্লেসমেন্ট',
+        };
+
+        if (rawItem.specifications && typeof rawItem.specifications === 'object') {
+          const forbiddenKeys = ['সোর্স', 'উৎস', 'পাইকারি', 'হোলসেল', 'লাভ', 'প্রফিট', 'রিসেলার', 'একাউন্ট'];
+          Object.entries(rawItem.specifications).forEach(([k, v]) => {
+            if (!forbiddenKeys.some(f => k.includes(f))) {
+              if (k.includes('ব্র্যান্ড') || k.toLowerCase().includes('brand')) {
+                cleanSpecs[k] = 'বাংলা বাজার';
+              } else {
+                cleanSpecs[k] = String(v)
+                  .replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার')
+                  .replace(/Bangla\s*Bazar\s*Mart/gi, 'বাংলা বাজার')
+                  .replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার')
+                  .replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার')
+                  .replace(/OneRoof/gi, 'বাংলা বাজার')
+                  .replace(/ShopBase/gi, 'বাংলা বাজার');
+              }
+            }
+          });
+        }
+
         let item: Product = { 
           ...rawItem, 
-          // All 11,902 products strictly branded as Bangla Bazar
-          brand: 'Bangla Bazar',
+          titleBn: cleanTitleBn || rawItem.titleBn,
+          titleEn: cleanTitleEn || rawItem.titleEn,
+          descriptionBn: descBn,
+          specifications: cleanSpecs,
+          // All 11,902 products strictly branded as বাংলা বাজার (Bangla Bazar without "Mart")
+          brand: 'বাংলা বাজার',
         };
 
         // Upgrade and sanitize product images to guaranteed HD resolution
-        if (Array.isArray(rawItem.images) && rawItem.images.length > 0) {
-          const uniqueHdImages: string[] = [];
-          const imgSeen = new Set<string>();
+        const rawImageList = (Array.isArray(rawItem.images) && rawItem.images.length > 0)
+          ? rawItem.images
+          : (rawItem.image ? [rawItem.image] : []);
 
-          for (const rawImg of rawItem.images) {
-            if (typeof rawImg !== 'string') continue;
-            let img = rawImg.trim();
+        const uniqueHdImages: string[] = [];
+        const imgSeen = new Set<string>();
 
-            // ShopBaseBD: Upgrade low-res thumbnail (_S_) to full-size Large HD (_L_) with .jpeg
-            if (img.includes('shopbasebd.com')) {
-              img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
-            }
+        for (const rawImg of rawImageList) {
+          if (typeof rawImg !== 'string') continue;
+          let img = rawImg.trim();
 
-            // Unsplash: Upgrade to ultra HD 1400px+ with q=95 quality
-            if (img.includes('unsplash.com')) {
-              img = img.replace(/w=\d+/, 'w=1400').replace(/q=\d+/, 'q=95');
-              if (!img.includes('w=1400')) {
-                img += (img.includes('?') ? '&' : '?') + 'w=1400&auto=format&fit=crop&q=95';
-              }
-            }
+          // ShopBaseBD: Upgrade low-res thumbnail (_S_) to full-size Large HD (_L_) with .jpeg
+          if (img.includes('shopbasebd.com')) {
+            img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
+          }
 
-            if (!imgSeen.has(img)) {
-              imgSeen.add(img);
-              uniqueHdImages.push(img);
+          // Unsplash: Upgrade to ultra HD 1600px+ with q=95 quality
+          if (img.includes('unsplash.com')) {
+            img = img.replace(/w=\d+/, 'w=1600').replace(/q=\d+/, 'q=95');
+            if (!img.includes('w=1600')) {
+              img += (img.includes('?') ? '&' : '?') + 'w=1600&auto=format&fit=crop&q=95';
             }
           }
 
-          item.images = uniqueHdImages.length > 0 ? uniqueHdImages : [
-            'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1400&auto=format&fit=crop&q=95'
-          ];
-        } else {
-          item.images = [
-            'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1400&auto=format&fit=crop&q=95'
-          ];
+          if (!imgSeen.has(img)) {
+            imgSeen.add(img);
+            uniqueHdImages.push(img);
+          }
         }
+
+        item.images = uniqueHdImages.length > 0 ? uniqueHdImages : [
+          'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&auto=format&fit=crop&q=95'
+        ];
+        item.image = item.images[0];
 
         result.push(item);
       }
@@ -1549,7 +1608,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             price: newPrice,
             originalPrice: Math.max(p.originalPrice || Math.round(newPrice * 1.3), Math.round(newPrice * 1.25)),
             profitMarginPercent: validMargin,
-            brand: (!p.brand || p.brand.toLowerCase().includes('shopbase') || p.brand.toLowerCase().includes('oneroof')) ? 'বাংলা বাজার' : p.brand,
+            brand: 'বাংলা বাজার',
           };
         });
         idbSet('oneroof_cached_products', updated).catch(() => {});
@@ -1583,12 +1642,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setProducts((prev) => {
         const cleaned = prev.map((p) => {
           let desc = p.descriptionBn || '';
-          desc = desc.replace(/ShopBase BD পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
-          desc = desc.replace(/OneRoof Mart এক্সক্লুসিভ পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
-          desc = desc.replace(/ShopBase BD/gi, 'বাংলা বাজার');
-          desc = desc.replace(/OneRoof Mart/gi, 'বাংলা বাজার');
-          desc = desc.replace(/ShopBaseBD Official/gi, 'Bangla Bazar Official');
-          desc = desc.replace(/OneRoof Official/gi, 'Bangla Bazar Official');
+          desc = desc.replace(/OneRoof\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
+          desc = desc.replace(/ShopBase\s*BD\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
+          desc = desc.replace(/বাংলা\s*বাজার\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
+          desc = desc.replace(/বাংলা\s*বাজার\s*মার্ট\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
+          desc = desc.replace(/Bangla\s*Bazar\s*Mart/gi, 'Bangla Bazar');
+          desc = desc.replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার');
+          desc = desc.replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার');
+          desc = desc.replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার');
+          desc = desc.replace(/ShopBase\s*BD/gi, 'বাংলা বাজার');
+          desc = desc.replace(/ShopBaseBD\s*Official/gi, 'Bangla Bazar Official');
+          desc = desc.replace(/OneRoof\s*Official/gi, 'Bangla Bazar Official');
           desc = desc.replace(/ShopBase/gi, 'বাংলা বাজার');
           desc = desc.replace(/OneRoof/gi, 'বাংলা বাজার');
           desc = desc.split('\n').filter(line => {
@@ -1613,7 +1677,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             const forbiddenKeys = ['সোর্স', 'উৎস', 'পাইকারি', 'হোলসেল', 'লাভ', 'প্রফিট', 'রিসেলার', 'একাউন্ট'];
             Object.entries(p.specifications).forEach(([k, v]) => {
               if (!forbiddenKeys.some(f => k.includes(f))) {
-                cleanSpecs[k] = String(v).replace(/ShopBase/gi, 'বাংলা বাজার').replace(/OneRoof/gi, 'বাংলা বাজার');
+                if (k.includes('ব্র্যান্ড') || k.toLowerCase().includes('brand')) {
+                  cleanSpecs[k] = 'বাংলা বাজার';
+                } else {
+                  cleanSpecs[k] = String(v)
+                    .replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার')
+                    .replace(/Bangla\s*Bazar\s*Mart/gi, 'বাংলা বাজার')
+                    .replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার')
+                    .replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার')
+                    .replace(/ShopBase/gi, 'বাংলা বাজার')
+                    .replace(/OneRoof/gi, 'বাংলা বাজার');
+                }
               }
             });
           }

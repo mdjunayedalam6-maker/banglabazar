@@ -141,12 +141,12 @@ export const ProductEditModal: React.FC<ProductEditModalProps> = ({
       setTitleEn('');
       setCategory(categories[0]?.slug || 'electronics');
       setSubcategory('');
-      setBrand('বাংলা বাজার অফিসিয়াল');
+      setBrand('বাংলা বাজার');
       setPriceStr('205');
       setOriginalPriceStr('250');
       setStockStr('50');
       setSku('');
-      setImages(['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80']);
+      setImages(['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1400&auto=format&fit=crop&q=95']);
       setActiveImageSlot(0);
       setSizes(['M', 'L', 'XL']);
       setColors(['কালো', 'নীল']);

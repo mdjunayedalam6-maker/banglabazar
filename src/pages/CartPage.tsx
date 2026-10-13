@@ -116,7 +116,14 @@ export const CartPage: React.FC = () => {
         <div className="lg:col-span-8 space-y-4">
           <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200/80 shadow-xs divide-y divide-slate-100">
             {cart.map((item) => {
-              const title = language === 'bn' ? item.product.titleBn : item.product.titleEn;
+              const rawTitle = language === 'bn' ? item.product.titleBn : item.product.titleEn;
+              const displayBrand = language === 'bn' ? 'বাংলা বাজার' : 'Bangla Bazar';
+              const title = (rawTitle || '')
+                .replace(/OneRoof\s*Mart/gi, displayBrand)
+                .replace(/Bangla\s*Bazar\s*Mart/gi, displayBrand)
+                .replace(/বাংলা\s*বাজার\s*Mart/gi, displayBrand)
+                .replace(/বাংলা\s*বাজার\s*মার্ট/gi, displayBrand)
+                .replace(/OneRoof/gi, displayBrand);
               return (
                 <div key={item.product.id} className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-center gap-4">
                   {/* Thumbnail */}
@@ -142,7 +149,7 @@ export const CartPage: React.FC = () => {
                   {/* Info */}
                   <div className="flex-1 min-w-0 text-center sm:text-left">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
-                      {item.product.brand}
+                      {displayBrand}
                     </span>
                     <h3 className="text-sm sm:text-base font-bold text-slate-800 line-clamp-2 mt-1">
                       {title}

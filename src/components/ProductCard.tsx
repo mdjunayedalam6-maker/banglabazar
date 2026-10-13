@@ -17,22 +17,29 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
   } = useApp();
 
   const isSaved = isInWishlist(product.id);
-  const title = language === 'bn' ? product.titleBn : product.titleEn;
-  // All 11,902 products branded as Bangla Bazar
+  // All 11,902 products strictly branded as বাংলা বাজার (Bangla Bazar without "Mart")
   const displayBrand = language === 'bn' ? 'বাংলা বাজার' : 'Bangla Bazar';
 
-  // Robust image handling: upgrade to guaranteed Large HD resolution
+  const rawTitle = language === 'bn' ? product.titleBn : product.titleEn;
+  const title = (rawTitle || '')
+    .replace(/OneRoof\s*Mart/gi, displayBrand)
+    .replace(/Bangla\s*Bazar\s*Mart/gi, displayBrand)
+    .replace(/বাংলা\s*বাজার\s*Mart/gi, displayBrand)
+    .replace(/বাংলা\s*বাজার\s*মার্ট/gi, displayBrand)
+    .replace(/OneRoof/gi, displayBrand);
+
+  // Robust image handling: upgrade to guaranteed Ultra-HD resolution
   const initialImage = React.useMemo(() => {
-    let img = product.images?.[0] || '';
+    let img = product.images?.[0] || product.image || '';
     if (typeof img === 'string') {
       if (img.includes('shopbasebd.com')) {
         img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
       } else if (img.includes('unsplash.com')) {
-        img = img.replace(/w=\d+/, 'w=800').replace(/q=\d+/, 'q=90');
+        img = img.replace(/w=\d+/, 'w=1000').replace(/q=\d+/, 'q=95');
       }
     }
-    return img || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop&q=90';
-  }, [product.images]);
+    return img || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1000&auto=format&fit=crop&q=95';
+  }, [product.images, product.image]);
 
   const [currentImg, setCurrentImg] = React.useState<string>(initialImage);
 
@@ -48,14 +55,14 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
         if (sec.includes('shopbasebd.com')) {
           sec = sec.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
         } else if (sec.includes('unsplash.com')) {
-          sec = sec.replace(/w=\d+/, 'w=800').replace(/q=\d+/, 'q=90');
+          sec = sec.replace(/w=\d+/, 'w=1000').replace(/q=\d+/, 'q=95');
         }
       }
       setCurrentImg(sec);
       return;
     }
     // High-resolution fallback
-    setCurrentImg('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop&q=90');
+    setCurrentImg('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1000&auto=format&fit=crop&q=95');
   };
 
   if (layout === 'list') {
@@ -71,7 +78,9 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
             referrerPolicy="no-referrer"
             onError={handleImageError}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            style={{ imageRendering: 'high-quality' }}
             loading="lazy"
+            decoding="async"
           />
           <div className="absolute top-2 left-2 flex flex-col gap-1">
             {product.discountPercentage && (
@@ -170,7 +179,9 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
           referrerPolicy="no-referrer"
           onError={handleImageError}
           className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+          style={{ imageRendering: 'high-quality' }}
           loading="lazy"
+          decoding="async"
         />
 
         <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">

@@ -175,24 +175,25 @@ export const ProductDetailPage: React.FC = () => {
 
   // Guaranteed Ultra-HD Image URLs with Large resolution and crisp quality
   const sanitizedImages = React.useMemo(() => {
-    if (!selectedProduct?.images || selectedProduct.images.length === 0) {
-      return ['https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1400&auto=format&fit=crop&q=95'];
-    }
+    const rawList = (Array.isArray(selectedProduct?.images) && selectedProduct.images.length > 0)
+      ? selectedProduct.images
+      : (selectedProduct?.image ? [selectedProduct.image] : []);
+
     const list: string[] = [];
     const seen = new Set<string>();
 
-    for (const raw of selectedProduct.images) {
+    for (const raw of rawList) {
       if (typeof raw !== 'string') continue;
       let img = raw.trim();
       // Upgrade shopbase images: always use _L_ (large HD) and .jpeg
       if (img.includes('shopbasebd.com')) {
         img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
       }
-      // Upgrade unsplash images to ultra HD 1400px+ q=95
+      // Upgrade unsplash images to ultra HD 1600px+ q=95
       if (img.includes('unsplash.com')) {
-        img = img.replace(/w=\d+/, 'w=1400').replace(/q=\d+/, 'q=95');
-        if (!img.includes('w=1400')) {
-          img += (img.includes('?') ? '&' : '?') + 'w=1400&auto=format&fit=crop&q=95';
+        img = img.replace(/w=\d+/, 'w=1600').replace(/q=\d+/, 'q=95');
+        if (!img.includes('w=1600')) {
+          img += (img.includes('?') ? '&' : '?') + 'w=1600&auto=format&fit=crop&q=95';
         }
       }
       if (!seen.has(img)) {
@@ -200,8 +201,8 @@ export const ProductDetailPage: React.FC = () => {
         list.push(img);
       }
     }
-    return list.length > 0 ? list : ['https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1400&auto=format&fit=crop&q=95'];
-  }, [selectedProduct?.images]);
+    return list.length > 0 ? list : ['https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&auto=format&fit=crop&q=95'];
+  }, [selectedProduct?.images, selectedProduct?.image]);
 
   const rawDescription = language === 'bn' ? selectedProduct.descriptionBn : selectedProduct.descriptionEn;
   const description = React.useMemo(() => {
@@ -211,12 +212,17 @@ export const ProductDetailPage: React.FC = () => {
       'Wholesale Price', 'Profit', 'রিসেলার একাউন্ট', '01929637253'
     ];
     let cleaned = rawDescription;
-    cleaned = cleaned.replace(/ShopBase BD পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
-    cleaned = cleaned.replace(/OneRoof Mart এক্সক্লুসিভ পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
-    cleaned = cleaned.replace(/ShopBase BD/gi, 'বাংলা বাজার');
-    cleaned = cleaned.replace(/OneRoof Mart/gi, 'বাংলা বাজার');
-    cleaned = cleaned.replace(/ShopBaseBD Official/gi, 'Bangla Bazar Official');
-    cleaned = cleaned.replace(/OneRoof Official/gi, 'Bangla Bazar Official');
+    cleaned = cleaned.replace(/OneRoof\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
+    cleaned = cleaned.replace(/ShopBase\s*BD\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
+    cleaned = cleaned.replace(/বাংলা\s*বাজার\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
+    cleaned = cleaned.replace(/বাংলা\s*বাজার\s*মার্ট\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
+    cleaned = cleaned.replace(/Bangla\s*Bazar\s*Mart/gi, 'Bangla Bazar');
+    cleaned = cleaned.replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার');
+    cleaned = cleaned.replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার');
+    cleaned = cleaned.replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার');
+    cleaned = cleaned.replace(/ShopBase\s*BD/gi, 'বাংলা বাজার');
+    cleaned = cleaned.replace(/ShopBaseBD\s*Official/gi, 'Bangla Bazar Official');
+    cleaned = cleaned.replace(/OneRoof\s*Official/gi, 'Bangla Bazar Official');
     cleaned = cleaned.replace(/ShopBase/gi, 'বাংলা বাজার');
     cleaned = cleaned.replace(/OneRoof/gi, 'বাংলা বাজার');
     sensitiveTerms.forEach(term => {
@@ -349,6 +355,7 @@ export const ProductDetailPage: React.FC = () => {
               setLightboxZoom(1);
               setLightboxPan({ x: 0, y: 0 });
             }}
+            title={language === 'bn' ? 'ক্লিক করে ফুলস্ক্রিন আল্ট্রা-এইচডি ভিউয়ারে দেখুন' : 'Click to view in Fullscreen Ultra-HD'}
           >
             <img
               src={sanitizedImages[activeImageIndex] || sanitizedImages[0]}
@@ -356,33 +363,54 @@ export const ProductDetailPage: React.FC = () => {
               referrerPolicy="no-referrer"
               onError={(e) => {
                 const target = e.currentTarget;
-                target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1400&auto=format&fit=crop&q=95';
+                target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&auto=format&fit=crop&q=95';
               }}
               style={{
                 transformOrigin: isHoverZooming ? `${zoomCoords.x}% ${zoomCoords.y}%` : 'center center',
-                transform: isHoverZooming ? 'scale(2.4)' : 'scale(1)',
+                transform: isHoverZooming ? 'scale(2.2)' : 'scale(1)',
                 transition: isHoverZooming ? 'transform 0.08s ease-out' : 'transform 0.3s ease-out',
-                imageRendering: '-webkit-optimize-contrast' as any,
+                imageRendering: 'high-quality',
+                WebkitBackfaceVisibility: 'hidden',
+                backfaceVisibility: 'hidden',
+                filter: isHoverZooming ? 'contrast(1.02) saturate(1.02)' : 'none',
               }}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain bg-white"
+              loading="eager"
+              decoding="async"
             />
+
+            {/* Magnifier lens indicator on hover */}
+            {isHoverZooming && (
+              <div 
+                className="absolute pointer-events-none rounded-xl border-2 border-emerald-500 bg-emerald-500/10 shadow-lg backdrop-contrast-125 hidden sm:block"
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  left: `calc(${zoomCoords.x}% - 60px)`,
+                  top: `calc(${zoomCoords.y}% - 60px)`,
+                  transition: 'none',
+                }}
+              />
+            )}
+
             {selectedProduct.discountPercentage && (
-              <span className="absolute top-3 left-3 bg-rose-600 text-white text-xs font-black px-2.5 py-1 rounded-lg shadow-sm pointer-events-none">
+              <span className="absolute top-3 left-3 bg-rose-600 text-white text-xs font-black px-2.5 py-1 rounded-lg shadow-sm pointer-events-none z-10">
                 -{selectedProduct.discountPercentage}% OFF
               </span>
             )}
             {selectedProduct.isFlashSale && (
-              <span className="absolute top-3 right-3 bg-amber-500 text-slate-950 text-xs font-black px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm pointer-events-none">
+              <span className="absolute top-3 right-3 bg-amber-500 text-slate-950 text-xs font-black px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm pointer-events-none z-10">
                 <Zap className="w-3 h-3 fill-slate-950" />
                 FLASH SALE
               </span>
             )}
+
             {/* Interactive HD Zoom Indicator */}
-            <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold shadow-md pointer-events-none select-none">
+            <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/85 backdrop-blur-md text-white text-[11px] font-bold shadow-lg pointer-events-none select-none z-10">
               <ZoomIn className={`w-3.5 h-3.5 ${isHoverZooming ? 'text-emerald-400 animate-pulse' : 'text-slate-300'}`} />
               <span>
                 {isHoverZooming 
-                  ? (language === 'bn' ? 'এইচডি জুম ২.৪x সক্রিয়' : 'HD 2.4x Zoom Active') 
+                  ? (language === 'bn' ? 'এইচডি জুম সক্রিয় (ক্লিক করে ফুলস্ক্রিন)' : 'HD Zoom Active (Click for 4K)') 
                   : (language === 'bn' ? 'এইচডি জুম (মাউস নিন / ক্লিক করুন)' : 'HD Zoom (Hover / Click)')}
               </span>
             </div>
@@ -771,12 +799,27 @@ export const ProductDetailPage: React.FC = () => {
                       const forbidden = ['সোর্স', 'উৎস', 'পাইকারি', 'হোলসেল', 'লাভ', 'প্রফিট', 'দাম', 'shopbase', 'রিসেলার', '01929637253'];
                       return !forbidden.some(term => k.includes(term) || v.includes(term));
                     })
-                    .map(([key, value]) => (
-                    <div key={key} className="flex justify-between p-3 bg-slate-50 rounded-xl text-xs sm:text-sm border border-slate-100">
-                      <span className="font-semibold text-slate-500">{key}</span>
-                      <span className="font-bold text-slate-800 text-right">{value}</span>
-                    </div>
-                  ))}
+                    .map(([key, value]) => {
+                      let cleanVal = String(value || '');
+                      if (key.includes('ব্র্যান্ড') || key.toLowerCase().includes('brand')) {
+                        cleanVal = displayBrand;
+                      } else {
+                        cleanVal = cleanVal
+                          .replace(/Bangla\s*Bazar\s*Mart/gi, displayBrand)
+                          .replace(/বাংলা\s*বাজার\s*Mart/gi, displayBrand)
+                          .replace(/বাংলা\s*বাজার\s*মার্ট/gi, displayBrand)
+                          .replace(/OneRoof\s*Mart/gi, displayBrand)
+                          .replace(/OneRoof/gi, displayBrand)
+                          .replace(/ShopBase\s*BD/gi, displayBrand)
+                          .replace(/ShopBase/gi, displayBrand);
+                      }
+                      return (
+                        <div key={key} className="flex justify-between p-3 bg-slate-50 rounded-xl text-xs sm:text-sm border border-slate-100">
+                          <span className="font-semibold text-slate-500">{key}</span>
+                          <span className="font-bold text-slate-800 text-right">{cleanVal}</span>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             ) : null}
@@ -1056,70 +1099,128 @@ export const ProductDetailPage: React.FC = () => {
       </div>
       {lightboxImage && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 select-none" 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-4 select-none" 
           onClick={() => setLightboxImage(null)}
+          onWheel={(e) => {
+            const delta = e.deltaY < 0 ? 0.35 : -0.35;
+            setLightboxZoom((prev) => Math.min(4, Math.max(1, +(prev + delta).toFixed(2))));
+          }}
         >
           {/* Top Floating HD Zoom & Close Controls */}
           <div 
-            className="absolute top-4 inset-x-4 max-w-xl mx-auto flex items-center justify-between gap-3 bg-slate-900/90 border border-slate-700/80 rounded-2xl px-4 py-2.5 shadow-2xl backdrop-blur-md text-white z-60"
+            className="absolute top-4 inset-x-4 max-w-2xl mx-auto flex items-center justify-between gap-3 bg-slate-900/95 border border-slate-700/80 rounded-2xl px-4 py-2.5 shadow-2xl backdrop-blur-md text-white z-60"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
                 <ZoomIn className="w-4 h-4" />
-                <span>{language === 'bn' ? 'এইচডি ইমেজ ভিউয়ার' : 'HD Image Viewer'}</span>
+                <span>{language === 'bn' ? 'আল্ট্রা এইচডি ভিউয়ার (৪K)' : 'Ultra HD 4K Viewer'}</span>
               </span>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-bold">
                 {Math.round(lightboxZoom * 100)}%
+              </span>
+              <span className="hidden sm:inline-block text-[10px] text-emerald-300/80 bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded-full">
+                {language === 'bn' ? '✨ জুম করলেও ফাটবে না' : '✨ Crystal Clear'}
               </span>
             </div>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 sm:gap-1.5">
               <button
                 type="button"
                 onClick={() => setLightboxZoom((prev) => Math.max(1, +(prev - 0.5).toFixed(2)))}
                 disabled={lightboxZoom <= 1}
                 className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
-                title="Zoom Out"
+                title={language === 'bn' ? 'জুম আউট' : 'Zoom Out'}
               >
                 <ZoomOut className="w-4 h-4" />
               </button>
               <button
                 type="button"
-                onClick={() => setLightboxZoom((prev) => Math.min(3.5, +(prev + 0.5).toFixed(2)))}
-                disabled={lightboxZoom >= 3.5}
+                onClick={() => setLightboxZoom((prev) => Math.min(4, +(prev + 0.5).toFixed(2)))}
+                disabled={lightboxZoom >= 4}
                 className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
-                title="Zoom In"
+                title={language === 'bn' ? 'জুম ইন' : 'Zoom In'}
               >
                 <ZoomIn className="w-4 h-4" />
               </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setLightboxZoom(1);
-                  setLightboxPan({ x: 0, y: 0 });
-                }}
-                className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 transition-colors cursor-pointer"
-                title="Reset Zoom"
-              >
-                1:1
-              </button>
+              {[1, 2, 3].map((level) => (
+                <button
+                  key={level}
+                  type="button"
+                  onClick={() => {
+                    setLightboxZoom(level);
+                    if (level === 1) setLightboxPan({ x: 0, y: 0 });
+                  }}
+                  className={`px-2 py-0.5 rounded-md text-[11px] font-bold transition-colors cursor-pointer ${
+                    Math.round(lightboxZoom) === level
+                      ? 'bg-emerald-600 text-white'
+                      : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+                  }`}
+                  title={`${level}x Zoom`}
+                >
+                  {level}x
+                </button>
+              ))}
               <div className="h-4 w-px bg-slate-700 mx-1" />
               <button 
                 type="button"
                 onClick={() => setLightboxImage(null)} 
                 className="p-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500 text-rose-300 hover:text-white transition-colors cursor-pointer"
-                title="Close"
+                title={language === 'bn' ? 'বন্ধ করুন' : 'Close'}
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
           </div>
 
+          {/* Previous / Next Arrow Controls in Lightbox (when multiple images) */}
+          {sanitizedImages.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const prevIdx = (activeImageIndex - 1 + sanitizedImages.length) % sanitizedImages.length;
+                  setActiveImageIndex(prevIdx);
+                  setLightboxImage(sanitizedImages[prevIdx]);
+                  setLightboxZoom(1);
+                  setLightboxPan({ x: 0, y: 0 });
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-slate-900/80 hover:bg-emerald-600 text-white border border-slate-700 shadow-xl transition-all cursor-pointer z-60"
+                title={language === 'bn' ? 'পূর্ববর্তী ছবি' : 'Previous Image'}
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const nextIdx = (activeImageIndex + 1) % sanitizedImages.length;
+                  setActiveImageIndex(nextIdx);
+                  setLightboxImage(sanitizedImages[nextIdx]);
+                  setLightboxZoom(1);
+                  setLightboxPan({ x: 0, y: 0 });
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-slate-900/80 hover:bg-emerald-600 text-white border border-slate-700 shadow-xl transition-all cursor-pointer z-60"
+                title={language === 'bn' ? 'পরবর্তী ছবি' : 'Next Image'}
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </>
+          )}
+
           {/* Interactive Pan & Zoom Image Canvas */}
           <div 
             className="w-full h-full flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing"
             onClick={(e) => e.stopPropagation()}
+            onDoubleClick={() => {
+              if (lightboxZoom > 1) {
+                setLightboxZoom(1);
+                setLightboxPan({ x: 0, y: 0 });
+              } else {
+                setLightboxZoom(2.5);
+              }
+            }}
             onMouseDown={(e) => {
               if (lightboxZoom > 1) {
                 setIsDragging(true);
@@ -1144,7 +1245,9 @@ export const ProductDetailPage: React.FC = () => {
               style={{
                 transform: `scale(${lightboxZoom}) translate(${lightboxPan.x / lightboxZoom}px, ${lightboxPan.y / lightboxZoom}px)`,
                 transition: isDragging ? 'none' : 'transform 0.2s ease-out',
-                imageRendering: '-webkit-optimize-contrast' as any,
+                imageRendering: 'high-quality',
+                WebkitBackfaceVisibility: 'hidden',
+                backfaceVisibility: 'hidden',
               }}
               className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform" 
             />

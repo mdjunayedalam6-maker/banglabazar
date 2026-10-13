@@ -436,10 +436,8 @@ export async function fetchProductsFromSupabase(
           if (row.stock !== undefined && row.stock !== null) item.stock = Number(row.stock);
           
           if (item.id) {
-            // White-label safety: enforce Bangla Bazar brand and supplier price fields
-            if (!item.brand || item.brand.toLowerCase().includes('shopbase') || item.brand.toLowerCase().includes('oneroof')) {
-              item.brand = 'বাংলা বাজার';
-            }
+            // White-label safety: strictly enforce বাংলা বাজার brand for all products
+            item.brand = 'বাংলা বাজার';
             if (!item.sku) {
               const cleanNum = item.id.replace(/\D/g, '');
               item.sku = `SBP-${cleanNum || item.id.toUpperCase()}`;

@@ -980,7 +980,7 @@ export const HERO_SLIDES = [
     id: 'slide-3',
     titleBn: 'সুপার গ্রোসারি বাজার - 1 ঘণ্টায় ডেলিভারি',
     subtitleBn: 'খাঁটি চাল, ডাল, তেল, ফলমূল ও নিত্যপ্রয়োজনীয় গ্রোসারি এখন সরাসরি আপনার দরজায়',
-    titleEn: 'Super Grocery Mart - 1 Hour Delivery',
+    titleEn: 'Super Grocery - 1 Hour Delivery',
     subtitleEn: 'Pure rice, spices, organic staples & fresh groceries delivered to your door',
     buttonTextBn: 'বাজার করুন',
     buttonTextEn: 'Order Grocery',

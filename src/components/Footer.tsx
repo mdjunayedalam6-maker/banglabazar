@@ -23,6 +23,7 @@ import {
 import { useApp } from '../context/AppContext';
 import { BrandLogo } from './BrandLogo';
 import { usePWAInstall } from '../hooks/usePWAInstall';
+import brandAppIcon from '../assets/images/bangla_bazar_app_icon_1791721630543.jpg';
 
 export const Footer: React.FC = () => {
   const { 
@@ -185,7 +186,7 @@ export const Footer: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3.5 p-3.5 px-4 sm:px-5 bg-gradient-to-r from-slate-900/90 via-emerald-950/60 to-slate-900/90 border border-emerald-500/40 rounded-2xl shadow-xl shadow-emerald-950/30">
                   <div className="flex items-center gap-3 text-center sm:text-left">
                     <div className="w-10 h-10 rounded-xl overflow-hidden shadow-md flex items-center justify-center shrink-0">
-                      <img src="/pwa-192x192.png" alt="বাংলা বাজার (Bangla Bazar)" className="w-full h-full object-cover rounded-xl" />
+                      <img src={brandAppIcon} alt="বাংলা বাজার (Bangla Bazar)" className="w-full h-full object-cover rounded-xl" />
                     </div>
                     <div>
                       <div className="text-xs font-black text-white flex items-center justify-center sm:justify-start gap-2">

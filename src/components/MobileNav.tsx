@@ -20,6 +20,7 @@ import { useApp } from '../context/AppContext';
 import { BrandLogo } from './BrandLogo';
 import { toBengaliNumber } from '../utils/translations';
 import { usePWAInstall } from '../hooks/usePWAInstall';
+import brandAppIcon from '../assets/images/bangla_bazar_app_icon_1791721630543.jpg';
 
 export const MobileBottomBar: React.FC = () => {
   const { 
@@ -222,7 +223,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
         ) : (!isInstalled && (isInstallable || isIOS)) && (
           <div className="p-3 bg-gradient-to-r from-[#00873E] to-[#056830] text-white flex items-center justify-between gap-2 shadow-inner">
             <div className="flex items-center gap-2.5 min-w-0">
-              <img src="/pwa-192x192.png" alt="বাংলা বাজার (Bangla Bazar)" className="w-8 h-8 rounded-lg object-cover shrink-0 shadow-xs" />
+              <img src={brandAppIcon} alt="বাংলা বাজার (Bangla Bazar)" className="w-8 h-8 rounded-lg object-cover shrink-0 shadow-xs" />
               <div className="min-w-0">
                 <div className="text-xs font-bold truncate">
                   {language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar Mobile App'}

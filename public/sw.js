@@ -1,4 +1,4 @@
-const CACHE_NAME = 'banglabazar-pwa-v1';
+const CACHE_NAME = 'banglabazar-pwa-v3';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -6,7 +6,9 @@ const PRECACHE_URLS = [
   '/favicon.png',
   '/pwa-192x192.png',
   '/pwa-512x512.png',
-  '/apple-touch-icon.png'
+  '/pwa-maskable-512x512.png',
+  '/apple-touch-icon.png',
+  '/app-icon-512.png'
 ];
 
 // Install Service Worker

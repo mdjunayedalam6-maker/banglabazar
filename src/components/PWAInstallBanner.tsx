@@ -3,6 +3,7 @@ import { Download, Smartphone, X, Share2, PlusSquare, Check } from 'lucide-react
 import { usePWAInstall } from '../hooks/usePWAInstall';
 import { useApp } from '../context/AppContext';
 import { safeSessionStorage } from '../utils/safeStorage';
+import brandAppIcon from '../assets/images/bangla_bazar_app_icon_1791721630543.jpg';
 
 export const PWAInstallBanner: React.FC = () => {
   const { isInstallable, isInstalled, isIOS, install } = usePWAInstall();
@@ -50,7 +51,7 @@ export const PWAInstallBanner: React.FC = () => {
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-12 h-12 shrink-0 rounded-2xl overflow-hidden shadow-sm">
               <img
-                src="/pwa-192x192.png"
+                src={brandAppIcon}
                 alt="বাংলা বাজার (Bangla Bazar) App Logo"
                 className="w-full h-full object-cover rounded-2xl"
               />

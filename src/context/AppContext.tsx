@@ -214,19 +214,49 @@ export const deduplicateProducts = (list: Product[]): Product[] => {
     if (rawItem && rawItem.id) {
       if (!seen.has(rawItem.id)) {
         seen.add(rawItem.id);
-        let item = rawItem;
+        let item: Product = { 
+          ...rawItem, 
+          // All 11,902 products strictly branded as Bangla Bazar
+          brand: 'Bangla Bazar',
+        };
+
+        // Upgrade and sanitize product images to guaranteed HD resolution
         if (Array.isArray(rawItem.images) && rawItem.images.length > 0) {
-          const sanitizedImages = rawItem.images.map((img) => {
-            if (typeof img === 'string' && img.includes('shopbasebd.com')) {
-              // Convert erroneous _L_*.jpg to _L_*.jpeg (ShopBaseBD uses .jpeg for large images)
-              if (img.includes('_L_') && img.endsWith('.jpg')) {
-                return img.replace(/\.jpg$/i, '.jpeg');
+          const uniqueHdImages: string[] = [];
+          const imgSeen = new Set<string>();
+
+          for (const rawImg of rawItem.images) {
+            if (typeof rawImg !== 'string') continue;
+            let img = rawImg.trim();
+
+            // ShopBaseBD: Upgrade low-res thumbnail (_S_) to full-size Large HD (_L_) with .jpeg
+            if (img.includes('shopbasebd.com')) {
+              img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
+            }
+
+            // Unsplash: Upgrade to ultra HD 1400px+ with q=95 quality
+            if (img.includes('unsplash.com')) {
+              img = img.replace(/w=\d+/, 'w=1400').replace(/q=\d+/, 'q=95');
+              if (!img.includes('w=1400')) {
+                img += (img.includes('?') ? '&' : '?') + 'w=1400&auto=format&fit=crop&q=95';
               }
             }
-            return img;
-          });
-          item = { ...rawItem, images: sanitizedImages };
+
+            if (!imgSeen.has(img)) {
+              imgSeen.add(img);
+              uniqueHdImages.push(img);
+            }
+          }
+
+          item.images = uniqueHdImages.length > 0 ? uniqueHdImages : [
+            'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1400&auto=format&fit=crop&q=95'
+          ];
+        } else {
+          item.images = [
+            'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1400&auto=format&fit=crop&q=95'
+          ];
         }
+
         result.push(item);
       }
     }

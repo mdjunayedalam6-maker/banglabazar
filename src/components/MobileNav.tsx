@@ -20,7 +20,7 @@ import { useApp } from '../context/AppContext';
 import { BrandLogo } from './BrandLogo';
 import { toBengaliNumber } from '../utils/translations';
 import { usePWAInstall } from '../hooks/usePWAInstall';
-import brandAppIcon from '../assets/images/bangla_bazar_app_icon_1791721630543.jpg';
+import brandAppIcon from '../assets/images/bangla_bazar_logo_trimmed.png';
 
 export const MobileBottomBar: React.FC = () => {
   const { 

@@ -18,17 +18,20 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
 
   const isSaved = isInWishlist(product.id);
   const title = language === 'bn' ? product.titleBn : product.titleEn;
-  const displayBrand = (!product.brand || product.brand.toLowerCase().includes('shopbase') || product.brand.toLowerCase().includes('oneroof')) 
-    ? (language === 'bn' ? 'বাংলা বাজার' : 'Bangla Bazar') 
-    : product.brand;
+  // All 11,902 products branded as Bangla Bazar
+  const displayBrand = language === 'bn' ? 'বাংলা বাজার' : 'Bangla Bazar';
 
-  // Robust image handling: normalize ShopBaseBD image extensions and provide fallback
+  // Robust image handling: upgrade to guaranteed Large HD resolution
   const initialImage = React.useMemo(() => {
     let img = product.images?.[0] || '';
-    if (typeof img === 'string' && img.includes('shopbasebd.com') && img.includes('_L_') && img.endsWith('.jpg')) {
-      img = img.replace(/\.jpg$/i, '.jpeg');
+    if (typeof img === 'string') {
+      if (img.includes('shopbasebd.com')) {
+        img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
+      } else if (img.includes('unsplash.com')) {
+        img = img.replace(/w=\d+/, 'w=800').replace(/q=\d+/, 'q=90');
+      }
     }
-    return img;
+    return img || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop&q=90';
   }, [product.images]);
 
   const [currentImg, setCurrentImg] = React.useState<string>(initialImage);
@@ -38,23 +41,21 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
   }, [initialImage]);
 
   const handleImageError = () => {
-    // If large image failed, fallback to small thumbnail (_S_...jpg)
-    if (currentImg && currentImg.includes('_L_')) {
-      const fallbackSm = currentImg.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
-      setCurrentImg(fallbackSm);
-      return;
-    }
-    // If that fails, try secondary image if available
+    // If secondary HD image is available, try it
     if (product.images?.[1] && currentImg !== product.images[1]) {
       let sec = product.images[1];
-      if (sec.includes('_L_') && sec.endsWith('.jpg')) {
-        sec = sec.replace(/\.jpg$/i, '.jpeg');
+      if (typeof sec === 'string') {
+        if (sec.includes('shopbasebd.com')) {
+          sec = sec.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
+        } else if (sec.includes('unsplash.com')) {
+          sec = sec.replace(/w=\d+/, 'w=800').replace(/q=\d+/, 'q=90');
+        }
       }
       setCurrentImg(sec);
       return;
     }
-    // Default fallback placeholder
-    setCurrentImg('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80');
+    // High-resolution fallback
+    setCurrentImg('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop&q=90');
   };
 
   if (layout === 'list') {

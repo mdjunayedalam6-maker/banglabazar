@@ -49,15 +49,10 @@ export const ShopPage: React.FC = () => {
     } catch (_) {}
   }, [filterState.category, filterState.subcategory]);
 
-  // Extract all unique brands (strictly white-labeled)
+  // Extract all unique brands (strictly white-labeled as Bangla Bazar)
   const allBrands = useMemo(() => {
-    const brandsSet = new Set<string>();
-    products.forEach((p) => {
-      const b = (!p.brand || p.brand.toLowerCase().includes('shopbase') || p.brand.toLowerCase().includes('oneroof')) ? 'বাংলা বাজার' : p.brand;
-      if (b) brandsSet.add(b);
-    });
-    return Array.from(brandsSet);
-  }, [products]);
+    return [language === 'bn' ? 'বাংলা বাজার' : 'Bangla Bazar'];
+  }, [language]);
 
   // Filter & Sort logic
   const filteredProducts = useMemo(() => {
@@ -71,9 +66,12 @@ export const ShopPage: React.FC = () => {
       if (p.price < filterState.minPrice || p.price > filterState.maxPrice) {
         return false;
       }
-      // Brand filter
-      if (filterState.brand.length > 0 && !filterState.brand.includes(p.brand)) {
-        return false;
+      // Brand filter: all products are Bangla Bazar
+      if (filterState.brand.length > 0) {
+        const matchesBrand = filterState.brand.some(
+          (b) => b.toLowerCase().includes('bangla') || b.includes('বাংলা') || b === p.brand
+        );
+        if (!matchesBrand) return false;
       }
       // Rating filter
       if (filterState.minRating > 0 && p.rating < filterState.minRating) {
@@ -89,13 +87,16 @@ export const ShopPage: React.FC = () => {
       }
       // Search query
       if (filterState.searchQuery.trim()) {
-        const q = filterState.searchQuery.toLowerCase();
-        const titleBn = p.titleBn || '';
-        const titleEn = p.titleEn || '';
-        const titleMatch = (language === 'bn' ? titleBn : titleEn).toLowerCase().includes(q);
+        const q = filterState.searchQuery.trim().toLowerCase();
+        const titleBn = (p.titleBn || '').toLowerCase();
+        const titleEn = (p.titleEn || '').toLowerCase();
+        const titleMatch = titleBn.includes(q) || titleEn.includes(q);
+        const skuMatch = p.sku ? String(p.sku).toLowerCase().includes(q) : false;
+        const idMatch = String(p.id).toLowerCase().includes(q);
         const brandMatch = typeof p.brand === 'string' && p.brand.toLowerCase().includes(q);
         const tagMatch = Array.isArray(p.tags) && p.tags.some((t) => typeof t === 'string' && t.toLowerCase().includes(q));
-        if (!titleMatch && !brandMatch && !tagMatch) {
+        const descMatch = (p.descriptionBn || '').toLowerCase().includes(q) || (p.descriptionEn || '').toLowerCase().includes(q);
+        if (!titleMatch && !skuMatch && !idMatch && !brandMatch && !tagMatch && !descMatch) {
           return false;
         }
       }

@@ -10,7 +10,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পলো শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 600,
     "discountPercentage": 44,
@@ -18,7 +18,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -94,7 +94,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পলো শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 600,
     "discountPercentage": 44,
@@ -102,7 +102,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -178,7 +178,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পলো শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 600,
     "discountPercentage": 44,
@@ -186,7 +186,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -262,7 +262,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পলো শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 600,
     "discountPercentage": 44,
@@ -270,7 +270,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -346,7 +346,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পলো শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 600,
     "discountPercentage": 44,
@@ -354,7 +354,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -430,7 +430,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পলো শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 311,
     "originalPrice": 500,
     "discountPercentage": 38,
@@ -438,7 +438,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789280982_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789280982_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789280982_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -514,7 +514,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "ড্রপসোল্ডার টিশার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 379,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -522,7 +522,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_20.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_S_20.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_20.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -598,7 +598,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "ড্রপসোল্ডার টিশার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 379,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -606,7 +606,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_S_19.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_19.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -682,7 +682,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "ড্রপসোল্ডার টিশার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 379,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -690,7 +690,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_S_18.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_18.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -766,7 +766,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "ড্রপসোল্ডার টিশার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 379,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -774,7 +774,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_S_17.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_17.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -850,7 +850,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "ড্রপসোল্ডার টিশার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 379,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -858,7 +858,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_S_16.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_16.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -934,7 +934,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "ড্রপসোল্ডার টিশার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 379,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -942,7 +942,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_S_15.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_15.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1018,7 +1018,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1026,7 +1026,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_20.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_S_20.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_20.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1102,7 +1102,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1110,7 +1110,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_S_19.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_19.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -1186,7 +1186,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1194,7 +1194,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_S_18.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_18.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1270,7 +1270,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1278,7 +1278,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_S_17.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_17.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1354,7 +1354,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1362,7 +1362,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_S_16.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_16.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1438,7 +1438,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1446,7 +1446,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_S_15.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_15.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1522,7 +1522,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1530,7 +1530,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1606,7 +1606,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1614,7 +1614,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1690,7 +1690,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1698,7 +1698,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1774,7 +1774,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1782,7 +1782,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1858,7 +1858,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1866,7 +1866,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -1942,7 +1942,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "টি-শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 241,
     "originalPrice": 350,
     "discountPercentage": 31,
@@ -1950,7 +1950,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2026,7 +2026,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 750,
     "discountPercentage": 31,
@@ -2034,7 +2034,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2110,7 +2110,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 750,
     "discountPercentage": 31,
@@ -2118,7 +2118,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2194,7 +2194,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 750,
     "discountPercentage": 31,
@@ -2202,7 +2202,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2278,7 +2278,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 750,
     "discountPercentage": 31,
@@ -2286,7 +2286,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2362,7 +2362,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 750,
     "discountPercentage": 31,
@@ -2370,7 +2370,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -2446,7 +2446,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 750,
     "discountPercentage": 31,
@@ -2454,7 +2454,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2530,7 +2530,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 800,
     "discountPercentage": 35,
@@ -2538,7 +2538,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 8,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2614,7 +2614,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 800,
     "discountPercentage": 35,
@@ -2622,7 +2622,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2698,7 +2698,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 800,
     "discountPercentage": 35,
@@ -2706,7 +2706,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2782,7 +2782,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 800,
     "discountPercentage": 35,
@@ -2790,7 +2790,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -2866,7 +2866,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 800,
     "discountPercentage": 35,
@@ -2874,7 +2874,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789923970_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923970_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923970_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2950,7 +2950,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 850,
     "discountPercentage": 39,
@@ -2958,7 +2958,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789503280_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789503280_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789503280_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -3034,7 +3034,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -3042,7 +3042,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560461_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3118,7 +3118,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -3126,7 +3126,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560461_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3202,7 +3202,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -3210,7 +3210,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560461_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3286,7 +3286,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -3294,7 +3294,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560460_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3370,7 +3370,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -3378,7 +3378,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560460_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3454,7 +3454,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "শার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -3462,7 +3462,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560460_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -3538,7 +3538,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1200,
     "discountPercentage": 31,
@@ -3546,7 +3546,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -3622,7 +3622,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1200,
     "discountPercentage": 31,
@@ -3630,7 +3630,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3706,7 +3706,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1200,
     "discountPercentage": 31,
@@ -3714,7 +3714,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -3790,7 +3790,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1200,
     "discountPercentage": 31,
@@ -3798,7 +3798,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3874,7 +3874,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1200,
     "discountPercentage": 31,
@@ -3882,7 +3882,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3958,7 +3958,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1200,
     "discountPercentage": 31,
@@ -3966,7 +3966,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4042,7 +4042,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কাতুয়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 575,
     "originalPrice": 850,
     "discountPercentage": 32,
@@ -4050,7 +4050,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4126,7 +4126,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কাতুয়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 575,
     "originalPrice": 850,
     "discountPercentage": 32,
@@ -4134,7 +4134,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4210,7 +4210,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কাতুয়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 575,
     "originalPrice": 850,
     "discountPercentage": 32,
@@ -4218,7 +4218,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4294,7 +4294,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কাতুয়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 575,
     "originalPrice": 850,
     "discountPercentage": 32,
@@ -4302,7 +4302,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4378,7 +4378,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কাতুয়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 575,
     "originalPrice": 850,
     "discountPercentage": 32,
@@ -4386,7 +4386,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -4462,7 +4462,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কাতুয়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 575,
     "originalPrice": 850,
     "discountPercentage": 32,
@@ -4470,7 +4470,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 8,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4546,7 +4546,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1600,
     "discountPercentage": 25,
@@ -4554,7 +4554,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4630,7 +4630,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1600,
     "discountPercentage": 25,
@@ -4638,7 +4638,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4714,7 +4714,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1600,
     "discountPercentage": 25,
@@ -4722,7 +4722,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4798,7 +4798,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1600,
     "discountPercentage": 25,
@@ -4806,7 +4806,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4882,7 +4882,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1600,
     "discountPercentage": 25,
@@ -4890,7 +4890,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4966,7 +4966,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1600,
     "discountPercentage": 25,
@@ -4974,7 +4974,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 22,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5050,7 +5050,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1450,
     "discountPercentage": 25,
@@ -5058,7 +5058,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -5134,7 +5134,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1450,
     "discountPercentage": 25,
@@ -5142,7 +5142,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5218,7 +5218,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1450,
     "discountPercentage": 25,
@@ -5226,7 +5226,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5302,7 +5302,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1450,
     "discountPercentage": 25,
@@ -5310,7 +5310,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5386,7 +5386,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1450,
     "discountPercentage": 25,
@@ -5394,7 +5394,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5470,7 +5470,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1450,
     "discountPercentage": 25,
@@ -5478,7 +5478,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -5554,7 +5554,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1500,
     "discountPercentage": 16,
@@ -5562,7 +5562,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_S_17.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_17.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -5638,7 +5638,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1500,
     "discountPercentage": 16,
@@ -5646,7 +5646,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_S_16.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_16.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5722,7 +5722,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1500,
     "discountPercentage": 16,
@@ -5730,7 +5730,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_S_15.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_15.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5806,7 +5806,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1500,
     "discountPercentage": 16,
@@ -5814,7 +5814,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_14.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_S_14.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_14.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5890,7 +5890,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1500,
     "discountPercentage": 16,
@@ -5898,7 +5898,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_S_13.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_13.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5974,7 +5974,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "পাঞ্জাবি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1500,
     "discountPercentage": 16,
@@ -5982,7 +5982,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6058,7 +6058,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 550,
     "discountPercentage": 37,
@@ -6066,7 +6066,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_14.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_S_14.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_14.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6142,7 +6142,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 550,
     "discountPercentage": 37,
@@ -6150,7 +6150,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_S_13.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_13.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6226,7 +6226,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 550,
     "discountPercentage": 37,
@@ -6234,7 +6234,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -6310,7 +6310,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 550,
     "discountPercentage": 37,
@@ -6318,7 +6318,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6394,7 +6394,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 550,
     "discountPercentage": 37,
@@ -6402,7 +6402,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6478,7 +6478,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 550,
     "discountPercentage": 37,
@@ -6486,7 +6486,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6562,7 +6562,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 459,
     "originalPrice": 700,
     "discountPercentage": 34,
@@ -6570,7 +6570,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6646,7 +6646,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 459,
     "originalPrice": 700,
     "discountPercentage": 34,
@@ -6654,7 +6654,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6730,7 +6730,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 459,
     "originalPrice": 700,
     "discountPercentage": 34,
@@ -6738,7 +6738,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6814,7 +6814,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 459,
     "originalPrice": 700,
     "discountPercentage": 34,
@@ -6822,7 +6822,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6898,7 +6898,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -6906,7 +6906,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787556236_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787556236_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787556236_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6982,7 +6982,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with 100% fine cotton and durable stitching. Size: M, L, XL, XXL.",
     "category": "fashion",
     "subcategory": "কম্বো সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -6990,7 +6990,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785954606_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785954606_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785954606_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7066,7 +7066,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL, XXL",
     "category": "world-cup",
     "subcategory": "ওয়ার্ল্ড কাপ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 500,
     "discountPercentage": 33,
@@ -7074,7 +7074,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782322578_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7141,7 +7141,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL, XXL",
     "category": "world-cup",
     "subcategory": "ওয়ার্ল্ড কাপ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 500,
     "discountPercentage": 33,
@@ -7149,7 +7149,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782322578_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7216,7 +7216,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL, XXL",
     "category": "world-cup",
     "subcategory": "ওয়ার্ল্ড কাপ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 500,
     "discountPercentage": 33,
@@ -7224,7 +7224,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782322578_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7291,7 +7291,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL, XXL",
     "category": "world-cup",
     "subcategory": "ওয়ার্ল্ড কাপ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 500,
     "discountPercentage": 33,
@@ -7299,7 +7299,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1781967269_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7366,7 +7366,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL, XXL",
     "category": "world-cup",
     "subcategory": "ওয়ার্ল্ড কাপ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 500,
     "discountPercentage": 33,
@@ -7374,7 +7374,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1781967269_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7441,7 +7441,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL, XXL",
     "category": "world-cup",
     "subcategory": "ওয়ার্ল্ড কাপ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 500,
     "discountPercentage": 33,
@@ -7449,7 +7449,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1781967269_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7516,7 +7516,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 52, 54, 56",
     "category": "borka-abaya",
     "subcategory": "বোরকা ও আবায়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1978,
     "originalPrice": 2200,
     "discountPercentage": 10,
@@ -7524,7 +7524,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715913_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7589,7 +7589,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 52, 54, 56",
     "category": "borka-abaya",
     "subcategory": "বোরকা ও আবায়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1978,
     "originalPrice": 2200,
     "discountPercentage": 10,
@@ -7597,7 +7597,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715913_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7662,7 +7662,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 52, 54, 56",
     "category": "borka-abaya",
     "subcategory": "বোরকা ও আবায়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1978,
     "originalPrice": 2200,
     "discountPercentage": 10,
@@ -7670,7 +7670,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715913_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7735,7 +7735,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 52, 54, 56",
     "category": "borka-abaya",
     "subcategory": "বোরকা ও আবায়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1081,
     "originalPrice": 1300,
     "discountPercentage": 17,
@@ -7743,7 +7743,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788713660_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7808,7 +7808,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 52, 54, 56",
     "category": "borka-abaya",
     "subcategory": "বোরকা ও আবায়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1081,
     "originalPrice": 1300,
     "discountPercentage": 17,
@@ -7816,7 +7816,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788713660_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7881,7 +7881,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 52, 54, 56",
     "category": "borka-abaya",
     "subcategory": "বোরকা ও আবায়া",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1081,
     "originalPrice": 1300,
     "discountPercentage": 17,
@@ -7889,7 +7889,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788713660_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7954,7 +7954,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "tanter-saree",
     "subcategory": "তাঁতের শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1050,
     "discountPercentage": 28,
@@ -7962,7 +7962,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789309285_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8023,7 +8023,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "tanter-saree",
     "subcategory": "তাঁতের শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1050,
     "discountPercentage": 28,
@@ -8031,7 +8031,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789309285_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8092,7 +8092,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "tanter-saree",
     "subcategory": "তাঁতের শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1050,
     "discountPercentage": 28,
@@ -8100,7 +8100,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789309285_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8161,7 +8161,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "tanter-saree",
     "subcategory": "তাঁতের শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 909,
     "originalPrice": 1250,
     "discountPercentage": 27,
@@ -8169,7 +8169,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789307597_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8230,7 +8230,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "tanter-saree",
     "subcategory": "তাঁতের শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 909,
     "originalPrice": 1250,
     "discountPercentage": 27,
@@ -8238,7 +8238,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789307597_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8299,7 +8299,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "tanter-saree",
     "subcategory": "তাঁতের শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 909,
     "originalPrice": 1250,
     "discountPercentage": 27,
@@ -8307,7 +8307,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789307596_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789307596_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789307596_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8368,7 +8368,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "handprint-saree",
     "subcategory": "হ্যান্ডপ্রিন্ট শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 748,
     "originalPrice": 1000,
     "discountPercentage": 25,
@@ -8376,7 +8376,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8437,7 +8437,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "handprint-saree",
     "subcategory": "হ্যান্ডপ্রিন্ট শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 748,
     "originalPrice": 1000,
     "discountPercentage": 25,
@@ -8445,7 +8445,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8506,7 +8506,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "handprint-saree",
     "subcategory": "হ্যান্ডপ্রিন্ট শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 748,
     "originalPrice": 1000,
     "discountPercentage": 25,
@@ -8514,7 +8514,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8575,7 +8575,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "handprint-saree",
     "subcategory": "হ্যান্ডপ্রিন্ট শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 748,
     "originalPrice": 1000,
     "discountPercentage": 25,
@@ -8583,7 +8583,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8644,7 +8644,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "handprint-saree",
     "subcategory": "হ্যান্ডপ্রিন্ট শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 748,
     "originalPrice": 1000,
     "discountPercentage": 25,
@@ -8652,7 +8652,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8713,7 +8713,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "handprint-saree",
     "subcategory": "হ্যান্ডপ্রিন্ট শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 748,
     "originalPrice": 1000,
     "discountPercentage": 25,
@@ -8721,7 +8721,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8782,7 +8782,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "saree",
     "subcategory": "শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1350,
     "discountPercentage": 19,
@@ -8790,7 +8790,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756475_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8851,7 +8851,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "saree",
     "subcategory": "শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1350,
     "discountPercentage": 19,
@@ -8859,7 +8859,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756475_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8920,7 +8920,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "saree",
     "subcategory": "শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1350,
     "discountPercentage": 19,
@@ -8928,7 +8928,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756475_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8989,7 +8989,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "saree",
     "subcategory": "শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1231,
     "originalPrice": 1500,
     "discountPercentage": 18,
@@ -8997,7 +8997,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 8,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756395_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9058,7 +9058,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "saree",
     "subcategory": "শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1231,
     "originalPrice": 1500,
     "discountPercentage": 18,
@@ -9066,7 +9066,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 8,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756395_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9127,7 +9127,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size (১২ হাত)",
     "category": "saree",
     "subcategory": "শাড়ি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1231,
     "originalPrice": 1500,
     "discountPercentage": 18,
@@ -9135,7 +9135,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756395_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9196,7 +9196,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 28, 30, 32, 34, 36",
     "category": "jeans-pant",
     "subcategory": "জিন্স প্যান্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1000,
     "discountPercentage": 24,
@@ -9204,7 +9204,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9273,7 +9273,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 28, 30, 32, 34, 36",
     "category": "jeans-pant",
     "subcategory": "জিন্স প্যান্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1000,
     "discountPercentage": 24,
@@ -9281,7 +9281,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9350,7 +9350,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 28, 30, 32, 34, 36",
     "category": "jeans-pant",
     "subcategory": "জিন্স প্যান্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1000,
     "discountPercentage": 24,
@@ -9358,7 +9358,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 22,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9427,7 +9427,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: 28, 30, 32, 34, 36",
     "category": "jeans-pant",
     "subcategory": "জিন্স প্যান্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1000,
     "discountPercentage": 24,
@@ -9435,7 +9435,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9504,7 +9504,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size / M-XL",
     "category": "three-piece",
     "subcategory": "থ্রি পিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -9512,7 +9512,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9573,7 +9573,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size / M-XL",
     "category": "three-piece",
     "subcategory": "থ্রি পিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -9581,7 +9581,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9642,7 +9642,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size / M-XL",
     "category": "three-piece",
     "subcategory": "থ্রি পিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -9650,7 +9650,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9711,7 +9711,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: Free Size / M-XL",
     "category": "three-piece",
     "subcategory": "থ্রি পিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -9719,7 +9719,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 22,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9780,7 +9780,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL",
     "category": "girls-tops",
     "subcategory": "গার্লস টপস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 550,
     "discountPercentage": 39,
@@ -9788,7 +9788,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_S_18.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_18.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9853,7 +9853,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL",
     "category": "girls-tops",
     "subcategory": "গার্লস টপস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 550,
     "discountPercentage": 39,
@@ -9861,7 +9861,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_S_17.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_17.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9926,7 +9926,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL",
     "category": "girls-tops",
     "subcategory": "গার্লস টপস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 550,
     "discountPercentage": 39,
@@ -9934,7 +9934,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 8,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_S_16.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_16.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9999,7 +9999,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ShopBaseBD export quality apparel with comfortable fit and verified material. Size: M, L, XL",
     "category": "girls-tops",
     "subcategory": "গার্লস টপস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 334,
     "originalPrice": 550,
     "discountPercentage": 39,
@@ -10007,7 +10007,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_S_15.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_15.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10072,7 +10072,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic সুন্নাতি ড্রেস collection with comfortable fit and verified material.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 782,
     "originalPrice": 850,
     "discountPercentage": 8,
@@ -10080,7 +10080,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10130,7 +10130,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic সুন্নাতি ড্রেস collection with comfortable fit and verified material.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 782,
     "originalPrice": 850,
     "discountPercentage": 8,
@@ -10138,7 +10138,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 5,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10188,7 +10188,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic সুন্নাতি ড্রেস collection with comfortable fit and verified material.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 782,
     "originalPrice": 850,
     "discountPercentage": 8,
@@ -10196,7 +10196,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10246,7 +10246,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic সুন্নাতি ড্রেস collection with comfortable fit and verified material.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 782,
     "originalPrice": 850,
     "discountPercentage": 8,
@@ -10254,7 +10254,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 6,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10304,7 +10304,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ইনার & নাইটি collection with comfortable fit and verified material.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 500,
     "discountPercentage": 40,
@@ -10312,7 +10312,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10362,7 +10362,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ইনার & নাইটি collection with comfortable fit and verified material.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 500,
     "discountPercentage": 40,
@@ -10370,7 +10370,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10420,7 +10420,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ইনার & নাইটি collection with comfortable fit and verified material.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 500,
     "discountPercentage": 40,
@@ -10428,7 +10428,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10478,7 +10478,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ইনার & নাইটি collection with comfortable fit and verified material.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 500,
     "discountPercentage": 40,
@@ -10486,7 +10486,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10536,7 +10536,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic টিশার্ট & স্কার্ট collection with comfortable fit and verified material.",
     "category": "tshirt-skirt",
     "subcategory": "টিশার্ট & স্কার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1300,
     "discountPercentage": 19,
@@ -10544,7 +10544,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10594,7 +10594,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic টিশার্ট & স্কার্ট collection with comfortable fit and verified material.",
     "category": "tshirt-skirt",
     "subcategory": "টিশার্ট & স্কার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1300,
     "discountPercentage": 19,
@@ -10602,7 +10602,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 8,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10652,7 +10652,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic টিশার্ট & স্কার্ট collection with comfortable fit and verified material.",
     "category": "tshirt-skirt",
     "subcategory": "টিশার্ট & স্কার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1300,
     "discountPercentage": 19,
@@ -10660,7 +10660,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10710,7 +10710,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic টিশার্ট & স্কার্ট collection with comfortable fit and verified material.",
     "category": "tshirt-skirt",
     "subcategory": "টিশার্ট & স্কার্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1300,
     "discountPercentage": 19,
@@ -10718,7 +10718,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10768,7 +10768,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ওয়াটারপ্রুফ ডাইনিং collection with comfortable fit and verified material.",
     "category": "waterproof-dining",
     "subcategory": "ওয়াটারপ্রুফ ডাইনিং",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1518,
     "originalPrice": 1700,
     "discountPercentage": 11,
@@ -10776,7 +10776,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 7,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10826,7 +10826,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ওয়াটারপ্রুফ ডাইনিং collection with comfortable fit and verified material.",
     "category": "waterproof-dining",
     "subcategory": "ওয়াটারপ্রুফ ডাইনিং",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1518,
     "originalPrice": 1700,
     "discountPercentage": 11,
@@ -10834,7 +10834,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10884,7 +10884,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ওয়াটারপ্রুফ ডাইনিং collection with comfortable fit and verified material.",
     "category": "waterproof-dining",
     "subcategory": "ওয়াটারপ্রুফ ডাইনিং",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1518,
     "originalPrice": 1700,
     "discountPercentage": 11,
@@ -10892,7 +10892,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10942,7 +10942,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic ওয়াটারপ্রুফ ডাইনিং collection with comfortable fit and verified material.",
     "category": "waterproof-dining",
     "subcategory": "ওয়াটারপ্রুফ ডাইনিং",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1518,
     "originalPrice": 1700,
     "discountPercentage": 11,
@@ -10950,7 +10950,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 7,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11000,7 +11000,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic রেগুলার ডাইনিং collection with comfortable fit and verified material.",
     "category": "regular-dining",
     "subcategory": "রেগুলার ডাইনিং",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1357,
     "originalPrice": 1600,
     "discountPercentage": 15,
@@ -11008,7 +11008,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11058,7 +11058,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic রেগুলার ডাইনিং collection with comfortable fit and verified material.",
     "category": "regular-dining",
     "subcategory": "রেগুলার ডাইনিং",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1357,
     "originalPrice": 1600,
     "discountPercentage": 15,
@@ -11066,7 +11066,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 5,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11116,7 +11116,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic রেগুলার ডাইনিং collection with comfortable fit and verified material.",
     "category": "regular-dining",
     "subcategory": "রেগুলার ডাইনিং",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1357,
     "originalPrice": 1600,
     "discountPercentage": 15,
@@ -11124,7 +11124,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11174,7 +11174,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic রেগুলার ডাইনিং collection with comfortable fit and verified material.",
     "category": "regular-dining",
     "subcategory": "রেগুলার ডাইনিং",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1357,
     "originalPrice": 1600,
     "discountPercentage": 15,
@@ -11182,7 +11182,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11232,7 +11232,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic রেগুলার বেডশীট collection with comfortable fit and verified material.",
     "category": "regular-bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -11240,7 +11240,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 6,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_19.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_19.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11290,7 +11290,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic রেগুলার বেডশীট collection with comfortable fit and verified material.",
     "category": "regular-bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -11298,7 +11298,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_18.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_18.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11348,7 +11348,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic রেগুলার বেডশীট collection with comfortable fit and verified material.",
     "category": "regular-bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -11356,7 +11356,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 5,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_17.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_17.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11406,7 +11406,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic রেগুলার বেডশীট collection with comfortable fit and verified material.",
     "category": "regular-bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -11414,7 +11414,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_16.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_16.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11464,7 +11464,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কাপল থ্রীপিস collection with comfortable fit and verified material.",
     "category": "couple-threepiece",
     "subcategory": "কাপল থ্রীপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1553,
     "originalPrice": 1800,
     "discountPercentage": 14,
@@ -11472,7 +11472,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11522,7 +11522,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কাপল থ্রীপিস collection with comfortable fit and verified material.",
     "category": "couple-threepiece",
     "subcategory": "কাপল থ্রীপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1553,
     "originalPrice": 1800,
     "discountPercentage": 14,
@@ -11530,7 +11530,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 6,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11580,7 +11580,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কাপল থ্রীপিস collection with comfortable fit and verified material.",
     "category": "couple-threepiece",
     "subcategory": "কাপল থ্রীপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1553,
     "originalPrice": 1800,
     "discountPercentage": 14,
@@ -11588,7 +11588,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11638,7 +11638,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কাপল থ্রীপিস collection with comfortable fit and verified material.",
     "category": "couple-threepiece",
     "subcategory": "কাপল থ্রীপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1553,
     "originalPrice": 1800,
     "discountPercentage": 14,
@@ -11646,7 +11646,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 7,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11696,7 +11696,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কাপল শাড়ী collection with comfortable fit and verified material.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1035,
     "originalPrice": 1300,
     "discountPercentage": 20,
@@ -11704,7 +11704,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 7,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789753985_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11754,7 +11754,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কাপল শাড়ী collection with comfortable fit and verified material.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1035,
     "originalPrice": 1300,
     "discountPercentage": 20,
@@ -11762,7 +11762,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789753985_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11812,7 +11812,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কাপল শাড়ী collection with comfortable fit and verified material.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1001,
     "originalPrice": 1200,
     "discountPercentage": 17,
@@ -11820,7 +11820,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581340_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11870,7 +11870,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কাপল শাড়ী collection with comfortable fit and verified material.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1001,
     "originalPrice": 1200,
     "discountPercentage": 17,
@@ -11878,7 +11878,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 7,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581340_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11928,7 +11928,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic মেয়েদের ব্যাগ collection with comfortable fit and verified material.",
     "category": "girls-bag",
     "subcategory": "মেয়েদের ব্যাগ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -11936,7 +11936,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785847431_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11986,7 +11986,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic মেয়েদের ব্যাগ collection with comfortable fit and verified material.",
     "category": "girls-bag",
     "subcategory": "মেয়েদের ব্যাগ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -11994,7 +11994,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785847431_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12044,7 +12044,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic মেয়েদের ব্যাগ collection with comfortable fit and verified material.",
     "category": "girls-bag",
     "subcategory": "মেয়েদের ব্যাগ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -12052,7 +12052,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785847431_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12102,7 +12102,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic মেয়েদের ব্যাগ collection with comfortable fit and verified material.",
     "category": "girls-bag",
     "subcategory": "মেয়েদের ব্যাগ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -12110,7 +12110,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778151764_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151764_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151764_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12160,7 +12160,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic পার্স ব্যাগ collection with comfortable fit and verified material.",
     "category": "purse-bag",
     "subcategory": "পার্স ব্যাগ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 450,
     "discountPercentage": 34,
@@ -12168,7 +12168,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 7,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12218,7 +12218,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic পার্স ব্যাগ collection with comfortable fit and verified material.",
     "category": "purse-bag",
     "subcategory": "পার্স ব্যাগ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 450,
     "discountPercentage": 34,
@@ -12226,7 +12226,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 8,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12276,7 +12276,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic পার্স ব্যাগ collection with comfortable fit and verified material.",
     "category": "purse-bag",
     "subcategory": "পার্স ব্যাগ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 450,
     "discountPercentage": 34,
@@ -12284,7 +12284,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12334,7 +12334,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic পার্স ব্যাগ collection with comfortable fit and verified material.",
     "category": "purse-bag",
     "subcategory": "পার্স ব্যাগ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 450,
     "discountPercentage": 34,
@@ -12342,7 +12342,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12392,7 +12392,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic গৃহ সজ্জা collection with comfortable fit and verified material.",
     "category": "home-decor",
     "subcategory": "গৃহ সজ্জা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 495,
     "originalPrice": 550,
     "discountPercentage": 10,
@@ -12400,7 +12400,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1739118583_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12450,7 +12450,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic গৃহ সজ্জা collection with comfortable fit and verified material.",
     "category": "home-decor",
     "subcategory": "গৃহ সজ্জা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 495,
     "originalPrice": 550,
     "discountPercentage": 10,
@@ -12458,7 +12458,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 5,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1739118583_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12508,7 +12508,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic গৃহ সজ্জা collection with comfortable fit and verified material.",
     "category": "home-decor",
     "subcategory": "গৃহ সজ্জা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 207,
     "originalPrice": 250,
     "discountPercentage": 17,
@@ -12516,7 +12516,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1738511234_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12566,7 +12566,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic গৃহ সজ্জা collection with comfortable fit and verified material.",
     "category": "home-decor",
     "subcategory": "গৃহ সজ্জা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 207,
     "originalPrice": 250,
     "discountPercentage": 17,
@@ -12574,7 +12574,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 5,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1738511234_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12624,7 +12624,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic এসি কাথা collection with comfortable fit and verified material.",
     "category": "ac-katha",
     "subcategory": "এসি কাথা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1817,
     "originalPrice": 2000,
     "discountPercentage": 9,
@@ -12632,7 +12632,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_20.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_S_20.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_20.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12682,7 +12682,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic এসি কাথা collection with comfortable fit and verified material.",
     "category": "ac-katha",
     "subcategory": "এসি কাথা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1817,
     "originalPrice": 2000,
     "discountPercentage": 9,
@@ -12690,7 +12690,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_S_19.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_19.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12740,7 +12740,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic এসি কাথা collection with comfortable fit and verified material.",
     "category": "ac-katha",
     "subcategory": "এসি কাথা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1817,
     "originalPrice": 2000,
     "discountPercentage": 9,
@@ -12748,7 +12748,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_S_18.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_18.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12798,7 +12798,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic এসি কাথা collection with comfortable fit and verified material.",
     "category": "ac-katha",
     "subcategory": "এসি কাথা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1817,
     "originalPrice": 2000,
     "discountPercentage": 9,
@@ -12806,7 +12806,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_S_17.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_17.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12856,7 +12856,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কম্ফর্টার collection with comfortable fit and verified material.",
     "category": "comforter",
     "subcategory": "কম্ফর্টার",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -12864,7 +12864,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 5,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_S_18.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_18.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12914,7 +12914,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কম্ফর্টার collection with comfortable fit and verified material.",
     "category": "comforter",
     "subcategory": "কম্ফর্টার",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -12922,7 +12922,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 6,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_S_17.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_17.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12972,7 +12972,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কম্ফর্টার collection with comfortable fit and verified material.",
     "category": "comforter",
     "subcategory": "কম্ফর্টার",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -12980,7 +12980,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_S_16.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_16.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13030,7 +13030,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কম্ফর্টার collection with comfortable fit and verified material.",
     "category": "comforter",
     "subcategory": "কম্ফর্টার",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -13038,7 +13038,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 8,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_S_15.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_15.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13088,7 +13088,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic লেডিস হুডি collection with comfortable fit and verified material.",
     "category": "ladies-hoodie",
     "subcategory": "লেডিস হুডি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 495,
     "originalPrice": 750,
     "discountPercentage": 34,
@@ -13096,7 +13096,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764415676_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764415676_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764415676_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13146,7 +13146,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic লেডিস হুডি collection with comfortable fit and verified material.",
     "category": "ladies-hoodie",
     "subcategory": "লেডিস হুডি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 495,
     "originalPrice": 750,
     "discountPercentage": 34,
@@ -13154,7 +13154,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761762045_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13204,7 +13204,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic লেডিস হুডি collection with comfortable fit and verified material.",
     "category": "ladies-hoodie",
     "subcategory": "লেডিস হুডি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 495,
     "originalPrice": 750,
     "discountPercentage": 34,
@@ -13212,7 +13212,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761762045_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13262,7 +13262,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic লেডিস হুডি collection with comfortable fit and verified material.",
     "category": "ladies-hoodie",
     "subcategory": "লেডিস হুডি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 495,
     "originalPrice": 750,
     "discountPercentage": 34,
@@ -13270,7 +13270,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761762045_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13320,7 +13320,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic হুডি সেট collection with comfortable fit and verified material.",
     "category": "hoodie-set",
     "subcategory": "হুডি সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 840,
     "originalPrice": 1050,
     "discountPercentage": 20,
@@ -13328,7 +13328,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 7,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1768049873_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768049873_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768049873_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13378,7 +13378,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic হুডি সেট collection with comfortable fit and verified material.",
     "category": "hoodie-set",
     "subcategory": "হুডি সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1000,
     "discountPercentage": 24,
@@ -13386,7 +13386,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1765476575_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13436,7 +13436,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic হুডি সেট collection with comfortable fit and verified material.",
     "category": "hoodie-set",
     "subcategory": "হুডি সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1000,
     "discountPercentage": 24,
@@ -13444,7 +13444,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1765476575_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13494,7 +13494,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic হুডি সেট collection with comfortable fit and verified material.",
     "category": "hoodie-set",
     "subcategory": "হুডি সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 759,
     "originalPrice": 1000,
     "discountPercentage": 24,
@@ -13502,7 +13502,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1765476575_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13552,7 +13552,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic জেন্টস জ্যাকেট collection with comfortable fit and verified material.",
     "category": "gents-jacket",
     "subcategory": "জেন্টস জ্যাকেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 978,
     "originalPrice": 1250,
     "discountPercentage": 22,
@@ -13560,7 +13560,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13610,7 +13610,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic জেন্টস জ্যাকেট collection with comfortable fit and verified material.",
     "category": "gents-jacket",
     "subcategory": "জেন্টস জ্যাকেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 978,
     "originalPrice": 1250,
     "discountPercentage": 22,
@@ -13618,7 +13618,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 6,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13668,7 +13668,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic জেন্টস জ্যাকেট collection with comfortable fit and verified material.",
     "category": "gents-jacket",
     "subcategory": "জেন্টস জ্যাকেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 978,
     "originalPrice": 1250,
     "discountPercentage": 22,
@@ -13676,7 +13676,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 5,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13726,7 +13726,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic জেন্টস জ্যাকেট collection with comfortable fit and verified material.",
     "category": "gents-jacket",
     "subcategory": "জেন্টস জ্যাকেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 978,
     "originalPrice": 1250,
     "discountPercentage": 22,
@@ -13734,7 +13734,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13784,7 +13784,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic জেন্টস হুডি collection with comfortable fit and verified material.",
     "category": "gents-hoodie",
     "subcategory": "জেন্টস হুডি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -13792,7 +13792,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13842,7 +13842,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic জেন্টস হুডি collection with comfortable fit and verified material.",
     "category": "gents-hoodie",
     "subcategory": "জেন্টস হুডি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -13850,7 +13850,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13900,7 +13900,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic জেন্টস হুডি collection with comfortable fit and verified material.",
     "category": "gents-hoodie",
     "subcategory": "জেন্টস হুডি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -13908,7 +13908,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 9,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13958,7 +13958,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic জেন্টস হুডি collection with comfortable fit and verified material.",
     "category": "gents-hoodie",
     "subcategory": "জেন্টস হুডি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 529,
     "originalPrice": 800,
     "discountPercentage": 34,
@@ -13966,7 +13966,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14016,7 +14016,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic এক্সেসরিজ collection with comfortable fit and verified material.",
     "category": "accessories",
     "subcategory": "এক্সেসরিজ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 265,
     "originalPrice": 450,
     "discountPercentage": 41,
@@ -14024,7 +14024,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787987153_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14074,7 +14074,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic এক্সেসরিজ collection with comfortable fit and verified material.",
     "category": "accessories",
     "subcategory": "এক্সেসরিজ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 265,
     "originalPrice": 450,
     "discountPercentage": 41,
@@ -14082,7 +14082,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787987153_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14132,7 +14132,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic এক্সেসরিজ collection with comfortable fit and verified material.",
     "category": "accessories",
     "subcategory": "এক্সেসরিজ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 265,
     "originalPrice": 450,
     "discountPercentage": 41,
@@ -14140,7 +14140,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787987153_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14190,7 +14190,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic এক্সেসরিজ collection with comfortable fit and verified material.",
     "category": "accessories",
     "subcategory": "এক্সেসরিজ",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 161,
     "originalPrice": 300,
     "discountPercentage": 46,
@@ -14198,7 +14198,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778152335_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778152335_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778152335_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14248,7 +14248,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic গার্লস টিশার্ট সেট collection with comfortable fit and verified material.",
     "category": "girls-tshirt-set",
     "subcategory": "গার্লস টিশার্ট সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 403,
     "originalPrice": 650,
     "discountPercentage": 38,
@@ -14256,7 +14256,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789751621_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14306,7 +14306,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic গার্লস টিশার্ট সেট collection with comfortable fit and verified material.",
     "category": "girls-tshirt-set",
     "subcategory": "গার্লস টিশার্ট সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 403,
     "originalPrice": 650,
     "discountPercentage": 38,
@@ -14314,7 +14314,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789751621_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14364,7 +14364,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic গার্লস টিশার্ট সেট collection with comfortable fit and verified material.",
     "category": "girls-tshirt-set",
     "subcategory": "গার্লস টিশার্ট সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 403,
     "originalPrice": 650,
     "discountPercentage": 38,
@@ -14372,7 +14372,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789751621_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14422,7 +14422,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic গার্লস টিশার্ট সেট collection with comfortable fit and verified material.",
     "category": "girls-tshirt-set",
     "subcategory": "গার্লস টিশার্ট সেট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 700,
     "discountPercentage": 38,
@@ -14430,7 +14430,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785956048_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785956048_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785956048_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14480,7 +14480,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic বেবি বোরখা collection with comfortable fit and verified material.",
     "category": "baby-borka",
     "subcategory": "বেবি বোরখা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 886,
     "originalPrice": 1100,
     "discountPercentage": 19,
@@ -14488,7 +14488,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14538,7 +14538,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic বেবি বোরখা collection with comfortable fit and verified material.",
     "category": "baby-borka",
     "subcategory": "বেবি বোরখা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 886,
     "originalPrice": 1100,
     "discountPercentage": 19,
@@ -14546,7 +14546,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14596,7 +14596,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic বেবি বোরখা collection with comfortable fit and verified material.",
     "category": "baby-borka",
     "subcategory": "বেবি বোরখা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 886,
     "originalPrice": 1100,
     "discountPercentage": 19,
@@ -14604,7 +14604,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14654,7 +14654,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic বেবি বোরখা collection with comfortable fit and verified material.",
     "category": "baby-borka",
     "subcategory": "বেবি বোরখা",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 886,
     "originalPrice": 1100,
     "discountPercentage": 19,
@@ -14662,7 +14662,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 6,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14712,7 +14712,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic পরী ড্রেস collection with comfortable fit and verified material.",
     "category": "pari-dress",
     "subcategory": "পরী ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1553,
     "originalPrice": 1850,
     "discountPercentage": 16,
@@ -14720,7 +14720,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772115753_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14770,7 +14770,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic পরী ড্রেস collection with comfortable fit and verified material.",
     "category": "pari-dress",
     "subcategory": "পরী ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1553,
     "originalPrice": 1850,
     "discountPercentage": 16,
@@ -14778,7 +14778,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772115753_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14828,7 +14828,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic পরী ড্রেস collection with comfortable fit and verified material.",
     "category": "pari-dress",
     "subcategory": "পরী ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1553,
     "originalPrice": 1850,
     "discountPercentage": 16,
@@ -14836,7 +14836,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 5,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772115753_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14886,7 +14886,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic পরী ড্রেস collection with comfortable fit and verified material.",
     "category": "pari-dress",
     "subcategory": "পরী ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1438,
     "originalPrice": 1700,
     "discountPercentage": 15,
@@ -14894,7 +14894,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 11,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1765476961_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1765476961_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1765476961_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14944,7 +14944,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কিডস প্যান্ট collection with comfortable fit and verified material.",
     "category": "kids-pant",
     "subcategory": "কিডস প্যান্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 380,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -14952,7 +14952,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 7,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15002,7 +15002,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কিডস প্যান্ট collection with comfortable fit and verified material.",
     "category": "kids-pant",
     "subcategory": "কিডস প্যান্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 380,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -15010,7 +15010,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 6,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15060,7 +15060,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কিডস প্যান্ট collection with comfortable fit and verified material.",
     "category": "kids-pant",
     "subcategory": "কিডস প্যান্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 380,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -15068,7 +15068,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15118,7 +15118,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic কিডস প্যান্ট collection with comfortable fit and verified material.",
     "category": "kids-pant",
     "subcategory": "কিডস প্যান্ট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 380,
     "originalPrice": 650,
     "discountPercentage": 42,
@@ -15126,7 +15126,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 6,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15176,7 +15176,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic লেডিস ওভারকোট collection with comfortable fit and verified material.",
     "category": "ladies-overcoat",
     "subcategory": "লেডিস ওভারকোট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 689,
     "originalPrice": 1200,
     "discountPercentage": 43,
@@ -15184,7 +15184,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 10,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_20.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_S_20.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_20.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15234,7 +15234,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic লেডিস ওভারকোট collection with comfortable fit and verified material.",
     "category": "ladies-overcoat",
     "subcategory": "লেডিস ওভারকোট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 689,
     "originalPrice": 1200,
     "discountPercentage": 43,
@@ -15242,7 +15242,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_S_19.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_19.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15292,7 +15292,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic লেডিস ওভারকোট collection with comfortable fit and verified material.",
     "category": "ladies-overcoat",
     "subcategory": "লেডিস ওভারকোট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 689,
     "originalPrice": 1200,
     "discountPercentage": 43,
@@ -15300,7 +15300,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_S_18.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_18.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15350,7 +15350,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Authentic লেডিস ওভারকোট collection with comfortable fit and verified material.",
     "category": "ladies-overcoat",
     "subcategory": "লেডিস ওভারকোট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 689,
     "originalPrice": 1200,
     "discountPercentage": 43,
@@ -15358,7 +15358,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_S_17.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_17.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15408,7 +15408,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -15416,7 +15416,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_15.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_15.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15489,7 +15489,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -15497,7 +15497,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_14.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_14.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_14.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15570,7 +15570,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -15578,7 +15578,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_13.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_13.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15651,7 +15651,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -15659,7 +15659,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15732,7 +15732,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -15740,7 +15740,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 22,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15813,7 +15813,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -15821,7 +15821,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15894,7 +15894,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -15902,7 +15902,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15975,7 +15975,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -15983,7 +15983,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16056,7 +16056,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -16064,7 +16064,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16137,7 +16137,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -16145,7 +16145,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16218,7 +16218,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -16226,7 +16226,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16299,7 +16299,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -16307,7 +16307,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 36,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16380,7 +16380,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -16388,7 +16388,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 32,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16461,7 +16461,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -16469,7 +16469,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 30,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16542,7 +16542,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1472,
     "originalPrice": 1800,
     "discountPercentage": 18,
@@ -16550,7 +16550,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16623,7 +16623,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1300,
     "discountPercentage": 31,
@@ -16631,7 +16631,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16704,7 +16704,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1300,
     "discountPercentage": 31,
@@ -16712,7 +16712,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16785,7 +16785,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1300,
     "discountPercentage": 31,
@@ -16793,7 +16793,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 36,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16866,7 +16866,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1300,
     "discountPercentage": 31,
@@ -16874,7 +16874,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16947,7 +16947,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1300,
     "discountPercentage": 31,
@@ -16955,7 +16955,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17028,7 +17028,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1300,
     "discountPercentage": 31,
@@ -17036,7 +17036,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17109,7 +17109,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1300,
     "discountPercentage": 31,
@@ -17117,7 +17117,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17190,7 +17190,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17198,7 +17198,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_15.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_15.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17271,7 +17271,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17279,7 +17279,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_14.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_14.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_14.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17352,7 +17352,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17360,7 +17360,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_13.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_13.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17433,7 +17433,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17441,7 +17441,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17514,7 +17514,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17522,7 +17522,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17595,7 +17595,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17603,7 +17603,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17676,7 +17676,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17684,7 +17684,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17757,7 +17757,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17765,7 +17765,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 35,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17838,7 +17838,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17846,7 +17846,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 22,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17919,7 +17919,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -17927,7 +17927,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18000,7 +18000,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -18008,7 +18008,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18081,7 +18081,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -18089,7 +18089,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18162,7 +18162,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -18170,7 +18170,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 22,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18243,7 +18243,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Regular Bedsheets sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "bedsheet",
     "subcategory": "রেগুলার বেডশীট",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 897,
     "originalPrice": 1200,
     "discountPercentage": 25,
@@ -18251,7 +18251,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18324,7 +18324,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1001,
     "originalPrice": 1200,
     "discountPercentage": 17,
@@ -18332,7 +18332,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581340_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18405,7 +18405,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1001,
     "originalPrice": 1200,
     "discountPercentage": 17,
@@ -18413,7 +18413,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18486,7 +18486,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1001,
     "originalPrice": 1200,
     "discountPercentage": 17,
@@ -18494,7 +18494,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18567,7 +18567,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1001,
     "originalPrice": 1200,
     "discountPercentage": 17,
@@ -18575,7 +18575,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18648,7 +18648,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1001,
     "originalPrice": 1200,
     "discountPercentage": 17,
@@ -18656,7 +18656,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 34,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18729,7 +18729,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1001,
     "originalPrice": 1200,
     "discountPercentage": 17,
@@ -18737,7 +18737,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 30,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18810,7 +18810,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1001,
     "originalPrice": 1200,
     "discountPercentage": 17,
@@ -18818,7 +18818,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 36,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18891,7 +18891,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -18899,7 +18899,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18972,7 +18972,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -18980,7 +18980,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19053,7 +19053,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19061,7 +19061,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19134,7 +19134,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19142,7 +19142,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19215,7 +19215,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19223,7 +19223,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 32,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19296,7 +19296,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19304,7 +19304,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19377,7 +19377,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19385,7 +19385,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19458,7 +19458,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19466,7 +19466,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19539,7 +19539,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19547,7 +19547,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19620,7 +19620,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19628,7 +19628,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19701,7 +19701,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19709,7 +19709,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19782,7 +19782,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1264,
     "originalPrice": 1600,
     "discountPercentage": 21,
@@ -19790,7 +19790,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 36,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19863,7 +19863,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -19871,7 +19871,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19944,7 +19944,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -19952,7 +19952,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20025,7 +20025,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -20033,7 +20033,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20106,7 +20106,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -20114,7 +20114,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20187,7 +20187,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -20195,7 +20195,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20268,7 +20268,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -20276,7 +20276,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20349,7 +20349,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -20357,7 +20357,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20430,7 +20430,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -20438,7 +20438,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 32,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20511,7 +20511,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1208,
     "originalPrice": 1500,
     "discountPercentage": 19,
@@ -20519,7 +20519,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20592,7 +20592,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1200,
     "discountPercentage": 12,
@@ -20600,7 +20600,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20673,7 +20673,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1200,
     "discountPercentage": 12,
@@ -20681,7 +20681,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20754,7 +20754,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1200,
     "discountPercentage": 12,
@@ -20762,7 +20762,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20835,7 +20835,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1200,
     "discountPercentage": 12,
@@ -20843,7 +20843,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20916,7 +20916,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1200,
     "discountPercentage": 12,
@@ -20924,7 +20924,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20997,7 +20997,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1200,
     "discountPercentage": 12,
@@ -21005,7 +21005,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21078,7 +21078,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1200,
     "discountPercentage": 12,
@@ -21086,7 +21086,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21159,7 +21159,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Couple Saree sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "couple-saree",
     "subcategory": "কাপল শাড়ী",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1058,
     "originalPrice": 1200,
     "discountPercentage": 12,
@@ -21167,7 +21167,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21240,7 +21240,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1050,
     "discountPercentage": 21,
@@ -21248,7 +21248,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21321,7 +21321,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1050,
     "discountPercentage": 21,
@@ -21329,7 +21329,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21402,7 +21402,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1050,
     "discountPercentage": 21,
@@ -21410,7 +21410,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21483,7 +21483,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1050,
     "discountPercentage": 21,
@@ -21491,7 +21491,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21564,7 +21564,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1050,
     "discountPercentage": 21,
@@ -21572,7 +21572,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21645,7 +21645,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1050,
     "discountPercentage": 21,
@@ -21653,7 +21653,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 29,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21726,7 +21726,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 828,
     "originalPrice": 1050,
     "discountPercentage": 21,
@@ -21734,7 +21734,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21807,7 +21807,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 863,
     "originalPrice": 1150,
     "discountPercentage": 25,
@@ -21815,7 +21815,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21888,7 +21888,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 863,
     "originalPrice": 1150,
     "discountPercentage": 25,
@@ -21896,7 +21896,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 29,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21969,7 +21969,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 863,
     "originalPrice": 1150,
     "discountPercentage": 25,
@@ -21977,7 +21977,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22050,7 +22050,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 863,
     "originalPrice": 1150,
     "discountPercentage": 25,
@@ -22058,7 +22058,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22131,7 +22131,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 600,
     "discountPercentage": 14,
@@ -22139,7 +22139,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22212,7 +22212,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 600,
     "discountPercentage": 14,
@@ -22220,7 +22220,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 27,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22293,7 +22293,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 600,
     "discountPercentage": 14,
@@ -22301,7 +22301,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22374,7 +22374,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 600,
     "discountPercentage": 14,
@@ -22382,7 +22382,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22455,7 +22455,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 600,
     "discountPercentage": 14,
@@ -22463,7 +22463,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22536,7 +22536,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 600,
     "discountPercentage": 14,
@@ -22544,7 +22544,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 34,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22617,7 +22617,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 600,
     "discountPercentage": 14,
@@ -22625,7 +22625,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 32,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22698,7 +22698,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 518,
     "originalPrice": 600,
     "discountPercentage": 14,
@@ -22706,7 +22706,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22779,7 +22779,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 909,
     "originalPrice": 1200,
     "discountPercentage": 24,
@@ -22787,7 +22787,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 35,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22860,7 +22860,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 909,
     "originalPrice": 1200,
     "discountPercentage": 24,
@@ -22868,7 +22868,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 22,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22941,7 +22941,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 909,
     "originalPrice": 1200,
     "discountPercentage": 24,
@@ -22949,7 +22949,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 29,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23022,7 +23022,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 909,
     "originalPrice": 1200,
     "discountPercentage": 24,
@@ -23030,7 +23030,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23103,7 +23103,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 909,
     "originalPrice": 1200,
     "discountPercentage": 24,
@@ -23111,7 +23111,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 35,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23184,7 +23184,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 909,
     "originalPrice": 1200,
     "discountPercentage": 24,
@@ -23192,7 +23192,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 36,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23265,7 +23265,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1242,
     "originalPrice": 1500,
     "discountPercentage": 17,
@@ -23273,7 +23273,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 35,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848337_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23346,7 +23346,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1242,
     "originalPrice": 1500,
     "discountPercentage": 17,
@@ -23354,7 +23354,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 30,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848337_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23427,7 +23427,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1242,
     "originalPrice": 1500,
     "discountPercentage": 17,
@@ -23435,7 +23435,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23508,7 +23508,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1242,
     "originalPrice": 1500,
     "discountPercentage": 17,
@@ -23516,7 +23516,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 32,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23589,7 +23589,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1242,
     "originalPrice": 1500,
     "discountPercentage": 17,
@@ -23597,7 +23597,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 34,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23670,7 +23670,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1242,
     "originalPrice": 1500,
     "discountPercentage": 17,
@@ -23678,7 +23678,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23751,7 +23751,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 966,
     "originalPrice": 1200,
     "discountPercentage": 20,
@@ -23759,7 +23759,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_S_13.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_13.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23832,7 +23832,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 966,
     "originalPrice": 1200,
     "discountPercentage": 20,
@@ -23840,7 +23840,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23913,7 +23913,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 966,
     "originalPrice": 1200,
     "discountPercentage": 20,
@@ -23921,7 +23921,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 34,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23994,7 +23994,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 966,
     "originalPrice": 1200,
     "discountPercentage": 20,
@@ -24002,7 +24002,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24075,7 +24075,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Sunnati Dress sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "sunnati-dress",
     "subcategory": "সুন্নাতি ড্রেস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 966,
     "originalPrice": 1200,
     "discountPercentage": 20,
@@ -24083,7 +24083,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24156,7 +24156,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -24164,7 +24164,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 30,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24237,7 +24237,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1093,
     "originalPrice": 1400,
     "discountPercentage": 22,
@@ -24245,7 +24245,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 30,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24318,7 +24318,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1817,
     "originalPrice": 2200,
     "discountPercentage": 17,
@@ -24326,7 +24326,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 33,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099858_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24399,7 +24399,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1817,
     "originalPrice": 2200,
     "discountPercentage": 17,
@@ -24407,7 +24407,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099858_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24480,7 +24480,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1817,
     "originalPrice": 2200,
     "discountPercentage": 17,
@@ -24488,7 +24488,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 36,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099858_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24561,7 +24561,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1817,
     "originalPrice": 2200,
     "discountPercentage": 17,
@@ -24569,7 +24569,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 15,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099719_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24642,7 +24642,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1817,
     "originalPrice": 2200,
     "discountPercentage": 17,
@@ -24650,7 +24650,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 34,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099719_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24723,7 +24723,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1495,
     "originalPrice": 1800,
     "discountPercentage": 17,
@@ -24731,7 +24731,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 22,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24804,7 +24804,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1495,
     "originalPrice": 1800,
     "discountPercentage": 17,
@@ -24812,7 +24812,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24885,7 +24885,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1495,
     "originalPrice": 1800,
     "discountPercentage": 17,
@@ -24893,7 +24893,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24966,7 +24966,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1495,
     "originalPrice": 1800,
     "discountPercentage": 17,
@@ -24974,7 +24974,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25047,7 +25047,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1149,
     "originalPrice": 1400,
     "discountPercentage": 18,
@@ -25055,7 +25055,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25128,7 +25128,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1149,
     "originalPrice": 1400,
     "discountPercentage": 18,
@@ -25136,7 +25136,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 35,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25209,7 +25209,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1149,
     "originalPrice": 1400,
     "discountPercentage": 18,
@@ -25217,7 +25217,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25290,7 +25290,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1149,
     "originalPrice": 1400,
     "discountPercentage": 18,
@@ -25298,7 +25298,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 29,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25371,7 +25371,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1288,
     "originalPrice": 1500,
     "discountPercentage": 14,
@@ -25379,7 +25379,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 32,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25452,7 +25452,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1288,
     "originalPrice": 1500,
     "discountPercentage": 14,
@@ -25460,7 +25460,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25533,7 +25533,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1288,
     "originalPrice": 1500,
     "discountPercentage": 14,
@@ -25541,7 +25541,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 33,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25614,7 +25614,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1288,
     "originalPrice": 1500,
     "discountPercentage": 14,
@@ -25622,7 +25622,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25695,7 +25695,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1288,
     "originalPrice": 1500,
     "discountPercentage": 14,
@@ -25703,7 +25703,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25776,7 +25776,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1288,
     "originalPrice": 1500,
     "discountPercentage": 14,
@@ -25784,7 +25784,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25857,7 +25857,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1288,
     "originalPrice": 1500,
     "discountPercentage": 14,
@@ -25865,7 +25865,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25938,7 +25938,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1288,
     "originalPrice": 1500,
     "discountPercentage": 14,
@@ -25946,7 +25946,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 34,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26019,7 +26019,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 1288,
     "originalPrice": 1500,
     "discountPercentage": 14,
@@ -26027,7 +26027,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26100,7 +26100,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26108,7 +26108,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_13.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_13.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26181,7 +26181,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26189,7 +26189,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_12.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_12.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26262,7 +26262,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26270,7 +26270,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 35,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_11.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_11.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26343,7 +26343,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26351,7 +26351,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_10.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_10.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26424,7 +26424,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26432,7 +26432,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_9.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_9.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26505,7 +26505,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26513,7 +26513,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26586,7 +26586,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26594,7 +26594,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 29,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26667,7 +26667,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26675,7 +26675,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26748,7 +26748,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26756,7 +26756,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 23,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26829,7 +26829,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26837,7 +26837,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26910,7 +26910,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26918,7 +26918,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 32,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26991,7 +26991,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Readymade Three-Piece sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "three-piece",
     "subcategory": "রেডিমেড থ্রিপিস",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 541,
     "originalPrice": 750,
     "discountPercentage": 28,
@@ -26999,7 +26999,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 29,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27072,7 +27072,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 500,
     "discountPercentage": 40,
@@ -27080,7 +27080,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27153,7 +27153,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 500,
     "discountPercentage": 40,
@@ -27161,7 +27161,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 17,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27234,7 +27234,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 500,
     "discountPercentage": 40,
@@ -27242,7 +27242,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 22,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27315,7 +27315,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 500,
     "discountPercentage": 40,
@@ -27323,7 +27323,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27396,7 +27396,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 299,
     "originalPrice": 500,
     "discountPercentage": 40,
@@ -27404,7 +27404,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27477,7 +27477,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -27485,7 +27485,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27558,7 +27558,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -27566,7 +27566,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 16,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27639,7 +27639,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -27647,7 +27647,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27720,7 +27720,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -27728,7 +27728,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27801,7 +27801,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -27809,7 +27809,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 36,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27882,7 +27882,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -27890,7 +27890,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 13,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27963,7 +27963,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 500,
     "discountPercentage": 15,
@@ -27971,7 +27971,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1731076192_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28044,7 +28044,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 500,
     "discountPercentage": 15,
@@ -28052,7 +28052,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 36,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1731076192_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28125,7 +28125,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 500,
     "discountPercentage": 15,
@@ -28133,7 +28133,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 36,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1731076192_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28206,7 +28206,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 500,
     "discountPercentage": 15,
@@ -28214,7 +28214,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 12,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728496600_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496600_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496600_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28287,7 +28287,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 500,
     "discountPercentage": 15,
@@ -28295,7 +28295,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 18,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728496599_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496599_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496599_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28368,7 +28368,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -28376,7 +28376,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 32,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496051_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28449,7 +28449,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -28457,7 +28457,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 19,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496051_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28530,7 +28530,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -28538,7 +28538,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 33,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496050_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28611,7 +28611,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -28619,7 +28619,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496050_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28692,7 +28692,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -28700,7 +28700,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28773,7 +28773,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -28781,7 +28781,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 21,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28854,7 +28854,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -28862,7 +28862,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28935,7 +28935,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 437,
     "originalPrice": 550,
     "discountPercentage": 21,
@@ -28943,7 +28943,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29016,7 +29016,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 550,
     "discountPercentage": 23,
@@ -29024,7 +29024,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 26,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29097,7 +29097,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 550,
     "discountPercentage": 23,
@@ -29105,7 +29105,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 28,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29178,7 +29178,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 550,
     "discountPercentage": 23,
@@ -29186,7 +29186,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 20,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29259,7 +29259,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 550,
     "discountPercentage": 23,
@@ -29267,7 +29267,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29340,7 +29340,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 550,
     "discountPercentage": 23,
@@ -29348,7 +29348,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_S_2.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_2.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29421,7 +29421,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 426,
     "originalPrice": 550,
     "discountPercentage": 23,
@@ -29429,7 +29429,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 24,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_S_1.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_1.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29502,7 +29502,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 450,
     "discountPercentage": 24,
@@ -29510,7 +29510,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 35,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_S_8.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_8.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29583,7 +29583,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 450,
     "discountPercentage": 24,
@@ -29591,7 +29591,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 33,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_S_7.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_7.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29664,7 +29664,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 450,
     "discountPercentage": 24,
@@ -29672,7 +29672,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 31,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_S_6.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_6.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29745,7 +29745,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 450,
     "discountPercentage": 24,
@@ -29753,7 +29753,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 25,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_S_5.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_5.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29826,7 +29826,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 450,
     "discountPercentage": 24,
@@ -29834,7 +29834,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 33,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986424_S_4.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_4.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29907,7 +29907,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "descriptionEn": "Premium quality Inner & Nighty sourced directly from ShopBaseBD wholesale catalog. 100% authentic and verified. Sized and stitched to perfection with comfortable fit.",
     "category": "inner-nighty",
     "subcategory": "ইনার & নাইটি",
-    "brand": "ShopBaseBD Official",
+    "brand": "Bangla Bazar",
     "price": 344,
     "originalPrice": 450,
     "discountPercentage": 24,
@@ -29915,7 +29915,7 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "reviewCount": 14,
     "images": [
       "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986424_S_3.jpg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_3.jpeg"
     ],
     "stock": 50,
     "isFlashSale": false,

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   Search, 
+  X,
   MoreVertical, 
   ShoppingCart, 
   Heart, 
@@ -46,21 +47,73 @@ export const Header: React.FC = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isThreeDotMenuOpen, setIsThreeDotMenuOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const threeDotRef = useRef<HTMLDivElement>(null);
 
-  // Filter auto-suggestions
-  const suggestions = searchInput.trim().length > 1
-    ? products.filter((p) => {
-        const titleBn = p.titleBn || '';
-        const titleEn = p.titleEn || '';
-        const titleMatch = (language === 'bn' ? titleBn : titleEn)
-          .toLowerCase()
-          .includes(searchInput.toLowerCase());
-        const tagMatch = Array.isArray(p.tags) && p.tags.some((tag) => typeof tag === 'string' && tag.toLowerCase().includes(searchInput.toLowerCase()));
-        const brandMatch = typeof p.brand === 'string' && p.brand.toLowerCase().includes(searchInput.toLowerCase());
-        const catMatch = selectedSearchCat === 'all' || p.category === selectedSearchCat;
-        return (titleMatch || tagMatch || brandMatch) && catMatch;
-      }).slice(0, 5)
+  // Filter auto-suggestions: matches Bengali, English, SKU code, brand, tags (even with 1 character or partial word!)
+  const trimmedTerm = searchInput.trim().toLowerCase();
+  const searchTokens = trimmedTerm.split(/\s+/).filter(Boolean);
+
+  const suggestions = trimmedTerm.length >= 1
+    ? products
+        .filter((p) => {
+          const titleBn = (p.titleBn || '').toLowerCase();
+          const titleEn = (p.titleEn || '').toLowerCase();
+          const sku = p.sku ? String(p.sku).toLowerCase() : '';
+          const id = String(p.id || '').toLowerCase();
+          const brand = typeof p.brand === 'string' ? p.brand.toLowerCase() : '';
+          const tags = Array.isArray(p.tags) ? p.tags.join(' ').toLowerCase() : '';
+          const cat = String(p.category || '').toLowerCase();
+
+          // Direct match: matches any partial word or single character
+          const directMatch =
+            titleBn.includes(trimmedTerm) ||
+            titleEn.includes(trimmedTerm) ||
+            sku.includes(trimmedTerm) ||
+            id.includes(trimmedTerm) ||
+            brand.includes(trimmedTerm) ||
+            tags.includes(trimmedTerm) ||
+            cat.includes(trimmedTerm);
+
+          // Multi-token match if spaces are present
+          const tokenMatch =
+            searchTokens.length > 1 &&
+            searchTokens.every((token) =>
+              titleBn.includes(token) ||
+              titleEn.includes(token) ||
+              sku.includes(token) ||
+              brand.includes(token) ||
+              tags.includes(token)
+            );
+
+          const catMatch = selectedSearchCat === 'all' || p.category === selectedSearchCat;
+          return (directMatch || tokenMatch) && catMatch;
+        })
+        .sort((a, b) => {
+          const aSku = a.sku ? String(a.sku).toLowerCase() : '';
+          const bSku = b.sku ? String(b.sku).toLowerCase() : '';
+
+          // 1. Exact SKU match gets top priority
+          if (aSku === trimmedTerm && bSku !== trimmedTerm) return -1;
+          if (bSku === trimmedTerm && aSku !== trimmedTerm) return 1;
+
+          // 2. Partial SKU match gets high priority
+          const aSkuMatch = aSku.includes(trimmedTerm);
+          const bSkuMatch = bSku.includes(trimmedTerm);
+          if (aSkuMatch && !bSkuMatch) return -1;
+          if (!aSkuMatch && bSkuMatch) return 1;
+
+          // 3. Title prefix match
+          const aTitle = (a.titleBn || a.titleEn || '').toLowerCase();
+          const bTitle = (b.titleBn || b.titleEn || '').toLowerCase();
+          const aPrefix = aTitle.startsWith(trimmedTerm);
+          const bPrefix = bTitle.startsWith(trimmedTerm);
+          if (aPrefix && !bPrefix) return -1;
+          if (!aPrefix && bPrefix) return 1;
+
+          return 0;
+        })
+        .slice(0, 10)
     : [];
 
   useEffect(() => {
@@ -72,8 +125,18 @@ export const Header: React.FC = () => {
         setIsThreeDotMenuOpen(false);
       }
     };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsSearchOpen(false);
+        setIsThreeDotMenuOpen(false);
+      }
+    };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -235,134 +298,203 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: Product Find & Search Section */}
-        <div ref={searchRef} className="relative flex-1 max-w-xl sm:max-w-2xl ml-auto">
-          <form onSubmit={handleSearchSubmit} className="relative flex items-center group">
-            {/* Animated Gradient Border wrapper */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 via-[#00873E] to-emerald-500 rounded-2xl blur-xs opacity-30 group-hover:opacity-70 transition duration-500"></div>
-            
-            <div className="relative flex w-full bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-              {/* Category Select inside Search Input (Desktop) */}
-              <div className="hidden md:flex items-center pl-2 bg-slate-50 border-r border-slate-200">
-                <select
-                  value={selectedSearchCat}
-                  onChange={(e) => setSelectedSearchCat(e.target.value)}
-                  className="bg-transparent hover:bg-slate-100 text-slate-700 text-xs font-bold py-3 px-2 focus:outline-none cursor-pointer transition-colors max-w-[140px] truncate"
-                >
-                  <option value="all">{language === 'bn' ? 'সকল ক্যাটাগরি' : 'All Categories'}</option>
-                  {categories.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {language === 'bn' ? c.nameBn : c.nameEn}
-                    </option>
-                  ))}
-                </select>
-              </div>
+        {/* Right: Product Find & Search Section (Single Search Icon Button that expands on click) */}
+        <div ref={searchRef} className="relative flex items-center justify-end flex-1 max-w-2xl ml-auto">
+          {!isSearchOpen ? (
+            /* Standalone Search Button Icon - Only the Search Icon is shown until clicked */
+            <button
+              type="button"
+              onClick={() => {
+                setIsSearchOpen(true);
+                setTimeout(() => searchInputRef.current?.focus(), 60);
+              }}
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center bg-gradient-to-tr from-[#00873E] to-[#059669] hover:from-[#007033] hover:to-[#047857] text-white shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-emerald-500/25 group"
+              aria-label={language === 'bn' ? 'চার্জ বাটন (পণ্য বা SKU খুঁজুন)' : 'Search Button (Search products or SKU)'}
+              title={language === 'bn' ? 'চার্জ বাটন: ক্লিক করে পণ্যের নাম বা SKU কোড দিয়ে খুঁজুন' : 'Click to search by name or SKU'}
+            >
+              <Search className="w-5 h-5 sm:w-5.5 sm:h-5.5 stroke-[2.4] transition-transform duration-200 group-hover:scale-110" />
+            </button>
+          ) : (
+            /* Open Search Input with Auto-focus and Live Predictive SKU/Title Results */
+            <div className="relative w-full max-w-xl sm:max-w-2xl animate-in fade-in slide-in-from-right duration-200">
+              <form onSubmit={handleSearchSubmit} className="relative flex items-center group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 via-[#00873E] to-emerald-500 rounded-2xl blur-xs opacity-40 transition duration-500"></div>
 
-              {/* Search Input */}
-              <div className="relative flex-1 flex items-center">
-                <Search className="w-5 h-5 text-slate-400 absolute left-3" />
-                <input
-                  type="text"
-                  value={searchInput}
-                  onChange={(e) => {
-                    setSearchInput(e.target.value);
-                    setIsSearchOpen(true);
-                  }}
-                  onFocus={() => setIsSearchOpen(true)}
-                  placeholder={
-                    language === 'bn'
-                      ? 'আপনার পছন্দের পণ্য বা ব্র্যান্ড খুঁজুন...'
-                      : 'Search for products or brands...'
-                  }
-                  className="w-full bg-transparent py-3 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 outline-none transition-all"
-                />
-              </div>
-
-              {/* Search Button */}
-              <button
-                type="submit"
-                className="px-3.5 sm:px-6 bg-gradient-to-r from-[#00873E] to-[#046A31] hover:from-[#007033] hover:to-[#035526] text-white font-bold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shrink-0 shadow-xs"
-                aria-label={language === 'bn' ? 'অনুসন্ধান' : 'Search'}
-              >
-                <Search className="w-4 h-4 shrink-0" />
-                <span className="hidden sm:inline whitespace-nowrap">
-                  {language === 'bn' ? 'অনুসন্ধান' : 'Search'}
-                </span>
-              </button>
-            </div>
-          </form>
-
-          {/* Auto-suggest dropdown */}
-          {isSearchOpen && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50">
-              {suggestions.length > 0 ? (
-                <div className="p-2 divide-y divide-slate-100 max-h-96 overflow-y-auto">
-                  <div className="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                    {language === 'bn' ? 'পণ্য সাজেশন' : 'Product Suggestions'}
-                  </div>
-                  {suggestions.map((prod) => (
-                    <div
-                      key={prod.id}
-                      onClick={() => handleSelectSuggestion(prod)}
-                      className="flex items-center gap-3 p-2.5 hover:bg-orange-50/60 rounded-xl cursor-pointer transition-colors"
+                <div className="relative flex w-full bg-white rounded-xl shadow-md border border-emerald-400 overflow-hidden">
+                  {/* Category Select inside Search Input (Desktop) */}
+                  <div className="hidden md:flex items-center pl-2 bg-slate-50 border-r border-slate-200">
+                    <select
+                      value={selectedSearchCat}
+                      onChange={(e) => setSelectedSearchCat(e.target.value)}
+                      className="bg-transparent hover:bg-slate-100 text-slate-700 text-xs font-bold py-2.5 px-2 focus:outline-none cursor-pointer transition-colors max-w-[130px] truncate"
                     >
-                      <img
-                        src={
-                          prod?.images?.[0]?.includes('_L_') && prod.images[0].endsWith('.jpg')
-                            ? prod.images[0].replace(/\.jpg$/i, '.jpeg')
-                            : prod?.images?.[0] || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80'
-                        }
-                        alt={prod.titleBn || ''}
-                        referrerPolicy="no-referrer"
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (target.src.includes('_L_')) {
-                            target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
-                          } else {
-                            target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80';
-                          }
+                      <option value="all">{language === 'bn' ? 'সকল ক্যাটাগরি' : 'All Categories'}</option>
+                      {categories.map((c) => (
+                        <option key={c.id} value={c.id}>
+                          {language === 'bn' ? c.nameBn : c.nameEn}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Search Input with Auto Focus */}
+                  <div className="relative flex-1 flex items-center">
+                    <Search className="w-4 h-4 text-emerald-600 absolute left-3" />
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      value={searchInput}
+                      onChange={(e) => setSearchInput(e.target.value)}
+                      placeholder={
+                        language === 'bn'
+                          ? 'পণ্যের নাম বা SKU কোড লিখুন (যেমন: টিশার্ট, SBP-101)...'
+                          : 'Search by product name, brand, or SKU code...'
+                      }
+                      className="w-full bg-transparent py-2.5 pl-9 pr-8 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none transition-all font-medium"
+                    />
+                    {searchInput && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSearchInput('');
+                          searchInputRef.current?.focus();
                         }}
-                        className="w-10 h-10 object-cover rounded-lg border border-slate-200 shrink-0"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <div className="text-xs font-bold text-slate-800 truncate">
-                          {language === 'bn' ? prod.titleBn : prod.titleEn}
-                        </div>
-                        <div className="text-[11px] text-[#FF6B00] font-bold">
-                          {formatPrice(prod.price)}
-                          {prod.originalPrice && (
-                            <span className="text-slate-400 line-through text-[10px] ml-1.5 font-normal">
-                              {formatPrice(prod.originalPrice)}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <span className="text-[10px] text-slate-500 shrink-0 capitalize bg-slate-100 px-2 py-0.5 rounded-full font-medium">
-                        {prod.category}
-                      </span>
-                    </div>
-                  ))}
+                        className="absolute right-2 p-1 text-slate-400 hover:text-slate-600 rounded-full cursor-pointer"
+                        title={language === 'bn' ? 'মুছে ফেলুন' : 'Clear'}
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Search Submit Button */}
+                  <button
+                    type="submit"
+                    className="px-3.5 sm:px-5 bg-gradient-to-r from-[#00873E] to-[#046A31] hover:from-[#007033] hover:to-[#035526] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 shadow-xs"
+                    aria-label={language === 'bn' ? 'অনুসন্ধান' : 'Search'}
+                  >
+                    <Search className="w-4 h-4" />
+                    <span className="hidden sm:inline whitespace-nowrap">{language === 'bn' ? 'খুঁজুন' : 'Search'}</span>
+                  </button>
+
+                  {/* Close Expand Button - Collapses back to just the search icon */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsSearchOpen(false);
+                      setSearchInput('');
+                    }}
+                    className="p-2 sm:px-3 text-slate-400 hover:text-red-500 hover:bg-slate-100 transition-colors border-l border-slate-200 cursor-pointer"
+                    title={language === 'bn' ? 'বন্ধ করুন' : 'Close'}
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
-              ) : searchInput.trim().length > 1 ? (
-                <div className="p-4 text-center text-xs text-slate-500">
-                  {language === 'bn' ? 'কোনো পণ্য খুঁজে পাওয়া যায়নি' : 'No matching products found'}
+              </form>
+
+              {/* Auto-suggest dropdown showing live SKU and name matches */}
+              {searchInput.trim().length >= 1 ? (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                  {suggestions.length > 0 ? (
+                    <div className="p-2 divide-y divide-slate-100 max-h-96 overflow-y-auto">
+                      <div className="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+                        <span>{language === 'bn' ? 'পণ্য ও SKU ম্যাচিং' : 'Product & SKU Matches'}</span>
+                        <span className="text-emerald-600 font-semibold">
+                          {suggestions.length} {language === 'bn' ? 'টি পাওয়া গেছে' : 'found'}
+                        </span>
+                      </div>
+                      {suggestions.map((prod) => {
+                        const isSkuMatched = prod.sku && prod.sku.toLowerCase().includes(trimmedTerm);
+                        return (
+                          <div
+                            key={prod.id}
+                            onClick={() => handleSelectSuggestion(prod)}
+                            className="flex items-center gap-3 p-2.5 hover:bg-emerald-50/70 rounded-xl cursor-pointer transition-colors group"
+                          >
+                            <img
+                              src={
+                                prod?.images?.[0]?.includes('shopbasebd.com')
+                                  ? prod.images[0].replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg')
+                                  : prod?.images?.[0] || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop&q=90'
+                              }
+                              alt={prod.titleBn || ''}
+                              referrerPolicy="no-referrer"
+                              onError={(e) => {
+                                const target = e.currentTarget;
+                                target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop&q=90';
+                              }}
+                              className="w-12 h-12 object-cover rounded-xl border border-slate-200 shrink-0 group-hover:scale-105 transition-transform shadow-2xs"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <div className="text-xs font-bold text-slate-800 truncate group-hover:text-emerald-700">
+                                {language === 'bn' ? prod.titleBn : prod.titleEn}
+                              </div>
+                              <div className="flex items-center gap-2 mt-0.5">
+                                <span className="text-[11px] text-[#DC2626] font-black">
+                                  {formatPrice(prod.price)}
+                                </span>
+                                {prod.originalPrice && (
+                                  <span className="text-slate-400 line-through text-[10px] font-normal">
+                                    {formatPrice(prod.originalPrice)}
+                                  </span>
+                                )}
+                                {prod.sku && (
+                                  <span
+                                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded font-bold border ${
+                                      isSkuMatched
+                                        ? 'bg-amber-100 text-amber-900 border-amber-300 font-black'
+                                        : 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                                    }`}
+                                  >
+                                    {isSkuMatched ? `⚡ SKU: ${prod.sku}` : `SKU: ${prod.sku}`}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                            <span className="text-[10px] text-slate-500 shrink-0 capitalize bg-slate-100 px-2 py-0.5 rounded-full font-medium">
+                              {prod.category}
+                            </span>
+                          </div>
+                        );
+                      })}
+                      <div className="p-2 pt-2.5 text-center bg-slate-50">
+                        <button
+                          type="button"
+                          onClick={handleSearchSubmit}
+                          className="text-xs text-emerald-700 font-bold hover:underline cursor-pointer"
+                        >
+                          {language === 'bn' ? `"${searchInput}" দিয়ে সব ফলাফল দেখুন →` : `View all results for "${searchInput}" →`}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-5 text-center space-y-1">
+                      <div className="text-xs font-bold text-slate-700">
+                        {language === 'bn' ? `"${searchInput}" এর সাথে কোনো পণ্য মেলেনি` : `No products matching "${searchInput}"`}
+                      </div>
+                      <div className="text-[11px] text-slate-400">
+                        {language === 'bn' ? 'সঠিক বানান লিখুন অথবা SKU কোড দিয়ে চেষ্টা করুন।' : 'Check the spelling or try searching with an SKU code.'}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
-                <div className="p-3">
-                  <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
-                    {language === 'bn' ? 'জনপ্রিয় সার্চসমূহ' : 'Popular Searches'}
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50 p-3 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+                    <span>{language === 'bn' ? 'জনপ্রিয় সার্চসমূহ' : 'Popular Searches'}</span>
+                    <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+                      💡 SKU কোড দিয়েও সার্চ করতে পারেন
+                    </span>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
-                    {['স্যামসাং A54', 'সুতি পাঞ্জাবি', 'চিনিগুঁড়া চাল', 'স্মার্টওয়াচ', 'নন-ফ্রস্ট ফ্রিজ', 'ব্লুটুথ হেডফোন'].map((tag) => (
+                    {['স্যামসাং', 'পাঞ্জাবি', 'টিশার্ট', 'স্মার্টওয়াচ', 'হেডফোন', 'SBP-'].map((tag) => (
                       <button
                         key={tag}
                         onClick={() => {
                           setSearchInput(tag);
-                          setFilterState((prev) => ({ ...prev, searchQuery: tag, category: 'all' }));
-                          setIsSearchOpen(false);
-                          setCurrentPage('shop');
+                          searchInputRef.current?.focus();
                         }}
-                        className="px-2.5 py-1 text-xs bg-slate-100 hover:bg-orange-50 hover:text-[#FF6B00] hover:border-orange-200 border border-transparent rounded-full text-slate-600 transition-colors cursor-pointer"
+                        className="px-2.5 py-1 text-xs bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 border border-transparent rounded-full text-slate-600 transition-colors cursor-pointer"
                       >
                         {tag}
                       </button>

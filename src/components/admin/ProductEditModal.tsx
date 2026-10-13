@@ -70,13 +70,13 @@ export const ProductEditModal: React.FC<ProductEditModalProps> = ({
   const [titleEn, setTitleEn] = useState('');
   const [category, setCategory] = useState('');
   const [subcategory, setSubcategory] = useState('');
-  const [brand, setBrand] = useState('');
+  const [brand, setBrand] = useState('বাংলা বাজার');
   const [priceStr, setPriceStr] = useState<string>('205');
   const [originalPriceStr, setOriginalPriceStr] = useState<string>('250');
   const [stockStr, setStockStr] = useState<string>('50');
   const [sku, setSku] = useState(''); // Added
   const [images, setImages] = useState<string[]>([
-    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1400&auto=format&fit=crop&q=95',
   ]);
   const [activeImageSlot, setActiveImageSlot] = useState(0);
   const [sizes, setSizes] = useState<string[]>([]);
@@ -101,7 +101,7 @@ export const ProductEditModal: React.FC<ProductEditModalProps> = ({
       setTitleEn(productToEdit.titleEn || '');
       setCategory(productToEdit.category || (categories[0]?.slug || 'electronics'));
       setSubcategory(productToEdit.subcategory || '');
-      setBrand(productToEdit.brand || '');
+      setBrand(productToEdit.brand || 'বাংলা বাজার');
       setPriceStr(productToEdit.price !== undefined ? String(productToEdit.price) : '205');
       setOriginalPriceStr(productToEdit.originalPrice ? String(productToEdit.originalPrice) : '');
       setStockStr(productToEdit.stock !== undefined ? String(productToEdit.stock) : '25');
@@ -110,7 +110,7 @@ export const ProductEditModal: React.FC<ProductEditModalProps> = ({
       // Product images (1 to 5)
       const existingImages = (productToEdit.images && productToEdit.images.length > 0)
         ? productToEdit.images.slice(0, 5)
-        : ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80'];
+        : ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1400&auto=format&fit=crop&q=95'];
       setImages(existingImages);
       setActiveImageSlot(0);
 

@@ -9,6 +9,7 @@ import {
   RefreshCw, 
   Check, 
   ChevronRight, 
+  ChevronLeft,
   ArrowLeft,
   Sparkles,
   Zap,
@@ -369,7 +370,7 @@ export const ProductDetailPage: React.FC = () => {
                 transformOrigin: isHoverZooming ? `${zoomCoords.x}% ${zoomCoords.y}%` : 'center center',
                 transform: isHoverZooming ? 'scale(2.2)' : 'scale(1)',
                 transition: isHoverZooming ? 'transform 0.08s ease-out' : 'transform 0.3s ease-out',
-                imageRendering: 'high-quality',
+                imageRendering: '-webkit-optimize-contrast' as any,
                 WebkitBackfaceVisibility: 'hidden',
                 backfaceVisibility: 'hidden',
                 filter: isHoverZooming ? 'contrast(1.02) saturate(1.02)' : 'none',
@@ -1245,7 +1246,7 @@ export const ProductDetailPage: React.FC = () => {
               style={{
                 transform: `scale(${lightboxZoom}) translate(${lightboxPan.x / lightboxZoom}px, ${lightboxPan.y / lightboxZoom}px)`,
                 transition: isDragging ? 'none' : 'transform 0.2s ease-out',
-                imageRendering: 'high-quality',
+                imageRendering: '-webkit-optimize-contrast' as any,
                 WebkitBackfaceVisibility: 'hidden',
                 backfaceVisibility: 'hidden',
               }}

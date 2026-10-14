@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { 
   Search, 
   X,
+  ArrowLeft,
   MoreVertical, 
   ShoppingCart, 
   Heart, 
@@ -180,8 +181,8 @@ export const Header: React.FC = () => {
 
       {/* Main Header Bar: Brand Logo on Left, Product Search & Find Button directly on Right */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-6">
-        {/* Left: 3-Dot Navigation Toggle + Brand Logo */}
-        <div className="flex items-center gap-2 sm:gap-4 shrink-0 py-0.5">
+        {/* Left: 3-Dot Navigation Toggle + Brand Logo (Hidden on mobile when search is open so search gets 100% full width like YouTube) */}
+        <div className={`items-center gap-2 sm:gap-4 shrink-0 py-0.5 ${isSearchOpen ? 'hidden sm:flex' : 'flex'}`}>
           <div ref={threeDotRef} className="relative">
             <button
               onClick={() => {
@@ -298,15 +299,15 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: Product Find & Search Section (Single Search Icon Button that expands on click) */}
-        <div ref={searchRef} className="relative flex items-center justify-end flex-1 max-w-2xl ml-auto">
+        {/* Right: Product Find & Search Section (Expands full-width on mobile like YouTube) */}
+        <div ref={searchRef} className={`relative flex items-center ${isSearchOpen ? 'w-full sm:flex-1 sm:max-w-2xl' : 'flex-1 max-w-2xl justify-end ml-auto'}`}>
           {!isSearchOpen ? (
             /* Standalone Search Button Icon - Only the Search Icon is shown until clicked */
             <button
               type="button"
               onClick={() => {
                 setIsSearchOpen(true);
-                setTimeout(() => searchInputRef.current?.focus(), 60);
+                setTimeout(() => searchInputRef.current?.focus(), 80);
               }}
               className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center bg-gradient-to-tr from-[#00873E] to-[#059669] hover:from-[#007033] hover:to-[#047857] text-white shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-emerald-500/25 group"
               aria-label={language === 'bn' ? 'চার্জ বাটন (পণ্য বা SKU খুঁজুন)' : 'Search Button (Search products or SKU)'}
@@ -315,31 +316,50 @@ export const Header: React.FC = () => {
               <Search className="w-5 h-5 sm:w-5.5 sm:h-5.5 stroke-[2.4] transition-transform duration-200 group-hover:scale-110" />
             </button>
           ) : (
-            /* Open Search Input with Auto-focus and Live Predictive SKU/Title Results */
-            <div className="relative w-full max-w-xl sm:max-w-2xl animate-in fade-in slide-in-from-right duration-200">
-              <form onSubmit={handleSearchSubmit} className="relative flex items-center group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 via-[#00873E] to-emerald-500 rounded-2xl blur-xs opacity-40 transition duration-500"></div>
+            /* Open Search Input with Auto-focus - Full-width, roomy YouTube-style search box */
+            <div className="relative w-full">
+              <div className="w-full flex items-center gap-1.5 sm:gap-2.5 animate-in fade-in slide-in-from-right duration-200">
+                {/* YouTube-style Back Arrow for Mobile */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsSearchOpen(false);
+                    setSearchInput('');
+                  }}
+                  className="p-2 -ml-1 sm:hidden text-slate-700 hover:text-emerald-700 hover:bg-slate-100 rounded-full transition-colors cursor-pointer shrink-0"
+                  aria-label={language === 'bn' ? 'সার্চ বন্ধ করুন' : 'Back to normal'}
+                  title={language === 'bn' ? 'সার্চ বন্ধ করুন' : 'Back'}
+                >
+                  <ArrowLeft className="w-5 h-5 stroke-[2.4]" />
+                </button>
 
-                <div className="relative flex w-full bg-white rounded-xl shadow-md border border-emerald-400 overflow-hidden">
-                  {/* Category Select inside Search Input (Desktop) */}
-                  <div className="hidden md:flex items-center pl-2 bg-slate-50 border-r border-slate-200">
-                    <select
-                      value={selectedSearchCat}
-                      onChange={(e) => setSelectedSearchCat(e.target.value)}
-                      className="bg-transparent hover:bg-slate-100 text-slate-700 text-xs font-bold py-2.5 px-2 focus:outline-none cursor-pointer transition-colors max-w-[130px] truncate"
-                    >
-                      <option value="all">{language === 'bn' ? 'সকল ক্যাটাগরি' : 'All Categories'}</option>
-                      {categories.map((c) => (
-                        <option key={c.id} value={c.id}>
-                          {language === 'bn' ? c.nameBn : c.nameEn}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                {/* Main Search Input Form */}
+                <form onSubmit={handleSearchSubmit} className="relative flex-1 flex items-center group">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 via-[#00873E] to-emerald-500 rounded-2xl blur-xs opacity-35 transition duration-500"></div>
 
-                  {/* Search Input with Auto Focus */}
-                  <div className="relative flex-1 flex items-center">
-                    <Search className="w-4 h-4 text-emerald-600 absolute left-3" />
+                  <div className="relative flex w-full bg-white rounded-xl sm:rounded-2xl shadow-md border-2 border-emerald-500 overflow-hidden h-11 sm:h-12 items-center">
+                    {/* Category Select inside Search Input (Desktop) */}
+                    <div className="hidden md:flex items-center pl-2 bg-slate-50 border-r border-slate-200 h-full">
+                      <select
+                        value={selectedSearchCat}
+                        onChange={(e) => setSelectedSearchCat(e.target.value)}
+                        className="bg-transparent hover:bg-slate-100 text-slate-700 text-xs font-bold py-2.5 px-2 focus:outline-none cursor-pointer transition-colors max-w-[130px] truncate"
+                      >
+                        <option value="all">{language === 'bn' ? 'সকল ক্যাটাগরি' : 'All Categories'}</option>
+                        {categories.map((c) => (
+                          <option key={c.id} value={c.id}>
+                            {language === 'bn' ? c.nameBn : c.nameEn}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Leading Search Icon inside Input */}
+                    <div className="pl-3 sm:pl-3.5 pr-1.5 text-emerald-600 flex items-center shrink-0">
+                      <Search className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
+                    </div>
+
+                    {/* Search Input with Auto Focus - Large, roomy font and clear visibility */}
                     <input
                       ref={searchInputRef}
                       type="text"
@@ -347,11 +367,16 @@ export const Header: React.FC = () => {
                       onChange={(e) => setSearchInput(e.target.value)}
                       placeholder={
                         language === 'bn'
-                          ? 'পণ্যের নাম বা SKU কোড লিখুন (যেমন: টিশার্ট, SBP-101)...'
-                          : 'Search by product name, brand, or SKU code...'
+                          ? 'পণ্য বা SKU কোড লিখে সার্চ করুন...'
+                          : 'Search by product name, brand, or SKU...'
                       }
-                      className="w-full bg-transparent py-2.5 pl-9 pr-8 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none transition-all font-medium"
+                      className="flex-1 min-w-0 bg-transparent py-2 px-2 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 placeholder:text-xs sm:placeholder:text-sm font-medium outline-none"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      spellCheck="false"
                     />
+
+                    {/* Instant Clear / Delete Button ("X") - Tap to immediately clear what you wrote */}
                     {searchInput && (
                       <button
                         type="button"
@@ -359,38 +384,39 @@ export const Header: React.FC = () => {
                           setSearchInput('');
                           searchInputRef.current?.focus();
                         }}
-                        className="absolute right-2 p-1 text-slate-400 hover:text-slate-600 rounded-full cursor-pointer"
-                        title={language === 'bn' ? 'মুছে ফেলুন' : 'Clear'}
+                        className="p-1.5 sm:p-2 mr-1 text-slate-400 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-colors cursor-pointer shrink-0"
+                        aria-label={language === 'bn' ? 'লেখা মুছে ফেলুন' : 'Clear text'}
+                        title={language === 'bn' ? 'লেখা মুছে ফেলুন' : 'Clear text'}
                       >
-                        <X className="w-3.5 h-3.5" />
+                        <X className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5]" />
                       </button>
                     )}
+
+                    {/* Search Submit Button */}
+                    <button
+                      type="submit"
+                      className="h-full px-3.5 sm:px-5 bg-gradient-to-r from-[#00873E] to-[#046A31] hover:from-[#007033] hover:to-[#035526] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 shadow-xs"
+                      aria-label={language === 'bn' ? 'অনুসন্ধান' : 'Search'}
+                    >
+                      <Search className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                      <span className="hidden sm:inline whitespace-nowrap">{language === 'bn' ? 'খুঁজুন' : 'Search'}</span>
+                    </button>
+
+                    {/* Close Expand Button (Desktop) - Collapses back to just the search icon */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsSearchOpen(false);
+                        setSearchInput('');
+                      }}
+                      className="hidden sm:flex h-full px-2.5 sm:px-3 text-slate-400 hover:text-red-500 hover:bg-slate-100 transition-colors border-l border-slate-200 cursor-pointer items-center justify-center shrink-0"
+                      title={language === 'bn' ? 'বন্ধ করুন' : 'Close'}
+                    >
+                      <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </button>
                   </div>
-
-                  {/* Search Submit Button */}
-                  <button
-                    type="submit"
-                    className="px-3.5 sm:px-5 bg-gradient-to-r from-[#00873E] to-[#046A31] hover:from-[#007033] hover:to-[#035526] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 shadow-xs"
-                    aria-label={language === 'bn' ? 'অনুসন্ধান' : 'Search'}
-                  >
-                    <Search className="w-4 h-4" />
-                    <span className="hidden sm:inline whitespace-nowrap">{language === 'bn' ? 'খুঁজুন' : 'Search'}</span>
-                  </button>
-
-                  {/* Close Expand Button - Collapses back to just the search icon */}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsSearchOpen(false);
-                      setSearchInput('');
-                    }}
-                    className="p-2 sm:px-3 text-slate-400 hover:text-red-500 hover:bg-slate-100 transition-colors border-l border-slate-200 cursor-pointer"
-                    title={language === 'bn' ? 'বন্ধ করুন' : 'Close'}
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              </form>
+                </form>
+              </div>
 
               {/* Auto-suggest dropdown showing live SKU and name matches */}
               {searchInput.trim().length >= 1 ? (

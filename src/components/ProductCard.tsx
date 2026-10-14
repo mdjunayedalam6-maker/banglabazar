@@ -78,7 +78,7 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
             referrerPolicy="no-referrer"
             onError={handleImageError}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            style={{ imageRendering: 'high-quality' }}
+            style={{ imageRendering: '-webkit-optimize-contrast' as any }}
             loading="lazy"
             decoding="async"
           />
@@ -179,7 +179,7 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
           referrerPolicy="no-referrer"
           onError={handleImageError}
           className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-          style={{ imageRendering: 'high-quality' }}
+          style={{ imageRendering: '-webkit-optimize-contrast' as any }}
           loading="lazy"
           decoding="async"
         />

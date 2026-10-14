@@ -116,6 +116,7 @@ export interface Product {
   rating: number;
   reviewCount: number;
   images: string[];
+  image?: string;
   stock: number;
   isFlashSale?: boolean;
   flashSaleEnds?: string; // ISO string

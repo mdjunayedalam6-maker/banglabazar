@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">OneRoof Mart</string>
-    <string name="app_tagline_bn">সবকিছু এক ছাদের নিচে</string>
-    <string name="app_tagline_en">Everything Under One Roof</string>
-    <string name="app_description">OneRoof Mart হলো বাংলাদেশের প্রিমিয়াম অল-ইন-ওয়ান অনলাইন মার্কেটপ্লেস। ইলেকট্রনিক্স, ফ্যাশন, গ্রোসারি, গ্যাজেট ও নিত্যপ্রয়োজনীয় সব পণ্য এক ছাদের নিচে।</string>
+    <string name="app_name">Bangla Bazar</string>
+    <string name="app_tagline_bn">আপনার বিশ্বস্ত অনলাইন শপ</string>
+    <string name="app_tagline_en">Your Trusted Online Shop</string>
+    <string name="app_description">বাংলা বাজার (Bangla Bazar) হলো বাংলাদেশের প্রিমিয়াম অনলাইন মার্কেটপ্লেস। ইলেকট্রনিক্স, ফ্যাশন, গ্রোসারি, গ্যাজেট ও নিত্যপ্রয়োজনীয় সব পণ্য সাশ্রয়ী মূল্যে সারা দেশে ক্যাশ অন ডেলিভারি।</string>
 </resources>

@@ -99,6 +99,18 @@ export const Footer: React.FC = () => {
                   <span className="text-xs font-bold">Facebook</span>
                 </a>
               )}
+              {siteSettings.instagramLink && (
+                <a 
+                  href={siteSettings.instagramLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pink-500/10 hover:bg-gradient-to-tr hover:from-amber-500 hover:via-rose-600 hover:to-purple-600 text-pink-400 hover:text-white border border-pink-500/20 transition-all shadow-xs"
+                  title="Instagram"
+                >
+                  <Instagram className="w-4 h-4" />
+                  <span className="text-xs font-bold">Instagram</span>
+                </a>
+              )}
               {siteSettings.messengerLink && (
                 <a 
                   href={siteSettings.messengerLink} 

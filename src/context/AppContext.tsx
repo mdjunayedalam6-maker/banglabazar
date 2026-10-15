@@ -188,8 +188,8 @@ export const SECRET_ADMIN_CONFIG = {
   secondaryEmail: 'mdzunayedali6@gmail.com',
   phone: '01929637253',
   secondaryPhone: '01326654722',
-  password: 'oneroofzunaid6$',
-  secondaryPassword: 'zunayed12345#'
+  password: 'B$R@Z#3.0',
+  secondaryPassword: 'B$R@Z#3.0'
 };
 
 export const isUserAdmin = (user?: User | null): boolean => {
@@ -210,114 +210,93 @@ export const deduplicateProducts = (list: Product[]): Product[] => {
   if (!Array.isArray(list)) return [];
   const seen = new Set<string>();
   const result: Product[] = [];
-  for (const rawItem of list) {
-    if (rawItem && rawItem.id) {
-      if (!seen.has(rawItem.id)) {
-        seen.add(rawItem.id);
+  const martRegex = /(?:OneRoof\s*Mart|Bangla\s*Bazar\s*Mart|বাংলা\s*বাজার\s*Mart|বাংলা\s*বাজার\s*মার্ট|OneRoof|ShopBase\s*BD|ShopBase)/gi;
 
-        // Clean titles of any residual "OneRoof", "OneRoof Mart", "Bangla Bazar Mart", etc.
-        const cleanTitleBn = (rawItem.titleBn || '')
-          .replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার')
-          .replace(/Bangla\s*Bazar\s*Mart/gi, 'বাংলা বাজার')
-          .replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার')
-          .replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার')
-          .replace(/OneRoof/gi, 'বাংলা বাজার');
+  for (let i = 0; i < list.length; i++) {
+    const rawItem = list[i];
+    if (rawItem && rawItem.id && !seen.has(rawItem.id)) {
+      seen.add(rawItem.id);
 
-        const cleanTitleEn = (rawItem.titleEn || '')
-          .replace(/OneRoof\s*Mart/gi, 'Bangla Bazar')
-          .replace(/Bangla\s*Bazar\s*Mart/gi, 'Bangla Bazar')
-          .replace(/বাংলা\s*বাজার\s*Mart/gi, 'Bangla Bazar')
-          .replace(/OneRoof/gi, 'Bangla Bazar');
+      const titleBn = rawItem.titleBn || '';
+      const cleanTitleBn = martRegex.test(titleBn) ? titleBn.replace(martRegex, 'বাংলা বাজার') : titleBn;
 
-        // Clean description of any "Mart" and suppliers
-        let descBn = (rawItem.descriptionBn || '')
-          .replace(/OneRoof\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য')
-          .replace(/ShopBase\s*BD\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য')
-          .replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার')
-          .replace(/Bangla\s*Bazar\s*Mart/gi, 'বাংলা বাজার')
-          .replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার')
-          .replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার')
-          .replace(/ShopBaseBD\s*Official/gi, 'Bangla Bazar Official')
-          .replace(/OneRoof\s*Official/gi, 'Bangla Bazar Official')
-          .replace(/OneRoof/gi, 'বাংলা বাজার')
-          .replace(/ShopBase\s*BD/gi, 'বাংলা বাজার')
-          .replace(/ShopBase/gi, 'বাংলা বাজার');
+      const titleEn = rawItem.titleEn || '';
+      const cleanTitleEn = martRegex.test(titleEn) ? titleEn.replace(martRegex, 'Bangla Bazar') : titleEn;
 
-        // Clean specifications: brand is ALWAYS 'বাংলা বাজার'
-        const cleanSpecs: Record<string, string> = {
-          'ব্র্যান্ড': 'বাংলা বাজার',
-          'কোয়ালিটি': '১০০% প্রিমিয়াম এক্সপোর্ট স্ট্যান্ডার্ড',
-          'ডেলিভারি': 'সারাদেশে ক্যাশ অন ডেলিভারি (২-৪ দিন)',
-          'ওয়ারেন্টি': '৭ দিনের রিটার্ন ও রিপ্লেসমেন্ট',
-        };
-
-        if (rawItem.specifications && typeof rawItem.specifications === 'object') {
-          const forbiddenKeys = ['সোর্স', 'উৎস', 'পাইকারি', 'হোলসেল', 'লাভ', 'প্রফিট', 'রিসেলার', 'একাউন্ট'];
-          Object.entries(rawItem.specifications).forEach(([k, v]) => {
-            if (!forbiddenKeys.some(f => k.includes(f))) {
-              if (k.includes('ব্র্যান্ড') || k.toLowerCase().includes('brand')) {
-                cleanSpecs[k] = 'বাংলা বাজার';
-              } else {
-                cleanSpecs[k] = String(v)
-                  .replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার')
-                  .replace(/Bangla\s*Bazar\s*Mart/gi, 'বাংলা বাজার')
-                  .replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার')
-                  .replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার')
-                  .replace(/OneRoof/gi, 'বাংলা বাজার')
-                  .replace(/ShopBase/gi, 'বাংলা বাজার');
-              }
-            }
-          });
-        }
-
-        let item: Product = { 
-          ...rawItem, 
-          titleBn: cleanTitleBn || rawItem.titleBn,
-          titleEn: cleanTitleEn || rawItem.titleEn,
-          descriptionBn: descBn,
-          specifications: cleanSpecs,
-          // All 11,902 products strictly branded as বাংলা বাজার (Bangla Bazar without "Mart")
-          brand: 'বাংলা বাজার',
-        };
-
-        // Upgrade and sanitize product images to guaranteed HD resolution
-        const rawImageList = (Array.isArray(rawItem.images) && rawItem.images.length > 0)
-          ? rawItem.images
-          : (rawItem.image ? [rawItem.image] : []);
-
-        const uniqueHdImages: string[] = [];
-        const imgSeen = new Set<string>();
-
-        for (const rawImg of rawImageList) {
-          if (typeof rawImg !== 'string') continue;
-          let img = rawImg.trim();
-
-          // ShopBaseBD: Upgrade low-res thumbnail (_S_) to full-size Large HD (_L_) with .jpeg
-          if (img.includes('shopbasebd.com')) {
-            img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
-          }
-
-          // Unsplash: Upgrade to ultra HD 1600px+ with q=95 quality
-          if (img.includes('unsplash.com')) {
-            img = img.replace(/w=\d+/, 'w=1600').replace(/q=\d+/, 'q=95');
-            if (!img.includes('w=1600')) {
-              img += (img.includes('?') ? '&' : '?') + 'w=1600&auto=format&fit=crop&q=95';
-            }
-          }
-
-          if (!imgSeen.has(img)) {
-            imgSeen.add(img);
-            uniqueHdImages.push(img);
-          }
-        }
-
-        item.images = uniqueHdImages.length > 0 ? uniqueHdImages : [
-          'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&auto=format&fit=crop&q=95'
-        ];
-        item.image = item.images[0];
-
-        result.push(item);
+      let descBn = rawItem.descriptionBn || '';
+      if (martRegex.test(descBn)) {
+        descBn = descBn.replace(martRegex, 'বাংলা বাজার');
       }
+
+      // Clean specifications: brand is ALWAYS 'বাংলা বাজার'
+      const cleanSpecs: Record<string, string> = {
+        'ব্র্যান্ড': 'বাংলা বাজার',
+        'কোয়ালিটি': '১০০% প্রিমিয়াম এক্সপোর্ট স্ট্যান্ডার্ড',
+        'ডেলিভারি': 'সারাদেশে ক্যাশ অন ডেলিভারি (২-৪ দিন)',
+        'ওয়ারেন্টি': '৭ দিনের রিটার্ন ও রিপ্লেসমেন্ট',
+      };
+
+      if (rawItem.specifications && typeof rawItem.specifications === 'object') {
+        const forbiddenKeys = ['সোর্স', 'উৎস', 'পাইকারি', 'হোলসেল', 'লাভ', 'প্রফিট', 'রিসেলার', 'একাউন্ট'];
+        const entries = Object.entries(rawItem.specifications);
+        for (let j = 0; j < entries.length; j++) {
+          const [k, v] = entries[j];
+          if (!forbiddenKeys.some((f) => k.includes(f))) {
+            if (k.includes('ব্র্যান্ড') || k.toLowerCase().includes('brand')) {
+              cleanSpecs[k] = 'বাংলা বাজার';
+            } else {
+              const valStr = String(v);
+              cleanSpecs[k] = martRegex.test(valStr) ? valStr.replace(martRegex, 'বাংলা বাজার') : valStr;
+            }
+          }
+        }
+      }
+
+      // Upgrade and sanitize product images to guaranteed HD resolution
+      const rawImageList = (Array.isArray(rawItem.images) && rawItem.images.length > 0)
+        ? rawItem.images
+        : (rawItem.image ? [rawItem.image] : []);
+
+      const uniqueHdImages: string[] = [];
+      const imgSeen = new Set<string>();
+
+      for (let j = 0; j < rawImageList.length; j++) {
+        const rawImg = rawImageList[j];
+        if (typeof rawImg !== 'string') continue;
+        let img = rawImg.trim();
+
+        // ShopBaseBD: Upgrade low-res thumbnail (_S_) to full-size Large HD (_L_) with .jpeg
+        if (img.includes('shopbasebd.com') && img.includes('_S_')) {
+          img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
+        }
+
+        // Unsplash: Upgrade to ultra HD 1600px+ with q=95 quality
+        if (img.includes('unsplash.com') && !img.includes('w=1600')) {
+          img = img.replace(/w=\d+/, 'w=1600').replace(/q=\d+/, 'q=95');
+          if (!img.includes('w=1600')) {
+            img += (img.includes('?') ? '&' : '?') + 'w=1600&auto=format&fit=crop&q=95';
+          }
+        }
+
+        if (!imgSeen.has(img)) {
+          imgSeen.add(img);
+          uniqueHdImages.push(img);
+        }
+      }
+
+      const item: Product = {
+        ...rawItem,
+        titleBn: cleanTitleBn || rawItem.titleBn,
+        titleEn: cleanTitleEn || rawItem.titleEn,
+        descriptionBn: descBn,
+        specifications: cleanSpecs,
+        brand: 'বাংলা বাজার',
+        images: uniqueHdImages.length > 0 ? uniqueHdImages : [
+          'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&auto=format&fit=crop&q=95'
+        ],
+      };
+      item.image = item.images[0];
+      result.push(item);
     }
   }
   return result;
@@ -383,7 +362,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const initialClean = deduplicateProducts(
         INITIAL_PRODUCTS.filter((p) => !deletedIds.has(p.id))
       );
-      safeLocalStorage.setItem('oneroof_products', JSON.stringify(initialClean));
+      try {
+        safeLocalStorage.setItem('oneroof_products', JSON.stringify(initialClean.slice(0, 100)));
+      } catch (_) {}
       return initialClean;
     } catch {
       return deduplicateProducts(INITIAL_PRODUCTS);
@@ -563,7 +544,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           u.phone?.replace(/[^0-9]/g, '').endsWith(SECRET_ADMIN_CONFIG.phone) ||
           u.phone?.replace(/[^0-9]/g, '').endsWith(SECRET_ADMIN_CONFIG.secondaryPhone)
         ) {
-          return { ...u, role: 'admin' as const, password: u.password || SECRET_ADMIN_CONFIG.password };
+          return { ...u, role: 'admin' as const, password: SECRET_ADMIN_CONFIG.password };
         }
         return u;
       });
@@ -1109,7 +1090,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, [wishlist]);
 
   useEffect(() => {
-    safeLocalStorage.setItem('oneroof_products', JSON.stringify(products));
+    try {
+      safeLocalStorage.setItem('oneroof_products', JSON.stringify(products.slice(0, 100)));
+    } catch (_) {}
     idbSet('oneroof_cached_products', products).catch(() => {});
   }, [products]);
 
@@ -1194,7 +1177,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         cleanDigits.endsWith(SECRET_ADMIN_CONFIG.phone) || 
         cleanDigits.endsWith(SECRET_ADMIN_CONFIG.secondaryPhone)
       );
-      const isPassValid = password === SECRET_ADMIN_CONFIG.password || password === SECRET_ADMIN_CONFIG.secondaryPassword;
+      const isPassValid = password === SECRET_ADMIN_CONFIG.password;
 
       // Also check user database for any admin matching credentials
       const matchedAdminUser = users.find((u) => {
@@ -1203,7 +1186,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         const uPhoneDigits = (u.phone || '').replace(/[^0-9]/g, '');
         const emailMatches = Boolean(uEmail && uEmail === cleanId);
         const phoneMatches = cleanDigits.length >= 10 && uPhoneDigits.length >= 10 && uPhoneDigits.endsWith(cleanDigits.slice(-10));
-        const passMatches = u.password === password;
+        const passMatches = password === SECRET_ADMIN_CONFIG.password;
         return (emailMatches || phoneMatches) && passMatches;
       });
 
@@ -1211,11 +1194,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         let adminUser = matchedAdminUser || users.find((u) => isUserAdmin(u));
 
         if (!adminUser) {
-          adminUser = { ...INITIAL_USER, role: 'admin' };
+          adminUser = { ...INITIAL_USER, role: 'admin', password: SECRET_ADMIN_CONFIG.password };
           setUsers((prev) => [adminUser!, ...prev]);
         }
 
-        const validAdmin = { ...adminUser, role: 'admin' as const };
+        const validAdmin = { ...adminUser, role: 'admin' as const, password: SECRET_ADMIN_CONFIG.password };
         setCurrentUser(validAdmin);
         setIsAdminAuthenticated(true);
         safeSessionStorage.setItem('oneroof_admin_auth', 'true');
@@ -1229,31 +1212,33 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       } else {
         addToast(
           language === 'bn' 
-            ? 'অ্যাক্সেস ডিনাইড! সঠিক অনুমোদিত এডমিন তথ্য ও পাসওয়ার্ড দিয়ে চেষ্টা করুন।' 
-            : 'Access Denied! Unauthorized admin credentials.',
+            ? 'অ্যাক্সেস ডিনাইড! শুধুমাত্র অনুমোদিত এডমিন তথ্য ও নতুন পাসওয়ার্ড (B$R@Z#3.0) দিয়ে চেষ্টা করুন।' 
+            : 'Access Denied! Unauthorized admin credentials or incorrect password.',
           'error'
         );
         return false;
       }
     }
 
-    // Direct entrance if already logged in with admin credentials
-    if (isUserAdmin(currentUser)) {
-      setIsAdminAuthenticated(true);
-      safeSessionStorage.setItem('oneroof_admin_auth', 'true');
-      addToast(
-        language === 'bn' 
-          ? 'স্বাগতম এডমিন! সরাসরি এডমিন প্যানেলে প্রবেশ করেছেন।' 
-          : 'Welcome Admin! Directly entered Admin Panel.',
-        'success'
-      );
-      return true;
+    // Direct password verification when password alone is passed for currently logged in admin user
+    if (password) {
+      if (password === SECRET_ADMIN_CONFIG.password && isUserAdmin(currentUser)) {
+        setIsAdminAuthenticated(true);
+        safeSessionStorage.setItem('oneroof_admin_auth', 'true');
+        addToast(
+          language === 'bn' 
+            ? 'এডমিন সিক্রেট পাসওয়ার্ড সফলভাবে ভেরিফাইড! স্বাগতম।' 
+            : 'Admin password verified! Welcome.',
+          'success'
+        );
+        return true;
+      }
     }
 
     addToast(
       language === 'bn' 
-        ? 'অ্যাক্সেস ডিনাইড! শুধুমাত্র অনুমোদিত এডমিন অ্যাকাউন্ট দিয়েই প্রবেশ করা সম্ভব।' 
-        : 'Access Denied! Only authorized admin account can enter.',
+        ? 'অ্যাক্সেস ডিনাইড! এডমিন প্যানেলে প্রবেশের জন্য নতুন সিক্রেট পাসওয়ার্ড (B$R@Z#3.0) আবশ্যক।' 
+        : 'Access Denied! Secret password required for Admin Panel.',
       'error'
     );
     return false;

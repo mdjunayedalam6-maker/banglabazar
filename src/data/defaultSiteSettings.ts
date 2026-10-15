@@ -22,6 +22,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   layoutStyle: 'modern',
   whatsappLink: 'https://wa.me/1234567890',
   facebookLink: 'https://facebook.com',
+  instagramLink: 'https://instagram.com',
   messengerLink: 'https://m.me/yourpage',
   imoLink: 'https://imo.im',
   youtubeLink: 'https://youtube.com',

@@ -35,7 +35,9 @@ import {
   Smartphone,
   ExternalLink,
   CheckSquare,
-  Send
+  Send,
+  Instagram,
+  Youtube
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Product, Category, Order, OrderStatus, AdminBannerSlide } from '../types';
@@ -2360,7 +2362,7 @@ export const AdminPage: React.FC = () => {
               {/* Social Media Links */}
               <div className="mt-6 pt-4 border-t border-slate-700/60">
                 <h4 className="text-sm font-bold text-slate-200 mb-3">সোশ্যাল মিডিয়া লিংক (Social Media Links)</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
                   <div>
                     <label className="font-bold text-slate-300 block mb-1">WhatsApp লিংক</label>
                     <input
@@ -2379,6 +2381,32 @@ export const AdminPage: React.FC = () => {
                       onChange={(e) => updateSiteSettings({ facebookLink: e.target.value })}
                       placeholder="https://facebook.com/..."
                       className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-300 flex items-center gap-1.5 mb-1">
+                      <Instagram className="w-3.5 h-3.5 text-pink-400" />
+                      <span>Instagram লিংক</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={siteSettings.instagramLink || ''}
+                      onChange={(e) => updateSiteSettings({ instagramLink: e.target.value })}
+                      placeholder="https://instagram.com/..."
+                      className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-pink-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-300 flex items-center gap-1.5 mb-1">
+                      <Youtube className="w-3.5 h-3.5 text-red-500" />
+                      <span>YouTube চ্যানেল লিংক</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={siteSettings.youtubeLink || ''}
+                      onChange={(e) => updateSiteSettings({ youtubeLink: e.target.value })}
+                      placeholder="https://youtube.com/@..."
+                      className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-red-500"
                     />
                   </div>
                   <div>

@@ -153,9 +153,7 @@ export const BannerSlider: React.FC = () => {
   const { language, openCategory, bannerSlides, addToast } = useApp();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [copiedCoupon, setCopiedCoupon] = useState<string | null>(null);
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Touch swipe support
   const touchStartXRef = useRef<number | null>(null);
@@ -166,17 +164,14 @@ export const BannerSlider: React.FC = () => {
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    setProgress(0);
   }, [totalSlides]);
 
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
-    setProgress(0);
   }, [totalSlides]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
-    setProgress(0);
   };
 
   const handleCopyCoupon = (code?: string) => {
@@ -217,30 +212,16 @@ export const BannerSlider: React.FC = () => {
     touchEndXRef.current = null;
   };
 
-  // Automatic banner transition timer with progress bar
+  // GPU-clean automatic banner transition timer without CPU churn
   useEffect(() => {
-    if (isPaused) {
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
-      return;
-    }
+    if (isPaused || totalSlides <= 1) return;
 
-    const stepMs = 50;
-    const progressStep = (stepMs / AUTO_PLAY_INTERVAL) * 100;
+    const timer = setInterval(() => {
+      nextSlide();
+    }, AUTO_PLAY_INTERVAL);
 
-    progressIntervalRef.current = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          nextSlide();
-          return 0;
-        }
-        return prev + progressStep;
-      });
-    }, stepMs);
-
-    return () => {
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
-    };
-  }, [isPaused, nextSlide]);
+    return () => clearInterval(timer);
+  }, [isPaused, totalSlides, nextSlide]);
 
   const activeSlide = slides[currentSlide] || slides[0];
   const hasTextOverlay = Boolean(activeSlide?.showTextOverlay && (activeSlide.titleBn || activeSlide.badgeBn));
@@ -452,18 +433,28 @@ export const BannerSlider: React.FC = () => {
             {/* Micro Linear Progress bar */}
             <div className="w-10 sm:w-14 h-1 bg-white/20 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-emerald-400 to-amber-400 transition-all duration-75 ease-linear rounded-full"
-                style={{ width: `${progress}%` }}
+                key={`micro-progress-${currentSlide}`}
+                className="h-full w-full bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full"
+                style={{
+                  transformOrigin: 'left',
+                  animation: `bannerBarProgress ${AUTO_PLAY_INTERVAL}ms linear forwards`,
+                  animationPlayState: isPaused ? 'paused' : 'running',
+                }}
               />
             </div>
           </div>
         </div>
 
         {/* Bottom edge glowing progress line */}
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10 z-30">
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10 z-30 overflow-hidden">
           <div 
-            className="h-full bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-500 transition-all duration-75 ease-linear"
-            style={{ width: `${progress}%` }}
+            key={`edge-progress-${currentSlide}`}
+            className="h-full w-full bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-500"
+            style={{
+              transformOrigin: 'left',
+              animation: `bannerBarProgress ${AUTO_PLAY_INTERVAL}ms linear forwards`,
+              animationPlayState: isPaused ? 'paused' : 'running',
+            }}
           />
         </div>
       </div>

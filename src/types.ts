@@ -32,6 +32,7 @@ export interface SiteSettings {
   layoutStyle: 'modern' | 'compact' | 'festive';
   whatsappLink?: string;
   facebookLink?: string;
+  instagramLink?: string;
   messengerLink?: string;
   imoLink?: string;
   youtubeLink?: string;

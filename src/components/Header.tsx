@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { 
   Search, 
   X,
@@ -51,71 +51,82 @@ export const Header: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const threeDotRef = useRef<HTMLDivElement>(null);
 
-  // Filter auto-suggestions: matches Bengali, English, SKU code, brand, tags (even with 1 character or partial word!)
+  // Filter auto-suggestions: matches Bengali, English, SKU code, brand, tags (memoized for instant typing response)
   const trimmedTerm = searchInput.trim().toLowerCase();
-  const searchTokens = trimmedTerm.split(/\s+/).filter(Boolean);
+  const suggestions = useMemo(() => {
+    if (trimmedTerm.length < 1) return [];
 
-  const suggestions = trimmedTerm.length >= 1
-    ? products
-        .filter((p) => {
-          const titleBn = (p.titleBn || '').toLowerCase();
-          const titleEn = (p.titleEn || '').toLowerCase();
-          const sku = p.sku ? String(p.sku).toLowerCase() : '';
-          const id = String(p.id || '').toLowerCase();
-          const brand = typeof p.brand === 'string' ? p.brand.toLowerCase() : '';
-          const tags = Array.isArray(p.tags) ? p.tags.join(' ').toLowerCase() : '';
-          const cat = String(p.category || '').toLowerCase();
+    const searchTokens = trimmedTerm.split(/\s+/).filter(Boolean);
+    const matched: typeof products = [];
 
-          // Direct match: matches any partial word or single character
-          const directMatch =
-            titleBn.includes(trimmedTerm) ||
-            titleEn.includes(trimmedTerm) ||
-            sku.includes(trimmedTerm) ||
-            id.includes(trimmedTerm) ||
-            brand.includes(trimmedTerm) ||
-            tags.includes(trimmedTerm) ||
-            cat.includes(trimmedTerm);
+    for (let i = 0; i < products.length; i++) {
+      const p = products[i];
+      if (selectedSearchCat !== 'all' && p.category !== selectedSearchCat) continue;
 
-          // Multi-token match if spaces are present
-          const tokenMatch =
-            searchTokens.length > 1 &&
-            searchTokens.every((token) =>
-              titleBn.includes(token) ||
-              titleEn.includes(token) ||
-              sku.includes(token) ||
-              brand.includes(token) ||
-              tags.includes(token)
-            );
+      const titleBn = (p.titleBn || '').toLowerCase();
+      const titleEn = (p.titleEn || '').toLowerCase();
+      const sku = p.sku ? String(p.sku).toLowerCase() : '';
+      const id = String(p.id || '').toLowerCase();
+      const brand = typeof p.brand === 'string' ? p.brand.toLowerCase() : '';
+      const tags = Array.isArray(p.tags) ? p.tags.join(' ').toLowerCase() : '';
+      const cat = String(p.category || '').toLowerCase();
 
-          const catMatch = selectedSearchCat === 'all' || p.category === selectedSearchCat;
-          return (directMatch || tokenMatch) && catMatch;
-        })
-        .sort((a, b) => {
-          const aSku = a.sku ? String(a.sku).toLowerCase() : '';
-          const bSku = b.sku ? String(b.sku).toLowerCase() : '';
+      // Direct match
+      const directMatch =
+        titleBn.includes(trimmedTerm) ||
+        titleEn.includes(trimmedTerm) ||
+        sku.includes(trimmedTerm) ||
+        id.includes(trimmedTerm) ||
+        brand.includes(trimmedTerm) ||
+        tags.includes(trimmedTerm) ||
+        cat.includes(trimmedTerm);
 
-          // 1. Exact SKU match gets top priority
-          if (aSku === trimmedTerm && bSku !== trimmedTerm) return -1;
-          if (bSku === trimmedTerm && aSku !== trimmedTerm) return 1;
+      // Multi-token match if spaces are present
+      const tokenMatch =
+        !directMatch &&
+        searchTokens.length > 1 &&
+        searchTokens.every((token) =>
+          titleBn.includes(token) ||
+          titleEn.includes(token) ||
+          sku.includes(token) ||
+          brand.includes(token) ||
+          tags.includes(token)
+        );
 
-          // 2. Partial SKU match gets high priority
-          const aSkuMatch = aSku.includes(trimmedTerm);
-          const bSkuMatch = bSku.includes(trimmedTerm);
-          if (aSkuMatch && !bSkuMatch) return -1;
-          if (!aSkuMatch && bSkuMatch) return 1;
+      if (directMatch || tokenMatch) {
+        matched.push(p);
+        // Early stop when sufficient candidates found to keep memory & sorting ultra-light
+        if (matched.length >= 30) break;
+      }
+    }
 
-          // 3. Title prefix match
-          const aTitle = (a.titleBn || a.titleEn || '').toLowerCase();
-          const bTitle = (b.titleBn || b.titleEn || '').toLowerCase();
-          const aPrefix = aTitle.startsWith(trimmedTerm);
-          const bPrefix = bTitle.startsWith(trimmedTerm);
-          if (aPrefix && !bPrefix) return -1;
-          if (!aPrefix && bPrefix) return 1;
+    return matched
+      .sort((a, b) => {
+        const aSku = a.sku ? String(a.sku).toLowerCase() : '';
+        const bSku = b.sku ? String(b.sku).toLowerCase() : '';
 
-          return 0;
-        })
-        .slice(0, 10)
-    : [];
+        // 1. Exact SKU match gets top priority
+        if (aSku === trimmedTerm && bSku !== trimmedTerm) return -1;
+        if (bSku === trimmedTerm && aSku !== trimmedTerm) return 1;
+
+        // 2. Partial SKU match gets high priority
+        const aSkuMatch = aSku.includes(trimmedTerm);
+        const bSkuMatch = bSku.includes(trimmedTerm);
+        if (aSkuMatch && !bSkuMatch) return -1;
+        if (!aSkuMatch && bSkuMatch) return 1;
+
+        // 3. Title prefix match
+        const aTitle = (a.titleBn || a.titleEn || '').toLowerCase();
+        const bTitle = (b.titleBn || b.titleEn || '').toLowerCase();
+        const aPrefix = aTitle.startsWith(trimmedTerm);
+        const bPrefix = bTitle.startsWith(trimmedTerm);
+        if (aPrefix && !bPrefix) return -1;
+        if (!aPrefix && bPrefix) return 1;
+
+        return 0;
+      })
+      .slice(0, 10);
+  }, [products, trimmedTerm, selectedSearchCat]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -300,7 +311,14 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Right: Product Find & Search Section (Expands full-width on mobile like YouTube) */}
-        <div ref={searchRef} className={`relative flex items-center ${isSearchOpen ? 'w-full sm:flex-1 sm:max-w-2xl' : 'flex-1 max-w-2xl justify-end ml-auto'}`}>
+        <div 
+          ref={searchRef} 
+          className={
+            isSearchOpen 
+              ? 'fixed inset-x-0 top-0 z-50 h-16 bg-white px-2.5 sm:px-0 flex items-center shadow-lg sm:shadow-none border-b-2 border-emerald-600 sm:border-0 sm:relative sm:inset-auto sm:top-auto sm:h-auto sm:flex-1 sm:max-w-2xl' 
+              : 'relative flex-1 max-w-2xl justify-end ml-auto'
+          }
+        >
           {!isSearchOpen ? (
             /* Standalone Search Button Icon - Only the Search Icon is shown until clicked */
             <button
@@ -316,29 +334,27 @@ export const Header: React.FC = () => {
               <Search className="w-5 h-5 sm:w-5.5 sm:h-5.5 stroke-[2.4] transition-transform duration-200 group-hover:scale-110" />
             </button>
           ) : (
-            /* Open Search Input with Auto-focus - Full-width, roomy YouTube-style search box */
+            /* Open Search Input with Auto-focus - Roomy, expansive YouTube-style search bar */
             <div className="relative w-full">
-              <div className="w-full flex items-center gap-1.5 sm:gap-2.5 animate-in fade-in slide-in-from-right duration-200">
-                {/* YouTube-style Back Arrow for Mobile */}
+              <div className="w-full flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-150">
+                {/* YouTube-style Back Arrow for Mobile and Exit button */}
                 <button
                   type="button"
                   onClick={() => {
                     setIsSearchOpen(false);
                     setSearchInput('');
                   }}
-                  className="p-2 -ml-1 sm:hidden text-slate-700 hover:text-emerald-700 hover:bg-slate-100 rounded-full transition-colors cursor-pointer shrink-0"
+                  className="w-10 h-10 flex items-center justify-center text-slate-700 hover:text-emerald-700 hover:bg-slate-100 rounded-full transition-all cursor-pointer shrink-0 active:scale-90"
                   aria-label={language === 'bn' ? 'সার্চ বন্ধ করুন' : 'Back to normal'}
                   title={language === 'bn' ? 'সার্চ বন্ধ করুন' : 'Back'}
                 >
                   <ArrowLeft className="w-5 h-5 stroke-[2.4]" />
                 </button>
 
-                {/* Main Search Input Form */}
-                <form onSubmit={handleSearchSubmit} className="relative flex-1 flex items-center group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 via-[#00873E] to-emerald-500 rounded-2xl blur-xs opacity-35 transition duration-500"></div>
-
-                  <div className="relative flex w-full bg-white rounded-xl sm:rounded-2xl shadow-md border-2 border-emerald-500 overflow-hidden h-11 sm:h-12 items-center">
-                    {/* Category Select inside Search Input (Desktop) */}
+                {/* Main Search Input Form - Expands full width */}
+                <form onSubmit={handleSearchSubmit} className="relative flex-1 flex items-center group min-w-0">
+                  <div className="relative flex w-full bg-slate-100 focus-within:bg-white rounded-full sm:rounded-2xl shadow-sm border-2 border-emerald-500 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-500/20 overflow-hidden h-11 sm:h-12 items-center transition-all">
+                    {/* Category Select inside Search Input (Desktop only) */}
                     <div className="hidden md:flex items-center pl-2 bg-slate-50 border-r border-slate-200 h-full">
                       <select
                         value={selectedSearchCat}
@@ -354,12 +370,12 @@ export const Header: React.FC = () => {
                       </select>
                     </div>
 
-                    {/* Leading Search Icon inside Input */}
-                    <div className="pl-3 sm:pl-3.5 pr-1.5 text-emerald-600 flex items-center shrink-0">
+                    {/* Leading Search Icon inside Input (Desktop) */}
+                    <div className="hidden sm:flex pl-3 sm:pl-3.5 pr-1.5 text-emerald-600 items-center shrink-0">
                       <Search className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
                     </div>
 
-                    {/* Search Input with Auto Focus - Large, roomy font and clear visibility */}
+                    {/* YouTube-style Roomy Search Input: large font, full width so typed text is 100% visible */}
                     <input
                       ref={searchInputRef}
                       type="text"
@@ -367,16 +383,17 @@ export const Header: React.FC = () => {
                       onChange={(e) => setSearchInput(e.target.value)}
                       placeholder={
                         language === 'bn'
-                          ? 'পণ্য বা SKU কোড লিখে সার্চ করুন...'
+                          ? 'পণ্যের নাম, ব্র্যান্ড বা SKU কোড লিখুন...'
                           : 'Search by product name, brand, or SKU...'
                       }
-                      className="flex-1 min-w-0 bg-transparent py-2 px-2 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 placeholder:text-xs sm:placeholder:text-sm font-medium outline-none"
+                      className="flex-1 min-w-0 bg-transparent py-2 pl-3.5 sm:pl-2 pr-2 text-base text-slate-900 placeholder:text-slate-400 placeholder:text-xs sm:placeholder:text-sm font-medium outline-none"
                       autoComplete="off"
                       autoCorrect="off"
                       spellCheck="false"
+                      autoFocus
                     />
 
-                    {/* Instant Clear / Delete Button ("X") - Tap to immediately clear what you wrote */}
+                    {/* Prominent Instant Clear / Delete Button ("X") - Tap to immediately clear what you wrote */}
                     {searchInput && (
                       <button
                         type="button"
@@ -384,25 +401,25 @@ export const Header: React.FC = () => {
                           setSearchInput('');
                           searchInputRef.current?.focus();
                         }}
-                        className="p-1.5 sm:p-2 mr-1 text-slate-400 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-colors cursor-pointer shrink-0"
+                        className="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-700 flex items-center justify-center transition-all cursor-pointer shrink-0 mr-1.5 active:scale-90"
                         aria-label={language === 'bn' ? 'লেখা মুছে ফেলুন' : 'Clear text'}
                         title={language === 'bn' ? 'লেখা মুছে ফেলুন' : 'Clear text'}
                       >
-                        <X className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5]" />
+                        <X className="w-4 h-4 stroke-[2.8]" />
                       </button>
                     )}
 
                     {/* Search Submit Button */}
                     <button
                       type="submit"
-                      className="h-full px-3.5 sm:px-5 bg-gradient-to-r from-[#00873E] to-[#046A31] hover:from-[#007033] hover:to-[#035526] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 shadow-xs"
+                      className="h-full px-3.5 sm:px-5 bg-gradient-to-r from-[#00873E] to-[#046A31] hover:from-[#007033] hover:to-[#035526] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 shadow-xs active:scale-95"
                       aria-label={language === 'bn' ? 'অনুসন্ধান' : 'Search'}
                     >
                       <Search className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                      <span className="hidden sm:inline whitespace-nowrap">{language === 'bn' ? 'খুঁজুন' : 'Search'}</span>
+                      <span className="whitespace-nowrap">{language === 'bn' ? 'খুঁজুন' : 'Search'}</span>
                     </button>
 
-                    {/* Close Expand Button (Desktop) - Collapses back to just the search icon */}
+                    {/* Close Expand Button (Desktop only) */}
                     <button
                       type="button"
                       onClick={() => {
@@ -420,9 +437,9 @@ export const Header: React.FC = () => {
 
               {/* Auto-suggest dropdown showing live SKU and name matches */}
               {searchInput.trim().length >= 1 ? (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="absolute top-full left-0 right-0 mt-1 sm:mt-2 bg-white rounded-b-2xl sm:rounded-2xl shadow-2xl border border-slate-200/80 sm:border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   {suggestions.length > 0 ? (
-                    <div className="p-2 divide-y divide-slate-100 max-h-96 overflow-y-auto">
+                    <div className="p-2 divide-y divide-slate-100 max-h-[calc(80vh-4rem)] sm:max-h-96 overflow-y-auto">
                       <div className="px-3 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
                         <span>{language === 'bn' ? 'পণ্য ও SKU ম্যাচিং' : 'Product & SKU Matches'}</span>
                         <span className="text-emerald-600 font-semibold">
@@ -505,7 +522,7 @@ export const Header: React.FC = () => {
                   )}
                 </div>
               ) : (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50 p-3 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="absolute top-full left-0 right-0 mt-1 sm:mt-2 bg-white rounded-b-2xl sm:rounded-2xl shadow-2xl border border-slate-200/80 sm:border-slate-100 overflow-hidden z-50 p-3 sm:p-4 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
                     <span>{language === 'bn' ? 'জনপ্রিয় সার্চসমূহ' : 'Popular Searches'}</span>
                     <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">

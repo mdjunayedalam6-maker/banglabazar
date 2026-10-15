@@ -82,6 +82,8 @@ export const CategoryGrid: React.FC = () => {
                 <img
                   src={displayImage}
                   alt={displayName}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;

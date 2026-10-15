@@ -55,7 +55,6 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
   const total = products.length;
@@ -64,7 +63,6 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({
     if (total <= 1) return;
     setIsAnimating(true);
     setCurrentIndex((prev) => (prev + 1) % total);
-    setProgress(0);
     setTimeout(() => setIsAnimating(false), 300);
   }, [total]);
 
@@ -72,7 +70,6 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({
     if (total <= 1) return;
     setIsAnimating(true);
     setCurrentIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
-    setProgress(0);
     setTimeout(() => setIsAnimating(false), 300);
   }, [total]);
 
@@ -80,28 +77,18 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({
     if (idx === currentIndex) return;
     setIsAnimating(true);
     setCurrentIndex(idx);
-    setProgress(0);
     setTimeout(() => setIsAnimating(false), 300);
   };
 
-  // Auto change timer
+  // Auto change timer - GPU clean without churning state
   useEffect(() => {
     if (isPaused || total <= 1) return;
 
-    const stepMs = 250;
-    const stepIncrement = (stepMs / autoRotateInterval) * 100;
+    const timer = setInterval(() => {
+      nextProduct();
+    }, autoRotateInterval);
 
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          nextProduct();
-          return 0;
-        }
-        return prev + stepIncrement;
-      });
-    }, stepMs);
-
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, [isPaused, total, autoRotateInterval, nextProduct]);
 
   if (!products || products.length === 0) {

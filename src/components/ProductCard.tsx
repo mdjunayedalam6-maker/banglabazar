@@ -48,6 +48,9 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
   }, [initialImage]);
 
   const handleImageError = () => {
+    const fallback = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1000&auto=format&fit=crop&q=95';
+    if (currentImg === fallback) return;
+
     // If secondary HD image is available, try it
     if (product.images?.[1] && currentImg !== product.images[1]) {
       let sec = product.images[1];
@@ -62,7 +65,7 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
       return;
     }
     // High-resolution fallback
-    setCurrentImg('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1000&auto=format&fit=crop&q=95');
+    setCurrentImg(fallback);
   };
 
   if (layout === 'list') {

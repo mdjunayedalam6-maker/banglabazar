@@ -364,7 +364,9 @@ export const ProductDetailPage: React.FC = () => {
               referrerPolicy="no-referrer"
               onError={(e) => {
                 const target = e.currentTarget;
-                target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&auto=format&fit=crop&q=95';
+                const fallback = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&auto=format&fit=crop&q=95';
+                if (target.src === fallback) return;
+                target.src = fallback;
               }}
               style={{
                 transformOrigin: isHoverZooming ? `${zoomCoords.x}% ${zoomCoords.y}%` : 'center center',
@@ -436,10 +438,13 @@ export const ProductDetailPage: React.FC = () => {
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       const target = e.currentTarget;
-                      if (target.src.includes('_L_')) {
+                      const fallback = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80';
+                      if (target.src === fallback) return;
+                      if (target.src.includes('_L_') && !(target as any)._fallbackTried) {
+                        (target as any)._fallbackTried = true;
                         target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
                       } else {
-                        target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80';
+                        target.src = fallback;
                       }
                     }}
                     className="w-full h-full object-cover"

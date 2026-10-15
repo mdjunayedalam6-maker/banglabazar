@@ -79,6 +79,9 @@ const CATEGORY_MAP: Record<string, { parentId: string; subId?: string }> = {
 
   // 3. Baby Collection (বেবি কালেকশন)
   'baby-collection': { parentId: 'baby-collection' },
+  'baby': { parentId: 'baby-collection' },
+  'বেবি': { parentId: 'baby-collection' },
+  'বাচ্চাদের পোশাক': { parentId: 'baby-collection' },
   'boys-tshirt-set': { parentId: 'baby-collection', subId: 'boys-tshirt-set' },
   'বয়েজ টিশার্ট সেট': { parentId: 'baby-collection', subId: 'boys-tshirt-set' },
   'girls-tshirt-set': { parentId: 'baby-collection', subId: 'girls-tshirt-set' },
@@ -113,6 +116,8 @@ const CATEGORY_MAP: Record<string, { parentId: string; subId?: string }> = {
 
   // 5. Home & Living (গৃহ সামগ্রী)
   'home-living': { parentId: 'home-living' },
+  'home': { parentId: 'home-living' },
+  'হোম': { parentId: 'home-living' },
   'bedsheet': { parentId: 'home-living', subId: 'bedsheet' },
   'রেগুলার বেডশীট': { parentId: 'home-living', subId: 'bedsheet' },
   'waterproof-bedsheet': { parentId: 'home-living', subId: 'waterproof-bedsheet' },
@@ -158,6 +163,12 @@ const CATEGORY_MAP: Record<string, { parentId: string; subId?: string }> = {
 
   // 8. Electronics & Gadgets (ইলেকট্রনিক্স এবং গ্যাজেট)
   'electronics-gadgets': { parentId: 'electronics-gadgets' },
+  'electronics': { parentId: 'electronics-gadgets' },
+  'ইলেকট্রনিক্স': { parentId: 'electronics-gadgets' },
+  'smartphones': { parentId: 'electronics-gadgets', subId: 'gadgets' },
+  'smartphone': { parentId: 'electronics-gadgets', subId: 'gadgets' },
+  'mobile': { parentId: 'electronics-gadgets', subId: 'gadgets' },
+  'স্মার্টফোন': { parentId: 'electronics-gadgets', subId: 'gadgets' },
   'fan': { parentId: 'electronics-gadgets', subId: 'fan' },
   'ফ্যান': { parentId: 'electronics-gadgets', subId: 'fan' },
   'watch': { parentId: 'electronics-gadgets', subId: 'watch' },

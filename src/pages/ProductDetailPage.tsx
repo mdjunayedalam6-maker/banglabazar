@@ -30,6 +30,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { ProductCard } from '../components/ProductCard';
+import { getCategoryFallbackImage, expandImageCandidates } from '../utils/productImageUtils';
 
 const COLOR_HEX_MAP: Record<string, string> = {
   'কালো': '#111827',
@@ -185,25 +186,16 @@ export const ProductDetailPage: React.FC = () => {
 
     for (const raw of rawList) {
       if (typeof raw !== 'string') continue;
-      let img = raw.trim();
-      // Upgrade shopbase images: always use _L_ (large HD) and .jpeg
-      if (img.includes('shopbasebd.com')) {
-        img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
-      }
-      // Upgrade unsplash images to ultra HD 1600px+ q=95
-      if (img.includes('unsplash.com')) {
-        img = img.replace(/w=\d+/, 'w=1600').replace(/q=\d+/, 'q=95');
-        if (!img.includes('w=1600')) {
-          img += (img.includes('?') ? '&' : '?') + 'w=1600&auto=format&fit=crop&q=95';
+      const candidates = expandImageCandidates(raw);
+      for (const cand of candidates) {
+        if (!seen.has(cand)) {
+          seen.add(cand);
+          list.push(cand);
         }
       }
-      if (!seen.has(img)) {
-        seen.add(img);
-        list.push(img);
-      }
     }
-    return list.length > 0 ? list : ['https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&auto=format&fit=crop&q=95'];
-  }, [selectedProduct?.images, selectedProduct?.image]);
+    return list.length > 0 ? list : [getCategoryFallbackImage(selectedProduct?.category)];
+  }, [selectedProduct?.images, selectedProduct?.image, selectedProduct?.category]);
 
   const rawDescription = language === 'bn' ? selectedProduct.descriptionBn : selectedProduct.descriptionEn;
   const description = React.useMemo(() => {
@@ -364,9 +356,17 @@ export const ProductDetailPage: React.FC = () => {
               referrerPolicy="no-referrer"
               onError={(e) => {
                 const target = e.currentTarget;
-                const fallback = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1600&auto=format&fit=crop&q=95';
+                const fallback = getCategoryFallbackImage(selectedProduct?.category);
                 if (target.src === fallback) return;
-                target.src = fallback;
+                if (target.src.includes('.jpeg') && !(target as any)._jpegTried) {
+                  (target as any)._jpegTried = true;
+                  target.src = target.src.replace(/\.jpeg$/i, '.jpg');
+                } else if (target.src.includes('_L_') && !(target as any)._smallTried) {
+                  (target as any)._smallTried = true;
+                  target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
+                } else {
+                  target.src = fallback;
+                }
               }}
               style={{
                 transformOrigin: isHoverZooming ? `${zoomCoords.x}% ${zoomCoords.y}%` : 'center center',
@@ -438,9 +438,12 @@ export const ProductDetailPage: React.FC = () => {
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       const target = e.currentTarget;
-                      const fallback = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80';
+                      const fallback = getCategoryFallbackImage(selectedProduct?.category);
                       if (target.src === fallback) return;
-                      if (target.src.includes('_L_') && !(target as any)._fallbackTried) {
+                      if (target.src.includes('.jpeg') && !(target as any)._jpegTried) {
+                        (target as any)._jpegTried = true;
+                        target.src = target.src.replace(/\.jpeg$/i, '.jpg');
+                      } else if (target.src.includes('_L_') && !(target as any)._fallbackTried) {
                         (target as any)._fallbackTried = true;
                         target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
                       } else {

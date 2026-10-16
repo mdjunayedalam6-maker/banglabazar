@@ -265,9 +265,9 @@ export const deduplicateProducts = (list: Product[]): Product[] => {
         if (typeof rawImg !== 'string') continue;
         let img = rawImg.trim();
 
-        // ShopBaseBD: Upgrade low-res thumbnail (_S_) to full-size Large HD (_L_) with .jpeg
-        if (img.includes('shopbasebd.com') && img.includes('_S_')) {
-          img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
+        // ShopBaseBD: Upgrade low-res thumbnail (_S_) to full-size Large HD (_L_) with .jpg
+        if (img.includes('shopbasebd.com')) {
+          img = img.replace('_S_', '_L_').replace(/\.jpeg$/i, '.jpg');
         }
 
         // Unsplash: Upgrade to ultra HD 1600px+ with q=95 quality
@@ -1212,7 +1212,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       } else {
         addToast(
           language === 'bn' 
-            ? 'অ্যাক্সেস ডিনাইড! শুধুমাত্র অনুমোদিত এডমিন তথ্য ও নতুন পাসওয়ার্ড (B$R@Z#3.0) দিয়ে চেষ্টা করুন।' 
+            ? 'অ্যাক্সেস ডিনাইড! ভুল তথ্য বা অননুমোদিত ক্রেডেনশিয়াল।' 
             : 'Access Denied! Unauthorized admin credentials or incorrect password.',
           'error'
         );
@@ -1237,7 +1237,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     addToast(
       language === 'bn' 
-        ? 'অ্যাক্সেস ডিনাইড! এডমিন প্যানেলে প্রবেশের জন্য নতুন সিক্রেট পাসওয়ার্ড (B$R@Z#3.0) আবশ্যক।' 
+        ? 'অ্যাক্সেস ডিনাইড! সঠিক সিক্রেট এডমিন পাসওয়ার্ড প্রদান করুন।' 
         : 'Access Denied! Secret password required for Admin Panel.',
       'error'
     );

@@ -17,8 +17,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -101,8 +101,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -185,8 +185,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -269,8 +269,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -353,8 +353,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789381529_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -437,8 +437,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789280982_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789280982_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789280982_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789280982_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -521,8 +521,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_20.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_20.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_20.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_20.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -605,8 +605,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_19.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_19.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_19.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -689,8 +689,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_18.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_18.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_18.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -773,8 +773,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_17.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_17.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_17.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -857,8 +857,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_16.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_16.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_16.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -941,8 +941,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_15.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_15.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787557183_L_15.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1025,8 +1025,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_20.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_20.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_20.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_20.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1109,8 +1109,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_19.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_19.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_19.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -1193,8 +1193,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_18.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_18.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_18.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1277,8 +1277,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_17.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_17.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_17.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1361,8 +1361,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_16.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_16.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_16.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1445,8 +1445,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_15.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_15.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790251966_L_15.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1529,8 +1529,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1613,8 +1613,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1697,8 +1697,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1781,8 +1781,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -1865,8 +1865,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -1949,8 +1949,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1752689255_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2033,8 +2033,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2117,8 +2117,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2201,8 +2201,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2285,8 +2285,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2369,8 +2369,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -2453,8 +2453,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789927860_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2537,8 +2537,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 8,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2621,8 +2621,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2705,8 +2705,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2789,8 +2789,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789923971_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -2873,8 +2873,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789923970_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923970_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923970_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789923970_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -2957,8 +2957,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789503280_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789503280_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789503280_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789503280_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -3041,8 +3041,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3125,8 +3125,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3209,8 +3209,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787560461_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3293,8 +3293,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3377,8 +3377,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3461,8 +3461,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787560460_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -3545,8 +3545,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -3629,8 +3629,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3713,8 +3713,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -3797,8 +3797,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3881,8 +3881,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -3965,8 +3965,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1786187805_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4049,8 +4049,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4133,8 +4133,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4217,8 +4217,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4301,8 +4301,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4385,8 +4385,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -4469,8 +4469,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 8,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788981514_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4553,8 +4553,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4637,8 +4637,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4721,8 +4721,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4805,8 +4805,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4889,8 +4889,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -4973,8 +4973,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 22,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785260245_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5057,8 +5057,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -5141,8 +5141,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5225,8 +5225,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5309,8 +5309,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5393,8 +5393,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5477,8 +5477,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785259966_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -5561,8 +5561,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_17.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_17.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_17.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -5645,8 +5645,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_16.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_16.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_16.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5729,8 +5729,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_15.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_15.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_15.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5813,8 +5813,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_14.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_14.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_14.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_14.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5897,8 +5897,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_13.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_13.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_13.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -5981,8 +5981,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1771253486_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6065,8 +6065,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_14.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_14.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_14.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_14.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6149,8 +6149,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_13.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_13.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_13.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6233,8 +6233,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": true,
@@ -6317,8 +6317,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6401,8 +6401,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6485,8 +6485,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785848652_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6569,8 +6569,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6653,8 +6653,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6737,8 +6737,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6821,8 +6821,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788520755_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6905,8 +6905,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787556236_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787556236_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787556236_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787556236_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -6989,8 +6989,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785954606_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785954606_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785954606_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785954606_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7073,8 +7073,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7148,8 +7148,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7223,8 +7223,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1782322578_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7298,8 +7298,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7373,8 +7373,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7448,8 +7448,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1781967269_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7523,8 +7523,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7596,8 +7596,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7669,8 +7669,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788715913_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7742,8 +7742,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7815,8 +7815,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7888,8 +7888,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788713660_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -7961,8 +7961,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8030,8 +8030,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8099,8 +8099,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789309285_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8168,8 +8168,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8237,8 +8237,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789307597_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8306,8 +8306,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789307596_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789307596_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789307596_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789307596_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8375,8 +8375,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8444,8 +8444,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8513,8 +8513,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8582,8 +8582,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8651,8 +8651,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8720,8 +8720,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1751352481_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8789,8 +8789,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8858,8 +8858,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8927,8 +8927,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789756475_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -8996,8 +8996,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 8,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9065,8 +9065,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 8,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9134,8 +9134,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789756395_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9203,8 +9203,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9280,8 +9280,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9357,8 +9357,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 22,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9434,8 +9434,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789923669_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9511,8 +9511,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9580,8 +9580,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9649,8 +9649,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9718,8 +9718,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 22,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9787,8 +9787,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_18.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_18.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_18.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9860,8 +9860,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_17.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_17.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_17.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -9933,8 +9933,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 8,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_16.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_16.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_16.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10006,8 +10006,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_15.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_15.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811056_L_15.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10079,8 +10079,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10137,8 +10137,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 5,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10195,8 +10195,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10253,8 +10253,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 6,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1782398278_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10311,8 +10311,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10369,8 +10369,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10427,8 +10427,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10485,8 +10485,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10543,8 +10543,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10601,8 +10601,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 8,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10659,8 +10659,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10717,8 +10717,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789379859_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10775,8 +10775,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 7,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10833,8 +10833,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10891,8 +10891,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -10949,8 +10949,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 7,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788883118_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11007,8 +11007,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11065,8 +11065,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 5,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11123,8 +11123,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11181,8 +11181,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788882794_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11239,8 +11239,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 6,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_19.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_19.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_19.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11297,8 +11297,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_18.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_18.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_18.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11355,8 +11355,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 5,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_17.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_17.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_17.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11413,8 +11413,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_16.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_16.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_16.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11471,8 +11471,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11529,8 +11529,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 6,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11587,8 +11587,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11645,8 +11645,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 7,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777723873_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11703,8 +11703,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 7,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11761,8 +11761,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789753985_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11819,8 +11819,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11877,8 +11877,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 7,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11935,8 +11935,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -11993,8 +11993,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12051,8 +12051,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785847431_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12109,8 +12109,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778151764_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151764_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151764_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778151764_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12167,8 +12167,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 7,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12225,8 +12225,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 8,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12283,8 +12283,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12341,8 +12341,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778151275_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12399,8 +12399,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12457,8 +12457,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 5,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1739118583_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12515,8 +12515,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12573,8 +12573,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 5,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1738511234_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12631,8 +12631,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_20.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_20.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_20.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_20.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12689,8 +12689,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_19.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_19.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_19.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12747,8 +12747,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_18.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_18.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_18.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12805,8 +12805,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_17.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_17.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787131593_L_17.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12863,8 +12863,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 5,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_18.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_18.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_18.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12921,8 +12921,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 6,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_17.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_17.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_17.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -12979,8 +12979,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_16.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_16.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_16.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_16.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13037,8 +13037,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 8,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_15.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_15.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787742106_L_15.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13095,8 +13095,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764415676_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764415676_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764415676_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764415676_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13153,8 +13153,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13211,8 +13211,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13269,8 +13269,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1761762045_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13327,8 +13327,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 7,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1768049873_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768049873_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768049873_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1768049873_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13385,8 +13385,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13443,8 +13443,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13501,8 +13501,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1765476575_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13559,8 +13559,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13617,8 +13617,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 6,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13675,8 +13675,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 5,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13733,8 +13733,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1766328079_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13791,8 +13791,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13849,8 +13849,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13907,8 +13907,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 9,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -13965,8 +13965,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1767253568_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14023,8 +14023,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14081,8 +14081,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14139,8 +14139,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1787987153_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14197,8 +14197,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778152335_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778152335_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778152335_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778152335_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14255,8 +14255,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14313,8 +14313,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14371,8 +14371,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789751621_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14429,8 +14429,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785956048_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785956048_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785956048_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785956048_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14487,8 +14487,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14545,8 +14545,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14603,8 +14603,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14661,8 +14661,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 6,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1788715511_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14719,8 +14719,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14777,8 +14777,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14835,8 +14835,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 5,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772115753_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14893,8 +14893,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 11,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1765476961_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1765476961_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1765476961_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1765476961_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -14951,8 +14951,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 7,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15009,8 +15009,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 6,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15067,8 +15067,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15125,8 +15125,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 6,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789385772_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15183,8 +15183,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 10,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_20.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_20.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_20.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_20.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15241,8 +15241,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_19.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_19.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_19.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_19.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15299,8 +15299,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_18.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_18.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_18.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_18.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15357,8 +15357,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_17.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_17.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_17.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1761132709_L_17.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15415,8 +15415,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_15.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_15.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_15.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15496,8 +15496,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_14.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_14.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_14.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_14.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15577,8 +15577,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_13.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_13.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_13.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15658,8 +15658,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15739,8 +15739,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 22,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15820,8 +15820,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15901,8 +15901,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -15982,8 +15982,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16063,8 +16063,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16144,8 +16144,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16225,8 +16225,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16306,8 +16306,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 36,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16387,8 +16387,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 32,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16468,8 +16468,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 30,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16549,8 +16549,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935758_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16630,8 +16630,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16711,8 +16711,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16792,8 +16792,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 36,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16873,8 +16873,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -16954,8 +16954,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17035,8 +17035,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17116,8 +17116,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1785935068_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17197,8 +17197,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_15.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_15.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_15.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_15.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17278,8 +17278,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_14.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_14.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_14.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_14.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17359,8 +17359,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_13.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_13.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_13.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17440,8 +17440,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17521,8 +17521,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17602,8 +17602,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17683,8 +17683,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17764,8 +17764,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 35,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17845,8 +17845,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 22,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -17926,8 +17926,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18007,8 +18007,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18088,8 +18088,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18169,8 +18169,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 22,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18250,8 +18250,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778244146_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18331,8 +18331,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778581340_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18412,8 +18412,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18493,8 +18493,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18574,8 +18574,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18655,8 +18655,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 34,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18736,8 +18736,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 30,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18817,8 +18817,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 36,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1778581339_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18898,8 +18898,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -18979,8 +18979,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19060,8 +19060,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19141,8 +19141,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19222,8 +19222,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 32,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19303,8 +19303,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19384,8 +19384,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19465,8 +19465,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19546,8 +19546,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19627,8 +19627,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19708,8 +19708,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19789,8 +19789,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 36,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777730248_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19870,8 +19870,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -19951,8 +19951,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20032,8 +20032,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20113,8 +20113,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20194,8 +20194,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20275,8 +20275,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20356,8 +20356,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20437,8 +20437,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 32,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20518,8 +20518,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1777729492_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20599,8 +20599,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20680,8 +20680,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20761,8 +20761,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20842,8 +20842,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -20923,8 +20923,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21004,8 +21004,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21085,8 +21085,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21166,8 +21166,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1775247893_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21247,8 +21247,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21328,8 +21328,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21409,8 +21409,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21490,8 +21490,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21571,8 +21571,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21652,8 +21652,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 29,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21733,8 +21733,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1772824584_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21814,8 +21814,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21895,8 +21895,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 29,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -21976,8 +21976,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22057,8 +22057,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1768752860_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22138,8 +22138,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22219,8 +22219,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 27,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22300,8 +22300,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22381,8 +22381,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22462,8 +22462,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22543,8 +22543,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 34,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22624,8 +22624,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 32,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22705,8 +22705,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764850012_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22786,8 +22786,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 35,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22867,8 +22867,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 22,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -22948,8 +22948,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 29,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23029,8 +23029,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23110,8 +23110,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 35,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23191,8 +23191,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 36,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764849253_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23272,8 +23272,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 35,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23353,8 +23353,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 30,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764848337_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23434,8 +23434,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23515,8 +23515,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 32,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23596,8 +23596,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 34,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23677,8 +23677,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764848336_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23758,8 +23758,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_13.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_13.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_13.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23839,8 +23839,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -23920,8 +23920,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 34,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24001,8 +24001,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24082,8 +24082,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1764007207_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24163,8 +24163,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 30,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24244,8 +24244,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 30,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790249695_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24325,8 +24325,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 33,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24406,8 +24406,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24487,8 +24487,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 36,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099858_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24568,8 +24568,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24649,8 +24649,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 34,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099719_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24730,8 +24730,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 22,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24811,8 +24811,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24892,8 +24892,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -24973,8 +24973,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099548_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25054,8 +25054,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25135,8 +25135,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 35,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25216,8 +25216,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25297,8 +25297,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 29,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1790099311_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25378,8 +25378,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 32,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25459,8 +25459,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25540,8 +25540,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 33,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25621,8 +25621,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25702,8 +25702,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789813809_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25783,8 +25783,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25864,8 +25864,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -25945,8 +25945,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 34,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26026,8 +26026,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789813808_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26107,8 +26107,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_13.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_13.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_13.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_13.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26188,8 +26188,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_12.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_12.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_12.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_12.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26269,8 +26269,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 35,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_11.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_11.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_11.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_11.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26350,8 +26350,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_10.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_10.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_10.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_10.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26431,8 +26431,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_9.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_9.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_9.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_9.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26512,8 +26512,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26593,8 +26593,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 29,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26674,8 +26674,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26755,8 +26755,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 23,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26836,8 +26836,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26917,8 +26917,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 32,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -26998,8 +26998,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 29,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1789811950_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27079,8 +27079,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27160,8 +27160,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 17,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27241,8 +27241,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 22,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27322,8 +27322,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27403,8 +27403,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1770404188_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27484,8 +27484,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27565,8 +27565,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 16,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27646,8 +27646,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27727,8 +27727,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27808,8 +27808,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 36,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27889,8 +27889,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 13,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1737476992_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -27970,8 +27970,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28051,8 +28051,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 36,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28132,8 +28132,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 36,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1731076192_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28213,8 +28213,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 12,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728496600_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496600_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496600_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728496600_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28294,8 +28294,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 18,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728496599_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496599_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496599_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728496599_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28375,8 +28375,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 32,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28456,8 +28456,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 19,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728496051_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28537,8 +28537,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 33,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28618,8 +28618,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728496050_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28699,8 +28699,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28780,8 +28780,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 21,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28861,8 +28861,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -28942,8 +28942,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1728495788_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29023,8 +29023,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 26,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29104,8 +29104,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 28,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29185,8 +29185,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 20,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29266,8 +29266,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29347,8 +29347,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_2.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_2.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_2.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_2.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29428,8 +29428,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 24,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_1.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_1.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_1.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986547_L_1.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29509,8 +29509,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 35,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_8.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_8.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_8.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_8.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29590,8 +29590,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 33,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_7.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_7.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_7.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_7.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29671,8 +29671,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 31,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_6.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_6.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_6.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_6.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29752,8 +29752,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 25,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_5.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_5.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_5.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986425_L_5.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29833,8 +29833,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 33,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_4.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_4.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_4.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_4.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,
@@ -29914,8 +29914,8 @@ export const SHOPBASE_ALL_PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 14,
     "images": [
-      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_3.jpeg",
-      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_3.jpeg"
+      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_3.jpg",
+      "https://shopbasebd.com/public/uploads/shop/products/1723986424_L_3.jpg"
     ],
     "stock": 50,
     "isFlashSale": false,

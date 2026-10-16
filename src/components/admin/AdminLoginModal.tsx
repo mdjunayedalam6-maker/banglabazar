@@ -84,8 +84,8 @@ export const AdminLoginModal: React.FC = () => {
     } else {
       setErrorMessage(
         language === 'bn'
-          ? 'অ্যাক্সেস ডিনাইড! শুধুমাত্র অনুমোদিত এডমিন তথ্য (Gmail বা ফোন নম্বর) এবং সঠিক সিক্রেট পাসওয়ার্ড দিয়ে প্রবেশ করা যাবে।'
-          : 'Access Denied! Only authorized credentials (Gmail or Phone) can enter.'
+          ? 'অ্যাক্সেস ডিনাইড! ভুল ক্রেডেনশিয়াল বা অননুমোদিত অ্যাক্সেস।'
+          : 'Access Denied! Invalid credentials or unauthorized access.'
       );
     }
   };
@@ -119,7 +119,7 @@ export const AdminLoginModal: React.FC = () => {
           </h3>
           <p className="text-xs text-slate-300 mt-1 max-w-xs mx-auto">
             {language === 'bn' 
-              ? 'শুধুমাত্র অনুমোদিত এডমিন ক্রেডেনশিয়াল দিয়েই প্রবেশাধিকার নিশ্চিত করা হয়।' 
+              ? 'শুধুমাত্র অনুমোদিত এডমিন ক্রেডেনশিয়াল দিয়েই প্রবেশাধিকার সংরক্ষিত।' 
               : 'Strictly restricted to authorized administrative credentials.'}
           </p>
         </div>
@@ -138,13 +138,13 @@ export const AdminLoginModal: React.FC = () => {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5 text-emerald-700 text-xs font-bold mb-0.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>অনুমোদিত এডমিন আইডি</span>
+                    <span>অনুমোদিত এডমিন সেশন সক্রিয়</span>
                   </div>
                   <h4 className="text-sm font-black text-slate-900 truncate">
-                    {currentUser?.name || 'Md. Junayed Alam'}
+                    {currentUser?.name || 'Authorized Admin'}
                   </h4>
-                  <p className="text-xs text-slate-500 truncate">
-                    {currentUser?.email || currentUser?.phone}
+                  <p className="text-xs text-slate-500 font-mono">
+                    ••••••••••••••••
                   </p>
                 </div>
               </div>
@@ -164,14 +164,14 @@ export const AdminLoginModal: React.FC = () => {
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
                     <KeyRound className="w-3.5 h-3.5 text-amber-600" />
-                    <span>এডমিন সিক্রেট পাসওয়ার্ড দিন</span>
+                    <span>সিক্রেট পাসওয়ার্ড দিন</span>
                   </label>
                   <div className="relative">
                     <input
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="পাসওয়ার্ড দিন (B$R@Z#3.0)"
+                      placeholder="••••••••••••"
                       className="w-full px-3.5 py-2.5 pr-10 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 transition-all text-slate-900 font-medium"
                       autoFocus
                     />
@@ -214,7 +214,7 @@ export const AdminLoginModal: React.FC = () => {
                         </span>
                       </h4>
                       <p className="text-xs text-rose-700 mt-1 leading-relaxed">
-                        বর্তমান অ্যাকাউন্ট ({currentUser.email || currentUser.phone}) এর এডমিন প্যানেলে প্রবেশের অনুমতি নেই।
+                        বর্তমান অ্যাকাউন্টের এডমিন প্যানেলে প্রবেশের অনুমতি নেই।
                       </p>
                     </div>
                   </div>
@@ -244,7 +244,7 @@ export const AdminLoginModal: React.FC = () => {
                       type="text"
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
-                      placeholder="Gmail বা ফোন নম্বর দিন (01929637253 / 01326654722)"
+                      placeholder="এডমিন আইডি (ইমেইল অথবা মোবাইল নম্বর)"
                       className="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 transition-all text-slate-900"
                       autoFocus
                     />
@@ -261,7 +261,7 @@ export const AdminLoginModal: React.FC = () => {
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="পাসওয়ার্ড দিন"
+                      placeholder="••••••••••••"
                       className="w-full px-3.5 py-2.5 pr-10 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 transition-all text-slate-900"
                     />
                     <button
@@ -287,10 +287,10 @@ export const AdminLoginModal: React.FC = () => {
                 </div>
               </form>
 
-              {/* Notice for direct registration entry */}
+              {/* Notice */}
               <div className="pt-3 border-t border-slate-100 text-center space-y-2">
-                <p className="text-[11px] text-slate-500 leading-normal">
-                  যদি ওয়েবসাইটে এই Gmail বা ফোন নম্বর দিয়ে রেজিস্ট্রেশন করা থাকে, তবে মূল অ্যাকাউন্টে লগইন করলেও সরাসরি প্রবেশ করতে পারবেন।
+                <p className="text-[11px] text-slate-400 leading-normal">
+                  নিরাপত্তার স্বার্থে সকল প্রবেশাধিকার কঠোরভাবে সুরক্ষিত। অননুমোদিত যেকোনো প্রচেষ্টা প্রতিরোধ করা হবে।
                 </p>
                 {!currentUser && (
                   <button

@@ -2,6 +2,7 @@ import React from 'react';
 import { Heart, Star, Eye, Zap, ChevronRight } from 'lucide-react';
 import { Product } from '../types';
 import { useApp } from '../context/AppContext';
+import { getProductImageCandidates, getCategoryFallbackImage } from '../utils/productImageUtils';
 
 export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' }> = ({
   product,
@@ -28,44 +29,23 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
     .replace(/বাংলা\s*বাজার\s*মার্ট/gi, displayBrand)
     .replace(/OneRoof/gi, displayBrand);
 
-  // Robust image handling: upgrade to guaranteed Ultra-HD resolution
-  const initialImage = React.useMemo(() => {
-    let img = product.images?.[0] || product.image || '';
-    if (typeof img === 'string') {
-      if (img.includes('shopbasebd.com')) {
-        img = img.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
-      } else if (img.includes('unsplash.com')) {
-        img = img.replace(/w=\d+/, 'w=1000').replace(/q=\d+/, 'q=95');
-      }
-    }
-    return img || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1000&auto=format&fit=crop&q=95';
-  }, [product.images, product.image]);
-
-  const [currentImg, setCurrentImg] = React.useState<string>(initialImage);
+  // Robust candidate waterfall: tries .jpg HD, then .jpeg HD, then original thumbnail before category fallback
+  const imageCandidates = React.useMemo(() => getProductImageCandidates(product), [product.id, product.images, product.image, product.category]);
+  const [candidateIndex, setCandidateIndex] = React.useState(0);
 
   React.useEffect(() => {
-    setCurrentImg(initialImage);
-  }, [initialImage]);
+    setCandidateIndex(0);
+  }, [product.id, product.images, product.image]);
+
+  const currentImg = imageCandidates[candidateIndex] || getCategoryFallbackImage(product.category);
 
   const handleImageError = () => {
-    const fallback = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1000&auto=format&fit=crop&q=95';
-    if (currentImg === fallback) return;
-
-    // If secondary HD image is available, try it
-    if (product.images?.[1] && currentImg !== product.images[1]) {
-      let sec = product.images[1];
-      if (typeof sec === 'string') {
-        if (sec.includes('shopbasebd.com')) {
-          sec = sec.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg');
-        } else if (sec.includes('unsplash.com')) {
-          sec = sec.replace(/w=\d+/, 'w=1000').replace(/q=\d+/, 'q=95');
-        }
+    setCandidateIndex((prev) => {
+      if (prev < imageCandidates.length - 1) {
+        return prev + 1;
       }
-      setCurrentImg(sec);
-      return;
-    }
-    // High-resolution fallback
-    setCurrentImg(fallback);
+      return prev;
+    });
   };
 
   if (layout === 'list') {

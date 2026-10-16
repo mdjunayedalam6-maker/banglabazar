@@ -20,6 +20,7 @@ import { useApp } from '../context/AppContext';
 import { BrandLogo } from './BrandLogo';
 import { MobileDrawer } from './MobileNav';
 import { usePWAInstall } from '../hooks/usePWAInstall';
+import { getProductMainImage, getCategoryFallbackImage } from '../utils/productImageUtils';
 
 export const Header: React.FC = () => {
   const {
@@ -455,16 +456,22 @@ export const Header: React.FC = () => {
                             className="flex items-center gap-3 p-2.5 hover:bg-emerald-50/70 rounded-xl cursor-pointer transition-colors group"
                           >
                             <img
-                              src={
-                                prod?.images?.[0]?.includes('shopbasebd.com')
-                                  ? prod.images[0].replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg')
-                                  : prod?.images?.[0] || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop&q=90'
-                              }
+                              src={getProductMainImage(prod)}
                               alt={prod.titleBn || ''}
                               referrerPolicy="no-referrer"
                               onError={(e) => {
                                 const target = e.currentTarget;
-                                target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop&q=90';
+                                const fallback = getCategoryFallbackImage(prod.category);
+                                if (target.src === fallback) return;
+                                if (target.src.includes('.jpeg') && !(target as any)._jpegTried) {
+                                  (target as any)._jpegTried = true;
+                                  target.src = target.src.replace(/\.jpeg$/i, '.jpg');
+                                } else if (target.src.includes('_L_') && !(target as any)._smallTried) {
+                                  (target as any)._smallTried = true;
+                                  target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
+                                } else {
+                                  target.src = fallback;
+                                }
                               }}
                               className="w-12 h-12 object-cover rounded-xl border border-slate-200 shrink-0 group-hover:scale-105 transition-transform shadow-2xs"
                             />

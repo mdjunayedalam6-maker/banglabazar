@@ -732,7 +732,7 @@ export function convertShopBaseToProduct(
 
   // High-res image URL formatting with fallback handling
   const mainImgUrl = `https://shopbasebd.com/public/uploads/shop/products/${item.img_sm}`;
-  const largeImgUrl = `https://shopbasebd.com/public/uploads/shop/products/${item.img_sm.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg')}`;
+  const largeImgUrl = `https://shopbasebd.com/public/uploads/shop/products/${item.img_sm.replace('_S_', '_L_')}`;
   
   const allImages = [
     largeImgUrl,

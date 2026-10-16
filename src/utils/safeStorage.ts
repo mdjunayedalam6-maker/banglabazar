@@ -6,18 +6,28 @@ export const safeLocalStorage = {
   getItem: (key: string): string | null => {
     try {
       if (typeof window !== 'undefined' && window.localStorage) {
-        return window.localStorage.getItem(key);
+        const val = window.localStorage.getItem(key);
+        if (val !== null) return val;
       }
     } catch (_) {}
     return memoryStore[key] ?? null;
   },
   setItem: (key: string, value: string): void => {
+    memoryStore[key] = value;
     try {
       if (typeof window !== 'undefined' && window.localStorage) {
         window.localStorage.setItem(key, value);
       }
-    } catch (_) {}
-    memoryStore[key] = value;
+    } catch (_) {
+      // If quota exceeded, clean up large non-critical cache keys and retry
+      try {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          window.localStorage.removeItem('oneroof_products');
+          window.localStorage.removeItem('oneroof_cached_products');
+          window.localStorage.setItem(key, value);
+        }
+      } catch (e2) {}
+    }
   },
   removeItem: (key: string): void => {
     try {

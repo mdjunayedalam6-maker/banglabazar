@@ -120,9 +120,18 @@ export const AdminPage: React.FC = () => {
   const [categoryToEdit, setCategoryToEdit] = useState<Category | null>(null);
   const [editCatNameBn, setEditCatNameBn] = useState('');
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, setter: (url: string) => void) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, setter: (url: string) => void) => {
     const file = e.target.files?.[0];
-    if (file) {
+    if (!file) return;
+    try {
+      // Auto compress phone photo to lightweight web image (800x800 at 0.82 quality)
+      const compressed = await compressImageFile(file, 800, 800, 0.82);
+      setter(compressed);
+      addToast(
+        language === 'bn' ? 'ছবি সফলভাবে লোড ও অপটিমাইজ হয়েছে!' : 'Image optimized & loaded!',
+        'success'
+      );
+    } catch {
       const reader = new FileReader();
       reader.onloadend = () => {
         setter(reader.result as string);
@@ -549,10 +558,10 @@ export const AdminPage: React.FC = () => {
     });
   };
 
-  const parseSubcategories = (bnStr: string, enStr: string) => {
-    if (!bnStr.trim()) return undefined;
-    const bnList = bnStr.split(',').map(s => s.trim()).filter(s => s);
-    const enList = enStr.split(',').map(s => s.trim()).filter(s => s);
+  const parseSubcategories = (bnStr?: string | null, enStr?: string | null) => {
+    if (!bnStr || typeof bnStr !== 'string' || !bnStr.trim()) return undefined;
+    const bnList = bnStr.split(',').map(s => s.trim()).filter(Boolean);
+    const enList = (enStr || '').split(',').map(s => s.trim()).filter(Boolean);
     
     return bnList.map((bnName, idx) => {
       const enName = enList[idx] || bnName;
@@ -563,24 +572,29 @@ export const AdminPage: React.FC = () => {
 
   const openEditCategory = (cat: Category) => {
     setCategoryToEdit(cat);
-    setEditCatNameBn(cat.nameBn);
-    setEditCatNameEn(cat.nameEn);
-    setEditCatSlug(cat.slug);
-    setEditCatImage(cat.image);
-    setEditCatSubBn(cat.subcategories?.map(s => s.nameBn).join(', ') || '');
-    setEditCatSubEn(cat.subcategories?.map(s => s.nameEn).join(', ') || '');
+    setEditCatNameBn(cat.nameBn || '');
+    setEditCatNameEn(cat.nameEn || '');
+    setEditCatSlug(cat.slug || '');
+    setEditCatImage(cat.image || '');
+    setEditCatSubBn(cat.subcategories?.map(s => s?.nameBn || '').filter(Boolean).join(', ') || '');
+    setEditCatSubEn(cat.subcategories?.map(s => s?.nameEn || '').filter(Boolean).join(', ') || '');
   };
 
   const handleUpdateCategorySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!categoryToEdit) return;
     
+    const nameBn = (editCatNameBn || '').trim() || categoryToEdit.nameBn || '';
+    const nameEn = (editCatNameEn || '').trim() || categoryToEdit.nameEn || '';
+    const slug = (editCatSlug || '').trim() || categoryToEdit.slug || '';
+    const image = (editCatImage || '').trim() || categoryToEdit.image || '';
+
     updateCategory(categoryToEdit.id, {
-      nameBn: editCatNameBn.trim() || categoryToEdit.nameBn,
-      nameEn: editCatNameEn.trim() || categoryToEdit.nameEn,
-      slug: editCatSlug.trim() || categoryToEdit.slug,
-      image: editCatImage.trim() || categoryToEdit.image,
-      subcategories: parseSubcategories(editCatSubBn, editCatSubEn) || categoryToEdit.subcategories,
+      nameBn,
+      nameEn,
+      slug,
+      image,
+      subcategories: parseSubcategories(editCatSubBn || '', editCatSubEn || '') || categoryToEdit.subcategories,
     });
     setCategoryToEdit(null);
   };
@@ -589,7 +603,7 @@ export const AdminPage: React.FC = () => {
     setBannerToEdit(slide);
     setEditSlideTitleBn(slide.titleBn || '');
     setEditSlideSubtitleBn(slide.subtitleBn || '');
-    setEditSlideImage(slide.image);
+    setEditSlideImage(slide.image || '');
     setEditSlideBadge(slide.badgeBn || '');
     setEditSlideDiscount(slide.discountTextBn || '');
     setEditSlideTargetCat(slide.categoryTarget || 'fashion');
@@ -599,17 +613,18 @@ export const AdminPage: React.FC = () => {
   const handleUpdateBannerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!bannerToEdit) return;
-    if (!editSlideImage || !editSlideImage.trim()) {
+    const img = (editSlideImage || '').trim();
+    if (!img) {
       addToast(language === 'bn' ? 'অনুগ্রহ করে ব্যানার ছবি দিন' : 'Please provide banner image', 'error');
       return;
     }
     updateBannerSlide(bannerToEdit.id, {
-      titleBn: editSlideTitleBn.trim() || bannerToEdit.titleBn || 'ব্যানার',
-      subtitleBn: editSlideShowText ? editSlideSubtitleBn.trim() : '',
-      image: editSlideImage.trim() || bannerToEdit.image,
-      badgeBn: editSlideShowText ? editSlideBadge.trim() : '',
-      discountTextBn: editSlideShowText ? editSlideDiscount.trim() : '',
-      categoryTarget: editSlideTargetCat,
+      titleBn: (editSlideTitleBn || '').trim() || bannerToEdit.titleBn || 'ব্যানার',
+      subtitleBn: editSlideShowText ? (editSlideSubtitleBn || '').trim() : '',
+      image: img || bannerToEdit.image,
+      badgeBn: editSlideShowText ? (editSlideBadge || '').trim() : '',
+      discountTextBn: editSlideShowText ? (editSlideDiscount || '').trim() : '',
+      categoryTarget: editSlideTargetCat || 'fashion',
       showTextOverlay: Boolean(editSlideShowText),
     });
     setBannerToEdit(null);
@@ -1960,7 +1975,7 @@ export const AdminPage: React.FC = () => {
                   <label className="block text-slate-400 font-bold mb-1">ক্যাটাগরির নাম (বাংলা) *</label>
                   <input
                     type="text"
-                    value={newCatNameBn}
+                    value={newCatNameBn ?? ''}
                     onChange={(e) => setNewCatNameBn(e.target.value)}
                     placeholder="যেমন: স্মার্ট ওয়াচ"
                     required
@@ -1972,7 +1987,7 @@ export const AdminPage: React.FC = () => {
                   <label className="block text-slate-400 font-bold mb-1">Category Name (English)</label>
                   <input
                     type="text"
-                    value={newCatNameEn}
+                    value={newCatNameEn ?? ''}
                     onChange={(e) => setNewCatNameEn(e.target.value)}
                     placeholder="e.g. Smart Watches"
                     className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-amber-400"
@@ -1983,7 +1998,7 @@ export const AdminPage: React.FC = () => {
                   <label className="block text-slate-400 font-bold mb-1">স্ল্যাগ বা আইডি (Slug) *</label>
                   <input
                     type="text"
-                    value={newCatSlug}
+                    value={newCatSlug ?? ''}
                     onChange={(e) => setNewCatSlug(e.target.value)}
                     placeholder="e.g. watches"
                     required
@@ -1995,7 +2010,7 @@ export const AdminPage: React.FC = () => {
                   <label className="block text-slate-400 font-bold mb-1">কভার ইমেজ লিংক (Image URL)</label>
                   <input
                     type="text"
-                    value={newCatImage}
+                    value={newCatImage ?? ''}
                     onChange={(e) => setNewCatImage(e.target.value)}
                     className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-amber-400"
                     placeholder="URL দিন অথবা ফাইল সিলেক্ট করুন"
@@ -2012,7 +2027,7 @@ export const AdminPage: React.FC = () => {
                   <label className="block text-slate-400 font-bold mb-1">সাব-ক্যাটাগরি (বাংলা)</label>
                   <input
                     type="text"
-                    value={newCatSubBn}
+                    value={newCatSubBn ?? ''}
                     onChange={(e) => setNewCatSubBn(e.target.value)}
                     placeholder="কমা দিয়ে দিয়ে লিখুন (যেমন: পাঞ্জাবি, শাড়ি, জুতো)"
                     className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-amber-400"
@@ -2023,7 +2038,7 @@ export const AdminPage: React.FC = () => {
                   <label className="block text-slate-400 font-bold mb-1">Sub-Categories (English)</label>
                   <input
                     type="text"
-                    value={newCatSubEn}
+                    value={newCatSubEn ?? ''}
                     onChange={(e) => setNewCatSubEn(e.target.value)}
                     placeholder="Comma separated (e.g. Punjabi, Sari, Shoes)"
                     className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-amber-400"
@@ -2199,13 +2214,13 @@ export const AdminPage: React.FC = () => {
                     <div className="flex items-center gap-3">
                       <input
                         type="color"
-                        value={siteSettings.primaryColor}
+                        value={siteSettings.primaryColor || '#00873E'}
                         onChange={(e) => updateSiteSettings({ primaryColor: e.target.value })}
                         className="w-12 h-10 rounded-xl cursor-pointer bg-slate-900 border border-slate-700 p-1"
                       />
                       <input
                         type="text"
-                        value={siteSettings.primaryColor}
+                        value={siteSettings.primaryColor || '#00873E'}
                         onChange={(e) => updateSiteSettings({ primaryColor: e.target.value })}
                         className="w-36 px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white font-mono uppercase"
                       />
@@ -2220,13 +2235,13 @@ export const AdminPage: React.FC = () => {
                     <div className="flex items-center gap-3">
                       <input
                         type="color"
-                        value={siteSettings.accentColor}
+                        value={siteSettings.accentColor || '#DC2626'}
                         onChange={(e) => updateSiteSettings({ accentColor: e.target.value })}
                         className="w-12 h-10 rounded-xl cursor-pointer bg-slate-900 border border-slate-700 p-1"
                       />
                       <input
                         type="text"
-                        value={siteSettings.accentColor}
+                        value={siteSettings.accentColor || '#DC2626'}
                         onChange={(e) => updateSiteSettings({ accentColor: e.target.value })}
                         className="w-36 px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white font-mono uppercase"
                       />
@@ -2319,7 +2334,7 @@ export const AdminPage: React.FC = () => {
                   <label className="font-bold text-white block">ফ্রি ডেলিভারি সর্বনিম্ন মূল্য (৳)</label>
                   <input
                     type="number"
-                    value={siteSettings.freeShippingThreshold}
+                    value={siteSettings.freeShippingThreshold ?? 0}
                     onChange={(e) => updateSiteSettings({ freeShippingThreshold: Number(e.target.value) })}
                     className="w-full px-3 py-1.5 bg-slate-800 border border-slate-600 rounded-xl text-white outline-none focus:border-amber-400"
                   />
@@ -2330,7 +2345,7 @@ export const AdminPage: React.FC = () => {
                   <label className="font-bold text-slate-300 block mb-1">নোটিশ বার মেসেজ (বাংলা)</label>
                   <input
                     type="text"
-                    value={siteSettings.announcementTextBn}
+                    value={siteSettings.announcementTextBn || ''}
                     onChange={(e) => updateSiteSettings({ announcementTextBn: e.target.value })}
                     className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-amber-400"
                   />
@@ -2341,7 +2356,7 @@ export const AdminPage: React.FC = () => {
                   <label className="font-bold text-slate-300 block mb-1">ব্র্যান্ড স্লোগান (Tagline Bangla)</label>
                   <input
                     type="text"
-                    value={siteSettings.taglineBn}
+                    value={siteSettings.taglineBn || ''}
                     onChange={(e) => updateSiteSettings({ taglineBn: e.target.value })}
                     className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-amber-400"
                   />
@@ -2352,7 +2367,7 @@ export const AdminPage: React.FC = () => {
                   <label className="font-bold text-slate-300 block mb-1">হটলাইন নম্বর (Hotline Number)</label>
                   <input
                     type="text"
-                    value={siteSettings.hotlineNumber}
+                    value={siteSettings.hotlineNumber || ''}
                     onChange={(e) => updateSiteSettings({ hotlineNumber: e.target.value })}
                     className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-amber-400"
                   />
@@ -2567,7 +2582,7 @@ export const AdminPage: React.FC = () => {
                       inputMode="numeric"
                       pattern="[0-9]*"
                       autoComplete="off"
-                      value={shippingInsideInput}
+                      value={shippingInsideInput ?? ''}
                       onChange={(e) => handleShippingInsideChange(e.target.value)}
                       placeholder="60"
                       className="w-full pl-8 pr-12 py-2.5 bg-slate-950 border border-slate-700 focus:border-emerald-400 rounded-xl text-white font-mono text-sm font-bold outline-none transition-colors"
@@ -2614,7 +2629,7 @@ export const AdminPage: React.FC = () => {
                       inputMode="numeric"
                       pattern="[0-9]*"
                       autoComplete="off"
-                      value={shippingOutsideInput}
+                      value={shippingOutsideInput ?? ''}
                       onChange={(e) => handleShippingOutsideChange(e.target.value)}
                       placeholder="120"
                       className="w-full pl-8 pr-12 py-2.5 bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl text-white font-mono text-sm font-bold outline-none transition-colors"
@@ -2661,7 +2676,7 @@ export const AdminPage: React.FC = () => {
                       inputMode="numeric"
                       pattern="[0-9]*"
                       autoComplete="off"
-                      value={shippingExpressInput}
+                      value={shippingExpressInput ?? ''}
                       onChange={(e) => handleShippingExpressChange(e.target.value)}
                       placeholder="150"
                       className="w-full pl-8 pr-12 py-2.5 bg-slate-950 border border-slate-700 focus:border-indigo-400 rounded-xl text-white font-mono text-sm font-bold outline-none transition-colors"
@@ -2718,7 +2733,7 @@ export const AdminPage: React.FC = () => {
                       inputMode="numeric"
                       pattern="[0-9]*"
                       autoComplete="off"
-                      value={freeShippingThresholdInput}
+                      value={freeShippingThresholdInput ?? ''}
                       onChange={(e) => handleFreeShippingThresholdChange(e.target.value)}
                       placeholder="2000"
                       className="w-full pl-8 pr-12 py-2 bg-slate-950 border border-slate-700 focus:border-emerald-400 rounded-xl text-white font-mono text-sm font-bold outline-none"
@@ -3558,7 +3573,7 @@ export const AdminPage: React.FC = () => {
                 <label className="block text-slate-400 font-bold mb-1">ক্যাটাগরি নাম (বাংলা) *</label>
                 <input
                   type="text"
-                  value={editCatNameBn}
+                  value={editCatNameBn ?? ''}
                   onChange={(e) => setEditCatNameBn(e.target.value)}
                   required
                   className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
@@ -3569,7 +3584,7 @@ export const AdminPage: React.FC = () => {
                 <label className="block text-slate-400 font-bold mb-1">ক্যাটাগরি নাম (ইংরেজি)</label>
                 <input
                   type="text"
-                  value={editCatNameEn}
+                  value={editCatNameEn ?? ''}
                   onChange={(e) => setEditCatNameEn(e.target.value)}
                   className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
                 />
@@ -3579,7 +3594,7 @@ export const AdminPage: React.FC = () => {
                 <label className="block text-slate-400 font-bold mb-1">স্ল্যাগ (URL Slug) *</label>
                 <input
                   type="text"
-                  value={editCatSlug}
+                  value={editCatSlug ?? ''}
                   onChange={(e) => setEditCatSlug(e.target.value)}
                   required
                   className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
@@ -3590,7 +3605,7 @@ export const AdminPage: React.FC = () => {
                 <label className="block text-slate-400 font-bold mb-1">ছবি বা আইকন URL</label>
                 <input
                   type="url"
-                  value={editCatImage}
+                  value={editCatImage ?? ''}
                   onChange={(e) => setEditCatImage(e.target.value)}
                   className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
                   placeholder="URL দিন অথবা ফাইল সিলেক্ট করুন"
@@ -3607,7 +3622,7 @@ export const AdminPage: React.FC = () => {
                 <label className="block text-slate-400 font-bold mb-1">সাব-ক্যাটাগরি (বাংলা)</label>
                 <input
                   type="text"
-                  value={editCatSubBn}
+                  value={editCatSubBn ?? ''}
                   onChange={(e) => setEditCatSubBn(e.target.value)}
                   placeholder="কমা দিয়ে দিয়ে লিখুন (যেমন: পাঞ্জাবি, শাড়ি, জুতো)"
                   className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
@@ -3618,7 +3633,7 @@ export const AdminPage: React.FC = () => {
                 <label className="block text-slate-400 font-bold mb-1">Sub-Categories (English)</label>
                 <input
                   type="text"
-                  value={editCatSubEn}
+                  value={editCatSubEn ?? ''}
                   onChange={(e) => setEditCatSubEn(e.target.value)}
                   placeholder="Comma separated (e.g. Punjabi, Sari, Shoes)"
                   className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
@@ -3718,7 +3733,7 @@ export const AdminPage: React.FC = () => {
                     <label className="block text-slate-300 font-bold mb-1">ব্যানার শিরোনাম (বাংলা) [ঐচ্ছিক]</label>
                     <input
                       type="text"
-                      value={editSlideTitleBn}
+                      value={editSlideTitleBn ?? ''}
                       onChange={(e) => setEditSlideTitleBn(e.target.value)}
                       placeholder="যেমন: ঈদ স্পেশাল মেগা সেল"
                       className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
@@ -3729,7 +3744,7 @@ export const AdminPage: React.FC = () => {
                     <label className="block text-slate-300 font-bold mb-1">উপ-শিরোনাম বা অফার বিবরণ [ঐচ্ছিক]</label>
                     <input
                       type="text"
-                      value={editSlideSubtitleBn}
+                      value={editSlideSubtitleBn ?? ''}
                       onChange={(e) => setEditSlideSubtitleBn(e.target.value)}
                       placeholder="যেমন: সকল পোশাকে মেগা ছাড়"
                       className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
@@ -3741,7 +3756,7 @@ export const AdminPage: React.FC = () => {
                       <label className="block text-slate-300 font-bold mb-1">ব্যাজ টেক্সট</label>
                       <input
                         type="text"
-                        value={editSlideBadge}
+                        value={editSlideBadge ?? ''}
                         onChange={(e) => setEditSlideBadge(e.target.value)}
                         placeholder="যেমন: ধামাকা অফার"
                         className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
@@ -3751,7 +3766,7 @@ export const AdminPage: React.FC = () => {
                       <label className="block text-slate-300 font-bold mb-1">অফার / ডিসকাউন্ট টেক্সট</label>
                       <input
                         type="text"
-                        value={editSlideDiscount}
+                        value={editSlideDiscount ?? ''}
                         onChange={(e) => setEditSlideDiscount(e.target.value)}
                         placeholder="যেমন: 50% ছাড়"
                         className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none focus:border-indigo-400"
@@ -3789,7 +3804,7 @@ export const AdminPage: React.FC = () => {
 
                   <input
                     type="text"
-                    value={editSlideImage}
+                    value={editSlideImage ?? ''}
                     onChange={(e) => setEditSlideImage(e.target.value)}
                     required
                     placeholder="অথবা সরাসরি ইমেজ লিংক (URL) দিন"

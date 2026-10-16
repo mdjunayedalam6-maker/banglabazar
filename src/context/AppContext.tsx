@@ -388,53 +388,51 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const sanitizeCategories = (cats: Category[]): Category[] => {
     if (!Array.isArray(cats) || cats.length === 0) return CATEGORIES;
-    // Keep only the 11 main categories
-    const valid = cats.filter((c) => MAIN_11_ORDER.includes(c.id));
     const defMap = new Map(CATEGORIES.map((c) => [c.id, c]));
 
-    const working = valid.length === 11 
-      ? valid 
-      : CATEGORIES.map((def) => {
-          const found = valid.find((c) => c.id === def.id);
-          return found || def;
-        });
+    const processed: Category[] = cats.map((c) => {
+      const def = defMap.get(c.id);
+      const defSubMap = new Map((def?.subcategories || []).map((s) => [s.id, s.image]));
+      const updatedSubs = (c.subcategories || def?.subcategories || []).map((s) => ({
+        ...s,
+        image: s.image || defSubMap.get(s.id) || getSubcategoryImage(s.id, s.nameBn),
+      }));
+      return {
+        ...c,
+        image: c.image || def?.image || '',
+        subcategories: updatedSubs,
+      };
+    });
 
-    // Ensure every subcategory has its latest distinct image
-    return working
-      .map((c) => {
-        const def = defMap.get(c.id);
-        const defSubMap = new Map((def?.subcategories || []).map((s) => [s.id, s.image]));
-        const updatedSubs = (c.subcategories || def?.subcategories || []).map((s) => ({
-          ...s,
-          image: s.image || defSubMap.get(s.id) || getSubcategoryImage(s.id, s.nameBn),
-        }));
-        return {
-          ...c,
-          subcategories: updatedSubs,
-        };
-      })
-      .sort((a, b) => MAIN_11_ORDER.indexOf(a.id) - MAIN_11_ORDER.indexOf(b.id));
+    // Make sure standard 11 categories exist if not present
+    const existingIds = new Set(processed.map((c) => c.id));
+    for (const def of CATEGORIES) {
+      if (!existingIds.has(def.id)) {
+        processed.push(def);
+      }
+    }
+
+    // Sort: standard 11 first in MAIN_11_ORDER, followed by custom categories
+    return processed.sort((a, b) => {
+      const idxA = MAIN_11_ORDER.indexOf(a.id);
+      const idxB = MAIN_11_ORDER.indexOf(b.id);
+      if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+      if (idxA !== -1) return -1;
+      if (idxB !== -1) return 1;
+      return 0;
+    });
   };
 
-  // Persistent Categories (guaranteed strictly 11 main categories with distinct subcategory images)
+  // Persistent Categories (maintains all admin updates and custom categories)
   const [categories, setCategories] = useState<Category[]>(() => {
     try {
-      const version = safeLocalStorage.getItem('oneroof_cat_schema_version');
-      if (version === 'v7_complete_all_shopbase_subcategories') {
-        const saved = safeLocalStorage.getItem('oneroof_categories');
-        if (saved !== null) {
-          const parsed: Category[] = JSON.parse(saved);
-          const sanitized = sanitizeCategories(parsed);
-          if (sanitized.length === 11) {
-            return sanitized;
-          }
+      const saved = safeLocalStorage.getItem('oneroof_categories');
+      if (saved !== null) {
+        const parsed: Category[] = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return sanitizeCategories(parsed);
         }
       }
-      // Force migration to clean 11 structured categories with complete subcategory catalog
-      safeLocalStorage.setItem('oneroof_cat_schema_version', 'v7_complete_all_shopbase_subcategories');
-      safeLocalStorage.setItem('oneroof_categories', JSON.stringify(CATEGORIES));
-      idbSet('oneroof_cached_categories', CATEGORIES).catch(() => {});
-      syncCategoriesToSupabase(CATEGORIES).catch(() => {});
       return CATEGORIES;
     } catch {
       return CATEGORIES;
@@ -638,8 +636,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       idbGet<Product[]>('oneroof_cached_products'),
       idbGet<Category[]>('oneroof_cached_categories'),
       idbGet<AdminBannerSlide[]>('oneroof_cached_slides'),
+      idbGet<SiteSettings>('oneroof_cached_site_settings'),
+      idbGet<Order[]>('oneroof_cached_orders'),
     ])
-      .then(([cachedProducts, cachedCategories, cachedSlides]) => {
+      .then(([cachedProducts, cachedCategories, cachedSlides, cachedSettings, cachedOrders]) => {
         if (!isMounted) return;
         if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 0) {
           const deletedIds = getDeletedProductIds();
@@ -657,6 +657,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         }
         if (cachedSlides && Array.isArray(cachedSlides) && cachedSlides.length > 0) {
           setBannerSlides(cachedSlides);
+        }
+        if (cachedSettings) {
+          setSiteSettings((prev) => ({ ...prev, ...cachedSettings }));
+        }
+        if (cachedOrders && Array.isArray(cachedOrders) && cachedOrders.length > 0) {
+          setOrders((prev) => (prev.length === 0 ? cachedOrders : prev));
         }
       })
       .catch(() => {});
@@ -832,10 +838,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
               deleteMultipleProductsFromSupabase(ghostIds).catch(() => {});
             }
           }
-          if (remoteOrders && remoteOrders.length > 0) setOrders(remoteOrders);
+          if (remoteOrders && remoteOrders.length > 0) {
+            setOrders(remoteOrders);
+            safeLocalStorage.setItem('oneroof_orders', JSON.stringify(remoteOrders));
+            idbSet('oneroof_cached_orders', remoteOrders).catch(() => {});
+          }
           if (remoteSettings) {
             setSiteSettings(remoteSettings);
             safeLocalStorage.setItem('oneroof_site_settings', JSON.stringify(remoteSettings));
+            idbSet('oneroof_cached_site_settings', remoteSettings).catch(() => {});
           }
           if (remoteCategories && Array.isArray(remoteCategories) && remoteCategories.length > 0) {
             const cleanCats = sanitizeCategories(remoteCategories);
@@ -1000,6 +1011,51 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                     const next = prev.filter((c) => c.id !== deletedId);
                     safeLocalStorage.setItem('oneroof_categories', JSON.stringify(next));
                     idbSet('oneroof_cached_categories', next).catch(() => {});
+                    return next;
+                  });
+                }
+              }
+            )
+            .on(
+              'postgres_changes',
+              { event: '*', schema: 'public', table: 'site_settings' },
+              (payload) => {
+                if (!isMounted) return;
+                if ((payload.eventType === 'INSERT' || payload.eventType === 'UPDATE') && payload.new?.data) {
+                  const settings = payload.new.data as SiteSettings;
+                  setSiteSettings(settings);
+                  safeLocalStorage.setItem('oneroof_site_settings', JSON.stringify(settings));
+                  idbSet('oneroof_cached_site_settings', settings).catch(() => {});
+                }
+              }
+            )
+            .on(
+              'postgres_changes',
+              { event: '*', schema: 'public', table: 'banner_slides' },
+              (payload) => {
+                if (!isMounted) return;
+                if (payload.eventType === 'INSERT' && payload.new?.data) {
+                  const newSlide = payload.new.data as AdminBannerSlide;
+                  setBannerSlides((prev) => {
+                    const next = prev.some((s) => s.id === newSlide.id) ? prev : [...prev, newSlide];
+                    safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(next));
+                    idbSet('oneroof_cached_slides', next).catch(() => {});
+                    return next;
+                  });
+                } else if (payload.eventType === 'UPDATE' && payload.new?.data) {
+                  const updatedSlide = payload.new.data as AdminBannerSlide;
+                  setBannerSlides((prev) => {
+                    const next = prev.map((s) => (s.id === updatedSlide.id ? updatedSlide : s));
+                    safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(next));
+                    idbSet('oneroof_cached_slides', next).catch(() => {});
+                    return next;
+                  });
+                } else if (payload.eventType === 'DELETE' && payload.old?.id) {
+                  const deletedId = payload.old.id;
+                  setBannerSlides((prev) => {
+                    const next = prev.filter((s) => s.id !== deletedId);
+                    safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(next));
+                    idbSet('oneroof_cached_slides', next).catch(() => {});
                     return next;
                   });
                 }
@@ -1477,7 +1533,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const addCategory = (newCat: Category) => {
     setCategories((prev) => {
       const next = [...prev, newCat];
-      syncCategoriesToSupabase(next);
+      safeLocalStorage.setItem('oneroof_categories', JSON.stringify(next));
+      idbSet('oneroof_cached_categories', next).catch(() => {});
+      syncCategoriesToSupabase(next).catch(() => {});
       return next;
     });
     addToast(
@@ -1489,7 +1547,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const updateCategory = (id: string, updated: Partial<Category>) => {
     setCategories((prev) => {
       const next = prev.map((c) => (c.id === id ? { ...c, ...updated } : c));
-      syncCategoriesToSupabase(next);
+      safeLocalStorage.setItem('oneroof_categories', JSON.stringify(next));
+      idbSet('oneroof_cached_categories', next).catch(() => {});
+      syncCategoriesToSupabase(next).catch(() => {});
       return next;
     });
     addToast(language === 'bn' ? 'ক্যাটাগরি সফলভাবে আপডেট হয়েছে!' : 'Category updated successfully!', 'success');
@@ -1498,8 +1558,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const deleteCategory = (id: string) => {
     setCategories((prev) => {
       const next = prev.filter((c) => c.id !== id);
-      deleteCategoryFromSupabase(id);
-      syncCategoriesToSupabase(next);
+      safeLocalStorage.setItem('oneroof_categories', JSON.stringify(next));
+      idbSet('oneroof_cached_categories', next).catch(() => {});
+      deleteCategoryFromSupabase(id).catch(() => {});
+      syncCategoriesToSupabase(next).catch(() => {});
       return next;
     });
     addToast(language === 'bn' ? 'ক্যাটাগরি মুছে ফেলা হয়েছে' : 'Category deleted', 'info');
@@ -1509,7 +1571,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setCategories(CATEGORIES);
     safeLocalStorage.setItem('oneroof_categories', JSON.stringify(CATEGORIES));
     idbSet('oneroof_cached_categories', CATEGORIES).catch(() => {});
-    syncCategoriesToSupabase(CATEGORIES);
+    syncCategoriesToSupabase(CATEGORIES).catch(() => {});
     addToast(language === 'bn' ? 'ডিফল্ট ক্যাটাগরিগুলো রিস্টোর করা হয়েছে' : 'Default categories restored', 'info');
   };
 
@@ -1523,11 +1585,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             status,
             ...(paymentStatus ? { paymentStatus } : {}),
           };
-          syncOrderToSupabase(updatedOrd);
+          syncOrderToSupabase(updatedOrd).catch(() => {});
           return updatedOrd;
         }
         return ord;
       });
+      safeLocalStorage.setItem('oneroof_orders', JSON.stringify(next));
+      idbSet('oneroof_cached_orders', next).catch(() => {});
       return next;
     });
     addToast(
@@ -1537,8 +1601,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const deleteOrder = (orderId: string) => {
-    setOrders((prev) => prev.filter((ord) => ord.id !== orderId));
-    deleteOrderFromSupabase(orderId);
+    setOrders((prev) => {
+      const next = prev.filter((ord) => ord.id !== orderId);
+      safeLocalStorage.setItem('oneroof_orders', JSON.stringify(next));
+      idbSet('oneroof_cached_orders', next).catch(() => {});
+      return next;
+    });
+    deleteOrderFromSupabase(orderId).catch(() => {});
     addToast(language === 'bn' ? 'অর্ডার রেকর্ড মুছে ফেলা হয়েছে' : 'Order record deleted', 'info');
   };
 
@@ -1546,7 +1615,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const updateSiteSettings = (newSettings: Partial<SiteSettings>) => {
     setSiteSettings((prev) => {
       const merged = { ...prev, ...newSettings };
-      syncSiteSettingsToSupabase(merged);
+      safeLocalStorage.setItem('oneroof_site_settings', JSON.stringify(merged));
+      idbSet('oneroof_cached_site_settings', merged).catch(() => {});
+      syncSiteSettingsToSupabase(merged).catch(() => {});
       return merged;
     });
     addToast(language === 'bn' ? 'সাইটের সেটিংস ও ডিজাইন সংরক্ষিত হয়েছে!' : 'Settings & design saved!', 'success');
@@ -1555,7 +1626,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const resetSiteSettings = () => {
     setSiteSettings(DEFAULT_SITE_SETTINGS);
     safeLocalStorage.setItem('oneroof_site_settings', JSON.stringify(DEFAULT_SITE_SETTINGS));
-    syncSiteSettingsToSupabase(DEFAULT_SITE_SETTINGS);
+    idbSet('oneroof_cached_site_settings', DEFAULT_SITE_SETTINGS).catch(() => {});
+    syncSiteSettingsToSupabase(DEFAULT_SITE_SETTINGS).catch(() => {});
     addToast(language === 'bn' ? 'ডিফল্ট সেটিংস ও কালার রিস্টোর করা হয়েছে' : 'Default settings restored', 'info');
   };
 
@@ -1708,14 +1780,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Banner Slides Operations
   const updateBannerSlides = (slides: AdminBannerSlide[]) => {
     setBannerSlides(slides);
-    syncBannerSlidesToSupabase(slides);
+    safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(slides));
+    idbSet('oneroof_cached_slides', slides).catch(() => {});
+    syncBannerSlidesToSupabase(slides).catch(() => {});
     addToast(language === 'bn' ? 'ব্যানার স্লাইডার আপডেট হয়েছে!' : 'Banner slides updated!', 'success');
   };
 
   const addBannerSlide = (slide: AdminBannerSlide) => {
     setBannerSlides((prev) => {
       const next = [...prev, slide];
-      syncBannerSlidesToSupabase(next);
+      safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(next));
+      idbSet('oneroof_cached_slides', next).catch(() => {});
+      syncBannerSlidesToSupabase(next).catch(() => {});
       return next;
     });
     addToast(language === 'bn' ? 'নতুন ব্যানার যুক্ত করা হয়েছে!' : 'New banner added!', 'success');
@@ -1724,7 +1800,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const updateBannerSlide = (id: string, updated: Partial<AdminBannerSlide>) => {
     setBannerSlides((prev) => {
       const next = prev.map((s) => (s.id === id ? { ...s, ...updated } : s));
-      syncBannerSlidesToSupabase(next);
+      safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(next));
+      idbSet('oneroof_cached_slides', next).catch(() => {});
+      syncBannerSlidesToSupabase(next).catch(() => {});
       return next;
     });
     addToast(language === 'bn' ? 'ব্যানার সফলভাবে আপডেট হয়েছে!' : 'Banner updated successfully!', 'success');
@@ -1733,8 +1811,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const deleteBannerSlide = (id: string) => {
     setBannerSlides((prev) => {
       const next = prev.filter((s) => s.id !== id);
-      deleteBannerSlideFromSupabase(id);
-      syncBannerSlidesToSupabase(next);
+      safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(next));
+      idbSet('oneroof_cached_slides', next).catch(() => {});
+      deleteBannerSlideFromSupabase(id).catch(() => {});
+      syncBannerSlidesToSupabase(next).catch(() => {});
       return next;
     });
     addToast(language === 'bn' ? 'ব্যানার মুছে ফেলা হয়েছে!' : 'Banner deleted!', 'info');
@@ -2065,9 +2145,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       customerPhone: currentUser?.phone || shippingInfo?.phone || '',
     };
 
-    setOrders((prev) => [newOrder, ...prev]);
+    setOrders((prev) => {
+      const next = [newOrder, ...prev];
+      safeLocalStorage.setItem('oneroof_orders', JSON.stringify(next));
+      idbSet('oneroof_cached_orders', next).catch(() => {});
+      return next;
+    });
     setLastPlacedOrder(newOrder);
-    syncOrderToSupabase(newOrder);
+    syncOrderToSupabase(newOrder).catch(() => {});
     clearCart();
     setAppliedCoupon(null);
     setCurrentPage('order-success');

@@ -133,8 +133,10 @@ export const ProductEditModal: React.FC<ProductEditModalProps> = ({
       setWarranty(productToEdit.warranty || '1 বছরের অফিসিয়াল ব্র্যান্ড ওয়ারেন্টি');
       setDeliveryTime(productToEdit.deliveryTime || '2-3 কার্যদিবস');
       setIsFreeShipping(Boolean(productToEdit.isFreeShipping));
-      setShippingInside(productToEdit.shippingInside ?? productToEdit.shippingFee);
-      setShippingOutside(productToEdit.shippingOutside ?? productToEdit.shippingFee);
+      const insideFee = productToEdit.shippingInside ?? productToEdit.shippingFee;
+      setShippingInside(insideFee !== null && insideFee !== undefined ? insideFee : undefined);
+      const outsideFee = productToEdit.shippingOutside ?? productToEdit.shippingFee;
+      setShippingOutside(outsideFee !== null && outsideFee !== undefined ? outsideFee : undefined);
     } else {
       // Default initial values for new product
       setTitleBn('');
@@ -1064,7 +1066,7 @@ export const ProductEditModal: React.FC<ProductEditModalProps> = ({
                 </label>
                 <input
                   type="number"
-                  value={shippingInside !== undefined ? shippingInside : ''}
+                  value={shippingInside ?? ''}
                   onChange={(e) =>
                     setShippingInside(e.target.value === '' ? undefined : Math.max(0, Number(e.target.value)))
                   }
@@ -1081,7 +1083,7 @@ export const ProductEditModal: React.FC<ProductEditModalProps> = ({
                 </label>
                 <input
                   type="number"
-                  value={shippingOutside !== undefined ? shippingOutside : ''}
+                  value={shippingOutside ?? ''}
                   onChange={(e) =>
                     setShippingOutside(e.target.value === '' ? undefined : Math.max(0, Number(e.target.value)))
                   }

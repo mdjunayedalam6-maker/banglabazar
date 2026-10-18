@@ -19,6 +19,7 @@ import { ToastContainer } from './components/Toast';
 import { Footer } from './components/Footer';
 import { PWAInstallBanner } from './components/PWAInstallBanner';
 import { OfflineIndicator } from './components/OfflineIndicator';
+import { InitialLoadingScreen } from './components/InitialLoadingScreen';
 import { ArrowUp, ShieldAlert, Lock } from 'lucide-react';
 
 const MainAppContent: React.FC = () => {
@@ -153,6 +154,7 @@ const MainAppContent: React.FC = () => {
       {/* PWA App Install Banner & Offline Status */}
       <PWAInstallBanner />
       <OfflineIndicator />
+      <InitialLoadingScreen />
 
       {/* Floating Scroll to Top Button */}
       <button

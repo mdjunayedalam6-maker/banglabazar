@@ -16,14 +16,27 @@ export const safeLocalStorage = {
     memoryStore[key] = value;
     try {
       if (typeof window !== 'undefined' && window.localStorage) {
+        // Prevent storing gigantic payloads into 5MB localStorage (IndexedDB handles full catalog)
+        if (key === 'oneroof_products' && value.length > 250000) {
+          try {
+            const arr = JSON.parse(value);
+            if (Array.isArray(arr)) {
+              window.localStorage.setItem(key, JSON.stringify(arr.slice(0, 40)));
+              return;
+            }
+          } catch (_) {
+            return;
+          }
+        }
         window.localStorage.setItem(key, value);
       }
     } catch (_) {
-      // If quota exceeded, clean up large non-critical cache keys and retry
+      // If quota exceeded, purge bulky non-essential keys and retry saving critical key
       try {
         if (typeof window !== 'undefined' && window.localStorage) {
           window.localStorage.removeItem('oneroof_products');
           window.localStorage.removeItem('oneroof_cached_products');
+          window.localStorage.removeItem('oneroof_search_history');
           window.localStorage.setItem(key, value);
         }
       } catch (e2) {}

@@ -124,11 +124,11 @@ export const AdminPage: React.FC = () => {
     const file = e.target.files?.[0];
     if (!file) return;
     try {
-      // Auto compress phone photo to lightweight web image (800x800 at 0.82 quality)
-      const compressed = await compressImageFile(file, 800, 800, 0.82);
+      // Auto compress phone photo to lightweight web image (600x600 at 0.78 quality for instant loading)
+      const compressed = await compressImageFile(file, 600, 600, 0.78);
       setter(compressed);
       addToast(
-        language === 'bn' ? 'ছবি সফলভাবে লোড ও অপটিমাইজ হয়েছে!' : 'Image optimized & loaded!',
+        language === 'bn' ? 'ছবি সফলভাবে অপটিমাইজ ও লোড হয়েছে!' : 'Image optimized & loaded!',
         'success'
       );
     } catch {

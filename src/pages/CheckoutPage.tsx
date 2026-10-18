@@ -698,9 +698,15 @@ export const OrderSuccessView: React.FC = () => {
         </div>
 
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
-            {language === 'bn' ? 'অর্ডার নিশ্চিত হয়েছে' : 'Order Confirmed'}
-          </span>
+          {lastPlacedOrder.isOfflineOrder ? (
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 border border-amber-300 px-3.5 py-1.5 rounded-full inline-block">
+              {language === 'bn' ? 'অফলাইন অর্ডার সংরক্ষিত (ইন্টারনেট পেলেই স্বয়ংক্রিয় সিঙ্ক হবে)' : 'Offline Order Saved (Auto-Syncs Online)'}
+            </span>
+          ) : (
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+              {language === 'bn' ? 'অর্ডার নিশ্চিত হয়েছে' : 'Order Confirmed'}
+            </span>
+          )}
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 mt-2">
             {t.orderSuccessTitle}
           </h1>

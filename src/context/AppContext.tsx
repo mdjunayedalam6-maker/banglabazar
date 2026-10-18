@@ -168,6 +168,8 @@ interface AppContextType {
   globalProfitMargin: number;
   updateGlobalProfitMargin: (marginPercent: number) => Promise<boolean>;
   enforceWhiteLabelPurge: () => Promise<boolean>;
+  isAppReady: boolean;
+  initialLoadingStep: string;
 }
 
 const defaultFilterState: FilterState = {
@@ -336,6 +338,35 @@ export const unrecordDeletedProductId = (id: string) => {
       safeLocalStorage.setItem('oneroof_deleted_product_ids', JSON.stringify(arr));
       idbSet('oneroof_deleted_product_ids', arr).catch(() => {});
     }
+  } catch {}
+};
+
+// Track and queue orders placed while offline to automatically sync when internet reconnects
+export const getPendingOfflineOrders = (): Order[] => {
+  try {
+    const raw = safeLocalStorage.getItem('oneroof_pending_offline_orders');
+    if (raw) {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr)) return arr;
+    }
+  } catch {}
+  return [];
+};
+
+export const savePendingOfflineOrder = (order: Order) => {
+  try {
+    const existing = getPendingOfflineOrders();
+    const filtered = existing.filter((o) => o.id !== order.id);
+    filtered.push(order);
+    safeLocalStorage.setItem('oneroof_pending_offline_orders', JSON.stringify(filtered));
+    idbSet('oneroof_pending_offline_orders', filtered).catch(() => {});
+  } catch {}
+};
+
+export const clearPendingOfflineOrders = () => {
+  try {
+    safeLocalStorage.removeItem('oneroof_pending_offline_orders');
+    idbSet('oneroof_pending_offline_orders', []).catch(() => {});
   } catch {}
 };
 
@@ -620,6 +651,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [supabaseConnected, setSupabaseConnected] = useState<boolean>(false);
   const [supabaseStatusMsg, setSupabaseStatusMsg] = useState<string>('কানেক্ট হচ্ছে...');
   const [isProductsLoading, setIsProductsLoading] = useState<boolean>(() => products.length === 0);
+  const [isAppReady, setIsAppReady] = useState<boolean>(false);
+  const [initialLoadingStep, setInitialLoadingStep] = useState<string>('ক্যাটালগ ও ডাটা প্রস্তুত হচ্ছে...');
 
   // Check Supabase Connection
   const checkSupabaseConnection = async (): Promise<boolean> => {
@@ -641,13 +674,35 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     ])
       .then(([cachedProducts, cachedCategories, cachedSlides, cachedSettings, cachedOrders]) => {
         if (!isMounted) return;
-        if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 0) {
+        if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 500) {
           const deletedIds = getDeletedProductIds();
           const cleanCached = deduplicateProducts(
             cachedProducts.filter((p) => !deletedIds.has(p.id))
           );
           setProducts(cleanCached);
           setIsProductsLoading(false);
+        } else {
+          // Immediately load all 11,901 products from website's bundled /products.json
+          fetch('/products.json')
+            .then((res) => {
+              if (!res.ok) throw new Error('Status ' + res.status);
+              return res.json();
+            })
+            .then((localProducts: Product[]) => {
+              if (!isMounted) return;
+              if (Array.isArray(localProducts) && localProducts.length > 0) {
+                const deletedIds = getDeletedProductIds();
+                const clean = deduplicateProducts(
+                  localProducts.filter((p) => !deletedIds.has(p.id))
+                );
+                setProducts(clean);
+                idbSet('oneroof_cached_products', clean).catch(() => {});
+                setIsProductsLoading(false);
+              }
+            })
+            .catch((err) => {
+              console.warn('Local products.json load notice:', err);
+            });
         }
         if (cachedCategories && Array.isArray(cachedCategories) && cachedCategories.length > 0) {
           const cleanCats = sanitizeCategories(cachedCategories);
@@ -853,8 +908,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             setCategories(cleanCats);
             safeLocalStorage.setItem('oneroof_categories', JSON.stringify(cleanCats));
             idbSet('oneroof_cached_categories', cleanCats).catch(() => {});
-          } else {
-            syncCategoriesToSupabase(CATEGORIES).catch(() => {});
           }
           if (remoteSlides && Array.isArray(remoteSlides) && remoteSlides.length > 0) {
             setBannerSlides(remoteSlides);
@@ -863,6 +916,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           }
           if (remoteUsers && remoteUsers.length > 0) setUsers(remoteUsers);
           setIsProductsLoading(false);
+          setInitialLoadingStep('সবকিছু প্রস্তুত, স্বাগতম!');
+          setTimeout(() => {
+            if (isMounted) setIsAppReady(true);
+          }, 250);
         }
 
         // Setup real auth listener with error safety
@@ -958,7 +1015,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                   if (deletedIds.has(newProduct.id)) return;
                   setProducts((prev) => {
                     const next = deduplicateProducts([newProduct, ...prev]);
-                    safeLocalStorage.setItem('oneroof_products', JSON.stringify(next));
+                    safeLocalStorage.setItem('oneroof_products', JSON.stringify(next.slice(0, 50)));
                     idbSet('oneroof_cached_products', next).catch(() => {});
                     return next;
                   });
@@ -968,7 +1025,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                   if (deletedIds.has(updatedProduct.id)) return;
                   setProducts((prev) => {
                     const next = prev.map((p) => (p.id === updatedProduct.id ? updatedProduct : p));
-                    safeLocalStorage.setItem('oneroof_products', JSON.stringify(next));
+                    safeLocalStorage.setItem('oneroof_products', JSON.stringify(next.slice(0, 50)));
                     idbSet('oneroof_cached_products', next).catch(() => {});
                     return next;
                   });
@@ -977,7 +1034,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                   recordDeletedProductIds([deletedId]);
                   setProducts((prev) => {
                     const next = prev.filter((p) => p.id !== deletedId);
-                    safeLocalStorage.setItem('oneroof_products', JSON.stringify(next));
+                    safeLocalStorage.setItem('oneroof_products', JSON.stringify(next.slice(0, 50)));
                     idbSet('oneroof_cached_products', next).catch(() => {});
                     return next;
                   });
@@ -1078,16 +1135,89 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       }
     };
 
+    const safetyTimer = setTimeout(() => {
+      if (isMounted) {
+        setIsAppReady(true);
+      }
+    }, 1400);
+
     initSupabase();
 
     return () => {
       isMounted = false;
+      clearTimeout(safetyTimer);
       try {
         if (authUnsub) authUnsub();
       } catch (_) {}
       try {
         if (channelObj) supabase.removeChannel(channelObj);
       } catch (_) {}
+    };
+  }, []);
+
+  // Auto-sync pending offline orders when internet connection is restored
+  const syncPendingOfflineOrders = async () => {
+    try {
+      const pending = getPendingOfflineOrders();
+      if (!pending || pending.length === 0) return;
+
+      const syncedIds = new Set<string>();
+      for (const order of pending) {
+        const orderToSync = { ...order, isOfflineOrder: false, syncedToCloud: true };
+        const ok = await syncOrderToSupabase(orderToSync);
+        if (ok) {
+          syncedIds.add(order.id);
+        }
+      }
+
+      if (syncedIds.size > 0) {
+        const remaining = pending.filter((o) => !syncedIds.has(o.id));
+        safeLocalStorage.setItem('oneroof_pending_offline_orders', JSON.stringify(remaining));
+        idbSet('oneroof_pending_offline_orders', remaining).catch(() => {});
+
+        // Mark them as synced in state, localStorage, and IDB
+        setOrders((prev) => {
+          const updated = prev.map((o) =>
+            syncedIds.has(o.id) ? { ...o, isOfflineOrder: false, syncedToCloud: true } : o
+          );
+          safeLocalStorage.setItem('oneroof_orders', JSON.stringify(updated));
+          idbSet('oneroof_cached_orders', updated).catch(() => {});
+          return updated;
+        });
+
+        addToast(
+          language === 'bn'
+            ? `ইন্টারনেট সংযুক্ত! ${syncedIds.size}টি অফলাইন অর্ডার সার্ভারে সফলভাবে সিঙ্ক হয়েছে।`
+            : `Back online! ${syncedIds.size} offline order(s) successfully synced.`,
+          'success'
+        );
+      }
+    } catch (e) {
+      console.warn('Sync pending orders error:', e);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleOnline = () => {
+      syncPendingOfflineOrders();
+    };
+
+    window.addEventListener('online', handleOnline);
+
+    if (navigator.onLine) {
+      const timer = setTimeout(() => {
+        syncPendingOfflineOrders();
+      }, 3000);
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener('online', handleOnline);
+      };
+    }
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
     };
   }, []);
 
@@ -1402,7 +1532,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setProducts((prev) => {
       const filtered = prev.filter((p) => p.id !== newProduct.id);
       const next = [newProduct, ...filtered];
-      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next));
+      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next.slice(0, 200)));
       idbSet('oneroof_cached_products', next).catch(() => {});
       return next;
     });
@@ -1443,7 +1573,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const incomingIds = new Set(incomingClean.map((p) => p.id));
       const filteredExisting = prev.filter((p) => !incomingIds.has(p.id));
       const next = [...incomingClean, ...filteredExisting];
-      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next));
+      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next.slice(0, 200)));
       idbSet('oneroof_cached_products', next).catch(() => {});
       return next;
     });
@@ -1469,7 +1599,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         }
         return p;
       });
-      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next));
+      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next.slice(0, 200)));
       idbSet('oneroof_cached_products', next).catch(() => {});
       return next;
     });
@@ -1487,7 +1617,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     recordDeletedProductIds([id]);
     setProducts((prev) => {
       const next = prev.filter((p) => p.id !== id);
-      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next));
+      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next.slice(0, 200)));
       idbSet('oneroof_cached_products', next).catch(() => {});
       return next;
     });
@@ -1503,7 +1633,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const idSet = new Set(ids);
     setProducts((prev) => {
       const next = prev.filter((p) => !idSet.has(p.id));
-      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next));
+      safeLocalStorage.setItem('oneroof_products', JSON.stringify(next.slice(0, 200)));
       idbSet('oneroof_cached_products', next).catch(() => {});
       return next;
     });
@@ -2143,7 +2273,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       userId: currentUser?.id,
       customerEmail: currentUser?.email || shippingInfo?.email || '',
       customerPhone: currentUser?.phone || shippingInfo?.phone || '',
+      isOfflineOrder: typeof navigator !== 'undefined' && !navigator.onLine,
+      syncedToCloud: typeof navigator !== 'undefined' ? navigator.onLine : false,
     };
+
+    const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
 
     setOrders((prev) => {
       const next = [newOrder, ...prev];
@@ -2152,16 +2286,34 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return next;
     });
     setLastPlacedOrder(newOrder);
-    syncOrderToSupabase(newOrder).catch(() => {});
+
+    if (isOffline) {
+      savePendingOfflineOrder(newOrder);
+      addToast(
+        language === 'bn'
+          ? 'অফলাইনে অর্ডার সংরক্ষিত হয়েছে! ইন্টারনেট সংযুক্ত হলে স্বয়ংক্রিয়ভাবে সার্ভারে সিঙ্ক হবে।'
+          : 'Order saved offline! It will automatically sync when online.',
+        'info'
+      );
+    } else {
+      syncOrderToSupabase(newOrder)
+        .then((ok) => {
+          if (!ok) savePendingOfflineOrder(newOrder);
+        })
+        .catch(() => {
+          savePendingOfflineOrder(newOrder);
+        });
+      addToast(
+        language === 'bn'
+          ? 'ধন্যবাদ! আপনার অর্ডার সফলভাবে গ্রহণ করা হয়েছে।'
+          : 'Thank you! Your order has been placed successfully.',
+        'success'
+      );
+    }
+
     clearCart();
     setAppliedCoupon(null);
     setCurrentPage('order-success');
-    addToast(
-      language === 'bn'
-        ? 'ধন্যবাদ! আপনার অর্ডার সফলভাবে গ্রহণ করা হয়েছে।'
-        : 'Thank you! Your order has been placed successfully.',
-      'success'
-    );
     return newOrder;
   };
 
@@ -2462,6 +2614,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         globalProfitMargin,
         updateGlobalProfitMargin,
         enforceWhiteLabelPurge,
+        isAppReady,
+        initialLoadingStep,
       }}
     >
       {children}

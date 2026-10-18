@@ -13,6 +13,8 @@ export type PageView =
   | 'admin';
 
 export interface SiteSettings {
+  siteName?: string;
+  supportEmail?: string;
   primaryColor: string;
   accentColor: string;
   themePreset: 'classic' | 'emerald' | 'festive' | 'violet' | 'luxury' | 'custom';
@@ -203,6 +205,8 @@ export interface Order {
   userId?: string;
   customerEmail?: string;
   customerPhone?: string;
+  isOfflineOrder?: boolean;
+  syncedToCloud?: boolean;
   shopbaseDropship?: {
     forwarded: boolean;
     forwardedAt?: string;

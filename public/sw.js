@@ -1,8 +1,9 @@
-const CACHE_NAME = 'banglabazar-pwa-v3';
+const CACHE_NAME = 'banglabazar-pwa-v5';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/products.json',
   '/favicon.png',
   '/pwa-192x192.png',
   '/pwa-512x512.png',
@@ -35,7 +36,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch Strategy: Network-First for navigation / HTML, Cache-First only for precached static images
+// Fetch Strategy: Network-First for navigation / HTML, Cache-First for static assets & offline fallbacks
 self.addEventListener('fetch', (event) => {
   // Only handle GET requests and http/https
   if (event.request.method !== 'GET' || !event.request.url.startsWith('http')) {
@@ -43,13 +44,14 @@ self.addEventListener('fetch', (event) => {
   }
 
   const url = new URL(event.request.url);
-  // Bypass API, Supabase, and Vite dev modules from service worker cache
+  // Bypass internal dev modules and Supabase auth/realtime from service worker cache
   if (
     url.pathname.startsWith('/api') || 
     url.pathname.startsWith('/@vite') ||
     url.pathname.startsWith('/src') ||
     url.pathname.startsWith('/node_modules') ||
-    url.hostname.includes('supabase.co') ||
+    url.pathname.startsWith('/rest/v1') ||
+    url.pathname.startsWith('/realtime') ||
     url.port === '3000'
   ) {
     return;
@@ -75,11 +77,15 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Stale-while-revalidate for static assets, products.json, and product images
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request)
         .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+          if (
+            networkResponse && 
+            (networkResponse.status === 200 || networkResponse.type === 'opaque' || networkResponse.type === 'cors')
+          ) {
             const responseToCache = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, responseToCache);

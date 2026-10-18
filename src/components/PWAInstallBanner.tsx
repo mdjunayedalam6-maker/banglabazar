@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Download, Smartphone, X, Share2, PlusSquare, Check } from 'lucide-react';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 import { useApp } from '../context/AppContext';
-import { safeSessionStorage } from '../utils/safeStorage';
+import { safeLocalStorage, safeSessionStorage } from '../utils/safeStorage';
 import brandAppIcon from '../assets/images/bangla_bazar_app_icon_1791721630543.jpg';
 
 export const PWAInstallBanner: React.FC = () => {
@@ -29,27 +29,31 @@ export const PWAInstallBanner: React.FC = () => {
     return null;
   }
 
-  // Only show if installable on Chromium/Android/Desktop OR if on iOS device
-  if (!isInstallable && !isIOS) {
-    return null;
-  }
-
   const handleInstallClick = async () => {
     if (isIOS) {
       setShowIOSModal(true);
-    } else {
-      await install();
+      return;
+    }
+
+    try {
+      const success = await install();
+      if (success) {
+        setDismissed(true);
+        safeLocalStorage.setItem('banglabazar_pwa_installed', 'true');
+      }
+    } catch (err) {
+      console.warn('Install trigger error:', err);
     }
   };
 
   return (
     <>
-      {/* Floating Prompt Banner */}
+      {/* Floating Direct Install Banner */}
       <div className="fixed bottom-18 sm:bottom-6 right-3 sm:right-6 left-3 sm:left-auto sm:max-w-md z-40 animate-in fade-in slide-in-from-bottom-4 duration-300">
-        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 shadow-[0_10px_35px_rgba(0,56,130,0.18)] border border-slate-200/90 flex items-center justify-between gap-3">
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 shadow-[0_10px_35px_rgba(0,135,62,0.22)] border-2 border-emerald-500/40 flex items-center justify-between gap-3">
           {/* Logo & Info */}
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-12 h-12 shrink-0 rounded-2xl overflow-hidden shadow-sm">
+            <div className="w-12 h-12 shrink-0 rounded-2xl overflow-hidden shadow-sm border border-emerald-500/20">
               <img
                 src={brandAppIcon}
                 alt="বাংলা বাজার (Bangla Bazar) App Logo"
@@ -61,14 +65,14 @@ export const PWAInstallBanner: React.FC = () => {
                 <h4 className="text-xs sm:text-sm font-bold text-slate-900 truncate">
                   {language === 'bn' ? 'বাংলা বাজার অ্যাপ' : 'Bangla Bazar Mobile App'}
                 </h4>
-                <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
-                  Fast & Free
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded-full">
+                  Free
                 </span>
               </div>
               <p className="text-[11px] text-slate-500 truncate">
                 {language === 'bn'
-                  ? 'দ্রুত কেনাকাটায় ফোনে ইনস্টল করুন'
-                  : 'Install on your home screen for quick shopping'}
+                  ? 'দ্রুত কেনাকাটায় ফোনে সরাসরি ইনস্টল করুন'
+                  : 'Install directly on your phone for quick shopping'}
               </p>
             </div>
           </div>
@@ -77,9 +81,9 @@ export const PWAInstallBanner: React.FC = () => {
           <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={handleInstallClick}
-              className="flex items-center gap-1.5 bg-[#00873E] hover:bg-[#007033] active:scale-95 text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer whitespace-nowrap"
+              className="flex items-center gap-1.5 bg-[#00873E] hover:bg-[#007033] active:scale-95 text-white text-xs font-bold px-3.5 py-2.5 rounded-xl transition-all shadow-md hover:shadow-emerald-600/30 cursor-pointer whitespace-nowrap"
             >
-              <Download className="w-3.5 h-3.5" />
+              <Download className="w-4 h-4 animate-bounce" />
               <span>{language === 'bn' ? 'ইনস্টল' : 'Install'}</span>
             </button>
             <button

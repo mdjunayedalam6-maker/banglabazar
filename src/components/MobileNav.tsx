@@ -195,33 +195,40 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
         </div>
 
         {/* App Download / Install Banner in Drawer */}
-        <div 
-          onClick={() => {
-            onClose();
-            setIsAppInstallModalOpen(true);
-          }}
-          className="p-3 bg-gradient-to-r from-emerald-700 to-teal-800 text-white flex items-center justify-between gap-2 shadow-inner cursor-pointer hover:brightness-105 transition-all"
-        >
-          <div className="flex items-center gap-2.5 min-w-0">
-            <img src={brandAppIcon} alt="বাংলা বাজার (Bangla Bazar)" className="w-9 h-9 rounded-xl object-cover shrink-0 shadow-xs border border-white/20" />
-            <div className="min-w-0">
-              <div className="text-xs font-bold truncate flex items-center gap-1.5">
-                <span>{language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar App'}</span>
-                <span className="text-[9px] bg-amber-400 text-slate-900 px-1.5 py-0.2 rounded-sm font-black">Free</span>
-              </div>
-              <div className="text-[10px] text-emerald-100 truncate">
-                {language === 'bn' ? 'ফোনে ইনস্টল ও ডাউনলোড করুন' : 'Tap to install or download'}
+        {!isInstalled && (
+          <div 
+            onClick={async () => {
+              onClose();
+              const success = await install();
+              if (success) {
+                try {
+                  localStorage.setItem('banglabazar_pwa_installed', 'true');
+                } catch (_) {}
+              }
+            }}
+            className="p-3 bg-gradient-to-r from-emerald-700 to-teal-800 text-white flex items-center justify-between gap-2 shadow-inner cursor-pointer hover:brightness-105 transition-all"
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <img src={brandAppIcon} alt="বাংলা বাজার (Bangla Bazar)" className="w-9 h-9 rounded-xl object-cover shrink-0 shadow-xs border border-white/20" />
+              <div className="min-w-0">
+                <div className="text-xs font-bold truncate flex items-center gap-1.5">
+                  <span>{language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar App'}</span>
+                  <span className="text-[9px] bg-amber-400 text-slate-900 px-1.5 py-0.2 rounded-sm font-black">Free</span>
+                </div>
+                <div className="text-[10px] text-emerald-100 truncate">
+                  {language === 'bn' ? 'ফোনে ইনস্টল ও ডাউনলোড করুন' : 'Tap to install or download'}
+                </div>
               </div>
             </div>
+            <button
+              type="button"
+              className="px-2.5 py-1.5 bg-white text-emerald-800 rounded-xl text-xs font-black shrink-0 shadow-xs flex items-center gap-1"
+            >
+              <Download className="w-3.5 h-3.5 text-emerald-700" />
+              <span>{language === 'bn' ? 'ইনস্টল' : 'Install'}</span>
+            </button>
           </div>
-          <button
-            type="button"
-            className="px-2.5 py-1.5 bg-white text-emerald-800 rounded-xl text-xs font-black shrink-0 shadow-xs flex items-center gap-1"
-          >
-            <Download className="w-3.5 h-3.5 text-emerald-700" />
-            <span>{language === 'bn' ? 'ইনস্টল' : 'Install'}</span>
-          </button>
-        </div>
+        )}
 
         {/* Language Selection */}
         <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between text-xs">
@@ -284,22 +291,29 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
               <span>{language === 'bn' ? 'লাইভ অর্ডার ট্র্যাকিং' : 'Track Order'}</span>
             </button>
 
-            <button
-              onClick={() => {
-                onClose();
-                setIsAppInstallModalOpen(true);
-              }}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 hover:bg-emerald-100 text-emerald-900 font-bold text-xs transition-colors cursor-pointer border border-emerald-200"
-            >
-              <div className="flex items-center gap-2">
-                <Smartphone className="w-4 h-4 text-emerald-600" />
-                <span>{language === 'bn' ? 'মোবাইল অ্যাপ ইনস্টল ও ডাউনলোড' : 'Install / Download App'}</span>
-              </div>
-              <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded font-bold flex items-center gap-1 shadow-2xs">
-                <Download className="w-3 h-3" />
-                <span>ফ্রি</span>
-              </span>
-            </button>
+            {!isInstalled && (
+              <button
+                onClick={async () => {
+                  onClose();
+                  const success = await install();
+                  if (success) {
+                    try {
+                      localStorage.setItem('banglabazar_pwa_installed', 'true');
+                    } catch (_) {}
+                  }
+                }}
+                className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 hover:bg-emerald-100 text-emerald-900 font-bold text-xs transition-colors cursor-pointer border border-emerald-200"
+              >
+                <div className="flex items-center gap-2">
+                  <Smartphone className="w-4 h-4 text-emerald-600" />
+                  <span>{language === 'bn' ? 'মোবাইল অ্যাপ ইনস্টল করুন' : 'Install Mobile App'}</span>
+                </div>
+                <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded font-bold flex items-center gap-1 shadow-2xs">
+                  <Download className="w-3 h-3" />
+                  <span>ফ্রি</span>
+                </span>
+              </button>
+            )}
 
             {currentUser && isUserAdmin(currentUser) && (
               <button

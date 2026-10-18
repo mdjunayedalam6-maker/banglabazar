@@ -7,18 +7,15 @@ import {
   CheckCircle2, 
   Mail, 
   Send,
-  Zap,
-  Download,
-  Smartphone
+  Zap
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { ProductCard } from './ProductCard';
 import { DualCategoryShowcase } from './DualCategoryShowcase';
 import { BRANDS } from '../data/mockData';
-import brandAppIcon from '../assets/images/bangla_bazar_app_icon_1791721630543.jpg';
 
 export const FeaturedSections: React.FC = () => {
-  const { products, isProductsLoading, language, t, setCurrentPage, setFilterState, addToast, setIsAppInstallModalOpen } = useApp();
+  const { products, isProductsLoading, language, t, setCurrentPage, setFilterState, addToast } = useApp();
   const [activeTab, setActiveTab] = useState<'all' | 'electronics' | 'fashion' | 'grocery' | 'home'>('all');
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -223,47 +220,6 @@ export const FeaturedSections: React.FC = () => {
               {newArrivals.map((prod, idx) => (
                 <ProductCard key={prod.id} product={prod} />
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Official Bangla Bazar Mobile App Promo Card */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-900 via-teal-950 to-slate-900 text-white p-6 sm:p-10 shadow-xl border border-emerald-500/30">
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-3 text-center md:text-left max-w-xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-400/30">
-                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                <span>অফিসিয়াল মোবাইল অ্যাপ</span>
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-                বাংলা বাজার অ্যাপে কেনাকাটা করুন আরও সহজে ও দ্রুত
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                কোনো ঝামেলা ছাড়াই মাত্র ১ ক্লিকে আপনার ফোনে বা কম্পিউটারে যুক্ত করুন। ইন্টারনেট ছাড়াও অফলাইনে সব প্রডাক্ট ব্রাউজ ও অর্ডার করতে পারবেন!
-              </p>
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
-                <button
-                  onClick={() => setIsAppInstallModalOpen(true)}
-                  className="px-5 py-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 active:scale-95 text-slate-950 font-black text-xs sm:text-sm rounded-xl shadow-lg flex items-center gap-2 transition-all cursor-pointer"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>অ্যাপ ইনস্টল ও ডাউনলোড করুন</span>
-                </button>
-                <button
-                  onClick={() => setIsAppInstallModalOpen(true)}
-                  className="px-4 py-3 bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm rounded-xl border border-white/20 transition-all cursor-pointer"
-                >
-                  ইনস্টল করার সহজ নিয়ম দেখুন →
-                </button>
-              </div>
-            </div>
-            
-            <div className="shrink-0 flex items-center justify-center">
-              <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 ring-4 ring-emerald-500/30">
-                <img src={brandAppIcon} alt="বাংলা বাজার অ্যাপ" className="w-full h-full object-cover" />
-              </div>
             </div>
           </div>
         </div>

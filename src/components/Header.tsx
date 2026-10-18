@@ -323,21 +323,24 @@ export const Header: React.FC = () => {
         >
           {!isSearchOpen ? (
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  if (isInstallable) {
-                    install();
-                  } else {
-                    setIsAppInstallModalOpen(true);
-                  }
-                }}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white text-xs font-bold shadow-xs active:scale-95 transition-all md:hidden cursor-pointer"
-                title={language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar App'}
-              >
-                <Smartphone className="w-3.5 h-3.5" />
-                <span className="text-[11px] font-bold">{language === 'bn' ? 'অ্যাপ' : 'App'}</span>
-              </button>
+              {!isInstalled && (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    const success = await install();
+                    if (success) {
+                      try {
+                        localStorage.setItem('banglabazar_pwa_installed', 'true');
+                      } catch (_) {}
+                    }
+                  }}
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#00873E] hover:bg-[#007033] active:scale-95 text-white text-xs font-bold shadow-xs transition-all md:hidden cursor-pointer"
+                  title={language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ ইন্সটল' : 'Install Bangla Bazar App'}
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span className="text-[11px] font-bold">{language === 'bn' ? 'ইন্সটল' : 'Install'}</span>
+                </button>
+              )}
 
               {/* Standalone Search Button Icon - Only the Search Icon is shown until clicked */}
               <button
@@ -578,20 +581,23 @@ export const Header: React.FC = () => {
         {/* Right: Desktop Action Icons (Track, Admin, Cart, Wishlist, User) */}
         <div className="hidden md:flex items-center gap-3 shrink-0 pl-3">
           {/* In-App PWA Install / App Download Button on Desktop */}
-          <button
-            onClick={() => {
-              if (isInstallable) {
-                install();
-              } else {
-                setIsAppInstallModalOpen(true);
-              }
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white text-xs font-bold transition-all shadow-sm cursor-pointer active:scale-95"
-            title={language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar Mobile App'}
-          >
-            <Smartphone className="w-3.5 h-3.5 text-white" />
-            <span>{language === 'bn' ? 'অ্যাপ ডাউনলোড' : 'Download App'}</span>
-          </button>
+          {!isInstalled && (
+            <button
+              onClick={async () => {
+                const success = await install();
+                if (success) {
+                  try {
+                    localStorage.setItem('banglabazar_pwa_installed', 'true');
+                  } catch (_) {}
+                }
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#00873E] hover:bg-[#007033] text-white text-xs font-bold transition-all shadow-sm cursor-pointer active:scale-95"
+              title={language === 'bn' ? 'বাংলা বাজার অ্যাপ ইন্সটল' : 'Install Bangla Bazar App'}
+            >
+              <Download className="w-3.5 h-3.5 text-white" />
+              <span>{language === 'bn' ? 'অ্যাপ ইন্সটল' : 'Install App'}</span>
+            </button>
+          )}
 
           {/* Universal Track Order Button */}
           <button

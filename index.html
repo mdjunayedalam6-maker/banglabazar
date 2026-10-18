@@ -35,24 +35,17 @@
           }
         });
 
-        // Proactively unregister any stale service workers in dev/preview iframe to prevent white screen
-        if ('serviceWorker' in navigator) {
-          try {
-            navigator.serviceWorker.getRegistrations().then(function(regs) {
-              for (var i = 0; i < regs.length; i++) {
-                regs[i].unregister();
-              }
-            }).catch(function() {});
-            if (typeof caches !== 'undefined' && caches && caches.keys) {
-              caches.keys().then(function(keys) {
-                for (var i = 0; i < keys.length; i++) {
-                  if (keys[i] !== 'banglabazar-pwa-v3') {
-                    caches.delete(keys[i]);
-                  }
-                }
-              }).catch(function() {});
-            }
-          } catch (_) {}
+        // Register PWA Service Worker for app installability and offline support
+        if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js', { scope: '/' })
+              .then(function(reg) {
+                console.log('Bangla Bazar PWA Service Worker active:', reg.scope);
+              })
+              .catch(function(err) {
+                console.warn('PWA Service Worker notice:', err);
+              });
+          });
         }
       })();
     </script>

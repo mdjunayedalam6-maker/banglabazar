@@ -40,6 +40,7 @@ export const Header: React.FC = () => {
     openTrackOrder,
     setIsAuthModalOpen,
     setIsCartDrawerOpen,
+    setIsAppInstallModalOpen,
   } = useApp();
   const { isInstallable, isInstalled, install } = usePWAInstall();
 
@@ -321,19 +322,37 @@ export const Header: React.FC = () => {
           }
         >
           {!isSearchOpen ? (
-            /* Standalone Search Button Icon - Only the Search Icon is shown until clicked */
-            <button
-              type="button"
-              onClick={() => {
-                setIsSearchOpen(true);
-                setTimeout(() => searchInputRef.current?.focus(), 80);
-              }}
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center bg-gradient-to-tr from-[#00873E] to-[#059669] hover:from-[#007033] hover:to-[#047857] text-white shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-emerald-500/25 group"
-              aria-label={language === 'bn' ? 'চার্জ বাটন (পণ্য বা SKU খুঁজুন)' : 'Search Button (Search products or SKU)'}
-              title={language === 'bn' ? 'চার্জ বাটন: ক্লিক করে পণ্যের নাম বা SKU কোড দিয়ে খুঁজুন' : 'Click to search by name or SKU'}
-            >
-              <Search className="w-5 h-5 sm:w-5.5 sm:h-5.5 stroke-[2.4] transition-transform duration-200 group-hover:scale-110" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  if (isInstallable) {
+                    install();
+                  } else {
+                    setIsAppInstallModalOpen(true);
+                  }
+                }}
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white text-xs font-bold shadow-xs active:scale-95 transition-all md:hidden cursor-pointer"
+                title={language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar App'}
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+                <span className="text-[11px] font-bold">{language === 'bn' ? 'অ্যাপ' : 'App'}</span>
+              </button>
+
+              {/* Standalone Search Button Icon - Only the Search Icon is shown until clicked */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSearchOpen(true);
+                  setTimeout(() => searchInputRef.current?.focus(), 80);
+                }}
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center bg-gradient-to-tr from-[#00873E] to-[#059669] hover:from-[#007033] hover:to-[#047857] text-white shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-emerald-500/25 group"
+                aria-label={language === 'bn' ? 'চার্জ বাটন (পণ্য বা SKU খুঁজুন)' : 'Search Button (Search products or SKU)'}
+                title={language === 'bn' ? 'চার্জ বাটন: ক্লিক করে পণ্যের নাম বা SKU কোড দিয়ে খুঁজুন' : 'Click to search by name or SKU'}
+              >
+                <Search className="w-5 h-5 sm:w-5.5 sm:h-5.5 stroke-[2.4] transition-transform duration-200 group-hover:scale-110" />
+              </button>
+            </div>
           ) : (
             /* Open Search Input with Auto-focus - Roomy, expansive YouTube-style search bar */
             <div className="relative w-full">
@@ -558,17 +577,21 @@ export const Header: React.FC = () => {
 
         {/* Right: Desktop Action Icons (Track, Admin, Cart, Wishlist, User) */}
         <div className="hidden md:flex items-center gap-3 shrink-0 pl-3">
-          {/* In-App PWA Install Button on Desktop */}
-          {isInstallable && !isInstalled && (
-            <button
-              onClick={() => install()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold transition-all border border-emerald-200 cursor-pointer shadow-2xs"
-              title={language === 'bn' ? 'বাংলা বাজার অ্যাপ ইনস্টল করুন' : 'Install Bangla Bazar App'}
-            >
-              <Download className="w-3.5 h-3.5 text-emerald-600 animate-bounce" />
-              <span>{language === 'bn' ? 'অ্যাপ ইনস্টল' : 'Install App'}</span>
-            </button>
-          )}
+          {/* In-App PWA Install / App Download Button on Desktop */}
+          <button
+            onClick={() => {
+              if (isInstallable) {
+                install();
+              } else {
+                setIsAppInstallModalOpen(true);
+              }
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white text-xs font-bold transition-all shadow-sm cursor-pointer active:scale-95"
+            title={language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar Mobile App'}
+          >
+            <Smartphone className="w-3.5 h-3.5 text-white" />
+            <span>{language === 'bn' ? 'অ্যাপ ডাউনলোড' : 'Download App'}</span>
+          </button>
 
           {/* Universal Track Order Button */}
           <button

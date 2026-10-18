@@ -126,6 +126,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
     isUserAdmin,
     loginAdmin,
     siteSettings,
+    setIsAppInstallModalOpen,
   } = useApp();
   const { isInstallable, isInstalled, isIOS, install } = usePWAInstall();
 
@@ -194,61 +195,33 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
         </div>
 
         {/* App Download / Install Banner in Drawer */}
-        {siteSettings?.appDownloadUrl?.trim() ? (
-          <div className="p-3 bg-gradient-to-r from-emerald-600 to-teal-700 text-white flex items-center justify-between gap-2 shadow-inner">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
-                <Download className="w-4 h-4 text-white animate-pulse" />
+        <div 
+          onClick={() => {
+            onClose();
+            setIsAppInstallModalOpen(true);
+          }}
+          className="p-3 bg-gradient-to-r from-emerald-700 to-teal-800 text-white flex items-center justify-between gap-2 shadow-inner cursor-pointer hover:brightness-105 transition-all"
+        >
+          <div className="flex items-center gap-2.5 min-w-0">
+            <img src={brandAppIcon} alt="বাংলা বাজার (Bangla Bazar)" className="w-9 h-9 rounded-xl object-cover shrink-0 shadow-xs border border-white/20" />
+            <div className="min-w-0">
+              <div className="text-xs font-bold truncate flex items-center gap-1.5">
+                <span>{language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar App'}</span>
+                <span className="text-[9px] bg-amber-400 text-slate-900 px-1.5 py-0.2 rounded-sm font-black">Free</span>
               </div>
-              <div className="min-w-0">
-                <div className="text-xs font-bold truncate">
-                  {siteSettings.appNameBn || (language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar Mobile App')}
-                </div>
-                <div className="text-[10px] text-emerald-100 truncate">
-                  {siteSettings.appSubtitleBn || (language === 'bn' ? 'ডাউনলোড ও ইনস্টল করুন' : 'Download & Install App')}
-                </div>
-              </div>
-            </div>
-            <a
-              href={siteSettings.appDownloadUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="px-2.5 py-1 bg-white text-emerald-800 rounded-lg text-xs font-black hover:bg-emerald-50 transition-colors shrink-0 shadow-xs flex items-center gap-1 cursor-pointer"
-            >
-              <span>{language === 'bn' ? 'ইনস্টল' : 'Get'}</span>
-              <ExternalLink className="w-3 h-3 text-emerald-700" />
-            </a>
-          </div>
-        ) : (!isInstalled && (isInstallable || isIOS)) && (
-          <div className="p-3 bg-gradient-to-r from-[#00873E] to-[#056830] text-white flex items-center justify-between gap-2 shadow-inner">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <img src={brandAppIcon} alt="বাংলা বাজার (Bangla Bazar)" className="w-8 h-8 rounded-lg object-cover shrink-0 shadow-xs" />
-              <div className="min-w-0">
-                <div className="text-xs font-bold truncate">
-                  {language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ' : 'Bangla Bazar Mobile App'}
-                </div>
-                <div className="text-[10px] text-emerald-100 truncate">
-                  {language === 'bn' ? 'দ্রুত কেনাকাটায় ইনস্টল করুন' : 'Install for faster shopping'}
-                </div>
+              <div className="text-[10px] text-emerald-100 truncate">
+                {language === 'bn' ? 'ফোনে ইনস্টল ও ডাউনলোড করুন' : 'Tap to install or download'}
               </div>
             </div>
-            <button
-              onClick={async () => {
-                if (isInstallable) {
-                  await install();
-                  onClose();
-                } else if (isIOS) {
-                  onClose();
-                }
-              }}
-              className="px-2.5 py-1 bg-white text-[#00873E] rounded-lg text-xs font-black hover:bg-emerald-50 transition-colors shrink-0 shadow-xs flex items-center gap-1 cursor-pointer"
-            >
-              <Download className="w-3 h-3 text-[#00873E]" />
-              <span>{language === 'bn' ? 'ইনস্টল' : 'Install'}</span>
-            </button>
           </div>
-        )}
+          <button
+            type="button"
+            className="px-2.5 py-1.5 bg-white text-emerald-800 rounded-xl text-xs font-black shrink-0 shadow-xs flex items-center gap-1"
+          >
+            <Download className="w-3.5 h-3.5 text-emerald-700" />
+            <span>{language === 'bn' ? 'ইনস্টল' : 'Install'}</span>
+          </button>
+        </div>
 
         {/* Language Selection */}
         <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between text-xs">
@@ -311,46 +284,22 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
               <span>{language === 'bn' ? 'লাইভ অর্ডার ট্র্যাকিং' : 'Track Order'}</span>
             </button>
 
-            {siteSettings?.appDownloadUrl?.trim() ? (
-              <a
-                href={siteSettings.appDownloadUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-                onClick={onClose}
-                className="w-full flex items-center justify-between p-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs transition-colors cursor-pointer border border-emerald-200"
-              >
-                <div className="flex items-center gap-2">
-                  <Smartphone className="w-4 h-4 text-emerald-600" />
-                  <span>{language === 'bn' ? 'মোবাইল অ্যাপ ডাউনলোড করুন' : 'Download Mobile App'}</span>
-                </div>
-                <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded font-bold flex items-center gap-1">
-                  <Download className="w-3 h-3" />
-                  <span>APK</span>
-                </span>
-              </a>
-            ) : (!isInstalled && (isInstallable || isIOS)) && (
-              <button
-                onClick={async () => {
-                  if (isInstallable) {
-                    await install();
-                    onClose();
-                  } else if (isIOS) {
-                    onClose();
-                  }
-                }}
-                className="w-full flex items-center justify-between p-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold text-xs transition-colors cursor-pointer border border-blue-200"
-              >
-                <div className="flex items-center gap-2">
-                  <Smartphone className="w-4 h-4 text-blue-600" />
-                  <span>{language === 'bn' ? 'মোবাইল অ্যাপ ইনস্টল করুন' : 'Install Mobile App'}</span>
-                </div>
-                <span className="text-[10px] bg-[#00873E] text-white px-2 py-0.5 rounded font-bold flex items-center gap-1">
-                  <Download className="w-3 h-3" />
-                  <span>App</span>
-                </span>
-              </button>
-            )}
+            <button
+              onClick={() => {
+                onClose();
+                setIsAppInstallModalOpen(true);
+              }}
+              className="w-full flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 hover:bg-emerald-100 text-emerald-900 font-bold text-xs transition-colors cursor-pointer border border-emerald-200"
+            >
+              <div className="flex items-center gap-2">
+                <Smartphone className="w-4 h-4 text-emerald-600" />
+                <span>{language === 'bn' ? 'মোবাইল অ্যাপ ইনস্টল ও ডাউনলোড' : 'Install / Download App'}</span>
+              </div>
+              <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded font-bold flex items-center gap-1 shadow-2xs">
+                <Download className="w-3 h-3" />
+                <span>ফ্রি</span>
+              </span>
+            </button>
 
             {currentUser && isUserAdmin(currentUser) && (
               <button

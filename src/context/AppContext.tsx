@@ -170,6 +170,8 @@ interface AppContextType {
   enforceWhiteLabelPurge: () => Promise<boolean>;
   isAppReady: boolean;
   initialLoadingStep: string;
+  isAppInstallModalOpen: boolean;
+  setIsAppInstallModalOpen: (open: boolean) => void;
 }
 
 const defaultFilterState: FilterState = {
@@ -640,6 +642,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
     setIsTrackOrderModalOpen(true);
   };
+
+  // App Install Modal State
+  const [isAppInstallModalOpen, setIsAppInstallModalOpen] = useState(false);
 
   // Hidden Admin Authentication & Modal State
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
@@ -2616,6 +2621,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         enforceWhiteLabelPurge,
         isAppReady,
         initialLoadingStep,
+        isAppInstallModalOpen,
+        setIsAppInstallModalOpen,
       }}
     >
       {children}

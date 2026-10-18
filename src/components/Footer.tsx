@@ -36,7 +36,8 @@ export const Footer: React.FC = () => {
     siteSettings,
     currentUser,
     isUserAdmin,
-    loginAdmin
+    loginAdmin,
+    setIsAppInstallModalOpen,
   } = useApp();
   const { isInstallable, isInstalled, install } = usePWAInstall();
 
@@ -193,7 +194,7 @@ export const Footer: React.FC = () => {
                   </a>
                 </div>
               </div>
-            ) : (!isInstalled && isInstallable) && (
+            ) : (
               <div className="pt-3 pb-1 w-full max-w-lg">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3.5 p-3.5 px-4 sm:px-5 bg-gradient-to-r from-slate-900/90 via-emerald-950/60 to-slate-900/90 border border-emerald-500/40 rounded-2xl shadow-xl shadow-emerald-950/30">
                   <div className="flex items-center gap-3 text-center sm:text-left">
@@ -213,11 +214,17 @@ export const Footer: React.FC = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => install()}
+                    onClick={() => {
+                      if (isInstallable) {
+                        install();
+                      } else {
+                        setIsAppInstallModalOpen(true);
+                      }
+                    }}
                     className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs rounded-xl shadow-md transition-all hover:scale-105 cursor-pointer shrink-0"
                   >
                     <Download className="w-4 h-4" />
-                    <span>{language === 'bn' ? 'ইনস্টল করুন' : 'Install App'}</span>
+                    <span>{language === 'bn' ? 'ইনস্টল ও ডাউনলোড' : 'Install App'}</span>
                   </button>
                 </div>
               </div>

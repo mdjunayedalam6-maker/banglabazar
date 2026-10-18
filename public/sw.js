@@ -1,9 +1,8 @@
-const CACHE_NAME = 'banglabazar-pwa-v5';
+const CACHE_NAME = 'banglabazar-pwa-v6';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/products.json',
   '/favicon.png',
   '/pwa-192x192.png',
   '/pwa-512x512.png',
@@ -15,8 +14,19 @@ const PRECACHE_URLS = [
 // Install Service Worker
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(PRECACHE_URLS);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      await Promise.allSettled(
+        PRECACHE_URLS.map(async (url) => {
+          try {
+            const res = await fetch(url, { cache: 'no-cache' });
+            if (res.ok) {
+              await cache.put(url, res);
+            }
+          } catch (e) {
+            // Silently continue for optional precache items
+          }
+        })
+      );
     }).then(() => self.skipWaiting())
   );
 });
@@ -48,11 +58,10 @@ self.addEventListener('fetch', (event) => {
   if (
     url.pathname.startsWith('/api') || 
     url.pathname.startsWith('/@vite') ||
+    url.pathname.startsWith('/@fs') ||
     url.pathname.startsWith('/src') ||
-    url.pathname.startsWith('/node_modules') ||
     url.pathname.startsWith('/rest/v1') ||
-    url.pathname.startsWith('/realtime') ||
-    url.port === '3000'
+    url.pathname.startsWith('/realtime')
   ) {
     return;
   }

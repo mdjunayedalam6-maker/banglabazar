@@ -20,6 +20,7 @@ import { Footer } from './components/Footer';
 import { PWAInstallBanner } from './components/PWAInstallBanner';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { InitialLoadingScreen } from './components/InitialLoadingScreen';
+import { AppInstallModal } from './components/AppInstallModal';
 import { ArrowUp, ShieldAlert, Lock } from 'lucide-react';
 
 const MainAppContent: React.FC = () => {
@@ -155,6 +156,7 @@ const MainAppContent: React.FC = () => {
       <PWAInstallBanner />
       <OfflineIndicator />
       <InitialLoadingScreen />
+      <AppInstallModal />
 
       {/* Floating Scroll to Top Button */}
       <button

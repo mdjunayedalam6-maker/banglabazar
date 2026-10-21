@@ -196,6 +196,7 @@ export interface Order {
     division: string;
     district: string;
     address: string;
+    thana?: string;
     deliverySpeed: 'regular' | 'express';
     notes?: string;
     senderNumber?: string;

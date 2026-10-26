@@ -188,7 +188,7 @@ export interface Order {
   shippingFee: number;
   discount: number;
   total: number;
-  paymentMethod: 'bkash' | 'nagad' | 'rocket' | 'card' | 'cod';
+  paymentMethod: 'cod' | 'bangla_qr' | 'bkash' | 'nagad' | 'rocket' | 'card';
   paymentStatus: 'paid' | 'pending';
   shippingAddress: {
     fullName: string;

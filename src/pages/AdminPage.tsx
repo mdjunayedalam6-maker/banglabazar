@@ -1070,7 +1070,7 @@ export const AdminPage: React.FC = () => {
                           {ord.paymentStatus === 'paid' ? 'Paid' : 'Pending'}
                         </span>
                         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
-                          {ord.paymentMethod}
+                          {ord.paymentMethod === 'bangla_qr' ? 'বাংলা কিউআর (Bangla QR)' : ord.paymentMethod}
                         </span>
                       </div>
                     </div>
@@ -1092,7 +1092,7 @@ export const AdminPage: React.FC = () => {
                       <div>
                         <span className="text-[10px] font-bold text-slate-500 uppercase block mb-1">পেমেন্ট ও ট্রানজেকশন তথ্য:</span>
                         <div className="text-white font-bold uppercase flex items-center gap-1.5">
-                          <span>পেমেন্ট: {ord.paymentMethod === 'cod' ? 'Cash on Delivery' : ord.paymentMethod}</span>
+                          <span>পেমেন্ট: {ord.paymentMethod === 'cod' ? 'Cash on Delivery' : ord.paymentMethod === 'bangla_qr' ? 'বাংলা কিউআর (Bangla QR)' : ord.paymentMethod}</span>
                           <span className={`px-2 py-0.5 rounded text-[9px] ${ord.paymentStatus === 'paid' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>
                             {ord.paymentStatus}
                           </span>

@@ -21,10 +21,15 @@ import {
   Key,
   Smartphone,
   Mail,
-  Sparkles
+  Sparkles,
+  Wallet,
+  Gift,
+  Share2
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { OrderStatus } from '../types';
+import { CustomerWallet } from '../components/CustomerWallet';
+import { CustomerReferral } from '../components/CustomerReferral';
 
 export const ProfilePage: React.FC = () => {
   const {
@@ -140,14 +145,49 @@ export const ProfilePage: React.FC = () => {
             <p className="text-xs text-slate-300 mt-0.5">
               {[currentUser.email, currentUser.phone].filter(Boolean).join(' | ') || (language === 'bn' ? 'কাস্টমার প্রোফাইল' : 'Customer Profile')}
             </p>
-            <div className="flex items-center gap-2 mt-2 text-[11px] text-emerald-300">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>{language === 'bn' ? 'যাচাইকৃত গ্রাহক অ্যাকাউন্ট' : 'Verified Customer Account'}</span>
+            <div className="flex flex-wrap items-center gap-2 mt-2 text-[11px]">
+              <div className="flex items-center gap-1.5 text-emerald-300">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>{language === 'bn' ? 'যাচাইকৃত গ্রাহক অ্যাকাউন্ট' : 'Verified Customer Account'}</span>
+              </div>
+              <span className="text-slate-400">•</span>
+              <button
+                onClick={() => setActiveTab('referral')}
+                className={`font-bold px-2 py-0.5 rounded-full text-[10px] cursor-pointer transition-all ${
+                  currentUser.hasCompletedFirstOrder
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                    : 'bg-amber-400/20 text-amber-300 border border-amber-400/40 animate-pulse'
+                }`}
+              >
+                {currentUser.hasCompletedFirstOrder
+                  ? '🎁 ৫০ টাকা ওয়েলকাম বোনাস সক্রিয়'
+                  : '🎁 ৫০ টাকা বোনাস অপেক্ষমাণ (১ম অর্ডারে সক্রিয়)'}
+              </button>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
+          {/* 1-Click Referral Shortcut */}
+          <button
+            onClick={() => setActiveTab('referral')}
+            className="px-3.5 py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all shadow-md cursor-pointer active:scale-95"
+            title="রেফার করুন ও আয় করুন ৳৩০"
+          >
+            <Gift className="w-4 h-4 text-slate-950" />
+            <span>{language === 'bn' ? 'রেফার ও আয়: ৳৩০' : 'Refer & Earn: ৳30'}</span>
+          </button>
+
+          {/* 1-Click Wallet Shortcut */}
+          <button
+            onClick={() => setActiveTab('wallet')}
+            className="px-3.5 py-2 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 rounded-xl text-xs font-black flex items-center gap-2 transition-all shadow-md cursor-pointer active:scale-95"
+            title="ওয়ালেট ও ব্যালেন্স দেখুন"
+          >
+            <Wallet className="w-4 h-4 text-slate-950" />
+            <span>{language === 'bn' ? 'ব্যালেন্স:' : 'Balance:'} {formatPrice(currentUser.balance || 0)}</span>
+          </button>
+
           {isUserAdmin(currentUser) && (
             <button
               onClick={() => {
@@ -177,8 +217,38 @@ export const ProfilePage: React.FC = () => {
         <div className="lg:col-span-3 space-y-2">
           <div className="bg-white rounded-2xl p-3 border border-slate-200/80 shadow-xs space-y-1">
             <button
+              onClick={() => setActiveTab('wallet')}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+                activeTab === 'wallet'
+                  ? 'bg-emerald-50 text-emerald-800'
+                  : 'text-slate-600 hover:bg-slate-50'
+              }`}
+            >
+              <Wallet className="w-4 h-4 text-emerald-600" />
+              <span className="flex-1 text-left">{language === 'bn' ? 'ওয়ালেট (ডিপোজিট ও উত্তোলন)' : 'Wallet & Balance'}</span>
+              <span className="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-black">
+                {formatPrice(currentUser.balance || 0)}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('referral')}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+                activeTab === 'referral'
+                  ? 'bg-amber-50 text-amber-900 border border-amber-300 shadow-xs'
+                  : 'text-slate-600 hover:bg-slate-50'
+              }`}
+            >
+              <Gift className="w-4 h-4 text-amber-600" />
+              <span className="flex-1 text-left">{language === 'bn' ? 'রেফার ও আয় (Refer & Earn)' : 'Refer & Earn'}</span>
+              <span className="text-[10px] bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full font-black">
+                ৳৩০ বোনাস
+              </span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('orders')}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 activeTab === 'orders'
                   ? 'bg-emerald-50 text-emerald-800'
                   : 'text-slate-600 hover:bg-slate-50'
@@ -193,7 +263,7 @@ export const ProfilePage: React.FC = () => {
 
             <button
               onClick={() => setActiveTab('wishlist')}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 activeTab === 'wishlist'
                   ? 'bg-emerald-50 text-emerald-800'
                   : 'text-slate-600 hover:bg-slate-50'
@@ -208,7 +278,7 @@ export const ProfilePage: React.FC = () => {
 
             <button
               onClick={() => setActiveTab('addresses')}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 activeTab === 'addresses'
                   ? 'bg-emerald-50 text-emerald-800'
                   : 'text-slate-600 hover:bg-slate-50'
@@ -220,7 +290,7 @@ export const ProfilePage: React.FC = () => {
 
             <button
               onClick={() => setActiveTab('settings')}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 activeTab === 'settings'
                   ? 'bg-emerald-50 text-emerald-800'
                   : 'text-slate-600 hover:bg-slate-50'
@@ -237,6 +307,16 @@ export const ProfilePage: React.FC = () => {
 
         {/* Right Content (9 cols) */}
         <div className="lg:col-span-9 space-y-6">
+          {/* Tab: Wallet & Balance (ডিপোজিট ও উত্তোলন) */}
+          {activeTab === 'wallet' && (
+            <CustomerWallet />
+          )}
+
+          {/* Tab: Referral & Earn (রেফার ও আয়) */}
+          {activeTab === 'referral' && (
+            <CustomerReferral />
+          )}
+
           {/* Tab 1: Orders History & Live Tracking */}
           {activeTab === 'orders' && (
             <div className="space-y-6">

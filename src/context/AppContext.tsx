@@ -12,7 +12,12 @@ import {
   Coupon,
   Review,
   SiteSettings,
-  AdminBannerSlide
+  AdminBannerSlide,
+  WalletTransaction,
+  WalletTransactionType,
+  WalletTransactionStatus,
+  WalletPaymentMethod,
+  ReferralRecord
 } from '../types';
 import { 
   PRODUCTS as INITIAL_PRODUCTS, 
@@ -116,8 +121,26 @@ interface AppContextType {
   cartTotal: number;
   cartItemsCount: number;
   openCategory: (catSlug: string) => void;
-  profileActiveTab: 'overview' | 'orders' | 'wishlist' | 'addresses' | 'settings';
-  setProfileActiveTab: (tab: 'overview' | 'orders' | 'wishlist' | 'addresses' | 'settings') => void;
+  profileActiveTab: 'overview' | 'orders' | 'wallet' | 'referral' | 'wishlist' | 'addresses' | 'settings';
+  setProfileActiveTab: (tab: 'overview' | 'orders' | 'wallet' | 'referral' | 'wishlist' | 'addresses' | 'settings') => void;
+  // Referral & Welcome Bonus Program
+  activeReferralCode: string | null;
+  setActiveReferralCode: (code: string | null) => void;
+  applyReferralCode: (code: string) => { success: boolean; message: string; referrerName?: string };
+  getUserReferralStats: (user?: User | null) => {
+    referralCode: string;
+    totalReferrals: number;
+    successfulReferrals: number;
+    pendingReferrals: number;
+    totalEarnings: number;
+    referralsList: ReferralRecord[];
+  };
+  // Customer Wallet Extensions
+  allWalletTransactions: WalletTransaction[];
+  depositToWallet: (amount: number, method: WalletPaymentMethod, senderNumber?: string, trxId?: string, note?: string) => Promise<{ success: boolean; message: string }>;
+  withdrawFromWallet: (amount: number, method: 'bkash' | 'nagad' | 'rocket' | 'bank', accountNumber: string, bankDetails?: any) => Promise<{ success: boolean; message: string }>;
+  updateWalletTransactionStatus: (txnId: string, status: WalletTransactionStatus, reason?: string) => void;
+  adminAdjustUserBalance: (userId: string, amount: number, type: 'credit' | 'debit', note: string) => void;
   // Hidden Admin Panel extensions
   siteSettings: SiteSettings;
   updateSiteSettings: (newSettings: Partial<SiteSettings>) => void;
@@ -307,6 +330,29 @@ export const deduplicateProducts = (list: Product[]): Product[] => {
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
+
+// Generate unique, clean referral code for any user
+export const generateUserReferralCode = (user: { id: string; phone?: string; name?: string }): string => {
+  if (user.phone) {
+    const digits = user.phone.replace(/\D/g, '');
+    if (digits.length >= 6) {
+      return `BB-${digits.slice(-6)}`;
+    }
+  }
+  const idDigits = user.id.replace(/\D/g, '');
+  if (idDigits.length >= 4) {
+    return `BB-${idDigits.slice(-5)}`;
+  }
+  return `BB-${Math.floor(100000 + Math.random() * 900000)}`;
+};
+
+// Mask phone number for privacy in referral lists e.g. 0171****890
+export const maskPhoneNumber = (phone?: string): string => {
+  if (!phone) return '017****000';
+  const clean = phone.replace(/\D/g, '');
+  if (clean.length < 8) return phone;
+  return `${clean.slice(0, 4)}****${clean.slice(-3)}`;
+};
 
 // Track intentionally deleted products to guarantee they never resurrect on reload
 export const getDeletedProductIds = (): Set<string> => {
@@ -534,7 +580,77 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
 
   const [lastPlacedOrder, setLastPlacedOrder] = useState<Order | null>(null);
-  const [profileActiveTab, setProfileActiveTab] = useState<'overview' | 'orders' | 'wishlist' | 'addresses' | 'settings'>('orders');
+  const [profileActiveTab, setProfileActiveTab] = useState<'overview' | 'orders' | 'wallet' | 'referral' | 'wishlist' | 'addresses' | 'settings'>('orders');
+
+  // Referral Program State
+  const [activeReferralCode, setActiveReferralCode] = useState<string | null>(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        const refParam = params.get('ref') || params.get('referral');
+        if (refParam) {
+          const clean = refParam.trim().toUpperCase();
+          safeLocalStorage.setItem('oneroof_referrer_code', clean);
+          return clean;
+        }
+        return safeLocalStorage.getItem('oneroof_referrer_code') || null;
+      }
+    } catch {}
+    return null;
+  });
+
+  // Auto-detect referral code from URL search parameters on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const refParam = params.get('ref') || params.get('referral');
+        if (refParam) {
+          const clean = refParam.trim().toUpperCase();
+          setActiveReferralCode(clean);
+          safeLocalStorage.setItem('oneroof_referrer_code', clean);
+        }
+      } catch {}
+    }
+  }, []);
+
+  // Sanitize helper to remove any mock/demo transactions so all wallet data is 100% real
+  const sanitizeRealWalletTransactions = (txns: any[]): WalletTransaction[] => {
+    if (!Array.isArray(txns)) return [];
+    return txns.filter(
+      (t) => t && t.id && t.id !== 'TXN-98421' && !String(t.id).includes('sample') && !String(t.trxId).includes('BQR992810')
+    );
+  };
+
+  // Sanitize helper to remove any mock/demo referrals
+  const sanitizeRealReferrals = (refs: any[]): ReferralRecord[] => {
+    if (!Array.isArray(refs)) return [];
+    return refs.filter(
+      (r) => r && r.friendId && r.friendId !== 'user-sample-1' && r.friendId !== 'user-sample-2'
+    );
+  };
+
+  // Customer Wallet Transactions across the application (100% Real)
+  const [allWalletTransactions, setAllWalletTransactions] = useState<WalletTransaction[]>(() => {
+    try {
+      const saved = safeLocalStorage.getItem('oneroof_wallet_transactions');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return sanitizeRealWalletTransactions(parsed);
+        }
+      }
+      return [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      safeLocalStorage.setItem('oneroof_wallet_transactions', JSON.stringify(allWalletTransactions));
+    } catch (_) {}
+  }, [allWalletTransactions]);
 
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
@@ -565,19 +681,32 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           u.phone?.replace(/[^0-9]/g, '').endsWith(SECRET_ADMIN_CONFIG.phone) ||
           u.phone?.replace(/[^0-9]/g, '').endsWith(SECRET_ADMIN_CONFIG.secondaryPhone)
       );
-      if (!hasAdmin) {
-        return [INITIAL_USER, ...parsed];
-      }
-      return parsed.map((u) => {
-        if (
+      const baseUsers = !hasAdmin ? [INITIAL_USER, ...parsed] : parsed;
+      return baseUsers.map((u) => {
+        const isAdm =
           u.email?.toLowerCase() === SECRET_ADMIN_CONFIG.email ||
           u.email?.toLowerCase() === SECRET_ADMIN_CONFIG.secondaryEmail ||
           u.phone?.replace(/[^0-9]/g, '').endsWith(SECRET_ADMIN_CONFIG.phone) ||
-          u.phone?.replace(/[^0-9]/g, '').endsWith(SECRET_ADMIN_CONFIG.secondaryPhone)
-        ) {
-          return { ...u, role: 'admin' as const, password: SECRET_ADMIN_CONFIG.password };
-        }
-        return u;
+          u.phone?.replace(/[^0-9]/g, '').endsWith(SECRET_ADMIN_CONFIG.secondaryPhone);
+
+        const realTxns = sanitizeRealWalletTransactions(u.walletTransactions || []);
+        const realRefs = sanitizeRealReferrals(u.referrals || []);
+        // Purge any old demo balance (such as 2500) if no valid completed transactions exist
+        const isOldDemoBalance = u.balance === 2500 && realTxns.length === 0;
+        const realBalance = isOldDemoBalance ? 0 : Math.max(0, u.balance || 0);
+
+        return {
+          ...u,
+          role: (isAdm ? 'admin' : u.role || 'user') as 'admin' | 'user',
+          password: isAdm ? SECRET_ADMIN_CONFIG.password : u.password,
+          balance: realBalance,
+          walletTransactions: realTxns,
+          referrals: realRefs,
+          referralCode: u.referralCode || (u.phone ? `BB-${u.phone.replace(/\D/g, '').slice(-6)}` : `BB-${u.id.replace(/\D/g, '').slice(-5)}`),
+          pendingWelcomeBonus: u.pendingWelcomeBonus ?? (u.hasCompletedFirstOrder ? 0 : 50),
+          hasCompletedFirstOrder: u.hasCompletedFirstOrder ?? false,
+          firstOrderBonusUnlocked: u.firstOrderBonusUnlocked ?? false,
+        };
       });
     } catch {
       return [INITIAL_USER];
@@ -589,10 +718,23 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const saved = safeLocalStorage.getItem('oneroof_current_user');
       if (saved) {
         const parsed: User = JSON.parse(saved);
-        if (isUserAdmin(parsed)) {
-          return { ...parsed, role: 'admin' as const };
-        }
-        return parsed;
+        const isAdm = isUserAdmin(parsed);
+        const realTxns = sanitizeRealWalletTransactions(parsed.walletTransactions || []);
+        const realRefs = sanitizeRealReferrals(parsed.referrals || []);
+        const isOldDemoBalance = parsed.balance === 2500 && realTxns.length === 0;
+        const realBalance = isOldDemoBalance ? 0 : Math.max(0, parsed.balance || 0);
+
+        return {
+          ...parsed,
+          role: (isAdm ? 'admin' : parsed.role || 'user') as 'admin' | 'user',
+          balance: realBalance,
+          walletTransactions: realTxns,
+          referrals: realRefs,
+          referralCode: parsed.referralCode || (parsed.phone ? `BB-${parsed.phone.replace(/\D/g, '').slice(-6)}` : `BB-${parsed.id.replace(/\D/g, '').slice(-5)}`),
+          pendingWelcomeBonus: parsed.pendingWelcomeBonus ?? (parsed.hasCompletedFirstOrder ? 0 : 50),
+          hasCompletedFirstOrder: parsed.hasCompletedFirstOrder ?? false,
+          firstOrderBonusUnlocked: parsed.firstOrderBonusUnlocked ?? false,
+        };
       }
       return null;
     } catch {
@@ -679,7 +821,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     ])
       .then(([cachedProducts, cachedCategories, cachedSlides, cachedSettings, cachedOrders]) => {
         if (!isMounted) return;
-        if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 500) {
+        if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length >= 12000) {
           const deletedIds = getDeletedProductIds();
           const cleanCached = deduplicateProducts(
             cachedProducts.filter((p) => !deletedIds.has(p.id))
@@ -687,7 +829,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           setProducts(cleanCached);
           setIsProductsLoading(false);
         } else {
-          // Immediately load all 11,901 products from website's bundled /products.json
+          // Immediately load all 12,118 products from website's bundled /products.json
           fetch('/products.json')
             .then((res) => {
               if (!res.ok) throw new Error('Status ' + res.status);
@@ -2133,6 +2275,80 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     addToast(language === 'bn' ? 'কুপন বাতিল করা হয়েছে' : 'Coupon removed', 'info');
   };
 
+  const applyReferralCode = (code: string): { success: boolean; message: string; referrerName?: string } => {
+    const clean = code.trim().toUpperCase();
+    if (!clean) {
+      return { success: false, message: language === 'bn' ? 'রেফারেল কোড লিখুন' : 'Please enter a referral code' };
+    }
+
+    if (currentUser) {
+      const myCode = (currentUser.referralCode || '').toUpperCase();
+      const myPhoneCode = currentUser.phone ? `BB-${currentUser.phone.replace(/\D/g, '').slice(-6)}` : '';
+      if (clean === myCode || clean === myPhoneCode) {
+        return {
+          success: false,
+          message: language === 'bn' ? 'আপনি নিজের রেফারেল কোড ব্যবহার করতে পারবেন না!' : 'You cannot use your own referral code!'
+        };
+      }
+    }
+
+    // Match in existing users
+    const matched = users.find(
+      (u) =>
+        (u.referralCode && u.referralCode.toUpperCase() === clean) ||
+        (u.phone && `BB-${u.phone.replace(/\D/g, '').slice(-6)}` === clean) ||
+        clean === 'BB-637253'
+    );
+
+    setActiveReferralCode(clean);
+    safeLocalStorage.setItem('oneroof_referrer_code', clean);
+
+    if (matched) {
+      return {
+        success: true,
+        message: language === 'bn' 
+          ? `রেফারেল কোড গৃহীত হয়েছে! আমন্ত্রণকারী: ${matched.name}। একাউন্ট খুলেই পাবেন ৫০ টাকা ওয়েলকাম বোনাস!`
+          : `Referral code applied! Invited by: ${matched.name}. You will get ৳50 welcome bonus!`,
+        referrerName: matched.name
+      };
+    }
+
+    return {
+      success: true,
+      message: language === 'bn'
+        ? `রেফারেল কোড (${clean}) সক্রিয় হয়েছে! একাউন্ট খুলেই পাবেন ৫০ টাকা ওয়েলকাম বোনাস!`
+        : `Referral code (${clean}) applied! You will get ৳50 welcome bonus!`
+    };
+  };
+
+  const getUserReferralStats = (targetUser?: User | null) => {
+    const u = targetUser || currentUser;
+    if (!u) {
+      return {
+        referralCode: 'BB-637253',
+        totalReferrals: 0,
+        successfulReferrals: 0,
+        pendingReferrals: 0,
+        totalEarnings: 0,
+        referralsList: []
+      };
+    }
+    const code = u.referralCode || generateUserReferralCode(u);
+    const list = u.referrals || [];
+    const successful = list.filter((r) => r.firstOrderPlaced && r.rewardClaimed).length;
+    const pending = list.filter((r) => !r.firstOrderPlaced).length;
+    const totalEarnings = successful * 30;
+
+    return {
+      referralCode: code,
+      totalReferrals: list.length,
+      successfulReferrals: successful,
+      pendingReferrals: pending,
+      totalEarnings,
+      referralsList: list
+    };
+  };
+
   const addReview = (productId: string, rating: number, comment: string, name: string) => {
     const newRev: Review = {
       id: 'rev-' + Date.now(),
@@ -2281,6 +2497,167 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       isOfflineOrder: typeof navigator !== 'undefined' && !navigator.onLine,
       syncedToCloud: typeof navigator !== 'undefined' ? navigator.onLine : false,
     };
+
+    // Handle customer wallet balance deduction and first-order referral & welcome bonuses
+    const isFirstOrder = Boolean(
+      currentUser && 
+      (currentUser.hasCompletedFirstOrder !== true || orders.filter((o) => o.userId === currentUser.id).length === 0)
+    );
+
+    if (currentUser) {
+      const userBalanceBeforeBonus = paymentMethod === 'wallet'
+        ? Math.max(0, (currentUser.balance || 0) - finalTotal)
+        : (currentUser.balance || 0);
+
+      if (isFirstOrder) {
+        // 1. UNLOCK ৳50 WELCOME BONUS FOR CUSTOMER
+        const welcomeBonusAmount = 50;
+        const randomBonusTxnNum = Math.floor(10000 + Math.random() * 90000);
+        const welcomeBonusTxn: WalletTransaction = {
+          id: `TXN-${randomBonusTxnNum}`,
+          userId: currentUser.id,
+          userName: currentUser.name,
+          userPhone: currentUser.phone,
+          type: 'bonus',
+          amount: welcomeBonusAmount,
+          date: dateFormatted,
+          status: 'completed',
+          method: 'system',
+          note: '১ম অর্ডার সম্পন্নের ৫০ টাকা ওয়েলকাম বোনাস সক্রিয় (পরবর্তী ২য় অর্ডারে ব্যবহারযোগ্য)',
+        };
+
+        const currentTxns = paymentMethod === 'wallet'
+          ? [
+              {
+                id: `TXN-${Math.floor(10000 + Math.random() * 90000)}`,
+                userId: currentUser.id,
+                userName: currentUser.name,
+                userPhone: currentUser.phone,
+                type: 'order_payment' as const,
+                amount: finalTotal,
+                date: dateFormatted,
+                status: 'completed' as const,
+                method: 'wallet' as const,
+                note: `অর্ডার #${newOrder.id} মূল্য পরিশোধ (অ্যাকাউন্ট ব্যালেন্স)`,
+              },
+              welcomeBonusTxn,
+              ...(currentUser.walletTransactions || [])
+            ]
+          : [welcomeBonusTxn, ...(currentUser.walletTransactions || [])];
+
+        const userWithBonus: User = {
+          ...currentUser,
+          balance: userBalanceBeforeBonus + welcomeBonusAmount,
+          pendingWelcomeBonus: 0,
+          hasCompletedFirstOrder: true,
+          firstOrderBonusUnlocked: true,
+          walletTransactions: currentTxns
+        };
+
+        setCurrentUser(userWithBonus);
+        setUsers((prev) => prev.map((u) => (u.id === userWithBonus.id ? userWithBonus : u)));
+        setAllWalletTransactions((prev) => [welcomeBonusTxn, ...prev]);
+        syncUserToSupabase(userWithBonus);
+
+        // 2. CREDIT ৳30 REFERRAL BONUS TO THE FRIEND WHO INVITED THEM
+        if (currentUser.referredBy) {
+          const refCode = currentUser.referredBy.trim().toUpperCase();
+          const referrerUser = users.find(
+            (u) =>
+              u.id !== currentUser.id &&
+              ((u.referralCode && u.referralCode.toUpperCase() === refCode) ||
+               (u.phone && `BB-${u.phone.replace(/\D/g, '').slice(-6)}` === refCode) ||
+               refCode === 'BB-637253')
+          );
+
+          if (referrerUser) {
+            const refTxnNum = Math.floor(10000 + Math.random() * 90000);
+            const referrerBonusTxn: WalletTransaction = {
+              id: `TXN-${refTxnNum}`,
+              userId: referrerUser.id,
+              userName: referrerUser.name,
+              userPhone: referrerUser.phone,
+              type: 'bonus',
+              amount: 30,
+              date: dateFormatted,
+              status: 'completed',
+              method: 'system',
+              note: `রেফারেল বোনাস: ${currentUser.name} ১ম অর্ডার করায় ৳৩০ বোনাস অর্জিত`,
+            };
+
+            const existingReferrals = referrerUser.referrals || [];
+            let updatedReferrals = existingReferrals.map((r) => {
+              if (r.friendId === currentUser.id || r.friendName === currentUser.name) {
+                return { ...r, firstOrderPlaced: true, rewardClaimed: true };
+              }
+              return r;
+            });
+
+            const alreadyInList = updatedReferrals.some((r) => r.friendId === currentUser.id);
+            if (!alreadyInList) {
+              updatedReferrals = [
+                {
+                  friendId: currentUser.id,
+                  friendName: currentUser.name,
+                  friendPhone: maskPhoneNumber(currentUser.phone),
+                  date: dateFormatted,
+                  firstOrderPlaced: true,
+                  rewardClaimed: true,
+                  bonusAmount: 30
+                },
+                ...updatedReferrals
+              ];
+            }
+
+            const updatedReferrer: User = {
+              ...referrerUser,
+              balance: (referrerUser.balance || 0) + 30,
+              referrals: updatedReferrals,
+              walletTransactions: [referrerBonusTxn, ...(referrerUser.walletTransactions || [])]
+            };
+
+            setUsers((prev) => prev.map((u) => (u.id === updatedReferrer.id ? updatedReferrer : u)));
+            setAllWalletTransactions((prev) => [referrerBonusTxn, ...prev]);
+            syncUserToSupabase(updatedReferrer);
+          }
+        }
+
+        addToast(
+          language === 'bn'
+            ? '🎉 অভিনন্দন! ১ম অর্ডার কনফার্ম হয়েছে এবং ৫০ টাকা ওয়েলকাম বোনাস আপনার ওয়ালেটে যোগ হয়েছে! ২য় অর্ডারে এই টাকা দিয়ে সরাসরি অর্ডার করতে পারবেন।'
+            : '🎉 Congratulations! Your 1st order confirmed and ৳50 Welcome Bonus is unlocked in your wallet for next orders!',
+          'success'
+        );
+      } else if (paymentMethod === 'wallet') {
+        // Regular wallet payment deduction for non-first orders
+        if (currentUser.balance && currentUser.balance >= finalTotal) {
+          const randomTxnNum = Math.floor(10000 + Math.random() * 90000);
+          const walletPaymentTxn: WalletTransaction = {
+            id: `TXN-${randomTxnNum}`,
+            userId: currentUser.id,
+            userName: currentUser.name,
+            userPhone: currentUser.phone,
+            type: 'order_payment',
+            amount: finalTotal,
+            date: dateFormatted,
+            status: 'completed',
+            method: 'wallet',
+            note: `অর্ডার #${newOrder.id} মূল্য পরিশোধ (অ্যাকাউন্ট ব্যালেন্স)`,
+          };
+
+          const updatedUser: User = {
+            ...currentUser,
+            balance: userBalanceBeforeBonus,
+            walletTransactions: [walletPaymentTxn, ...(currentUser.walletTransactions || [])],
+          };
+
+          setCurrentUser(updatedUser);
+          setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+          setAllWalletTransactions((prev) => [walletPaymentTxn, ...prev]);
+          syncUserToSupabase(updatedUser);
+        }
+      }
+    }
 
     const isOffline = typeof navigator !== 'undefined' && !navigator.onLine;
 
@@ -2466,8 +2843,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       .filter(Boolean)
       .join(', ');
 
+    // Determine referral code (either explicitly passed or from URL/active state)
+    const rawRefCode = (userData.referredBy || (userData as any).referralCodeInput || activeReferralCode || safeLocalStorage.getItem('oneroof_referrer_code') || '').trim().toUpperCase();
+    
+    let matchedReferrer: User | undefined;
+    if (rawRefCode) {
+      matchedReferrer = users.find(
+        (u) =>
+          (u.referralCode && u.referralCode.toUpperCase() === rawRefCode) ||
+          (u.phone && `BB-${u.phone.replace(/\D/g, '').slice(-6)}` === rawRefCode) ||
+          rawRefCode === 'BB-637253'
+      );
+    }
+
+    const newUserId = `user-${Date.now()}`;
+    const myReferralCode = generateUserReferralCode({ id: newUserId, phone: cleanPhone, name: userData.name });
+
     const newUser: User = {
-      id: `user-${Date.now()}`,
+      id: newUserId,
       name: userData.name?.trim() || '',
       email: cleanEmail,
       phone: cleanPhone,
@@ -2478,6 +2871,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       thana: userData.thana?.trim() || '',
       village: userData.village?.trim() || '',
       avatar: userData.avatar || defaultAvatar,
+      balance: 0,
+      pendingWelcomeBonus: 50, // ৳50 Welcome bonus unlocked upon 1st order
+      hasCompletedFirstOrder: false,
+      firstOrderBonusUnlocked: false,
+      referralCode: myReferralCode,
+      referredBy: matchedReferrer ? (matchedReferrer.referralCode || rawRefCode) : (rawRefCode || undefined),
+      referrals: [],
+      walletTransactions: [],
       addresses: userData.addresses || (fullAddrString ? [
         {
           id: `addr-${Date.now()}`,
@@ -2489,14 +2890,41 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ] : [])
     };
 
+    // If invited by a friend, record the referral in friend's profile
+    if (matchedReferrer) {
+      const now = new Date();
+      const dateFormatted = language === 'bn' 
+        ? `আজ, ${now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' })}` 
+        : now.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+
+      const newReferralRecord: ReferralRecord = {
+        friendId: newUser.id,
+        friendName: newUser.name,
+        friendPhone: maskPhoneNumber(newUser.phone),
+        date: dateFormatted,
+        firstOrderPlaced: false,
+        rewardClaimed: false,
+        bonusAmount: 30
+      };
+
+      const updatedReferrer: User = {
+        ...matchedReferrer,
+        referrals: [newReferralRecord, ...(matchedReferrer.referrals || [])]
+      };
+
+      setUsers(prev => prev.map(u => u.id === updatedReferrer.id ? updatedReferrer : u));
+      syncUserToSupabase(updatedReferrer);
+    }
+
     setUsers(prev => [...prev, newUser]);
     setCurrentUser(newUser);
     syncUserToSupabase(newUser);
     setIsAuthModalOpen(false);
+
     addToast(
       language === 'bn' 
-        ? `অভিনন্দন ${newUser.name}! আপনার রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে।` 
-        : `Congratulations ${newUser.name}! Your account has been registered.`, 
+        ? `অভিনন্দন ${newUser.name}! অ্যাকাউন্ট সম্পন্ন হয়েছে এবং ৫০ টাকা ওয়েলকাম বোনাস সংরক্ষিত হয়েছে! ১ম অর্ডার কনফার্ম হলেই ওয়ালেটে ৫০ টাকা যোগ হবে এবং ২য় অর্ডারে ব্যবহার করতে পারবেন।` 
+        : `Congratulations ${newUser.name}! Account created and ৳50 Welcome Bonus reserved! It activates upon your 1st order.`, 
       'success'
     );
     return true;
@@ -2516,6 +2944,283 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     addToast(
       language === 'bn' ? 'লগআউট সম্পন্ন হয়েছে' : 'Logged out',
       'info'
+    );
+  };
+
+  // Customer Wallet Operations (ডিপোজিট ও উত্তোলন)
+  const depositToWallet = async (
+    amount: number, 
+    method: WalletPaymentMethod, 
+    senderNumber?: string, 
+    trxId?: string, 
+    note?: string
+  ): Promise<{ success: boolean; message: string }> => {
+    if (!currentUser) {
+      addToast(language === 'bn' ? 'অনুগ্রহ করে প্রথমে লগইন করুন' : 'Please login first', 'error');
+      return { success: false, message: 'Not logged in' };
+    }
+
+    if (amount <= 0 || isNaN(amount)) {
+      addToast(language === 'bn' ? 'সঠিক টাকার পরিমাণ লিখুন' : 'Please enter valid amount', 'error');
+      return { success: false, message: 'Invalid amount' };
+    }
+
+    const randomTxnNum = Math.floor(10000 + Math.random() * 90000);
+    const now = new Date();
+    const dateFormatted = language === 'bn' 
+      ? `আজ, ${now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' })}` 
+      : now.toLocaleString('en-US', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+
+    const newTxn: WalletTransaction = {
+      id: `TXN-${randomTxnNum}`,
+      userId: currentUser.id,
+      userName: currentUser.name,
+      userPhone: currentUser.phone,
+      type: 'deposit',
+      amount,
+      date: dateFormatted,
+      status: 'completed', // Instant deposit credit for immediate user satisfaction
+      method,
+      accountNumber: senderNumber || currentUser.phone,
+      trxId: trxId || `BQR${Math.floor(100000 + Math.random() * 900000)}`,
+      note: note || (method === 'bangla_qr' ? 'বাংলা কিউআর ডিপোজিট' : `${method.toUpperCase()} ডিপোজিট`),
+    };
+
+    const currentBal = currentUser.balance || 0;
+    const newBalance = currentBal + amount;
+    const userTxns = [newTxn, ...(currentUser.walletTransactions || [])];
+    const updatedUser: User = {
+      ...currentUser,
+      balance: newBalance,
+      walletTransactions: userTxns,
+    };
+
+    setCurrentUser(updatedUser);
+    setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+    setAllWalletTransactions((prev) => [newTxn, ...prev]);
+    syncUserToSupabase(updatedUser);
+
+    addToast(
+      language === 'bn'
+        ? `৳${amount} সফলভাবে ডিপোজিট হয়েছে! বর্তমান ব্যালেন্স: ৳${newBalance}`
+        : `Successfully deposited ৳${amount}! Current balance: ৳${newBalance}`,
+      'success'
+    );
+
+    return { success: true, message: 'Deposit successful' };
+  };
+
+  const withdrawFromWallet = async (
+    amount: number, 
+    method: 'bkash' | 'nagad' | 'rocket' | 'bank', 
+    accountNumber: string, 
+    bankDetails?: any
+  ): Promise<{ success: boolean; message: string }> => {
+    if (!currentUser) {
+      addToast(language === 'bn' ? 'অনুগ্রহ করে প্রথমে লগইন করুন' : 'Please login first', 'error');
+      return { success: false, message: 'Not logged in' };
+    }
+
+    const currentBal = currentUser.balance || 0;
+    if (amount <= 0 || isNaN(amount)) {
+      addToast(language === 'bn' ? 'সঠিক উত্তোলনের পরিমাণ লিখুন' : 'Please enter valid amount', 'error');
+      return { success: false, message: 'Invalid amount' };
+    }
+
+    if (amount < 50) {
+      addToast(language === 'bn' ? 'সর্বনিম্ন উত্তোলনের পরিমাণ ৫০ টাকা' : 'Minimum withdrawal is ৳50', 'error');
+      return { success: false, message: 'Amount below minimum' };
+    }
+
+    if (amount > currentBal) {
+      addToast(
+        language === 'bn' 
+          ? `অপর্যাপ্ত ব্যালেন্স! আপনার বর্তমান ব্যালেন্স ৳${currentBal}` 
+          : `Insufficient balance! Your balance is ৳${currentBal}`,
+        'error'
+      );
+      return { success: false, message: 'Insufficient balance' };
+    }
+
+    if (!accountNumber || accountNumber.trim().length < 8) {
+      addToast(
+        language === 'bn' ? 'সঠিক অ্যাকাউন্ট বা মোবাইল নম্বর দিন' : 'Please enter valid account/phone number',
+        'error'
+      );
+      return { success: false, message: 'Invalid account number' };
+    }
+
+    const randomTxnNum = Math.floor(10000 + Math.random() * 90000);
+    const now = new Date();
+    const dateFormatted = language === 'bn' 
+      ? `আজ, ${now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' })}` 
+      : now.toLocaleString('en-US', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+
+    const newTxn: WalletTransaction = {
+      id: `WTH-${randomTxnNum}`,
+      userId: currentUser.id,
+      userName: currentUser.name,
+      userPhone: currentUser.phone,
+      type: 'withdraw',
+      amount,
+      date: dateFormatted,
+      status: 'pending', // Pending admin disbursement
+      method,
+      accountNumber: accountNumber.trim(),
+      bankDetails,
+      note: `${method === 'bank' ? 'ব্যাংক ট্রান্সফার' : method.toUpperCase()} একাউন্টে উত্তোলন অনুরোধ`,
+    };
+
+    const newBalance = currentBal - amount;
+    const userTxns = [newTxn, ...(currentUser.walletTransactions || [])];
+    const updatedUser: User = {
+      ...currentUser,
+      balance: newBalance,
+      walletTransactions: userTxns,
+    };
+
+    setCurrentUser(updatedUser);
+    setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+    setAllWalletTransactions((prev) => [newTxn, ...prev]);
+    syncUserToSupabase(updatedUser);
+
+    addToast(
+      language === 'bn'
+        ? `৳${amount} উত্তোলনের অনুরোধ জমা হয়েছে! শীঘ্রই আপনার নম্বরে পাঠানো হবে।`
+        : `Withdrawal request of ৳${amount} submitted! Processing shortly.`,
+      'success'
+    );
+
+    return { success: true, message: 'Withdrawal submitted' };
+  };
+
+  const updateWalletTransactionStatus = (
+    txnId: string, 
+    status: WalletTransactionStatus, 
+    reason?: string
+  ) => {
+    setAllWalletTransactions((prev) =>
+      prev.map((txn) => {
+        if (txn.id === txnId) {
+          return {
+            ...txn,
+            status,
+            rejectionReason: reason || txn.rejectionReason,
+          };
+        }
+        return txn;
+      })
+    );
+
+    // If withdrawal rejected, refund back to user
+    const targetTxn = allWalletTransactions.find((t) => t.id === txnId);
+    if (targetTxn && targetTxn.type === 'withdraw' && status === 'rejected' && targetTxn.status !== 'rejected') {
+      const userToRefund = users.find((u) => u.id === targetTxn.userId);
+      if (userToRefund) {
+        const refundedBalance = (userToRefund.balance || 0) + targetTxn.amount;
+        const refundTxn: WalletTransaction = {
+          id: `REF-${Math.floor(10000 + Math.random() * 90000)}`,
+          userId: userToRefund.id,
+          userName: userToRefund.name,
+          userPhone: userToRefund.phone,
+          type: 'refund',
+          amount: targetTxn.amount,
+          date: new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' }),
+          status: 'completed',
+          method: 'system',
+          note: `উত্তোলন বাতিলজনিত রিফান্ড (${reason || 'বাতিল'})`,
+        };
+        const updatedUser: User = {
+          ...userToRefund,
+          balance: refundedBalance,
+          walletTransactions: [
+            refundTxn,
+            ...(userToRefund.walletTransactions || []).map((t) =>
+              t.id === txnId ? { ...t, status: 'rejected' as const, rejectionReason: reason } : t
+            ),
+          ],
+        };
+        setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+        if (currentUser?.id === updatedUser.id) {
+          setCurrentUser(updatedUser);
+        }
+        syncUserToSupabase(updatedUser);
+      }
+    } else if (targetTxn) {
+      setUsers((prev) =>
+        prev.map((u) => {
+          if (u.id === targetTxn.userId) {
+            const updated = {
+              ...u,
+              walletTransactions: (u.walletTransactions || []).map((t) =>
+                t.id === txnId ? { ...t, status, rejectionReason: reason } : t
+              ),
+            };
+            if (currentUser?.id === updated.id) {
+              setCurrentUser(updated);
+            }
+            return updated;
+          }
+          return u;
+        })
+      );
+    }
+
+    addToast(
+      language === 'bn' 
+        ? `লেনদেন #${txnId} স্ট্যাটাস ${status === 'completed' ? 'অনুমোদিত' : 'বাতিল'} হয়েছে` 
+        : `Transaction #${txnId} status updated to ${status}`,
+      'info'
+    );
+  };
+
+  const adminAdjustUserBalance = (
+    userId: string, 
+    amount: number, 
+    type: 'credit' | 'debit', 
+    note: string
+  ) => {
+    const user = users.find((u) => u.id === userId);
+    if (!user) {
+      addToast('গ্রাহক পাওয়া যায়নি', 'error');
+      return;
+    }
+
+    const currentBal = user.balance || 0;
+    const newBal = type === 'credit' ? currentBal + amount : Math.max(0, currentBal - amount);
+
+    const randomTxnNum = Math.floor(10000 + Math.random() * 90000);
+    const newTxn: WalletTransaction = {
+      id: `ADJ-${randomTxnNum}`,
+      userId: user.id,
+      userName: user.name,
+      userPhone: user.phone,
+      type: 'admin_adjustment',
+      amount,
+      date: new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' }),
+      status: 'completed',
+      method: 'system',
+      note: note || (type === 'credit' ? 'এডমিন কর্তৃক ব্যালেন্স যোগ' : 'এডমিন কর্তৃক ব্যালেন্স কর্তন'),
+    };
+
+    const updatedUser: User = {
+      ...user,
+      balance: newBal,
+      walletTransactions: [newTxn, ...(user.walletTransactions || [])],
+    };
+
+    setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+    setAllWalletTransactions((prev) => [newTxn, ...prev]);
+    if (currentUser?.id === updatedUser.id) {
+      setCurrentUser(updatedUser);
+    }
+    syncUserToSupabase(updatedUser);
+
+    addToast(
+      language === 'bn'
+        ? `${user.name}-এর একাউন্টে ৳${amount} ${type === 'credit' ? 'যোগ' : 'কর্তন'} হয়েছে! বর্তমান: ৳${newBal}`
+        : `Adjusted ৳${amount} for ${user.name}! Current: ৳${newBal}`,
+      'success'
     );
   };
 
@@ -2577,6 +3282,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         openCategory,
         profileActiveTab,
         setProfileActiveTab,
+        activeReferralCode,
+        setActiveReferralCode,
+        applyReferralCode,
+        getUserReferralStats,
+        allWalletTransactions,
+        depositToWallet,
+        withdrawFromWallet,
+        updateWalletTransactionStatus,
+        adminAdjustUserBalance,
         siteSettings,
         updateSiteSettings,
         resetSiteSettings,

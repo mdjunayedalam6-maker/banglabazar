@@ -37,7 +37,12 @@ import {
   CheckSquare,
   Send,
   Instagram,
-  Youtube
+  Youtube,
+  Wallet,
+  ArrowDownLeft,
+  ArrowUpRight,
+  CheckCircle2,
+  XCircle
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Product, Category, Order, OrderStatus, AdminBannerSlide } from '../types';
@@ -83,12 +88,25 @@ export const AdminPage: React.FC = () => {
     globalProfitMargin,
     updateGlobalProfitMargin,
     enforceWhiteLabelPurge,
-    supabaseUrl
+    supabaseUrl,
+    allWalletTransactions,
+    updateWalletTransactionStatus,
+    adminAdjustUserBalance,
+    currentUser
   } = useApp();
 
   const [activeTab, setActiveTab] = useState<
-    'overview' | 'orders' | 'products' | 'categories' | 'design' | 'banners' | 'security' | 'supabase' | 'shopbase'
+    'overview' | 'orders' | 'products' | 'categories' | 'design' | 'banners' | 'security' | 'supabase' | 'shopbase' | 'wallet'
   >('overview');
+
+  // Wallet admin state
+  const [walletTxnSearch, setWalletTxnSearch] = useState('');
+  const [walletTxnFilter, setWalletTxnFilter] = useState<'all' | 'pending' | 'completed' | 'rejected' | 'deposit' | 'withdraw'>('all');
+  const [isAdjustModalOpen, setIsAdjustModalOpen] = useState(false);
+  const [adjustUserId, setAdjustUserId] = useState('user-1');
+  const [adjustAmount, setAdjustAmount] = useState('');
+  const [adjustType, setAdjustType] = useState<'credit' | 'debit'>('credit');
+  const [adjustNote, setAdjustNote] = useState('');
 
   const [sqlCopied, setSqlCopied] = useState(false);
   const [isSyncingSupabase, setIsSyncingSupabase] = useState(false);
@@ -463,6 +481,42 @@ export const AdminPage: React.FC = () => {
   const pendingOrdersCount = orders.filter((o) => o.status === 'placed' || o.status === 'processing').length;
   const deliveredOrdersCount = orders.filter((o) => o.status === 'delivered').length;
 
+  // Wallet metrics
+  const totalWalletDeposits = allWalletTransactions
+    .filter((t) => t.type === 'deposit' && t.status === 'completed')
+    .reduce((sum, t) => sum + t.amount, 0);
+  const totalWalletWithdrawals = allWalletTransactions
+    .filter((t) => t.type === 'withdraw' && t.status === 'completed')
+    .reduce((sum, t) => sum + t.amount, 0);
+  const pendingWithdrawalsCount = allWalletTransactions.filter(
+    (t) => t.type === 'withdraw' && t.status === 'pending'
+  ).length;
+
+  // Filtered Wallet Transactions
+  const filteredWalletTransactions = useMemo(() => {
+    return allWalletTransactions.filter((txn) => {
+      const s = walletTxnSearch.toLowerCase().trim();
+      const matchesSearch =
+        !s ||
+        txn.id.toLowerCase().includes(s) ||
+        (txn.userName && txn.userName.toLowerCase().includes(s)) ||
+        (txn.userPhone && txn.userPhone.includes(s)) ||
+        (txn.trxId && txn.trxId.toLowerCase().includes(s)) ||
+        (txn.accountNumber && txn.accountNumber.includes(s)) ||
+        (txn.note && txn.note.toLowerCase().includes(s));
+
+      if (!matchesSearch) return false;
+
+      if (walletTxnFilter === 'all') return true;
+      if (walletTxnFilter === 'pending') return txn.status === 'pending';
+      if (walletTxnFilter === 'completed') return txn.status === 'completed';
+      if (walletTxnFilter === 'rejected') return txn.status === 'rejected';
+      if (walletTxnFilter === 'deposit') return txn.type === 'deposit';
+      if (walletTxnFilter === 'withdraw') return txn.type === 'withdraw';
+      return true;
+    });
+  }, [allWalletTransactions, walletTxnSearch, walletTxnFilter]);
+
   // Memoized Filtered Products (Supports searching by title, SKU, brand, ID across all 11,902 products)
   const filteredProducts = useMemo(() => {
     const s = productSearch.toLowerCase().trim();
@@ -785,6 +839,12 @@ export const AdminPage: React.FC = () => {
               label: 'কাস্টমার অর্ডারসমূহ (Orders)', 
               icon: Package, 
               badge: pendingOrdersCount > 0 ? pendingOrdersCount : undefined 
+            },
+            {
+              id: 'wallet',
+              label: 'ওয়ালেট ও লেনদেন (Transactions)',
+              icon: Wallet,
+              badge: pendingWithdrawalsCount > 0 ? `${pendingWithdrawalsCount} পেন্ডিং` : undefined
             },
             { id: 'products', label: 'প্রডাক্ট আপলোড ও ম্যানেজমেন্ট', icon: ShoppingBag, count: products.length },
             { id: 'shopbase', label: '💰 প্রফিট মার্জিন ও অটোমেশন', icon: Sparkles, badge: `${globalProfitMargin || 15}% লাভ` },
@@ -3523,7 +3583,486 @@ export const AdminPage: React.FC = () => {
             addCategory={addCategory}
           />
         )}
+
+        {/* TAB 9: CUSTOMER WALLET & TRANSACTIONS (DEPOSIT & WITHDRAWAL) */}
+        {activeTab === 'wallet' && (
+          <div className="space-y-6">
+            {/* Header & Quick Actions */}
+            <div className="p-6 bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 rounded-3xl border border-indigo-500/20 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-3 mb-1.5">
+                  <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+                    <Wallet className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-black text-white">
+                    গ্রাহক ওয়ালেট ও লেনদেন কন্ট্রোল (Customer Wallet & Cashflow)
+                  </h2>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-400">
+                  গ্রাহকদের একাউন্ট জমা (Bangla QR / bKash / নগদ / ব্যাংক), উত্তোলন আবেদন অনুমোদন ও ব্যালেন্স সমন্বয় করুন।
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setIsAdjustModalOpen(true)}
+                  className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all cursor-pointer"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>ম্যানুয়াল ব্যালেন্স সমন্বয় (Adjust)</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="p-5 bg-slate-950/80 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+                  <span>মোট সফল জমা (Deposits)</span>
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                    <ArrowDownLeft className="w-4 h-4" />
+                  </div>
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-emerald-400">
+                  {formatPrice(totalWalletDeposits)}
+                </div>
+                <div className="text-[11px] text-slate-500 mt-1">Bangla QR ও MFS জমা</div>
+              </div>
+
+              <div className="p-5 bg-slate-950/80 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+                  <span>মোট পরিশোধিত উত্তোলন</span>
+                  <div className="w-8 h-8 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-rose-400">
+                  {formatPrice(totalWalletWithdrawals)}
+                </div>
+                <div className="text-[11px] text-slate-500 mt-1">কাস্টমারকে প্রেরিত টাকা</div>
+              </div>
+
+              <div className="p-5 bg-slate-950/80 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+                  <span>অপেক্ষমাণ উত্তোলন (Pending)</span>
+                  <div className="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-amber-400 flex items-center gap-2">
+                  <span>{pendingWithdrawalsCount}</span>
+                  <span className="text-xs font-normal text-slate-400">টি রিকোয়েস্ট</span>
+                </div>
+                <div className="text-[11px] text-slate-500 mt-1">
+                  {pendingWithdrawalsCount > 0 ? 'অনুমোদনের অপেক্ষায়' : 'সব আবেদন নিষ্পত্তি'}
+                </div>
+              </div>
+
+              <div className="p-5 bg-slate-950/80 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+                  <span>গ্রাহক ওয়ালেট ব্যালেন্স</span>
+                  <div className="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+                    <Wallet className="w-4 h-4" />
+                  </div>
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-white">
+                  {formatPrice(currentUser?.balance || 0)}
+                </div>
+                <div className="text-[11px] text-slate-500 mt-1">
+                  {currentUser?.name || 'লগইন গ্রাহক'}
+                </div>
+              </div>
+            </div>
+
+            {/* Filter and Search Bar */}
+            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 flex flex-col md:flex-row gap-4 items-center justify-between">
+              {/* Search */}
+              <div className="relative w-full md:w-96">
+                <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                <input
+                  type="text"
+                  value={walletTxnSearch}
+                  onChange={(e) => setWalletTxnSearch(e.target.value)}
+                  placeholder="ID, নাম, ফোন, TrxID বা একাউন্ট খুঁজুন..."
+                  className="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors"
+                />
+                {walletTxnSearch && (
+                  <button
+                    onClick={() => setWalletTxnSearch('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+
+              {/* Filters */}
+              <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
+                {[
+                  { id: 'all', label: 'সব লেনদেন' },
+                  { id: 'pending', label: `পেন্ডিং (${pendingWithdrawalsCount})` },
+                  { id: 'deposit', label: 'ডিপোজিট' },
+                  { id: 'withdraw', label: 'উত্তোলন' },
+                  { id: 'completed', label: 'সফল' },
+                  { id: 'rejected', label: 'বাতিল' }
+                ].map((f) => (
+                  <button
+                    key={f.id}
+                    onClick={() => setWalletTxnFilter(f.id as any)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                      walletTxnFilter === f.id
+                        ? 'bg-indigo-600 text-white shadow-sm'
+                        : 'bg-slate-900 hover:bg-slate-850 text-slate-400 hover:text-slate-200 border border-slate-800'
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Transactions Table */}
+            <div className="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-900/90 border-b border-slate-800 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                      <th className="py-3.5 px-4">ট্রানজেকশন ID ও সময়</th>
+                      <th className="py-3.5 px-4">গ্রাহক</th>
+                      <th className="py-3.5 px-4">ধরন</th>
+                      <th className="py-3.5 px-4">পেমেন্ট মাধ্যম</th>
+                      <th className="py-3.5 px-4">পরিমাণ</th>
+                      <th className="py-3.5 px-4">একাউন্ট / TrxID / নোট</th>
+                      <th className="py-3.5 px-4">স্ট্যাটাস</th>
+                      <th className="py-3.5 px-4 text-right">পদক্ষেপ (Action)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800/60 text-xs">
+                    {filteredWalletTransactions.length === 0 ? (
+                      <tr>
+                        <td colSpan={8} className="py-12 text-center text-slate-500">
+                          <Wallet className="w-10 h-10 mx-auto mb-2 opacity-30 text-slate-400" />
+                          <p className="font-medium text-slate-400">কোন লেনদেন খুঁজে পাওয়া যায়নি</p>
+                          <p className="text-[11px] text-slate-600 mt-0.5">ফিল্টার পরিবর্তন করে আবার চেষ্টা করুন</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      filteredWalletTransactions.map((txn) => {
+                        const isCredit = txn.type === 'deposit' || txn.type === 'admin_adjustment';
+                        const isWithdraw = txn.type === 'withdraw';
+                        return (
+                          <tr key={txn.id} className="hover:bg-slate-900/50 transition-colors">
+                            {/* ID & Date */}
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              <div className="font-mono font-bold text-white text-xs">{txn.id}</div>
+                              <div className="text-[10px] text-slate-500 flex items-center gap-1 mt-0.5">
+                                <Clock className="w-3 h-3" />
+                                <span>{new Date(txn.date).toLocaleDateString('bn-BD', {
+                                  day: 'numeric',
+                                  month: 'short',
+                                  year: 'numeric',
+                                  hour: '2-digit',
+                                  minute: '2-digit'
+                                })}</span>
+                              </div>
+                            </td>
+
+                            {/* Customer */}
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              <div className="font-bold text-slate-200">{txn.userName || 'গ্রাহক'}</div>
+                              <div className="text-[10px] text-slate-400 font-mono">{txn.userPhone || '—'}</div>
+                            </td>
+
+                            {/* Type */}
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              {txn.type === 'deposit' && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                                  <ArrowDownLeft className="w-3 h-3" />
+                                  <span>ডিপোজিট</span>
+                                </span>
+                              )}
+                              {txn.type === 'withdraw' && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-500/15 text-rose-400 border border-rose-500/30">
+                                  <ArrowUpRight className="w-3 h-3" />
+                                  <span>উত্তোলন</span>
+                                </span>
+                              )}
+                              {txn.type === 'order_payment' && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-indigo-500/15 text-indigo-400 border border-indigo-500/30">
+                                  <Package className="w-3 h-3" />
+                                  <span>অর্ডার পেমেন্ট</span>
+                                </span>
+                              )}
+                              {txn.type === 'admin_adjustment' && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                                  <Sliders className="w-3 h-3" />
+                                  <span>এডমিন সমন্বয়</span>
+                                </span>
+                              )}
+                            </td>
+
+                            {/* Method */}
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              <div className="font-medium text-slate-300 capitalize">
+                                {txn.method === 'bangla_qr' && 'বাংলা QR (TallyPay)'}
+                                {txn.method === 'bkash' && 'bKash'}
+                                {txn.method === 'nagad' && 'Nagad'}
+                                {txn.method === 'rocket' && 'Rocket'}
+                                {txn.method === 'bank' && 'ব্যাংক একাউন্ট'}
+                                {txn.method === 'wallet' && 'ওয়ালেট ব্যালেন্স'}
+                                {txn.method === 'system' && 'সিস্টেম / এডমিন'}
+                              </div>
+                            </td>
+
+                            {/* Amount */}
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              <span className={`font-black text-sm ${
+                                isCredit ? 'text-emerald-400' : 'text-rose-400'
+                              }`}>
+                                {isCredit ? '+' : '-'}{formatPrice(txn.amount)}
+                              </span>
+                            </td>
+
+                            {/* Details (Account / TrxID / Note) */}
+                            <td className="py-3.5 px-4 max-w-xs">
+                              {txn.trxId && (
+                                <div className="text-[11px] font-mono text-amber-300 truncate">
+                                  TrxID: {txn.trxId}
+                                </div>
+                              )}
+                              {txn.accountNumber && (
+                                <div className="text-[11px] font-mono text-slate-300">
+                                  A/C: {txn.accountNumber}
+                                </div>
+                              )}
+                              {txn.bankDetails?.bankName && (
+                                <div className="text-[10px] text-slate-400">
+                                  {txn.bankDetails.bankName} {txn.bankDetails.branchName && `(${txn.bankDetails.branchName})`}
+                                </div>
+                              )}
+                              {txn.note && (
+                                <div className="text-[10px] text-slate-400 line-clamp-1 italic mt-0.5">
+                                  "{txn.note}"
+                                </div>
+                              )}
+                            </td>
+
+                            {/* Status */}
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              {txn.status === 'completed' && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                  <CheckCircle2 className="w-3 h-3" />
+                                  <span>সফল</span>
+                                </span>
+                              )}
+                              {txn.status === 'pending' && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/30 animate-pulse">
+                                  <Clock className="w-3 h-3" />
+                                  <span>অপেক্ষমাণ</span>
+                                </span>
+                              )}
+                              {txn.status === 'rejected' && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                                  <XCircle className="w-3 h-3" />
+                                  <span>বাতিল ও রিফান্ড</span>
+                                </span>
+                              )}
+                            </td>
+
+                            {/* Action Buttons */}
+                            <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                              {txn.status === 'pending' && isWithdraw ? (
+                                <div className="flex items-center justify-end gap-1.5">
+                                  <button
+                                    onClick={() => {
+                                      updateWalletTransactionStatus(
+                                        txn.id,
+                                        'completed',
+                                        'এডমিন কর্তৃক অনুমোদিত ও কাস্টমারের নাম্বারে প্রেরণ সম্পন্ন'
+                                      );
+                                      addToast('উত্তোলন রিকোয়েস্ট সফলভাবে অনুমোদন করা হয়েছে!', 'success');
+                                    }}
+                                    className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-[11px] font-bold flex items-center gap-1 transition-all shadow-sm active:scale-95 cursor-pointer"
+                                    title="উত্তোলন অনুমোদন করুন"
+                                  >
+                                    <Check className="w-3 h-3" />
+                                    <span>অনুমোদন</span>
+                                  </button>
+
+                                  <button
+                                    onClick={() => {
+                                      updateWalletTransactionStatus(
+                                        txn.id,
+                                        'rejected',
+                                        'তথ্য অমিল বা গ্রাহকের অনুরোধে বাতিল ও টাকা ওয়ালেটে ফেরত'
+                                      );
+                                      addToast('উত্তোলন বাতিল ও টাকা মূল ওয়ালেটে ফেরত দেওয়া হয়েছে', 'info');
+                                    }}
+                                    className="px-2 py-1 bg-rose-600/80 hover:bg-rose-600 text-white rounded-lg text-[11px] font-bold flex items-center gap-1 transition-all active:scale-95 cursor-pointer"
+                                    title="বাতিল করে টাকা ওয়ালেটে ফেরত দিন"
+                                  >
+                                    <X className="w-3 h-3" />
+                                    <span>বাতিল</span>
+                                  </button>
+                                </div>
+                              ) : txn.status === 'completed' ? (
+                                <span className="text-[11px] text-slate-500 flex items-center justify-end gap-1 font-medium">
+                                  <CheckCircle className="w-3 h-3 text-emerald-500" />
+                                  <span>নিষ্পন্ন</span>
+                                </span>
+                              ) : (
+                                <span className="text-[11px] text-slate-500">সম্পন্ন</span>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Manual Customer Balance Adjustment Modal */}
+      {isAdjustModalOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-5">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                  <Sliders className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="font-black text-white text-base">গ্রাহকের ব্যালেন্স সমন্বয়</h3>
+                  <p className="text-[11px] text-slate-400">ম্যানুয়ালি বোনাস বা ব্যালেন্স যোগ/কর্তন করুন</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsAdjustModalOpen(false)}
+                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const amt = parseFloat(adjustAmount);
+                if (isNaN(amt) || amt <= 0) {
+                  addToast('সঠিক টাকার পরিমাণ দিন', 'error');
+                  return;
+                }
+                adminAdjustUserBalance(
+                  adjustUserId || 'user-1',
+                  amt,
+                  adjustType,
+                  adjustNote.trim() || (adjustType === 'credit' ? 'এডমিন ক্যাশব্যাক / বোনাস' : 'এডমিন সমন্বয় কর্তন')
+                );
+                addToast(
+                  adjustType === 'credit'
+                    ? `৳${amt} গ্রাহকের ওয়ালেটে সফলভাবে যোগ করা হয়েছে!`
+                    : `৳${amt} গ্রাহকের ওয়ালেট থেকে কর্তন করা হয়েছে!`,
+                  'success'
+                );
+                setAdjustAmount('');
+                setAdjustNote('');
+                setIsAdjustModalOpen(false);
+              }}
+              className="space-y-4"
+            >
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                  সমন্বয়ের ধরন নির্বাচন করুন
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setAdjustType('credit')}
+                    className={`py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                      adjustType === 'credit'
+                        ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30 ring-2 ring-emerald-500/50'
+                        : 'bg-slate-800 text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <ArrowDownLeft className="w-4 h-4 text-emerald-400" />
+                    <span>টাকা যোগ (+)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAdjustType('debit')}
+                    className={`py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                      adjustType === 'debit'
+                        ? 'bg-rose-600 text-white shadow-md shadow-rose-600/30 ring-2 ring-rose-500/50'
+                        : 'bg-slate-800 text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <ArrowUpRight className="w-4 h-4 text-rose-400" />
+                    <span>টাকা কর্তন (-)</span>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                  টাকার পরিমাণ (টাকা)
+                </label>
+                <div className="relative">
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 font-bold">৳</span>
+                  <input
+                    type="number"
+                    min="1"
+                    step="any"
+                    required
+                    value={adjustAmount}
+                    onChange={(e) => setAdjustAmount(e.target.value)}
+                    placeholder="যেমন: 500"
+                    className="w-full pl-8 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                  সমন্বয়ের কারণ বা নোট (গ্রাহক দেখতে পারবেন)
+                </label>
+                <input
+                  type="text"
+                  value={adjustNote}
+                  onChange={(e) => setAdjustNote(e.target.value)}
+                  placeholder="যেমন: রেফারেল বোনাস / অফার রিফান্ড"
+                  className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                />
+              </div>
+
+              <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-[11px] text-slate-400">
+                বর্তমান গ্রাহক: <span className="font-bold text-white">{currentUser?.name || 'লগইন গ্রাহক'}</span> ({currentUser?.phone})
+                <br />
+                বর্তমান ব্যালেন্স: <span className="font-bold text-amber-400">{formatPrice(currentUser?.balance || 0)}</span>
+              </div>
+
+              <div className="flex gap-2.5 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsAdjustModalOpen(false)}
+                  className="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold text-xs cursor-pointer"
+                >
+                  বাতিল
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs shadow-lg shadow-amber-500/20 cursor-pointer"
+                >
+                  কনফার্ম সমন্বয়
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Product Edit / Upload Modal */}
       <ProductEditModal

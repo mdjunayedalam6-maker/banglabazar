@@ -38,8 +38,8 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     profitMargin: 15,
     autoSync: true,
     autoForwardOrders: true,
-    lastSyncTime: 'আজকের তারিখে সফলভাবে সংযুক্ত',
-    totalSyncedProducts: 11902,
+    lastSyncTime: 'আজকের লাইভ সিঙ্ক সফল (১২,১১৮টি পণ্য যুক্ত)',
+    totalSyncedProducts: 12118,
   },
 };
 

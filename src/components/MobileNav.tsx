@@ -14,7 +14,9 @@ import {
   Truck,
   Download,
   Smartphone,
-  ExternalLink
+  ExternalLink,
+  Wallet,
+  Gift
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BrandLogo } from './BrandLogo';
@@ -127,6 +129,8 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
     loginAdmin,
     siteSettings,
     setIsAppInstallModalOpen,
+    formatPrice,
+    setProfileActiveTab,
   } = useApp();
   const { isInstallable, isInstalled, isIOS, install } = usePWAInstall();
 
@@ -147,7 +151,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
           <BrandLogo size="sm" textColor="light" />
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800"
+            className="p-1 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -156,40 +160,91 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
         {/* User Card */}
         <div className="p-4 bg-slate-50 border-b border-slate-200">
           {currentUser ? (
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <img
-                  src={currentUser.avatar}
-                  alt={currentUser.name}
-                  className="w-10 h-10 rounded-full border border-emerald-500 object-cover"
-                />
-                <div>
-                  <div className="text-xs font-bold text-slate-800">{currentUser.name}</div>
-                  <div className="text-[11px] text-slate-500">{currentUser.phone}</div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={currentUser.avatar}
+                    alt={currentUser.name}
+                    className="w-10 h-10 rounded-full border border-emerald-500 object-cover"
+                  />
+                  <div>
+                    <div className="text-xs font-bold text-slate-800">{currentUser.name}</div>
+                    <div className="text-[11px] text-slate-500">{currentUser.phone}</div>
+                  </div>
                 </div>
+                <button
+                  onClick={() => {
+                    logoutUser();
+                    onClose();
+                  }}
+                  className="text-xs text-rose-600 font-semibold cursor-pointer"
+                >
+                  লগআউট
+                </button>
               </div>
+
+              {/* Wallet Balance Card in Drawer */}
+              <div className="p-3 bg-gradient-to-r from-[#062919] to-[#0A3D24] text-white rounded-2xl flex items-center justify-between shadow-xs">
+                <div>
+                  <span className="text-[10px] text-emerald-300 font-medium block">ওয়ালেট ব্যালেন্স:</span>
+                  <span className="text-base font-black">{formatPrice(currentUser.balance || 0)}</span>
+                </div>
+                <button
+                  onClick={() => {
+                    setProfileActiveTab('wallet');
+                    setCurrentPage('profile');
+                    onClose();
+                  }}
+                  className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs rounded-xl flex items-center gap-1 cursor-pointer transition-colors"
+                >
+                  <Wallet className="w-3.5 h-3.5" />
+                  <span>ডিপোজিট / তুলুন</span>
+                </button>
+              </div>
+
+              {/* Referral & Earn Quick Link */}
               <button
                 onClick={() => {
-                  logoutUser();
+                  setProfileActiveTab('referral');
+                  setCurrentPage('profile');
                   onClose();
                 }}
-                className="text-xs text-rose-600 font-semibold"
+                className="w-full p-2.5 bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 border border-amber-300 text-amber-950 rounded-2xl flex items-center justify-between shadow-xs cursor-pointer transition-all text-left"
               >
-                লগআউট
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black shrink-0 shadow-xs">
+                    <Gift className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-black text-amber-950 flex items-center gap-1.5">
+                      <span>রেফার ও আয়</span>
+                      <span className="bg-amber-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">প্রতি রেফারে ৳৩০</span>
+                    </div>
+                    <div className="text-[10px] text-amber-800">বন্ধুর ১ম অর্ডারে ৩০ টাকা ক্যাশ</div>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-amber-600 shrink-0" />
               </button>
             </div>
           ) : (
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-slate-600">স্বাগতম! কেনাকাটা শুরু করুন</span>
-              <button
-                onClick={() => {
-                  setIsAuthModalOpen(true);
-                  onClose();
-                }}
-                className="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold shadow-xs"
-              >
-                লগইন / রেজিস্ট্রেশন
-              </button>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-slate-600 font-medium">স্বাগতম! কেনাকাটা শুরু করুন</span>
+                <button
+                  onClick={() => {
+                    setIsAuthModalOpen(true);
+                    onClose();
+                  }}
+                  className="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer hover:bg-emerald-700"
+                >
+                  লগইন / সাইনআপ
+                </button>
+              </div>
+              <div className="p-2 bg-amber-50/80 border border-amber-200 rounded-xl text-[11px] text-amber-900 flex items-center gap-2">
+                <Gift className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>রেজিস্ট্রেশনে <strong>৫০ টাকা বোনাস</strong> • রেফারে <strong>৩০ টাকা</strong></span>
+              </div>
             </div>
           )}
         </div>
@@ -289,6 +344,27 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
             >
               <Truck className="w-4 h-4 text-orange-600" />
               <span>{language === 'bn' ? 'লাইভ অর্ডার ট্র্যাকিং' : 'Track Order'}</span>
+            </button>
+
+            <button
+              onClick={() => {
+                if (currentUser) {
+                  setProfileActiveTab('referral');
+                  setCurrentPage('profile');
+                } else {
+                  setIsAuthModalOpen(true);
+                }
+                onClose();
+              }}
+              className="w-full flex items-center justify-between py-2 font-bold text-emerald-800 hover:text-emerald-900 cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Gift className="w-4 h-4 text-amber-500" />
+                <span>{language === 'bn' ? 'রেফার ও আয় (প্রতি রেফারে ৳৩০)' : 'Refer & Earn (৳30)'}</span>
+              </div>
+              <span className="text-[10px] bg-amber-500 text-white px-2 py-0.5 rounded-full font-bold">
+                ৳৩০
+              </span>
             </button>
 
             {!isInstalled && (

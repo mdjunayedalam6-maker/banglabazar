@@ -13,13 +13,23 @@ import {
   ImagePlus,
   Eye,
   EyeOff,
-  Trash2
+  Trash2,
+  Gift
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BANGLADESH_DIVISIONS } from '../data/mockData';
 
 export const AuthModal: React.FC = () => {
-  const { isAuthModalOpen, setIsAuthModalOpen, loginUser, loginWithGoogle, registerUser, language, addToast } = useApp();
+  const { 
+    isAuthModalOpen, 
+    setIsAuthModalOpen, 
+    loginUser, 
+    loginWithGoogle, 
+    registerUser, 
+    language, 
+    addToast,
+    activeReferralCode
+  } = useApp();
   
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   
@@ -41,8 +51,15 @@ export const AuthModal: React.FC = () => {
   const [registerPassword, setRegisterPassword] = useState('');
   const [showRegPassword, setShowRegPassword] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [referralCodeInput, setReferralCodeInput] = useState<string>(() => activeReferralCode || '');
   
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (activeReferralCode) {
+      setReferralCodeInput(activeReferralCode);
+    }
+  }, [activeReferralCode]);
 
   if (!isAuthModalOpen) return null;
 
@@ -196,7 +213,8 @@ export const AuthModal: React.FC = () => {
       district: district,
       thana: thana.trim(),
       village: village.trim(),
-      avatar: avatar || undefined
+      avatar: avatar || undefined,
+      referredBy: referralCodeInput.trim().toUpperCase() || undefined
     });
   };
 
@@ -402,6 +420,25 @@ export const AuthModal: React.FC = () => {
         {/* REGISTER FORM */}
         {activeTab === 'register' && (
           <form onSubmit={handleRegisterSubmit} className="space-y-3.5">
+            {/* Welcome Bonus Notice - Short & Attractive */}
+            <div className="p-2.5 rounded-xl bg-gradient-to-r from-amber-50 to-emerald-50 border border-amber-300 flex items-center justify-between gap-3 shadow-2xs">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                  <Gift className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs font-black text-slate-900 flex items-center gap-1.5">
+                    <span>স্বাগতম বোনাস ৳৫০</span>
+                    <span className="text-[9px] font-black bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded-full">অফার</span>
+                  </div>
+                  <div className="text-[11px] text-slate-600 truncate">রেজিস্ট্রেশনে ৫০ টাকা বোনাস • ১ম অর্ডারে আনলক</div>
+                </div>
+              </div>
+              <span className="text-xs font-black text-emerald-700 bg-white px-2 py-0.5 rounded-lg border border-emerald-200 shadow-2xs shrink-0">
+                +৳৫০
+              </span>
+            </div>
+
             {/* 1. Full Name */}
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1">
@@ -663,6 +700,38 @@ export const AuthModal: React.FC = () => {
               </div>
               <p className="text-[10px] text-slate-400 mt-1">
                 {language === 'bn' ? 'এই পাসওয়ার্ড এবং আপনার ইমেইল অথবা মোবাইল নম্বর দিয়ে পরে লগইন করতে পারবেন' : 'You can log in later with this password and your email or mobile number'}
+              </p>
+            </div>
+
+            {/* 6. Referral Code (Optional) */}
+            <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200/90 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                  <Gift className="w-3.5 h-3.5 text-amber-600" />
+                  <span>{language === 'bn' ? 'রেফারেল কোড (ঐচ্ছিক)' : 'Referral Code (Optional)'}</span>
+                </label>
+                {referralCodeInput.trim() ? (
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                    <span>কোড যুক্ত হয়েছে</span>
+                  </span>
+                ) : (
+                  <span className="text-[10px] text-slate-400">
+                    {language === 'bn' ? 'না থাকলে খালি রাখুন' : 'Leave empty if none'}
+                  </span>
+                )}
+              </div>
+              <input
+                type="text"
+                value={referralCodeInput}
+                onChange={(e) => setReferralCodeInput(e.target.value.toUpperCase())}
+                placeholder="যেমন: BB-637253"
+                className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-mono uppercase text-slate-800 outline-none focus:border-emerald-600 shadow-xs"
+              />
+              <p className="text-[10px] text-slate-400">
+                {language === 'bn'
+                  ? 'কোনো বন্ধু আপনাকে লিংক বা কোড দিয়ে থাকলে তা এখানে লিখুন।'
+                  : 'Enter friend referral code if you were invited.'}
               </p>
             </div>
 

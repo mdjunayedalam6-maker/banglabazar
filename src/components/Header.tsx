@@ -14,7 +14,9 @@ import {
   ExternalLink,
   Grid,
   PhoneCall,
-  Store
+  Store,
+  Wallet,
+  Gift
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BrandLogo } from './BrandLogo';
@@ -41,6 +43,7 @@ export const Header: React.FC = () => {
     setIsAuthModalOpen,
     setIsCartDrawerOpen,
     setIsAppInstallModalOpen,
+    setProfileActiveTab,
   } = useApp();
   const { isInstallable, isInstalled, install } = usePWAInstall();
 
@@ -621,6 +624,37 @@ export const Header: React.FC = () => {
             >
               <ShieldCheck className="w-4 h-4 text-slate-950" />
               <span>{language === 'bn' ? 'এডমিন' : 'Admin'}</span>
+            </button>
+          )}
+
+          {/* Customer Wallet Balance Button */}
+          {currentUser && (
+            <button
+              onClick={() => {
+                setProfileActiveTab('wallet');
+                setCurrentPage('profile');
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300/80 text-emerald-900 text-xs font-black transition-all cursor-pointer shadow-2xs active:scale-95"
+              title={language === 'bn' ? 'আপনার ওয়ালেট ব্যালেন্স (ক্লিক করে ডিপোজিট বা উত্তোলন করুন)' : 'Wallet Balance (Click to deposit/withdraw)'}
+            >
+              <Wallet className="w-3.5 h-3.5 text-emerald-700 stroke-[2.5]" />
+              <span>{formatPrice(currentUser.balance || 0)}</span>
+            </button>
+          )}
+
+          {/* Refer & Earn Shortcut Pill */}
+          {currentUser && (
+            <button
+              onClick={() => {
+                setProfileActiveTab('referral');
+                setCurrentPage('profile');
+              }}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black transition-all cursor-pointer shadow-2xs active:scale-95"
+              title="বন্ধুকে রেফার করে আয় করুন ৳৩০"
+            >
+              <Gift className="w-3.5 h-3.5 text-amber-600 stroke-[2.5]" />
+              <span className="hidden xl:inline">রেফার:</span>
+              <span>৳৩০</span>
             </button>
           )}
 

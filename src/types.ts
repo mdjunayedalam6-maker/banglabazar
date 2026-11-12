@@ -108,8 +108,8 @@ export interface Product {
   sku?: string; // New field
   titleBn: string;
   titleEn: string;
-  descriptionBn: string;
-  descriptionEn: string;
+  descriptionBn?: string;
+  descriptionEn?: string;
   category: string;
   subcategory?: string;
   brand: string;
@@ -127,7 +127,7 @@ export interface Product {
   isFeatured?: boolean;
   isBestSeller?: boolean;
   isNewArrival?: boolean;
-  tags: string[];
+  tags?: string[];
   variants?: {
     type: 'size' | 'color' | 'weight' | 'storage';
     options: string[];
@@ -178,6 +178,32 @@ export interface OrderItem {
 
 export type OrderStatus = 'placed' | 'processing' | 'shipped' | 'out_for_delivery' | 'delivered' | 'cancelled' | 'forwarded_to_shopbase';
 
+export type WalletTransactionType = 'deposit' | 'withdraw' | 'order_payment' | 'refund' | 'bonus' | 'admin_adjustment';
+export type WalletTransactionStatus = 'completed' | 'pending' | 'rejected';
+export type WalletPaymentMethod = 'bangla_qr' | 'bkash' | 'nagad' | 'rocket' | 'bank' | 'wallet' | 'system';
+
+export interface WalletTransaction {
+  id: string; // e.g. "TXN-84920"
+  userId: string;
+  userName?: string;
+  userPhone?: string;
+  type: WalletTransactionType;
+  amount: number;
+  date: string;
+  status: WalletTransactionStatus;
+  method: WalletPaymentMethod;
+  accountNumber?: string; // sender number or withdrawal destination account
+  bankDetails?: {
+    bankName?: string;
+    accountHolder?: string;
+    branchName?: string;
+    routingNumber?: string;
+  };
+  trxId?: string; // Transaction ID for deposit verification
+  note?: string;
+  rejectionReason?: string;
+}
+
 export interface Order {
   id: string;
   trackingNumber: string;
@@ -188,7 +214,7 @@ export interface Order {
   shippingFee: number;
   discount: number;
   total: number;
-  paymentMethod: 'cod' | 'bangla_qr' | 'bkash' | 'nagad' | 'rocket' | 'card';
+  paymentMethod: 'cod' | 'bangla_qr' | 'wallet' | 'bkash' | 'nagad' | 'rocket' | 'card';
   paymentStatus: 'paid' | 'pending';
   shippingAddress: {
     fullName: string;
@@ -219,6 +245,16 @@ export interface Order {
   };
 }
 
+export interface ReferralRecord {
+  friendId: string;
+  friendName: string;
+  friendPhone?: string;
+  date: string;
+  firstOrderPlaced: boolean;
+  rewardClaimed: boolean;
+  bonusAmount: number; // 30 BDT
+}
+
 export interface User {
   id: string;
   name: string;
@@ -231,6 +267,14 @@ export interface User {
   thana: string;
   village: string;
   avatar: string;
+  balance?: number; // Customer wallet balance in ৳ (BDT)
+  walletTransactions?: WalletTransaction[]; // History of deposits, withdrawals, order payments, bonuses
+  referralCode?: string; // Unique referral code (e.g. "BB-637253")
+  referredBy?: string; // Referral code of the friend who invited them
+  referrals?: ReferralRecord[]; // List of friends referred by this user
+  pendingWelcomeBonus?: number; // 50 BDT welcome bonus for new accounts (unlocked on first order)
+  hasCompletedFirstOrder?: boolean; // Set to true once the first order is placed
+  firstOrderBonusUnlocked?: boolean; // Set to true once the 50 BDT bonus is credited to wallet
   addresses: {
     id: string;
     title: string;

@@ -528,7 +528,7 @@ export async function updateAllProductsProfitMarginInSupabase(
       const { error: upsertErr } = await supabase.from('products').upsert(updatedBatch);
       if (!upsertErr) {
         processed += updatedBatch.length;
-        if (onProgress) onProgress(processed, 11902);
+        if (onProgress) onProgress(processed, 12118);
       }
 
       if (data.length < step) break;

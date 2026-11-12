@@ -17,7 +17,9 @@ import {
   QrCode,
   Download,
   Eye,
-  X
+  X,
+  Wallet,
+  Gift
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BANGLADESH_DIVISIONS } from '../data/mockData';
@@ -64,8 +66,8 @@ export const CheckoutPage: React.FC = () => {
   const [address, setAddress] = useState(
     currentUser?.addresses?.[0]?.address || currentUser?.village || ''
   );
-  // Payment Method: Strictly Cash on Delivery and Bangla QR as requested
-  const [paymentMethod, setPaymentMethod] = useState<'cod' | 'bangla_qr'>('cod');
+  // Payment Method: Cash on Delivery, Bangla QR, or Customer Wallet Balance
+  const [paymentMethod, setPaymentMethod] = useState<'cod' | 'bangla_qr' | 'wallet'>('cod');
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const [deliveryArea, setDeliveryArea] = useState<'dhaka' | 'outside'>(() => {
     if (initialDivObj.nameBn === 'ঢাকা' && initialDistrict.includes('ঢাকা')) {
@@ -201,6 +203,18 @@ export const CheckoutPage: React.FC = () => {
         'error'
       );
       return;
+    }
+    if (paymentMethod === 'wallet') {
+      const userBal = currentUser?.balance || 0;
+      if (userBal < calculatedTotal) {
+        addToast(
+          language === 'bn'
+            ? `ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই! আপনার ব্যালেন্স ৳${userBal}, প্রয়োজন ৳${calculatedTotal}`
+            : `Insufficient wallet balance! You have ৳${userBal}, needed ৳${calculatedTotal}`,
+          'error'
+        );
+        return;
+      }
     }
 
     setIsSubmitting(true);
@@ -466,14 +480,65 @@ export const CheckoutPage: React.FC = () => {
               <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${
                 paymentMethod === 'cod' 
                   ? 'text-emerald-700 bg-emerald-50 border-emerald-200' 
+                  : paymentMethod === 'wallet'
+                  ? 'text-emerald-800 bg-emerald-100 border-emerald-300'
                   : 'text-red-700 bg-red-50 border-red-200'
               }`}>
-                {paymentMethod === 'cod' ? 'ক্যাশ অন ডেলিভারি' : 'বাংলা কিউআর (Bangla QR)'}
+                {paymentMethod === 'cod' 
+                  ? 'ক্যাশ অন ডেলিভারি' 
+                  : paymentMethod === 'wallet'
+                  ? 'ওয়ালেট ব্যালেন্স'
+                  : 'বাংলা কিউআর (Bangla QR)'}
               </span>
             </div>
 
-            {/* Strictly 2 Options: 1. Cash On Delivery, 2. Bangla QR */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* Welcome Bonus Notice for 1st order */}
+            {currentUser && !currentUser.hasCompletedFirstOrder && (
+              <div className="p-2.5 rounded-xl bg-gradient-to-r from-amber-50 to-emerald-50 border border-amber-300 flex items-center justify-between gap-3 shadow-2xs">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <Gift className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs font-black text-slate-900 flex items-center gap-1.5">
+                      <span>১ম অর্ডার বোনাস: ৳৫০</span>
+                      <span className="text-[9px] font-black bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded-full">অফার</span>
+                    </div>
+                    <div className="text-[11px] text-slate-600 truncate">অর্ডার শেষ হলেই ওয়ালেটে ৫০ টাকা জমা হবে (২য় অর্ডারে ব্যবহার্য)</div>
+                  </div>
+                </div>
+                <span className="text-xs font-black text-amber-700 bg-white px-2.5 py-1 rounded-lg border border-amber-200 shadow-2xs shrink-0">
+                  +৳৫০
+                </span>
+              </div>
+            )}
+
+            {/* Wallet Balance Usage Card */}
+            {currentUser && (currentUser.balance || 0) > 0 && (
+              <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 flex items-center justify-between gap-3 shadow-2xs">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs font-black text-emerald-950 flex items-center gap-1.5">
+                      <span>ওয়ালেট ব্যালেন্স: {formatPrice(currentUser.balance || 0)}</span>
+                    </div>
+                    <div className="text-[11px] text-emerald-800 truncate">ওয়ালেট থেকে ১-ক্লিকে পরিশোধ করতে নিচে অপশনটি সিলেক্ট করুন</div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('wallet')}
+                  className="text-xs font-black text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-lg shadow-xs shrink-0 cursor-pointer transition-colors"
+                >
+                  ব্যবহার করুন
+                </button>
+              </div>
+            )}
+
+            {/* Payment Options: 1. Cash On Delivery, 2. Bangla QR, 3. Wallet Balance (if balance > 0) */}
+            <div className={`grid grid-cols-1 ${currentUser && (currentUser.balance || 0) > 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-3`}>
               {/* 1. Cash On Delivery */}
               <button
                 type="button"
@@ -496,7 +561,7 @@ export const CheckoutPage: React.FC = () => {
                       <span className="text-xs sm:text-sm font-black text-slate-900">ক্যাশ অন ডেলিভারি</span>
                     </div>
                     <span className="text-[11px] text-slate-500 font-medium block mt-0.5">
-                      পণ্য হাতে পেয়ে দেখে মূল্য পরিশোধ
+                      পণ্য হাতে পেয়ে দেখে পরিশোধ
                     </span>
                   </div>
                 </div>
@@ -524,10 +589,10 @@ export const CheckoutPage: React.FC = () => {
                   <div>
                     <div className="flex items-center gap-1.5">
                       <QrCode className="w-4 h-4 text-red-600" />
-                      <span className="text-xs sm:text-sm font-black text-slate-900">Bangla QR (বাংলা কিউআর)</span>
+                      <span className="text-xs sm:text-sm font-black text-slate-900">Bangla QR</span>
                     </div>
                     <span className="text-[11px] text-slate-500 font-medium block mt-0.5">
-                      বিকাশ, নগদ, রকেট, সেলফিন ও সকল ব্যাংক
+                      বিকাশ, নগদ ও সকল ব্যাংক
                     </span>
                   </div>
                 </div>
@@ -535,16 +600,77 @@ export const CheckoutPage: React.FC = () => {
                   ০% চার্জ
                 </span>
               </button>
+
+              {/* 3. Wallet Balance Option (If customer has balance) */}
+              {currentUser && (currentUser.balance || 0) > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('wallet')}
+                  className={`p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
+                    paymentMethod === 'wallet'
+                      ? 'border-emerald-600 bg-emerald-50/90 ring-2 ring-emerald-600/15 shadow-sm'
+                      : 'border-slate-200 hover:border-slate-300 bg-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                      paymentMethod === 'wallet' ? 'border-emerald-600 bg-emerald-600' : 'border-slate-300 bg-white'
+                    }`}>
+                      {paymentMethod === 'wallet' && <div className="w-2 h-2 rounded-full bg-white" />}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <Wallet className="w-4 h-4 text-emerald-700" />
+                        <span className="text-xs sm:text-sm font-black text-slate-900">ওয়ালেট ব্যালেন্স</span>
+                      </div>
+                      <span className="text-[11px] text-emerald-700 font-bold block mt-0.5">
+                        জমা: {formatPrice(currentUser.balance || 0)}
+                      </span>
+                    </div>
+                  </div>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md shrink-0 ${
+                    (currentUser.balance || 0) >= calculatedTotal
+                      ? 'bg-emerald-100 text-emerald-800'
+                      : 'bg-amber-100 text-amber-800'
+                  }`}>
+                    {(currentUser.balance || 0) >= calculatedTotal ? '১-ক্লিক পে' : 'ঘাটতি'}
+                  </span>
+                </button>
+              )}
             </div>
+
+            {/* Wallet Details Block */}
+            {paymentMethod === 'wallet' && (
+              <div className="p-4 rounded-2xl bg-emerald-50/90 border border-emerald-300 text-xs text-emerald-950 space-y-2 animate-fade-in">
+                <div className="flex items-center justify-between">
+                  <div className="font-bold flex items-center gap-2">
+                    <Wallet className="w-4 h-4 text-emerald-700" />
+                    <span>অ্যাকাউন্ট ব্যালেন্স থেকে মূল্য পরিশোধ:</span>
+                  </div>
+                  <span className="font-black text-sm text-emerald-900">
+                    {formatPrice(calculatedTotal)}
+                  </span>
+                </div>
+
+                {(currentUser?.balance || 0) >= calculatedTotal ? (
+                  <p className="text-[11px] text-emerald-800">
+                    অর্ডার কনফার্মে ওয়ালেট থেকে <strong>{formatPrice(calculatedTotal)}</strong> পরিশোধ হবে। ডেলিভারিতে কোনো টাকা লাগবে না।
+                  </p>
+                ) : (
+                  <div className="p-2 bg-amber-50 rounded-xl border border-amber-200 text-amber-900 text-[11px]">
+                    ব্যালেন্স ঘাটতি: {formatPrice(calculatedTotal - (currentUser?.balance || 0))}। অনুগ্রহ করে ক্যাশ অন ডেলিভারি বা বাংলা কিউআর বেছে নিন।
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* COD Details */}
             {paymentMethod === 'cod' && (
-              <div className="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 text-xs text-emerald-950 flex items-start gap-2.5 animate-fade-in">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <div className="text-[11px] text-emerald-900 leading-relaxed space-y-0.5">
-                  <strong className="font-bold text-emerald-950 block">কোনো অগ্রিম চার্জ ছাড়াই অর্ডার কনফার্ম করুন:</strong>
-                  <p className="text-slate-600">ডেলিভারি প্রতিনিধি আপনার ঠিকানায় পণ্য নিয়ে আসলে প্যাকেট চেক করে সরাসরি নগদ টাকায় মূল্য পরিশোধ করবেন।</p>
-                </div>
+              <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200/80 text-xs text-emerald-950 flex items-center gap-2 animate-fade-in">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="text-[11px] text-emerald-900 font-medium">
+                  <strong>অগ্রিম চার্জ নেই:</strong> পণ্য হাতে পেয়ে দেখে নগদ টাকায় মূল্য পরিশোধ করবেন।
+                </span>
               </div>
             )}
 
@@ -964,6 +1090,8 @@ export const OrderSuccessView: React.FC = () => {
             <span className="font-bold text-slate-800">
               {lastPlacedOrder.paymentMethod === 'bangla_qr'
                 ? (language === 'bn' ? 'বাংলা কিউআর (Bangla QR)' : 'Bangla QR')
+                : lastPlacedOrder.paymentMethod === 'wallet'
+                ? (language === 'bn' ? 'ওয়ালেট ব্যালেন্স (Wallet)' : 'Wallet Balance')
                 : lastPlacedOrder.paymentMethod === 'cod'
                 ? (language === 'bn' ? 'ক্যাশ অন ডেলিভারি' : 'Cash on Delivery')
                 : lastPlacedOrder.paymentMethod.toUpperCase()}

@@ -1,103 +1,76 @@
 import React, { useState } from 'react';
-import { 
-  Sparkles, 
-  TrendingUp, 
-  Award, 
-  ArrowRight, 
-  CheckCircle2, 
-  Mail, 
-  Send,
+import {
+  TrendingUp,
+  ArrowRight,
   Zap
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { ProductCard } from './ProductCard';
 import { DualCategoryShowcase } from './DualCategoryShowcase';
-import { BRANDS } from '../data/mockData';
+import { FlashSaleSection } from './FlashSaleSection';
+import { isProductInCategory } from '../utils/categoryMatcher';
 
 export const FeaturedSections: React.FC = () => {
-  const { products, isProductsLoading, language, t, setCurrentPage, setFilterState, addToast } = useApp();
-  const [activeTab, setActiveTab] = useState<'all' | 'electronics' | 'fashion' | 'grocery' | 'home'>('all');
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  const {
+    products,
+    categories,
+    isProductsLoading,
+    language,
+    setCurrentPage,
+    setFilterState,
+  } = useApp();
+
+  const [activeTab, setActiveTab] = useState<string>('all');
 
   const filteredFeatured = React.useMemo(() => {
-    return products.filter((p) => {
-      if (activeTab === 'all') return p.isFeatured;
-      return p.isFeatured && p.category === activeTab;
-    });
-  }, [products, activeTab]);
+    const inCategory = products.filter((p) =>
+      isProductInCategory(p, activeTab, 'all', categories)
+    );
+    const featuredOnly = inCategory.filter((p) => p.isFeatured);
+    return featuredOnly.length >= 4 ? featuredOnly : inCategory;
+  }, [products, activeTab, categories]);
 
   const displayedFeatured = React.useMemo(() => {
-    return filteredFeatured.slice(0, 16);
+    return filteredFeatured.slice(0, 12);
   }, [filteredFeatured]);
 
   const bestSellers = React.useMemo(() => {
-    return products.filter((p) => p.isBestSeller).slice(0, 4);
+    const list = products.filter((p) => p.isBestSeller);
+    return (list.length >= 4 ? list : products).slice(0, 4);
   }, [products]);
 
   const newArrivals = React.useMemo(() => {
-    return products.filter((p) => p.isNewArrival || p.isFlashSale).slice(0, 4);
+    const list = products.filter((p) => p.isNewArrival || p.isFlashSale);
+    return (list.length >= 4 ? list : products.slice(4)).slice(0, 4);
   }, [products]);
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail || !newsletterEmail.includes('@')) {
-      addToast(
-        language === 'bn' ? 'দয়া করে একটি সঠিক ইমেইল প্রদান করুন' : 'Please enter a valid email',
-        'error'
-      );
-      return;
-    }
-    setIsSubscribed(true);
-    addToast(
-      language === 'bn' 
-        ? 'ধন্যবাদ! আপনি সফলভাবে নিউজলেটারে যুক্ত হয়েছেন।' 
-        : 'Thank you for subscribing to our newsletter!',
-      'success'
-    );
-    setNewsletterEmail('');
-  };
-
-  const handleBrandClick = (brandName: string) => {
-    setFilterState((prev) => ({
-      ...prev,
-      brand: [brandName],
-      category: 'all',
-      searchQuery: '',
-    }));
-    setCurrentPage('shop');
-  };
+  const featuredTabs = [
+    { id: 'all', labelBn: 'সকল পণ্য', labelEn: 'All' },
+    { id: 'womens-clothing', labelBn: 'মেয়েদের পোশাক', labelEn: 'Womenswear' },
+    { id: 'mens-clothing', labelBn: 'ছেলেদের পোশাক', labelEn: 'Menswear' },
+    { id: 'electronics-gadgets', labelBn: 'ইলেকট্রনিক্স', labelEn: 'Electronics' },
+    { id: 'home-living', labelBn: 'গৃহ সামগ্রী', labelEn: 'Home Living' },
+    { id: 'winter-collection', labelBn: 'শীতের কালেকশন', labelEn: 'Winter' },
+  ];
 
   return (
-    <div className="space-y-12 pb-8">
-      {/* 1. Featured Products with Interactive Tabs */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
-          <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1">
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              <span>{language === 'bn' ? 'সেরা বাছাইকৃত পণ্য' : 'Curated Picks'}</span>
-            </div>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-              {language === 'bn' ? 'ফিচারড প্রোডাক্টস' : 'Featured Products'}
-            </h2>
-          </div>
+    <div className="space-y-10 sm:space-y-12 pb-10">
+      {/* 1. Featured Products with Real Category Tabs */}
+      <section className="max-w-7xl mx-auto px-3 sm:px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-5 gap-4">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            {language === 'bn' ? 'জনপ্রিয় ও ফিচারড পণ্য' : 'Featured Products'}
+          </h2>
 
-          {/* Category Tabs */}
-          <div className="flex items-center gap-1 overflow-x-auto pb-1 max-w-full">
-            {[
-              { id: 'all', labelBn: 'সকল পণ্য', labelEn: 'All' },
-              { id: 'electronics', labelBn: 'ইলেকট্রনিক্স', labelEn: 'Electronics' },
-              { id: 'fashion', labelBn: 'ফ্যাশন', labelEn: 'Fashion' },
-              { id: 'grocery', labelBn: 'মুদি বাজার', labelEn: 'Grocery' },
-              { id: 'home', labelBn: 'হোম অ্যাপ্লায়েন্স', labelEn: 'Home' },
-            ].map((tab) => (
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none max-w-full">
+            {featuredTabs.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer shrink-0 ${
                   activeTab === tab.id
-                    ? 'bg-emerald-700 text-white shadow-xs'
+                    ? 'bg-[#00873E] text-white shadow-xs'
                     : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80'
                 }`}
               >
@@ -110,14 +83,10 @@ export const FeaturedSections: React.FC = () => {
         {isProductsLoading && products.length === 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white rounded-2xl p-3.5 border border-slate-200/80 animate-pulse space-y-3">
-                <div className="w-full pt-[100%] bg-slate-200 rounded-xl"></div>
-                <div className="h-4 bg-slate-200 rounded w-3/4"></div>
-                <div className="h-3 bg-slate-100 rounded w-1/2"></div>
-                <div className="flex justify-between items-center pt-2">
-                  <div className="h-5 bg-slate-200 rounded w-1/3"></div>
-                  <div className="h-7 bg-slate-200 rounded-xl w-1/3"></div>
-                </div>
+              <div key={i} className="bg-white rounded-2xl p-3.5 border border-slate-200/80 space-y-3">
+                <div className="w-full pt-[100%] bg-slate-100 rounded-xl" />
+                <div className="h-4 bg-slate-100 rounded w-3/4" />
+                <div className="h-3 bg-slate-100 rounded w-1/2" />
               </div>
             ))}
           </div>
@@ -129,23 +98,24 @@ export const FeaturedSections: React.FC = () => {
               ))}
             </div>
             {filteredFeatured.length > displayedFeatured.length && (
-              <div className="text-center pt-2">
+              <div className="text-center pt-1">
                 <button
+                  type="button"
                   onClick={() => {
                     setFilterState((prev) => ({
                       ...prev,
-                      category: activeTab === 'all' ? 'all' : activeTab,
+                      category: activeTab,
                       subcategory: 'all',
                       searchQuery: '',
                     }));
                     setCurrentPage('shop');
                   }}
-                  className="px-6 py-3 bg-white hover:bg-slate-50 text-emerald-800 font-bold text-xs sm:text-sm rounded-xl border border-emerald-600/30 hover:border-emerald-600 shadow-xs inline-flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
+                  className="px-6 py-3 bg-white hover:bg-emerald-50 text-[#00873E] font-bold text-xs sm:text-sm rounded-xl border border-[#00873E]/30 hover:border-[#00873E] inline-flex items-center gap-2 transition-colors cursor-pointer tabular-nums"
                 >
                   <span>
-                    {language === 'bn' 
-                      ? `সকল ফিচারড পণ্য দেখুন (${filteredFeatured.length}টি পণ্য)` 
-                      : `View All Featured Products (${filteredFeatured.length} items)`}
+                    {language === 'bn'
+                      ? `সবগুলো দেখুন (${filteredFeatured.length}টি পণ্য)`
+                      : `View All Products (${filteredFeatured.length})`}
                   </span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
@@ -159,36 +129,43 @@ export const FeaturedSections: React.FC = () => {
         )}
       </section>
 
-      {/* 2. Dynamic Auto-Rotating Category Showcase (Panjabi & Festive + Pure Food & Grocery) */}
+      {/* 3. Flash Sale Countdown Showcase */}
+      <FlashSaleSection />
+
+      {/* 4. Dual Category Spotlight */}
       <DualCategoryShowcase />
 
-      {/* 3. Best Sellers & New Arrivals Row */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* 5. Best Sellers & New Arrivals */}
+      <section className="max-w-7xl mx-auto px-3 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Best Sellers */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center font-black">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
                   <TrendingUp className="w-4 h-4" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900">
-                  {language === 'bn' ? 'বেস্ট সেলার (সেরা বিক্রিত)' : 'Best Sellers'}
-                </h3>
+                <div>
+                  <h3 className="text-base sm:text-lg font-black text-slate-900">
+                    {language === 'bn' ? 'সেরা বিক্রিত পণ্য' : 'Best Sellers'}
+                  </h3>
+                </div>
               </div>
               <button
+                type="button"
                 onClick={() => {
                   setFilterState((prev) => ({ ...prev, category: 'all', sortBy: 'featured', searchQuery: '' }));
                   setCurrentPage('shop');
                 }}
-                className="text-xs font-bold text-emerald-700 hover:underline"
+                className="text-xs font-bold text-[#00873E] hover:underline flex items-center gap-1 cursor-pointer"
               >
-                {language === 'bn' ? 'সব দেখুন' : 'See all'}
+                <span>{language === 'bn' ? 'সব দেখুন' : 'See all'}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {bestSellers.map((prod, idx) => (
+              {bestSellers.map((prod) => (
                 <ProductCard key={prod.id} product={prod} />
               ))}
             </div>
@@ -197,34 +174,37 @@ export const FeaturedSections: React.FC = () => {
           {/* New Arrivals */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-black">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-emerald-100 text-[#00873E] flex items-center justify-center">
                   <Zap className="w-4 h-4" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900">
-                  {language === 'bn' ? 'নতুন এসেছে (নতুন কালেকশন)' : 'New Arrivals'}
-                </h3>
+                <div>
+                  <h3 className="text-base sm:text-lg font-black text-slate-900">
+                    {language === 'bn' ? 'নতুন কালেকশন' : 'New Arrivals'}
+                  </h3>
+                </div>
               </div>
               <button
+                type="button"
                 onClick={() => {
                   setFilterState((prev) => ({ ...prev, category: 'all', sortBy: 'newest', searchQuery: '' }));
                   setCurrentPage('shop');
                 }}
-                className="text-xs font-bold text-emerald-700 hover:underline"
+                className="text-xs font-bold text-[#00873E] hover:underline flex items-center gap-1 cursor-pointer"
               >
-                {language === 'bn' ? 'সব দেখুন' : 'See all'}
+                <span>{language === 'bn' ? 'সব দেখুন' : 'See all'}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {newArrivals.map((prod, idx) => (
+              {newArrivals.map((prod) => (
                 <ProductCard key={prod.id} product={prod} />
               ))}
             </div>
           </div>
         </div>
       </section>
-
     </div>
   );
 };

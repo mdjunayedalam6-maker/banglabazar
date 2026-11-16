@@ -50,7 +50,7 @@ const SLIDES_DATA: BannerSlide[] = [
     discountTextEn: 'Up to 70% Off',
     btnTextBn: 'উৎসবের অফার উপভোগ করুন',
     btnTextEn: 'Explore Festive Deals',
-    categoryTarget: 'fashion',
+    categoryTarget: 'mens-clothing',
     image: eidBannerImg,
     accentColor: 'from-amber-500 to-amber-600',
     showTextOverlay: false,
@@ -68,7 +68,7 @@ const SLIDES_DATA: BannerSlide[] = [
     discountTextEn: 'Flat 20% Cashback',
     btnTextBn: 'টেক অফার দেখুন',
     btnTextEn: 'Discover Gadgets',
-    categoryTarget: 'electronics',
+    categoryTarget: 'electronics-gadgets',
     image: techBannerImg,
     accentColor: 'from-emerald-500 to-teal-600',
     showTextOverlay: false,
@@ -86,7 +86,7 @@ const SLIDES_DATA: BannerSlide[] = [
     discountTextEn: 'Up to ৳200 Off',
     btnTextBn: 'মুদি বাজার অর্ডার করুন',
     btnTextEn: 'Shop Groceries',
-    categoryTarget: 'grocery',
+    categoryTarget: 'other-categories',
     image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600&h=600&auto=format&fit=crop&q=80',
     accentColor: 'from-green-500 to-emerald-600',
     showTextOverlay: false,
@@ -104,7 +104,7 @@ const SLIDES_DATA: BannerSlide[] = [
     discountTextEn: 'Up to 25% Off',
     btnTextBn: 'হোম অ্যাপ্লায়েন্স দেখুন',
     btnTextEn: 'Shop Appliances',
-    categoryTarget: 'home',
+    categoryTarget: 'home-living',
     image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1600&h=600&auto=format&fit=crop&q=80',
     accentColor: 'from-blue-500 to-indigo-600',
     showTextOverlay: false,
@@ -122,7 +122,7 @@ const SLIDES_DATA: BannerSlide[] = [
     discountTextEn: 'Buy 1 Get 1 / 30% Off',
     btnTextBn: 'বিউটি অফার দেখুন',
     btnTextEn: 'Shop Beauty',
-    categoryTarget: 'beauty',
+    categoryTarget: 'jewelry-accessories',
     image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1600&h=600&auto=format&fit=crop&q=80',
     accentColor: 'from-pink-500 to-rose-600',
     showTextOverlay: false,
@@ -140,7 +140,7 @@ const SLIDES_DATA: BannerSlide[] = [
     discountTextEn: 'Free Delivery on ৳1000+',
     btnTextBn: 'সব হট ডিল দেখুন',
     btnTextEn: 'Explore Flash Deals',
-    categoryTarget: 'electronics',
+    categoryTarget: 'womens-clothing',
     image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1600&h=600&auto=format&fit=crop&q=80',
     accentColor: 'from-amber-500 to-orange-600',
     showTextOverlay: false,
@@ -228,12 +228,12 @@ export const BannerSlider: React.FC = () => {
 
   return (
     <section 
-      className="w-full max-w-7xl mx-auto px-2 sm:px-4 md:px-6 pt-2 pb-1"
+      className="w-full max-w-7xl mx-auto px-3 sm:px-6 pt-3 sm:pt-4 pb-1"
       aria-label="Promotional Showcase"
     >
-      {/* Slim, Compact, Ultra-Modern Hero Banner Canvas */}
+      {/* Crisp Editorial Hero Banner Canvas */}
       <div 
-        className={`relative w-full h-[165px] sm:h-[210px] md:h-[260px] lg:h-[300px] rounded-xl sm:rounded-2xl overflow-hidden shadow-md shadow-slate-900/10 bg-slate-950 border border-slate-800/80 group select-none transition-all duration-300 ${
+        className={`relative w-full h-[180px] sm:h-[240px] md:h-[290px] lg:h-[340px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm bg-slate-900 border border-slate-200/80 group select-none transition-all duration-300 ${
           !hasTextOverlay ? 'cursor-pointer' : ''
         }`}
         onMouseEnter={() => setIsPaused(true)}
@@ -247,7 +247,7 @@ export const BannerSlider: React.FC = () => {
           }
         }}
       >
-        {/* Background Slides with smooth cross-fade & subtle ken-burns zoom */}
+        {/* Background Slides */}
         {slides.map((slide, index) => {
           const isActive = index === currentSlide;
           const slideHasText = Boolean(slide.showTextOverlay && (slide.titleBn || slide.badgeBn));
@@ -259,42 +259,36 @@ export const BannerSlider: React.FC = () => {
                 isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
-              {/* Background Cover Image */}
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out"
                 style={{ backgroundImage: `url(${slide.image})` }}
               />
 
-              {/* Multi-tier Cinematic Gradient Overlays - ONLY when text is requested */}
               {slideHasText && (
                 <>
-                  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-950/30 sm:to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/40" />
-                  <div className="absolute -left-12 -top-12 w-64 h-64 rounded-full bg-emerald-500/15 blur-2xl pointer-events-none" />
-                  <div className="absolute right-6 bottom-4 w-52 h-52 rounded-full bg-amber-500/10 blur-2xl pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/30" />
                 </>
               )}
             </div>
           );
         })}
 
-        {/* Foreground Content for Current Slide - Slim & Compact Layout (Only when text overlay is requested) */}
+        {/* Foreground Content (Only when text overlay is enabled) */}
         {hasTextOverlay && (
-          <div className="relative z-20 h-full flex items-center justify-between px-3.5 sm:px-8 md:px-12 text-white">
-            {/* Left / Main Text & Action Column */}
+          <div className="relative z-20 h-full flex items-center justify-between px-4 sm:px-8 md:px-12 text-white">
             <div className="max-w-xl md:max-w-2xl flex flex-col justify-center py-2">
-              {/* Top Badges Row */}
-              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1 sm:mb-1.5">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1.5">
                 {activeSlide.badgeBn && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-600/90 text-white text-[10px] sm:text-xs font-bold shadow-xs backdrop-blur-md">
-                    <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-300 animate-pulse" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-[#00873E]/90 text-white text-[10px] sm:text-xs font-bold backdrop-blur-xs">
+                    <Sparkles className="w-3 h-3 text-amber-300" />
                     <span>{language === 'bn' ? activeSlide.badgeBn : activeSlide.badgeEn}</span>
                   </span>
                 )}
 
                 {activeSlide.discountTextBn && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] sm:text-xs font-black shadow-xs">
-                    <Flame className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-slate-950 text-slate-950" />
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-amber-400 text-slate-950 text-[10px] sm:text-xs font-black">
+                    <Flame className="w-3 h-3 fill-slate-950" />
                     <span>{language === 'bn' ? activeSlide.discountTextBn : activeSlide.discountTextEn}</span>
                   </span>
                 )}

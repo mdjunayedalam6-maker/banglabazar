@@ -17,7 +17,8 @@ import {
   WalletTransactionType,
   WalletTransactionStatus,
   WalletPaymentMethod,
-  ReferralRecord
+  ReferralRecord,
+  DeliveryAddress
 } from '../types';
 import { 
   PRODUCTS as INITIAL_PRODUCTS, 
@@ -112,7 +113,11 @@ interface AppContextType {
   loginUser: (identifier: string, password?: string) => boolean;
   loginWithGoogle: () => Promise<void>;
   registerUser: (userData: Partial<User>) => boolean;
-  updateUserProfile: (userData: Partial<User>) => void;
+  updateUserProfile: (userData: Partial<User>) => boolean;
+  addDeliveryAddress: (addr: Omit<DeliveryAddress, 'id'>) => void;
+  updateDeliveryAddress: (id: string, addr: Partial<DeliveryAddress>) => void;
+  deleteDeliveryAddress: (id: string) => void;
+  setDefaultDeliveryAddress: (id: string) => void;
   logoutUser: () => void;
   formatPrice: (amount: number) => string;
   cartSubtotal: number;
@@ -2883,8 +2888,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         {
           id: `addr-${Date.now()}`,
           title: language === 'bn' ? 'মূল ঠিকানা (Default Address)' : 'Primary Address',
-          address: fullAddrString,
+          recipientName: userData.name?.trim() || '',
+          phone: cleanPhone,
+          division: userData.division?.trim() || '',
           district: userData.district?.trim() || '',
+          thana: userData.thana?.trim() || '',
+          address: userData.village?.trim() || fullAddrString,
           isDefault: true
         }
       ] : [])
@@ -2930,13 +2939,141 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return true;
   };
 
-  const updateUserProfile = (userData: Partial<User>) => {
-    if (!currentUser) return;
-    const updatedUser = { ...currentUser, ...userData };
+  const updateUserProfile = (userData: Partial<User>): boolean => {
+    if (!currentUser) return false;
+
+    if (userData.phone !== undefined) {
+      const cleanPhone = userData.phone.trim();
+      if (!cleanPhone) {
+        addToast(
+          language === 'bn' ? 'দয়া করে একটি সঠিক মোবাইল নম্বর লিখুন' : 'Please enter a valid mobile number',
+          'error'
+        );
+        return false;
+      }
+      const duplicate = users.find(
+        (u) => u.id !== currentUser.id && u.phone && u.phone.trim() === cleanPhone
+      );
+      if (duplicate) {
+        addToast(
+          language === 'bn'
+            ? 'এই মোবাইল নম্বরটি অন্য একটি অ্যাকাউন্টে ব্যবহৃত হচ্ছে'
+            : 'This mobile number is already registered to another account',
+          'error'
+        );
+        return false;
+      }
+    }
+
+    const updatedUser: User = {
+      ...currentUser,
+      ...userData,
+      name: userData.name !== undefined ? userData.name.trim() : currentUser.name,
+      phone: userData.phone !== undefined ? userData.phone.trim() : currentUser.phone,
+      email: userData.email !== undefined ? userData.email.trim() : currentUser.email,
+    };
+
     setCurrentUser(updatedUser);
     setUsers(prev => prev.map(u => u.id === updatedUser.id ? updatedUser : u));
     syncUserToSupabase(updatedUser);
-    addToast(language === 'bn' ? 'প্রোফাইল আপডেট করা হয়েছে' : 'Profile updated successfully', 'success');
+    addToast(language === 'bn' ? 'প্রোফাইল সফলভাবে আপডেট করা হয়েছে' : 'Profile updated successfully', 'success');
+    return true;
+  };
+
+  const addDeliveryAddress = (addr: Omit<DeliveryAddress, 'id'>) => {
+    if (!currentUser) return;
+    const existing = currentUser.addresses || [];
+    const shouldBeDefault = addr.isDefault || existing.length === 0;
+    const newAddr: DeliveryAddress = {
+      ...addr,
+      id: `addr-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`,
+      isDefault: shouldBeDefault,
+    };
+    const nextAddresses = shouldBeDefault
+      ? [newAddr, ...existing.map((a) => ({ ...a, isDefault: false }))]
+      : [...existing, newAddr];
+
+    const updatedUser: User = {
+      ...currentUser,
+      addresses: nextAddresses,
+      ...(shouldBeDefault && addr.division ? { division: addr.division } : {}),
+      ...(shouldBeDefault && addr.district ? { district: addr.district } : {}),
+      ...(shouldBeDefault && addr.thana ? { thana: addr.thana } : {}),
+      ...(shouldBeDefault && addr.address ? { village: addr.address } : {}),
+    };
+    setCurrentUser(updatedUser);
+    setUsers(prev => prev.map(u => u.id === updatedUser.id ? updatedUser : u));
+    syncUserToSupabase(updatedUser);
+    addToast(language === 'bn' ? 'নতুন ডেলিভারি ঠিকানা যোগ করা হয়েছে' : 'New delivery address added', 'success');
+  };
+
+  const updateDeliveryAddress = (id: string, addr: Partial<DeliveryAddress>) => {
+    if (!currentUser) return;
+    const existing = currentUser.addresses || [];
+    const makeDefault = addr.isDefault === true;
+    const nextAddresses = existing.map((item) => {
+      if (item.id === id) {
+        return { ...item, ...addr };
+      }
+      return makeDefault ? { ...item, isDefault: false } : item;
+    });
+
+    const edited = nextAddresses.find((a) => a.id === id);
+    const updatedUser: User = {
+      ...currentUser,
+      addresses: nextAddresses,
+      ...(edited?.isDefault && edited.division ? { division: edited.division } : {}),
+      ...(edited?.isDefault && edited.district ? { district: edited.district } : {}),
+      ...(edited?.isDefault && edited.thana ? { thana: edited.thana } : {}),
+      ...(edited?.isDefault && edited.address ? { village: edited.address } : {}),
+    };
+    setCurrentUser(updatedUser);
+    setUsers(prev => prev.map(u => u.id === updatedUser.id ? updatedUser : u));
+    syncUserToSupabase(updatedUser);
+    addToast(language === 'bn' ? 'ডেলিভারি ঠিকানা আপডেট করা হয়েছে' : 'Delivery address updated', 'success');
+  };
+
+  const deleteDeliveryAddress = (id: string) => {
+    if (!currentUser) return;
+    const existing = currentUser.addresses || [];
+    const filtered = existing.filter((a) => a.id !== id);
+    if (filtered.length > 0 && !filtered.some((a) => a.isDefault)) {
+      filtered[0] = { ...filtered[0], isDefault: true };
+    }
+    const updatedUser: User = {
+      ...currentUser,
+      addresses: filtered,
+    };
+    setCurrentUser(updatedUser);
+    setUsers(prev => prev.map(u => u.id === updatedUser.id ? updatedUser : u));
+    syncUserToSupabase(updatedUser);
+    addToast(language === 'bn' ? 'ডেলিভারি ঠিকানা মুছে ফেলা হয়েছে' : 'Delivery address deleted', 'info');
+  };
+
+  const setDefaultDeliveryAddress = (id: string) => {
+    if (!currentUser) return;
+    const existing = currentUser.addresses || [];
+    const target = existing.find((a) => a.id === id);
+    if (!target) return;
+    const nextAddresses = existing.map((a) => ({
+      ...a,
+      isDefault: a.id === id,
+    }));
+    const updatedUser: User = {
+      ...currentUser,
+      addresses: nextAddresses,
+      ...(target.division ? { division: target.division } : {}),
+      ...(target.district ? { district: target.district } : {}),
+      ...(target.thana ? { thana: target.thana } : {}),
+      ...(target.address ? { village: target.address } : {}),
+    };
+    setCurrentUser(updatedUser);
+    setUsers(prev => prev.map(u => u.id === updatedUser.id ? updatedUser : u));
+    syncUserToSupabase(updatedUser);
+    addToast(
+      language === 'bn' ? `"${target.title}" ডিফল্ট ঠিকানা হিসেবে সেট হয়েছে` : `"${target.title}" set as default address`,
+      'success'
+    );
   };
 
   const logoutUser = () => {
@@ -3272,6 +3409,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         loginWithGoogle,
         registerUser,
         updateUserProfile,
+        addDeliveryAddress,
+        updateDeliveryAddress,
+        deleteDeliveryAddress,
+        setDefaultDeliveryAddress,
         logoutUser,
         formatPrice,
         cartSubtotal,

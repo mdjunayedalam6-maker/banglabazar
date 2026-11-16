@@ -1,30 +1,24 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { 
-  Zap, 
-  ShoppingBag, 
-  Star, 
-  ChevronLeft, 
-  ChevronRight, 
-  ArrowRight, 
-  Sparkles, 
-  ShieldCheck, 
-  Eye, 
-  Truck, 
-  CheckCircle2,
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  Star,
+  ChevronLeft,
+  ChevronRight,
+  ArrowRight,
   Heart
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { Product } from '../types';
+import { isProductInCategory } from '../utils/categoryMatcher';
+import { getProductMainImage, getCategoryFallbackImage } from '../utils/productImageUtils';
 
 interface ShowcasePanelProps {
   titleBn: string;
   titleEn: string;
   subtitleBn: string;
   subtitleEn: string;
-  badgeBn: string;
-  badgeEn: string;
-  badgeBg: string;
-  themeColor: 'amber' | 'emerald';
+  eyebrowBn: string;
+  eyebrowEn: string;
+  accent: 'emerald' | 'amber';
   categorySlug: string;
   products: Product[];
   autoRotateInterval?: number;
@@ -35,59 +29,41 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({
   titleEn,
   subtitleBn,
   subtitleEn,
-  badgeBn,
-  badgeEn,
-  badgeBg,
-  themeColor,
+  eyebrowBn,
+  eyebrowEn,
+  accent,
   categorySlug,
   products,
-  autoRotateInterval = 3800,
+  autoRotateInterval = 4000,
 }) => {
-  const { 
-    language, 
-    formatPrice, 
-    viewProductDetails, 
-    setCurrentPage, 
-    setFilterState, 
+  const {
+    language,
+    formatPrice,
+    viewProductDetails,
+    setCurrentPage,
+    setFilterState,
     toggleWishlist,
-    isInWishlist
+    isInWishlist,
   } = useApp();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   const total = products.length;
 
   const nextProduct = useCallback(() => {
     if (total <= 1) return;
-    setIsAnimating(true);
     setCurrentIndex((prev) => (prev + 1) % total);
-    setTimeout(() => setIsAnimating(false), 300);
   }, [total]);
 
   const prevProduct = useCallback(() => {
     if (total <= 1) return;
-    setIsAnimating(true);
     setCurrentIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
-    setTimeout(() => setIsAnimating(false), 300);
   }, [total]);
 
-  const goToProduct = (idx: number) => {
-    if (idx === currentIndex) return;
-    setIsAnimating(true);
-    setCurrentIndex(idx);
-    setTimeout(() => setIsAnimating(false), 300);
-  };
-
-  // Auto change timer - GPU clean without churning state
   useEffect(() => {
     if (isPaused || total <= 1) return;
-
-    const timer = setInterval(() => {
-      nextProduct();
-    }, autoRotateInterval);
-
+    const timer = setInterval(nextProduct, autoRotateInterval);
     return () => clearInterval(timer);
   }, [isPaused, total, autoRotateInterval, nextProduct]);
 
@@ -97,145 +73,152 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({
 
   const currentProduct = products[currentIndex] || products[0];
   const title = language === 'bn' ? currentProduct.titleBn : currentProduct.titleEn;
-  const isWishlisted = isInWishlist(currentProduct.id);
+  const isSaved = isInWishlist(currentProduct.id);
+  const isEmerald = accent === 'emerald';
 
   const handleViewAll = () => {
     setFilterState((prev) => ({
       ...prev,
       category: categorySlug,
+      subcategory: 'all',
       searchQuery: '',
     }));
     setCurrentPage('shop');
   };
 
-  const isAmber = themeColor === 'amber';
-
   return (
-    <div 
-      className={`rounded-xl border p-2 sm:p-3 relative overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between ${
-        isAmber 
-          ? 'bg-gradient-to-br from-amber-950/20 via-slate-900 to-slate-950 border-amber-500/30 text-white' 
-          : 'bg-gradient-to-br from-emerald-950/20 via-slate-900 to-slate-950 border-emerald-500/30 text-white'
-      }`}
+    <div
+      className="bg-white rounded-3xl border border-slate-200/80 p-4 sm:p-6 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Background Decorative Ambient Glow */}
-      <div 
-        className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl pointer-events-none opacity-20 ${
-          isAmber ? 'bg-amber-500' : 'bg-emerald-500'
-        }`} 
-      />
-
-      {/* Header Bar */}
-      <div className="relative z-10 flex items-center justify-between gap-1 mb-2 pb-2 border-b border-white/10">
-        <div className="flex flex-col overflow-hidden">
-          <div className="flex items-center gap-1">
-            <div className="flex flex-wrap gap-1">
-              {(language === 'bn' ? badgeBn : badgeEn).split(' • ').map((b, i) => (
-                <span key={i} className={`text-[8px] font-black uppercase px-1 py-0.5 rounded shadow-xs ${badgeBg}`}>
-                  {b}
-                </span>
-              ))}
-            </div>
-            <span className="flex items-center gap-0.5 text-[8px] text-slate-300 bg-white/10 px-1 py-0.5 rounded-full font-mono">
-              <span>{currentIndex + 1}/{total}</span>
-            </span>
-          </div>
-          <h3 className="text-sm font-bold text-white mt-0.5 truncate">
-            {language === 'bn' ? titleBn : titleEn}
-          </h3>
-        </div>
+      {/* Top Header */}
+      <div className="flex items-center justify-between gap-3 pb-3.5 border-b border-slate-100">
+        <h3 className="text-base sm:text-lg font-black text-slate-900 truncate">
+          {language === 'bn' ? titleBn : titleEn}
+        </h3>
 
         <button
+          type="button"
           onClick={handleViewAll}
-          className={`shrink-0 flex items-center gap-0.5 text-[10px] font-bold px-1.5 py-1 rounded border transition-all cursor-pointer ${
-            isAmber 
-              ? 'text-amber-300 border-amber-500/30 hover:bg-amber-500/20' 
-              : 'text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/20'
-          }`}
+          className="shrink-0 inline-flex items-center gap-1 text-xs font-bold text-[#00873E] hover:text-[#007033] px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition-colors cursor-pointer whitespace-nowrap"
         >
-          <span>{language === 'bn' ? 'সব' : 'All'}</span>
-          <ArrowRight className="w-3 h-3 shrink-0" />
+          <span>{language === 'bn' ? 'সব দেখুন' : 'View All'}</span>
+          <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
 
-      {/* Main Dynamic Product Card Presentation */}
-      <div 
+      {/* Featured Rotating Product Card */}
+      <div
         onClick={() => viewProductDetails(currentProduct)}
-        className={`relative z-10 bg-slate-900/80 backdrop-blur-md rounded-lg p-2 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer group flex flex-row gap-2 items-center ${
-          isAnimating ? 'opacity-80 scale-[0.99]' : 'opacity-100 scale-100'
-        }`}
+        className="my-4 p-3 sm:p-4 rounded-2xl bg-slate-50/80 hover:bg-emerald-50/40 border border-slate-200/70 transition-colors cursor-pointer group flex items-center gap-4"
       >
-        {/* Product Image Box */}
-        <div className="relative w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-slate-950">
+        <div className="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-2xl overflow-hidden bg-white border border-slate-200/70">
           <img
-            src={
-              currentProduct?.images?.[0]?.includes('_L_') && currentProduct.images[0].endsWith('.jpg')
-                ? currentProduct.images[0].replace(/\.jpg$/i, '.jpeg')
-                : currentProduct?.images?.[0] || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80'
-            }
+            src={getProductMainImage(currentProduct)}
             alt={title}
             referrerPolicy="no-referrer"
             onError={(e) => {
-              const target = e.currentTarget;
-              if (target.src.includes('_L_')) {
-                target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
-              } else {
-                target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80';
-              }
+              e.currentTarget.src = getCategoryFallbackImage(currentProduct.category);
             }}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
+          {currentProduct.discountPercentage && (
+            <span className="absolute top-1.5 left-1.5 bg-[#DC2626] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md tabular-nums">
+              -{currentProduct.discountPercentage}%
+            </span>
+          )}
         </div>
 
-        {/* Product Details Column */}
-        <div className="flex-1 min-w-0 flex flex-col justify-center">
-          <h4 className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors line-clamp-1 leading-tight">
+        <div className="flex-1 min-w-0 space-y-1.5">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1 text-xs text-slate-600 font-semibold">
+              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+              <span className="tabular-nums">{currentProduct.rating}</span>
+              <span className="text-slate-400 font-normal tabular-nums">
+                ({currentProduct.reviewCount})
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleWishlist(currentProduct.id);
+              }}
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
+                isSaved
+                  ? 'bg-rose-50 text-[#DC2626]'
+                  : 'bg-white text-slate-400 hover:text-[#DC2626] border border-slate-200'
+              }`}
+              aria-label="Wishlist"
+            >
+              <Heart className={`w-4 h-4 ${isSaved ? 'fill-[#DC2626]' : ''}`} />
+            </button>
+          </div>
+
+          <h4 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-[#00873E] transition-colors line-clamp-2 leading-snug">
             {title}
           </h4>
 
-          {/* Rating */}
-          <div className="flex items-center gap-1 mt-0.5 text-[10px] text-slate-300">
-            <div className="flex items-center text-amber-400">
-              <Star className="w-3 h-3 fill-amber-400" />
-              <span className="ml-0.5 font-bold">{currentProduct.rating}</span>
+          <div className="flex items-baseline justify-between gap-2 pt-1">
+            <div className="flex items-baseline gap-2">
+              <span className="text-lg font-black text-slate-900 tabular-nums">
+                {formatPrice(currentProduct.price)}
+              </span>
+              {currentProduct.originalPrice && (
+                <span className="text-xs text-slate-400 line-through tabular-nums">
+                  {formatPrice(currentProduct.originalPrice)}
+                </span>
+              )}
             </div>
-          </div>
-
-          {/* Pricing Row */}
-          <div className="flex items-baseline gap-1 mt-1">
-            <span className="text-sm font-black text-amber-400 font-mono">
-              {formatPrice(currentProduct.price)}
+            <span className="text-xs font-bold text-[#00873E] hidden sm:inline-flex items-center gap-0.5">
+              {language === 'bn' ? 'দেখুন' : 'View'}
+              <ChevronRight className="w-3.5 h-3.5" />
             </span>
           </div>
         </div>
       </div>
 
-      {/* Bottom Footer: Slide Dots & Micro Progress */}
-      <div className="relative z-10 flex items-center justify-between pt-2 mt-2 border-t border-white/10">
-        <div className="flex items-center gap-1">
+      {/* Bottom Controls */}
+      <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+        <div className="flex items-center gap-1.5">
           {products.map((p, idx) => (
             <button
               key={`showcase-dot-${p.id}-${idx}`}
-              onClick={() => goToProduct(idx)}
-              className={`h-1 rounded-full transition-all duration-300 cursor-pointer ${
-                currentIndex === idx 
-                  ? isAmber ? 'w-4 bg-amber-400' : 'w-4 bg-emerald-400'
-                  : 'w-1 bg-white/25 hover:bg-white/50'
+              type="button"
+              onClick={() => setCurrentIndex(idx)}
+              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                currentIndex === idx
+                  ? isEmerald
+                    ? 'w-6 bg-[#00873E]'
+                    : 'w-6 bg-amber-500'
+                  : 'w-1.5 bg-slate-200 hover:bg-slate-300'
               }`}
-              aria-label={`Show product ${idx + 1}`}
+              aria-label={`Show item ${idx + 1}`}
             />
           ))}
         </div>
 
-        <div className="flex items-center gap-1">
-            <button onClick={prevProduct} className="w-5 h-5 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer">
-              <ChevronLeft className="w-3 h-3" />
-            </button>
-            <button onClick={nextProduct} className="w-5 h-5 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer">
-              <ChevronRight className="w-3 h-3" />
-            </button>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[11px] font-medium text-slate-400 tabular-nums mr-1">
+            {currentIndex + 1}/{total}
+          </span>
+          <button
+            type="button"
+            onClick={prevProduct}
+            className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={nextProduct}
+            className="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Next"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </div>
@@ -243,61 +226,47 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({
 };
 
 export const DualCategoryShowcase: React.FC = () => {
-  const { products } = useApp();
+  const { products, categories } = useApp();
 
-  // 1. Fashion / Panjabi & Festive Products (strictly top 6 handpicked)
-  const fashionProducts = React.useMemo(() => {
-    return products.filter((p) => {
-      const isFashionCat = p.category === 'fashion' || p.category === 'mens-clothing';
-      const hasFestiveTag = p.tags && p.tags.some((t) => 
-        ['panjabi', 'kabli', 'eid', 'festive', 'fashion'].includes(t.toLowerCase())
-      );
-      return isFashionCat || hasFestiveTag;
-    }).slice(0, 6);
-  }, [products]);
+  const mensFashionProducts = React.useMemo(() => {
+    const matched = products.filter((p) => isProductInCategory(p, 'mens-clothing', 'all', categories));
+    return (matched.length > 0 ? matched : products).slice(0, 6);
+  }, [products, categories]);
 
-  // 2. Grocery / Pure & Natural Products (strictly top 6 handpicked)
-  const groceryProducts = React.useMemo(() => {
-    return products.filter((p) => {
-      const isGroceryCat = p.category === 'grocery';
-      const hasOrganicTag = p.tags && p.tags.some((t) => 
-        ['grocery', 'honey', 'rice', 'oil', 'ghee', 'organic', 'pure'].includes(t.toLowerCase())
-      );
-      return isGroceryCat || hasOrganicTag;
-    }).slice(0, 6);
-  }, [products]);
+  const womensAndHomeProducts = React.useMemo(() => {
+    const electronics = products.filter((p) => isProductInCategory(p, 'electronics-gadgets', 'all', categories));
+    const womens = products.filter((p) => isProductInCategory(p, 'womens-clothing', 'all', categories));
+    const pool = electronics.length >= 4 ? electronics : womens;
+    return (pool.length > 0 ? pool : products).slice(0, 6);
+  }, [products, categories]);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-2">
-      <div className="grid grid-cols-2 gap-3 sm:gap-5">
-        {/* Left: Fashion & Punjabi Showcase */}
+    <section className="max-w-7xl mx-auto px-3 sm:px-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <ShowcasePanel
-          titleBn="পাঞ্জাবি ও উৎসব স্পেশাল ডিল"
-          titleEn="Festive Panjabi & Ethnic Collection"
-          subtitleBn="প্রিমিয়াম সুতি ও সেমি-তসর সিল্ক পাঞ্জাবিতে আকর্ষণীয় মূল্যছাড়"
-          subtitleEn="Handpicked premium cotton & semi-tussar silk festival wear"
-          badgeBn="সীমিত অফার • উৎসব কালেকশন"
-          badgeEn="Limited Offer • Festive Wear"
-          badgeBg="bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black"
-          themeColor="amber"
-          categorySlug="fashion"
-          products={fashionProducts}
-          autoRotateInterval={3800}
+          eyebrowBn="ট্রেন্ডিং ফ্যাশন"
+          eyebrowEn="Trending Fashion"
+          titleBn="ছেলেদের পোশাক ও পাঞ্জাবি কালেকশন"
+          titleEn="Menswear & Panjabi Collection"
+          subtitleBn="প্রিমিয়াম কটন শার্ট, পলো, টিশার্ট ও উৎসবের পাঞ্জাবি"
+          subtitleEn="Curated cotton shirts, polos, t-shirts & festive panjabis"
+          accent="amber"
+          categorySlug="mens-clothing"
+          products={mensFashionProducts}
+          autoRotateInterval={4000}
         />
 
-        {/* Right: Grocery, Sundarbans Honey, Fragrant Rice & Pure Food */}
         <ShowcasePanel
-          titleBn="খাঁটি ও প্রাকৃতিক খাদ্য উপাদান"
-          titleEn="Pure Natural & Organic Food"
-          subtitleBn="সুন্দরবনের প্রাকৃতিক মধু, সুগন্ধি চিনিগুঁড়া চাল, খাঁটি সরিষার তেল ও গাওয়া ঘি"
-          subtitleEn="Sundarbans raw honey, fragrant chinigura rice, cold-pressed oil & ghee"
-          badgeBn="খাঁটি ও প্রাকৃতিক • 100% খাঁটি"
-          badgeEn="100% Pure & Organic Staples"
-          badgeBg="bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black"
-          themeColor="emerald"
-          categorySlug="grocery"
-          products={groceryProducts}
-          autoRotateInterval={4200}
+          eyebrowBn="স্মার্ট কালেকশন"
+          eyebrowEn="Smart Picks"
+          titleBn="গ্যাজেট ও আধুনিক লাইফস্টাইল"
+          titleEn="Gadgets & Smart Essentials"
+          subtitleBn="স্মার্টওয়াচ, স্পিকার, কুলিং ফ্যান ও দরকারি সব গ্যাজেট"
+          subtitleEn="Smartwatches, speakers, fans & everyday lifestyle tech"
+          accent="emerald"
+          categorySlug="electronics-gadgets"
+          products={womensAndHomeProducts}
+          autoRotateInterval={4400}
         />
       </div>
     </section>

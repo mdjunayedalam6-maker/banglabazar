@@ -324,10 +324,10 @@ export const CartPage: React.FC = () => {
             {/* Trust badge info */}
             <div className="pt-2 text-center text-[11px] text-slate-400 space-y-1">
               <div className="flex items-center justify-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>{language === 'bn' ? '100% নিরাপদ ও সুরক্ষিত পেমেন্ট' : '100% Safe & Secure Checkout'}</span>
+                <ShieldCheck className="w-3.5 h-3.5 text-[#00873E]" />
+                <span>{language === 'bn' ? '১০০% নিরাপদ ও সুরক্ষিত অর্ডার' : '100% Safe & Secure Checkout'}</span>
               </div>
-              <p>{language === 'bn' ? 'বিকাশ, নগদ বা ক্যাশ অন ডেলিভারি সাপোর্ট' : 'bKash, Nagad, Card or Cash on Delivery'}</p>
+              <p>{language === 'bn' ? 'ক্যাশ অন ডেলিভারি ও Bangla QR পেমেন্ট সাপোর্ট' : 'Cash on Delivery & Bangla QR Payment Supported'}</p>
             </div>
           </div>
         </div>

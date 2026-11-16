@@ -1,32 +1,21 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { 
-  Star, 
-  ShoppingBag, 
-  Heart, 
-  Share2, 
-  ShieldCheck, 
-  Truck, 
-  RefreshCw, 
-  Check, 
-  ChevronRight, 
+import {
+  Star,
+  ShoppingBag,
+  Heart,
+  Share2,
+  Truck,
+  Check,
+  ChevronRight,
   ChevronLeft,
   ArrowLeft,
-  Sparkles,
   Zap,
-  Info,
-  ThumbsUp,
-  MessageSquare,
-  Layers,
-  Palette,
   X,
-  Tag,
   Copy,
-  RotateCcw,
-  CheckCircle2,
-  ShieldAlert,
   ZoomIn,
   ZoomOut,
-  Maximize2
+  Maximize2,
+  ShieldCheck,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { ProductCard } from '../components/ProductCard';
@@ -34,34 +23,34 @@ import { getCategoryFallbackImage, expandImageCandidates } from '../utils/produc
 
 const COLOR_HEX_MAP: Record<string, string> = {
   'কালো': '#111827',
-  'black': '#111827',
+  black: '#111827',
   'সাদা': '#FFFFFF',
-  'white': '#FFFFFF',
+  white: '#FFFFFF',
   'লাল': '#DC2626',
-  'red': '#DC2626',
+  red: '#DC2626',
   'নীল': '#2563EB',
-  'blue': '#2563EB',
+  blue: '#2563EB',
   'নেভি ব্লু': '#1E3A8A',
-  'navy': '#1E3A8A',
+  navy: '#1E3A8A',
   'navy blue': '#1E3A8A',
   'সবুজ': '#16A34A',
-  'green': '#16A34A',
+  green: '#16A34A',
   'হলুদ': '#EAB308',
-  'yellow': '#EAB308',
+  yellow: '#EAB308',
   'মেরুন': '#831843',
-  'maroon': '#831843',
+  maroon: '#831843',
   'গোলাপি': '#DB2777',
-  'pink': '#DB2777',
+  pink: '#DB2777',
   'কমলা': '#EA580C',
-  'orange': '#EA580C',
+  orange: '#EA580C',
   'ধূসর / গ্রে': '#6B7280',
   'ধূসর': '#6B7280',
-  'gray': '#6B7280',
-  'grey': '#6B7280',
+  gray: '#6B7280',
+  grey: '#6B7280',
   'বেগুনি': '#7C3AED',
-  'purple': '#7C3AED',
+  purple: '#7C3AED',
   'গোল্ডেন': '#D97706',
-  'gold': '#D97706',
+  gold: '#D97706',
 };
 
 export const ProductDetailPage: React.FC = () => {
@@ -70,6 +59,8 @@ export const ProductDetailPage: React.FC = () => {
     siteSettings,
     language,
     t,
+    categories,
+    openCategory,
     setCurrentPage,
     addToCart,
     clearCart,
@@ -79,7 +70,6 @@ export const ProductDetailPage: React.FC = () => {
     formatPrice,
     addReview,
     addToast,
-    viewProductDetails,
   } = useApp();
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -89,7 +79,6 @@ export const ProductDetailPage: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
-  // Interactive Hover Zoom Lens state
   const [isHoverZooming, setIsHoverZooming] = useState(false);
   const [zoomCoords, setZoomCoords] = useState({ x: 50, y: 50 });
 
@@ -97,17 +86,16 @@ export const ProductDetailPage: React.FC = () => {
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [selectedColor, setSelectedColor] = useState<string>('');
-  const [activeTab, setActiveTab] = useState<'specs' | 'returns' | 'reviews'>('specs');
+  const [activeTab, setActiveTab] = useState<'specs' | 'reviews'>('specs');
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
 
-  // Review Form State
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewName, setReviewName] = useState('');
   const [reviewComment, setReviewComment] = useState('');
   const [showReviewForm, setShowReviewForm] = useState(false);
 
-  // Available Sizes
   const availableSizes = useMemo(() => {
     if (!selectedProduct) return [];
     if (selectedProduct.sizes && selectedProduct.sizes.length > 0) {
@@ -117,7 +105,6 @@ export const ProductDetailPage: React.FC = () => {
     return found ? found.options : [];
   }, [selectedProduct]);
 
-  // Available Colors
   const availableColors = useMemo(() => {
     if (!selectedProduct) return [];
     if (selectedProduct.colors && selectedProduct.colors.length > 0) {
@@ -127,59 +114,24 @@ export const ProductDetailPage: React.FC = () => {
     return found ? found.options : [];
   }, [selectedProduct]);
 
-  useEffect(() => {
-    if (selectedProduct) {
-      setActiveImageIndex(0);
-      if (availableSizes.length > 0) {
-        setSelectedSize(availableSizes[0]);
-      } else {
-        setSelectedSize('');
-      }
-      if (availableColors.length > 0) {
-        setSelectedColor(availableColors[0]);
-      } else {
-        setSelectedColor('');
-      }
-    }
-  }, [selectedProduct, availableSizes, availableColors]);
-
-  if (!selectedProduct) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-xl font-bold text-slate-800">
-          {language === 'bn' ? 'কোনো পণ্য নির্বাচিত হয়নি' : 'No product selected'}
-        </h2>
-        <button
-          onClick={() => setCurrentPage('shop')}
-          className="mt-4 px-6 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-bold"
-        >
-          {language === 'bn' ? 'শপে ফিরে যান' : 'Back to Shop'}
-        </button>
-      </div>
-    );
-  }
-
-  const isSaved = isInWishlist(selectedProduct.id);
-  const title = language === 'bn' ? selectedProduct.titleBn : selectedProduct.titleEn;
-  // All 11,902 products branded as Bangla Bazar
-  const displayBrand = language === 'bn' ? 'বাংলা বাজার' : 'Bangla Bazar';
-
-  // Safe reviews and specifications fallback
-  const productReviews = React.useMemo(() => {
+  const productReviews = useMemo(() => {
     return Array.isArray(selectedProduct?.reviews) ? selectedProduct.reviews : [];
   }, [selectedProduct?.reviews]);
 
-  const productSpecifications = React.useMemo(() => {
-    return (selectedProduct?.specifications && typeof selectedProduct.specifications === 'object')
+  const productSpecifications = useMemo(() => {
+    return selectedProduct?.specifications && typeof selectedProduct.specifications === 'object'
       ? selectedProduct.specifications
       : {};
   }, [selectedProduct?.specifications]);
 
-  // Guaranteed Ultra-HD Image URLs with Large resolution and crisp quality
-  const sanitizedImages = React.useMemo(() => {
-    const rawList = (Array.isArray(selectedProduct?.images) && selectedProduct.images.length > 0)
-      ? selectedProduct.images
-      : (selectedProduct?.image ? [selectedProduct.image] : []);
+  const sanitizedImages = useMemo(() => {
+    if (!selectedProduct) return [getCategoryFallbackImage()];
+    const rawList =
+      Array.isArray(selectedProduct.images) && selectedProduct.images.length > 0
+        ? selectedProduct.images
+        : selectedProduct.image
+        ? [selectedProduct.image]
+        : [];
 
     const list: string[] = [];
     const seen = new Set<string>();
@@ -194,36 +146,145 @@ export const ProductDetailPage: React.FC = () => {
         }
       }
     }
-    return list.length > 0 ? list : [getCategoryFallbackImage(selectedProduct?.category)];
-  }, [selectedProduct?.images, selectedProduct?.image, selectedProduct?.category]);
+    return list.length > 0 ? list : [getCategoryFallbackImage(selectedProduct.category)];
+  }, [selectedProduct]);
 
-  const rawDescription = language === 'bn' ? selectedProduct.descriptionBn : selectedProduct.descriptionEn;
-  const description = React.useMemo(() => {
-    if (!rawDescription) return '';
-    const sensitiveTerms = [
-      'সোর্স', 'উৎস', 'পাইকারি রেট', 'পাইকারি মূল্য', 'হোলসেল রেট', 'হোলসেল', 'আপনার লাভ', 'লাভ', 
-      'Wholesale Price', 'Profit', 'রিসেলার একাউন্ট', '01929637253'
+  const description = useMemo(() => {
+    if (!selectedProduct) return '';
+    const rawDescription =
+      language === 'bn'
+        ? selectedProduct.descriptionBn || selectedProduct.descriptionEn || ''
+        : selectedProduct.descriptionEn || selectedProduct.descriptionBn || '';
+    if (!rawDescription.trim()) return '';
+
+    let cleaned = rawDescription
+      .replace(/OneRoof\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য')
+      .replace(/ShopBase\s*BD\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য')
+      .replace(/বাংলা\s*বাজার\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য')
+      .replace(/বাংলা\s*বাজার\s*মার্ট\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য')
+      .replace(/Bangla\s*Bazar\s*Mart/gi, 'Bangla Bazar')
+      .replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার')
+      .replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার')
+      .replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার')
+      .replace(/ShopBase\s*BD/gi, 'বাংলা বাজার')
+      .replace(/ShopBaseBD\s*Official/gi, 'Bangla Bazar Official')
+      .replace(/OneRoof\s*Official/gi, 'Bangla Bazar Official')
+      .replace(/ShopBase/gi, 'বাংলা বাজার')
+      .replace(/OneRoof/gi, 'বাংলা বাজার');
+
+    const wholesaleLineTerms = [
+      'পাইকারি রেট',
+      'পাইকারি মূল্য',
+      'হোলসেল রেট',
+      'wholesale price',
+      'রিসেলার একাউন্ট',
+      'আপনার নিট প্রফিট',
+      'আপনার লাভ',
+      '01929637253',
     ];
-    let cleaned = rawDescription;
-    cleaned = cleaned.replace(/OneRoof\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
-    cleaned = cleaned.replace(/ShopBase\s*BD\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
-    cleaned = cleaned.replace(/বাংলা\s*বাজার\s*Mart\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
-    cleaned = cleaned.replace(/বাংলা\s*বাজার\s*মার্ট\s*এক্সক্লুসিভ\s*পণ্য/gi, 'বাংলা বাজার এক্সক্লুসিভ পণ্য');
-    cleaned = cleaned.replace(/Bangla\s*Bazar\s*Mart/gi, 'Bangla Bazar');
-    cleaned = cleaned.replace(/বাংলা\s*বাজার\s*Mart/gi, 'বাংলা বাজার');
-    cleaned = cleaned.replace(/বাংলা\s*বাজার\s*মার্ট/gi, 'বাংলা বাজার');
-    cleaned = cleaned.replace(/OneRoof\s*Mart/gi, 'বাংলা বাজার');
-    cleaned = cleaned.replace(/ShopBase\s*BD/gi, 'বাংলা বাজার');
-    cleaned = cleaned.replace(/ShopBaseBD\s*Official/gi, 'Bangla Bazar Official');
-    cleaned = cleaned.replace(/OneRoof\s*Official/gi, 'Bangla Bazar Official');
-    cleaned = cleaned.replace(/ShopBase/gi, 'বাংলা বাজার');
-    cleaned = cleaned.replace(/OneRoof/gi, 'বাংলা বাজার');
-    sensitiveTerms.forEach(term => {
-      const regex = new RegExp(`${term}.*?(\\n|$)`, 'gi');
-      cleaned = cleaned.replace(regex, '');
-    });
-    return cleaned.trim();
-  }, [rawDescription, language]);
+
+    cleaned = cleaned
+      .split(/\r?\n/)
+      .filter((line) => {
+        const lower = line.toLowerCase();
+        return !wholesaleLineTerms.some((term) => lower.includes(term));
+      })
+      .join('\n')
+      .trim();
+
+    return cleaned;
+  }, [selectedProduct, language]);
+
+  const descriptionLines = useMemo(() => {
+    if (!description) return [];
+    return description
+      .split(/\r?\n/)
+      .map((line) => line.replace(/^[•\-–*]\s*/, '').trim())
+      .filter(Boolean);
+  }, [description]);
+
+  const productShareUrl = useMemo(() => {
+    if (typeof window === 'undefined' || !selectedProduct) return '';
+    return `${window.location.origin}/?product=${encodeURIComponent(selectedProduct.id)}`;
+  }, [selectedProduct]);
+
+  const matchedCategory = useMemo(() => {
+    if (!selectedProduct) return undefined;
+    return categories.find(
+      (c) =>
+        c.id === selectedProduct.category ||
+        c.nameEn.toLowerCase() === (selectedProduct.category || '').toLowerCase()
+    );
+  }, [categories, selectedProduct]);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setActiveImageIndex(0);
+      setSelectedQuantity(1);
+      setSelectedVariants({});
+      setActiveTab('specs');
+      setIsDescriptionExpanded(false);
+      setSelectedSize(availableSizes[0] || '');
+      setSelectedColor(availableColors[0] || '');
+    }
+  }, [selectedProduct, availableSizes, availableColors]);
+
+  if (!selectedProduct) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <h2 className="text-xl font-bold text-slate-800">
+          {language === 'bn' ? 'কোনো পণ্য নির্বাচিত হয়নি' : 'No product selected'}
+        </h2>
+        <button
+          onClick={() => setCurrentPage('shop')}
+          className="mt-4 px-6 py-2.5 bg-[#00873E] text-white rounded-xl text-sm font-bold cursor-pointer"
+        >
+          {language === 'bn' ? 'শপে ফিরে যান' : 'Back to Shop'}
+        </button>
+      </div>
+    );
+  }
+
+  const isSaved = isInWishlist(selectedProduct.id);
+  const title = language === 'bn' ? selectedProduct.titleBn : selectedProduct.titleEn;
+  const displayBrand = language === 'bn' ? 'বাংলা বাজার' : 'Bangla Bazar';
+  const skuCode = selectedProduct.sku
+    ? selectedProduct.sku.toUpperCase()
+    : `SBP-${selectedProduct.id.replace(/\D/g, '') || selectedProduct.id.toUpperCase()}`;
+
+  const categoryLabel = matchedCategory
+    ? language === 'bn'
+      ? matchedCategory.nameBn
+      : matchedCategory.nameEn
+    : selectedProduct.category;
+
+  const extraVariants =
+    selectedProduct.variants?.filter(
+      (v) => v.type.toLowerCase() !== 'size' && v.type.toLowerCase() !== 'color'
+    ) || [];
+
+  const filteredSpecs = Object.entries(productSpecifications).filter(([key, value]) => {
+    const k = key.toLowerCase();
+    const v = String(value || '').toLowerCase();
+    const forbidden = [
+      'সোর্স',
+      'উৎস',
+      'পাইকারি',
+      'হোলসেল',
+      'লাভ',
+      'প্রফিট',
+      'দাম',
+      'shopbase',
+      'রিসেলার',
+      '01929637253',
+    ];
+    return !forbidden.some((term) => k.includes(term) || v.includes(term));
+  });
+
+  const savingsAmount =
+    selectedProduct.originalPrice && selectedProduct.originalPrice > selectedProduct.price
+      ? selectedProduct.originalPrice - selectedProduct.price
+      : 0;
 
   const handleVariantSelect = (type: string, option: string) => {
     setSelectedVariants((prev) => ({ ...prev, [type]: option }));
@@ -249,17 +310,12 @@ export const ProductDetailPage: React.FC = () => {
     setCurrentPage('checkout');
   };
 
-  const productShareUrl = useMemo(() => {
-    if (typeof window === 'undefined' || !selectedProduct) return '';
-    return `${window.location.origin}/?product=${encodeURIComponent(selectedProduct.id)}`;
-  }, [selectedProduct]);
-
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
           title,
-          text: `${title} - বাংলা বাজার (Bangla Bazar) থেকে সহজে অর্ডার করুন`,
+          text: `${title} - বাংলা বাজার`,
           url: productShareUrl,
         });
         return;
@@ -273,7 +329,7 @@ export const ProductDetailPage: React.FC = () => {
       navigator.clipboard.writeText(productShareUrl);
       setCopiedLink(true);
       addToast(
-        language === 'bn' ? 'পণ্যটির সরাসরি লিংক কপি করা হয়েছে!' : 'Product direct link copied to clipboard!',
+        language === 'bn' ? 'লিংক কপি করা হয়েছে' : 'Link copied',
         'success'
       );
       setTimeout(() => setCopiedLink(false), 3000);
@@ -284,7 +340,7 @@ export const ProductDetailPage: React.FC = () => {
     e.preventDefault();
     if (!reviewComment.trim()) {
       addToast(
-        language === 'bn' ? 'দয়া করে আপনার মন্তব্য লিখুন' : 'Please write your feedback',
+        language === 'bn' ? 'আপনার মতামত লিখুন' : 'Please write your review',
         'error'
       );
       return;
@@ -298,40 +354,66 @@ export const ProductDetailPage: React.FC = () => {
     .filter((p) => p.category === selectedProduct.category && p.id !== selectedProduct.id)
     .slice(0, 4);
 
+  const deliverySummaryText = selectedProduct.isFreeShipping
+    ? language === 'bn'
+      ? 'ফ্রি ডেলিভারি · ক্যাশ অন ডেলিভারি'
+      : 'Free Delivery · Cash on Delivery'
+    : selectedProduct.shippingFee !== undefined
+    ? language === 'bn'
+      ? `ডেলিভারি চার্জ ${formatPrice(selectedProduct.shippingFee)} · ক্যাশ অন ডেলিভারি`
+      : `Delivery ${formatPrice(selectedProduct.shippingFee)} · Cash on Delivery`
+    : language === 'bn'
+    ? `ঢাকা ${formatPrice(siteSettings.shippingFeeInsideDhaka ?? 60)} · বাইরে ${formatPrice(
+        siteSettings.shippingFeeOutsideDhaka ?? 120
+      )} · ক্যাশ অন ডেলিভারি`
+    : `Dhaka ${formatPrice(siteSettings.shippingFeeInsideDhaka ?? 60)} · Outside ${formatPrice(
+        siteSettings.shippingFeeOutsideDhaka ?? 120
+      )} · COD`;
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-8">
-      {/* Breadcrumb & Back Button */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-xs text-slate-500 flex-wrap">
-          <button onClick={() => setCurrentPage('home')} className="hover:text-emerald-700">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-32 md:py-7 space-y-6">
+      {/* Compact Breadcrumb & Back */}
+      <div className="flex items-center justify-between gap-3">
+        <nav className="flex items-center gap-1.5 text-xs text-slate-500 min-w-0">
+          <button
+            type="button"
+            onClick={() => setCurrentPage('home')}
+            className="hover:text-[#00873E] transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          >
             {t.home}
           </button>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+          <ChevronRight className="w-3.5 h-3.5 text-slate-300 shrink-0" />
           <button
-            onClick={() => setCurrentPage('shop')}
-            className="hover:text-emerald-700 capitalize"
+            type="button"
+            onClick={() =>
+              matchedCategory ? openCategory(matchedCategory.id) : setCurrentPage('shop')
+            }
+            className="hover:text-[#00873E] transition-colors whitespace-nowrap shrink-0 cursor-pointer"
           >
-            {selectedProduct.category}
+            {categoryLabel}
           </button>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <span className="text-slate-800 font-semibold truncate max-w-xs">{title}</span>
-        </div>
+          <ChevronRight className="w-3.5 h-3.5 text-slate-300 shrink-0 hidden sm:block" />
+          <span className="text-slate-700 font-medium truncate max-w-[220px] hidden sm:inline">
+            {title}
+          </span>
+        </nav>
 
         <button
+          type="button"
           onClick={() => setCurrentPage('shop')}
-          className="flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-700 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-[#00873E] transition-colors whitespace-nowrap shrink-0 cursor-pointer"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>{language === 'bn' ? 'শপে ফিরে যান' : 'Back to Shop'}</span>
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>{language === 'bn' ? 'শপে ফিরুন' : 'Back'}</span>
         </button>
       </div>
 
-      {/* Main Product Layout: Left Image Gallery, Right Details */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left Column: Image Gallery (5 cols) */}
-        <div className="lg:col-span-5 flex flex-col gap-4">
-          <div 
-            className="relative aspect-square w-full rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 group select-none cursor-crosshair"
+      {/* Contiguous Purchase Module */}
+      <div className="bg-white rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/80 shadow-xs grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
+        {/* Left Column: Gallery */}
+        <div className="lg:col-span-5 lg:sticky lg:top-24 self-start space-y-3">
+          <div
+            className="relative aspect-square w-full rounded-2xl overflow-hidden bg-white border border-slate-200/80 group select-none cursor-zoom-in"
             onMouseEnter={() => setIsHoverZooming(true)}
             onMouseLeave={() => {
               setIsHoverZooming(false);
@@ -348,7 +430,6 @@ export const ProductDetailPage: React.FC = () => {
               setLightboxZoom(1);
               setLightboxPan({ x: 0, y: 0 });
             }}
-            title={language === 'bn' ? 'ক্লিক করে ফুলস্ক্রিন আল্ট্রা-এইচডি ভিউয়ারে দেখুন' : 'Click to view in Fullscreen Ultra-HD'}
           >
             <img
               src={sanitizedImages[activeImageIndex] || sanitizedImages[0]}
@@ -356,7 +437,7 @@ export const ProductDetailPage: React.FC = () => {
               referrerPolicy="no-referrer"
               onError={(e) => {
                 const target = e.currentTarget;
-                const fallback = getCategoryFallbackImage(selectedProduct?.category);
+                const fallback = getCategoryFallbackImage(selectedProduct.category);
                 if (target.src === fallback) return;
                 if (target.src.includes('.jpeg') && !(target as any)._jpegTried) {
                   (target as any)._jpegTried = true;
@@ -370,75 +451,53 @@ export const ProductDetailPage: React.FC = () => {
               }}
               style={{
                 transformOrigin: isHoverZooming ? `${zoomCoords.x}% ${zoomCoords.y}%` : 'center center',
-                transform: isHoverZooming ? 'scale(2.2)' : 'scale(1)',
-                transition: isHoverZooming ? 'transform 0.08s ease-out' : 'transform 0.3s ease-out',
+                transform: isHoverZooming ? 'scale(2.1)' : 'scale(1)',
+                transition: isHoverZooming ? 'transform 0.08s ease-out' : 'transform 0.25s ease-out',
                 imageRendering: '-webkit-optimize-contrast' as any,
-                WebkitBackfaceVisibility: 'hidden',
-                backfaceVisibility: 'hidden',
-                filter: isHoverZooming ? 'contrast(1.02) saturate(1.02)' : 'none',
               }}
               className="w-full h-full object-contain bg-white"
               loading="eager"
               decoding="async"
             />
 
-            {/* Magnifier lens indicator on hover */}
-            {isHoverZooming && (
-              <div 
-                className="absolute pointer-events-none rounded-xl border-2 border-emerald-500 bg-emerald-500/10 shadow-lg backdrop-contrast-125 hidden sm:block"
-                style={{
-                  width: '120px',
-                  height: '120px',
-                  left: `calc(${zoomCoords.x}% - 60px)`,
-                  top: `calc(${zoomCoords.y}% - 60px)`,
-                  transition: 'none',
-                }}
-              />
-            )}
+            {selectedProduct.discountPercentage ? (
+              <span className="absolute top-3 left-3 bg-[#DC2626] text-white text-[11px] font-bold px-2.5 py-1 rounded-lg pointer-events-none tabular-nums">
+                -{selectedProduct.discountPercentage}%
+              </span>
+            ) : selectedProduct.isFlashSale ? (
+              <span className="absolute top-3 left-3 bg-[#DC2626] text-white text-[11px] font-bold px-2.5 py-1 rounded-lg pointer-events-none">
+                {language === 'bn' ? 'ফ্ল্যাশ সেল' : 'Flash Sale'}
+              </span>
+            ) : null}
 
-            {selectedProduct.discountPercentage && (
-              <span className="absolute top-3 left-3 bg-rose-600 text-white text-xs font-black px-2.5 py-1 rounded-lg shadow-sm pointer-events-none z-10">
-                -{selectedProduct.discountPercentage}% OFF
-              </span>
-            )}
-            {selectedProduct.isFlashSale && (
-              <span className="absolute top-3 right-3 bg-amber-500 text-slate-950 text-xs font-black px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm pointer-events-none z-10">
-                <Zap className="w-3 h-3 fill-slate-950" />
-                FLASH SALE
-              </span>
-            )}
-
-            {/* Interactive HD Zoom Indicator */}
-            <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/85 backdrop-blur-md text-white text-[11px] font-bold shadow-lg pointer-events-none select-none z-10">
-              <ZoomIn className={`w-3.5 h-3.5 ${isHoverZooming ? 'text-emerald-400 animate-pulse' : 'text-slate-300'}`} />
-              <span>
-                {isHoverZooming 
-                  ? (language === 'bn' ? 'এইচডি জুম সক্রিয় (ক্লিক করে ফুলস্ক্রিন)' : 'HD Zoom Active (Click for 4K)') 
-                  : (language === 'bn' ? 'এইচডি জুম (মাউস নিন / ক্লিক করুন)' : 'HD Zoom (Hover / Click)')}
-              </span>
-            </div>
+            <span
+              className="absolute bottom-3 right-3 w-9 h-9 rounded-xl bg-white/95 border border-slate-200/90 text-slate-600 shadow-xs flex items-center justify-center opacity-85 group-hover:opacity-100 transition-opacity pointer-events-none"
+              aria-hidden="true"
+            >
+              <Maximize2 className="w-4 h-4" />
+            </span>
           </div>
 
-          {/* Thumbnails */}
           {sanitizedImages.length > 1 && (
-            <div className="flex items-center gap-2 overflow-x-auto pb-1">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
               {sanitizedImages.map((img, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => setActiveImageIndex(idx)}
-                  className={`w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                  className={`w-15 h-15 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 cursor-pointer ${
                     activeImageIndex === idx
-                      ? 'border-emerald-600 ring-2 ring-emerald-600/20'
-                      : 'border-slate-200 hover:border-slate-300 opacity-70 hover:opacity-100'
+                      ? 'border-[#00873E] ring-2 ring-[#00873E]/15'
+                      : 'border-slate-200 hover:border-slate-300 opacity-75 hover:opacity-100'
                   }`}
                 >
                   <img
                     src={img}
-                    alt="Thumbnail"
+                    alt={`${title} ${idx + 1}`}
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       const target = e.currentTarget;
-                      const fallback = getCategoryFallbackImage(selectedProduct?.category);
+                      const fallback = getCategoryFallbackImage(selectedProduct.category);
                       if (target.src === fallback) return;
                       if (target.src.includes('.jpeg') && !(target as any)._jpegTried) {
                         (target as any)._jpegTried = true;
@@ -458,89 +517,169 @@ export const ProductDetailPage: React.FC = () => {
           )}
         </div>
 
-        {/* Right Column: Product Info & Actions (7 cols) */}
-        <div className="lg:col-span-7 flex flex-col justify-between">
+        {/* Right Column: Clean Purchase Options */}
+        <div className="lg:col-span-7 flex flex-col justify-between gap-5">
           <div className="space-y-4">
-            {/* Brand & SKU */}
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <span className="text-xs font-bold text-[#00873E] uppercase bg-emerald-50 border border-emerald-200/60 px-3 py-1 rounded-lg tracking-wider">
-                {displayBrand}
-              </span>
-              <div className="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1 rounded-lg text-xs font-mono font-medium border border-slate-200 transition-colors">
-                <span>SKU: {selectedProduct.sku ? selectedProduct.sku.toUpperCase() : `SBP-${selectedProduct.id.replace(/\D/g, '') || selectedProduct.id.toUpperCase()}`}</span>
+            {/* Unboxed Metadata */}
+            <div className="flex items-center justify-between gap-3 text-xs text-slate-500">
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-[#00873E]">{displayBrand}</span>
+                <span aria-hidden="true">·</span>
                 <button
                   type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const skuCode = selectedProduct.sku ? selectedProduct.sku.toUpperCase() : `SBP-${selectedProduct.id.replace(/\D/g, '') || selectedProduct.id.toUpperCase()}`;
+                  onClick={() => {
                     navigator.clipboard?.writeText(skuCode);
-                    addToast(language === 'bn' ? `SKU (${skuCode}) কপি করা হয়েছে` : `SKU (${skuCode}) copied`, 'info');
+                    addToast(language === 'bn' ? `SKU কপি হয়েছে` : `SKU copied`, 'info');
                   }}
-                  className="text-slate-400 hover:text-slate-900 transition-colors p-0.5 rounded cursor-pointer"
+                  className="inline-flex items-center gap-1 font-mono text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
                   title="Copy SKU"
                 >
-                  <Copy className="w-3.5 h-3.5" />
+                  <span>{skuCode}</span>
+                  <Copy className="w-3 h-3" />
                 </button>
               </div>
             </div>
 
-            {/* Title */}
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 leading-tight">
+            {/* Product Title */}
+            <h1 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-slate-900 leading-snug text-balance">
               {title}
             </h1>
 
-            {/* Rating and Reviews Counter */}
-            <div className="flex items-center gap-3 text-xs">
-              <div className="flex items-center gap-1 bg-amber-50 text-amber-800 px-2.5 py-1 rounded-lg font-bold border border-amber-200">
+            {/* Rating & Stock Inline */}
+            <div className="flex items-center flex-wrap gap-2.5 text-xs text-slate-600">
+              <div className="inline-flex items-center gap-1 font-semibold text-slate-800 tabular-nums">
                 <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 <span>{selectedProduct.rating}</span>
               </div>
               {productReviews.length > 0 && (
                 <>
-                  <span className="text-slate-500">
-                    {selectedProduct.reviewCount || productReviews.length} {language === 'bn' ? 'টি কাস্টমার রিভিউ' : 'Customer Reviews'}
-                  </span>
-                  <span className="text-slate-300">|</span>
+                  <span aria-hidden="true" className="text-slate-300">·</span>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('reviews')}
+                    className="hover:text-[#00873E] transition-colors cursor-pointer tabular-nums"
+                  >
+                    {selectedProduct.reviewCount || productReviews.length}{' '}
+                    {language === 'bn' ? 'রিভিউ' : 'Reviews'}
+                  </button>
                 </>
               )}
-              <span className="text-emerald-700 font-bold flex items-center gap-1">
-                <Check className="w-3.5 h-3.5" />
-                {t.inStock} ({selectedProduct.stock} {language === 'bn' ? 'টি এভেইলেবল' : 'units left'})
+              <span aria-hidden="true" className="text-slate-300">·</span>
+              <span
+                className={`font-semibold inline-flex items-center gap-1 tabular-nums ${
+                  selectedProduct.stock > 0 ? 'text-[#00873E]' : 'text-[#DC2626]'
+                }`}
+              >
+                {selectedProduct.stock > 0 ? (
+                  <>
+                    <Check className="w-3.5 h-3.5" />
+                    <span>
+                      {t.inStock} ({selectedProduct.stock}
+                      {language === 'bn' ? 'টি' : ''})
+                    </span>
+                  </>
+                ) : (
+                  <span>{language === 'bn' ? 'স্টক শেষ' : 'Out of Stock'}</span>
+                )}
               </span>
             </div>
 
-            {/* Price Box */}
-            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 flex items-baseline gap-3">
-              <span className="text-2xl sm:text-3xl font-black text-slate-900">
+            {/* Clean Price Row */}
+            <div className="py-3.5 border-y border-slate-100 flex items-baseline flex-wrap gap-3">
+              <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 tabular-nums">
                 {formatPrice(selectedProduct.price)}
               </span>
-              {selectedProduct.originalPrice && (
-                <span className="text-sm text-slate-400 line-through">
+              {selectedProduct.originalPrice && selectedProduct.originalPrice > selectedProduct.price && (
+                <span className="text-sm text-slate-400 line-through tabular-nums">
                   {formatPrice(selectedProduct.originalPrice)}
+                </span>
+              )}
+              {savingsAmount > 0 && (
+                <span className="text-xs font-semibold text-[#DC2626] tabular-nums">
+                  {language === 'bn'
+                    ? `${formatPrice(savingsAmount)} সাশ্রয়`
+                    : `Save ${formatPrice(savingsAmount)}`}
                 </span>
               )}
             </div>
 
-            {/* Description Short */}
-            <div className="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/80">
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line">
-                {description}
-              </p>
-            </div>
+            {/* Product Description (Preserved & Attractively Styled) */}
+            {(descriptionLines.length > 0 || selectedProduct.subcategory) && (
+              <div className="bg-[#F8FAFC] rounded-xl px-4 py-3 border border-slate-200/70 space-y-2">
+                {descriptionLines.length > 0 ? (
+                  <>
+                    <div className="space-y-1.5">
+                      {(isDescriptionExpanded
+                        ? descriptionLines
+                        : descriptionLines.slice(0, 4)
+                      ).map((line, index) => {
+                        const colonIdx = line.indexOf(':');
+                        const hasPrefix =
+                          colonIdx > 1 && colonIdx <= 28 && !line.startsWith('http');
+                        if (hasPrefix) {
+                          const label = line.slice(0, colonIdx).trim();
+                          const value = line.slice(colonIdx + 1).trim();
+                          return (
+                            <p
+                              key={index}
+                              className="text-[13px] sm:text-sm leading-relaxed text-slate-600"
+                            >
+                              <span className="font-semibold text-slate-900">{label}:</span>{' '}
+                              <span>{value}</span>
+                            </p>
+                          );
+                        }
+                        return (
+                          <p
+                            key={index}
+                            className="text-[13px] sm:text-sm leading-[1.7] text-slate-600"
+                          >
+                            {line}
+                          </p>
+                        );
+                      })}
+                    </div>
+                    {descriptionLines.length > 4 && (
+                      <button
+                        type="button"
+                        onClick={() => setIsDescriptionExpanded((prev) => !prev)}
+                        className="text-xs font-semibold text-[#00873E] hover:underline cursor-pointer"
+                      >
+                        {isDescriptionExpanded
+                          ? language === 'bn'
+                            ? 'সংক্ষিপ্ত করুন'
+                            : 'Show less'
+                          : language === 'bn'
+                          ? 'সম্পূর্ণ বিবরণ পড়ুন'
+                          : 'Read more'}
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-[13px] sm:text-sm leading-relaxed text-slate-600">
+                    <span className="font-semibold text-slate-900">
+                      {categoryLabel}
+                      {selectedProduct.subcategory ? ` · ${selectedProduct.subcategory}` : ''}
+                    </span>{' '}
+                    —{' '}
+                    {language === 'bn'
+                      ? `${title} প্রিমিয়াম কোয়ালিটির যাচাইকৃত পণ্য।`
+                      : `${title} verified quality product.`}
+                  </p>
+                )}
+              </div>
+            )}
 
-            {/* Size Selector */}
+            {/* Size Selector (Unboxed) */}
             {availableSizes.length > 0 && (
-              <div className="space-y-2 p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90">
-                <div className="flex items-center justify-between">
-                  <label className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-indigo-600" />
-                    <span>{language === 'bn' ? 'সাইজ নির্বাচন করুন (Size):' : 'Select Size:'}</span>
-                  </label>
-                  <span className="text-xs font-bold text-indigo-700 bg-white px-2.5 py-0.5 rounded-md border border-indigo-200 shadow-2xs">
-                    {selectedSize || (language === 'bn' ? 'সিলেক্ট করুন' : 'Select')}
+              <div className="space-y-2 pt-0.5">
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="font-semibold text-slate-700">
+                    {language === 'bn' ? 'সাইজ:' : 'Size:'}
                   </span>
+                  <span className="font-bold text-[#00873E]">{selectedSize}</span>
                 </div>
-                <div className="flex flex-wrap gap-2 pt-0.5">
+                <div className="flex flex-wrap gap-2">
                   {availableSizes.map((sz) => {
                     const isSelected = selectedSize === sz;
                     return (
@@ -548,14 +687,13 @@ export const ProductDetailPage: React.FC = () => {
                         key={sz}
                         type="button"
                         onClick={() => setSelectedSize(sz)}
-                        className={`px-3.5 py-1.5 text-xs font-bold rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 ${
+                        className={`min-h-[40px] min-w-[44px] px-3.5 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs ring-2 ring-indigo-600/20'
-                            : 'bg-white text-slate-700 border-slate-300 hover:border-indigo-400 hover:bg-indigo-50/40'
+                            ? 'bg-[#062919] text-white border-[#062919] shadow-xs'
+                            : 'bg-white text-slate-700 border-slate-200 hover:border-slate-400'
                         }`}
                       >
-                        {isSelected && <Check className="w-3 h-3" />}
-                        <span>{sz}</span>
+                        {sz}
                       </button>
                     );
                   })}
@@ -563,19 +701,16 @@ export const ProductDetailPage: React.FC = () => {
               </div>
             )}
 
-            {/* Color Selector */}
+            {/* Color Selector (Unboxed with clean swatches) */}
             {availableColors.length > 0 && (
-              <div className="space-y-2 p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90">
-                <div className="flex items-center justify-between">
-                  <label className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                    <Palette className="w-3.5 h-3.5 text-amber-600" />
-                    <span>{language === 'bn' ? 'কালার / রঙ নির্বাচন করুন (Color):' : 'Select Color:'}</span>
-                  </label>
-                  <span className="text-xs font-bold text-amber-800 bg-white px-2.5 py-0.5 rounded-md border border-amber-200 shadow-2xs">
-                    {selectedColor || (language === 'bn' ? 'সিলেক্ট করুন' : 'Select')}
+              <div className="space-y-2 pt-0.5">
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="font-semibold text-slate-700">
+                    {language === 'bn' ? 'কালার:' : 'Color:'}
                   </span>
+                  <span className="font-bold text-slate-900">{selectedColor}</span>
                 </div>
-                <div className="flex flex-wrap gap-2 pt-0.5">
+                <div className="flex flex-wrap gap-2">
                   {availableColors.map((clr) => {
                     const isSelected = selectedColor === clr;
                     const hexCode = COLOR_HEX_MAP[clr.toLowerCase()] || COLOR_HEX_MAP[clr];
@@ -584,10 +719,10 @@ export const ProductDetailPage: React.FC = () => {
                         key={clr}
                         type="button"
                         onClick={() => setSelectedColor(clr)}
-                        className={`px-3 py-1.5 text-xs font-bold rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 ${
+                        className={`min-h-[40px] px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer flex items-center gap-2 ${
                           isSelected
-                            ? 'bg-amber-600 text-white border-amber-600 shadow-xs ring-2 ring-amber-600/20'
-                            : 'bg-white text-slate-800 border-slate-300 hover:border-amber-400 hover:bg-amber-50/40'
+                            ? 'border-[#00873E] bg-emerald-50/70 text-slate-900 ring-1 ring-[#00873E]'
+                            : 'bg-white text-slate-700 border-slate-200 hover:border-slate-400'
                         }`}
                       >
                         <span
@@ -595,7 +730,6 @@ export const ProductDetailPage: React.FC = () => {
                           style={{ backgroundColor: hexCode || '#94A3B8' }}
                         />
                         <span>{clr}</span>
-                        {isSelected && <Check className="w-3 h-3 text-white ml-0.5" />}
                       </button>
                     );
                   })}
@@ -603,347 +737,286 @@ export const ProductDetailPage: React.FC = () => {
               </div>
             )}
 
-            {/* Other Variants Selector (Weight / Storage if any) */}
-            {selectedProduct.variants && selectedProduct.variants.filter(v => v.type.toLowerCase() !== 'size' && v.type.toLowerCase() !== 'color').length > 0 && (
-              <div className="space-y-3 pt-2">
-                {selectedProduct.variants.filter(v => v.type.toLowerCase() !== 'size' && v.type.toLowerCase() !== 'color').map((v) => (
-                  <div key={v.type} className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700 capitalize">
-                      {v.type}: {selectedVariants[v.type] || v.options[0]}
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {v.options.map((opt) => {
-                        const isChosen = (selectedVariants[v.type] || v.options[0]) === opt;
-                        return (
-                          <button
-                            key={opt}
-                            onClick={() => handleVariantSelect(v.type, opt)}
-                            className={`px-3 py-1.5 text-xs font-semibold rounded-xl border transition-all ${
-                              isChosen
-                                ? 'bg-[#00873E] text-white border-[#00873E] shadow-xs'
-                                : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
-                            }`}
-                          >
-                            {opt}
-                          </button>
-                        );
-                      })}
+            {/* Other Variants */}
+            {extraVariants.length > 0 && (
+              <div className="space-y-3 pt-0.5">
+                {extraVariants.map((v) => {
+                  const chosen = selectedVariants[v.type] || v.options[0];
+                  return (
+                    <div key={v.type} className="space-y-2">
+                      <div className="flex items-center gap-2 text-xs">
+                        <span className="font-semibold text-slate-700 capitalize">{v.type}:</span>
+                        <span className="font-bold text-[#00873E]">{chosen}</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {v.options.map((opt) => {
+                          const isChosen = chosen === opt;
+                          return (
+                            <button
+                              key={opt}
+                              type="button"
+                              onClick={() => handleVariantSelect(v.type, opt)}
+                              className={`min-h-[40px] px-3.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                                isChosen
+                                  ? 'bg-[#062919] text-white border-[#062919]'
+                                  : 'bg-white text-slate-700 border-slate-200 hover:border-slate-400'
+                              }`}
+                            >
+                              {opt}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 
-            {/* Quantity Selector */}
-            <div className="flex items-center gap-4 pt-2">
-              <span className="text-xs font-bold text-slate-700">
-                {language === 'bn' ? 'পরিমাণ (Quantity):' : 'Quantity:'}
-              </span>
-              <div className="flex items-center border border-slate-200 rounded-xl bg-slate-50 overflow-hidden">
-                <button
-                  onClick={() => setSelectedQuantity(Math.max(1, selectedQuantity - 1))}
-                  className="px-3 py-1.5 text-slate-600 hover:bg-slate-200 font-bold transition-colors"
-                >
-                  -
-                </button>
-                <span className="px-4 py-1.5 text-xs font-bold text-slate-800 bg-white min-w-[36px] text-center">
-                  {selectedQuantity}
+            {/* Quantity + Quick Utility Row */}
+            <div className="flex items-center justify-between flex-wrap gap-3 pt-1">
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-semibold text-slate-700">
+                  {language === 'bn' ? 'পরিমাণ:' : 'Qty:'}
                 </span>
+                <div className="inline-flex items-center h-11 border border-slate-200 rounded-xl bg-white overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedQuantity(Math.max(1, selectedQuantity - 1))}
+                    className="w-10 h-full text-slate-600 hover:bg-slate-100 font-bold transition-colors cursor-pointer"
+                    aria-label="Decrease quantity"
+                  >
+                    −
+                  </button>
+                  <span className="w-10 text-center text-sm font-bold text-slate-900 tabular-nums">
+                    {selectedQuantity}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedQuantity(selectedQuantity + 1)}
+                    className="w-10 h-full text-slate-600 hover:bg-slate-100 font-bold transition-colors cursor-pointer"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
                 <button
-                  onClick={() => setSelectedQuantity(selectedQuantity + 1)}
-                  className="px-3 py-1.5 text-slate-600 hover:bg-slate-200 font-bold transition-colors"
+                  type="button"
+                  onClick={() => toggleWishlist(selectedProduct.id)}
+                  className={`h-11 px-3.5 rounded-xl border text-xs font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer ${
+                    isSaved
+                      ? 'border-rose-200 bg-rose-50 text-rose-600'
+                      : 'border-slate-200 text-slate-600 hover:border-slate-300 hover:text-rose-600'
+                  }`}
                 >
-                  +
+                  <Heart className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
+                  <span className="hidden sm:inline">
+                    {isSaved
+                      ? language === 'bn'
+                        ? 'সংরক্ষিত'
+                        : 'Saved'
+                      : language === 'bn'
+                      ? 'পছন্দ'
+                      : 'Save'}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleShare}
+                  className="h-11 px-3.5 rounded-xl border border-slate-200 text-slate-600 hover:border-slate-300 hover:text-[#00873E] text-xs font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <Share2 className="w-4 h-4" />
+                  <span className="hidden sm:inline">{language === 'bn' ? 'শেয়ার' : 'Share'}</span>
                 </button>
               </div>
             </div>
 
-            {/* Action Buttons: Add to Cart & Buy Now */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-4">
+            {/* Primary Action Buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="theme-btn-cart py-3.5 px-6 rounded-2xl text-sm sm:text-base font-black flex items-center justify-center gap-2.5 transition-all active:scale-98 shadow-md cursor-pointer group whitespace-nowrap"
+                className="theme-btn-cart min-h-[48px] px-5 rounded-xl text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
               >
-                <ShoppingBag className="w-5 h-5 transition-transform group-hover:scale-110 shrink-0" />
-                <span className="whitespace-nowrap">{t.addToCart}</span>
+                <ShoppingBag className="w-4 h-4 shrink-0" />
+                <span>{t.addToCart}</span>
               </button>
 
               <button
                 type="button"
                 onClick={handleBuyNow}
-                className="theme-btn-buy theme-shimmer-effect py-3.5 px-6 rounded-2xl text-sm sm:text-base font-black flex items-center justify-center gap-2.5 transition-all active:scale-98 shadow-lg cursor-pointer group whitespace-nowrap"
+                className="theme-btn-buy theme-shimmer-effect min-h-[48px] px-5 rounded-xl text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
               >
-                <Zap className="w-5 h-5 text-amber-200 fill-amber-300 animate-pulse transition-transform group-hover:scale-110 shrink-0" />
-                <span className="whitespace-nowrap">{t.buyNow}</span>
-              </button>
-            </div>
-
-            {/* Wishlist & Share buttons */}
-            <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-              <button
-                onClick={() => toggleWishlist(selectedProduct.id)}
-                className={`flex items-center gap-1.5 font-semibold transition-colors ${
-                  isSaved ? 'text-rose-600' : 'text-slate-600 hover:text-rose-600'
-                }`}
-              >
-                <Heart className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
-                <span>
-                  {isSaved 
-                    ? (language === 'bn' ? 'উইশলিস্টে সংরক্ষিত' : 'Saved in Wishlist') 
-                    : (language === 'bn' ? 'উইশলিস্টে যোগ করুন' : 'Add to Wishlist')}
-                </span>
-              </button>
-
-              <button
-                onClick={handleShare}
-                className="flex items-center gap-1.5 text-slate-600 hover:text-emerald-700 font-semibold transition-colors"
-              >
-                <Share2 className="w-4 h-4" />
-                <span>{language === 'bn' ? 'শেয়ার করুন' : 'Share Product'}</span>
+                <Zap className="w-4 h-4 text-amber-200 fill-amber-300 shrink-0" />
+                <span>{t.buyNow}</span>
               </button>
             </div>
           </div>
 
-          {/* Delivery & Shipping info block */}
-          <div className="mt-6 p-4 bg-emerald-50/70 border border-emerald-200/60 rounded-2xl space-y-2 text-xs">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-emerald-900 font-bold">
-                <Truck className="w-4 h-4 text-emerald-700" />
-                <span>{selectedProduct.deliveryTime || (language === 'bn' ? '24-72 ঘণ্টা সমগ্র বাংলাদেশ' : '24-72 hours nationwide delivery')}</span>
-              </div>
-              {selectedProduct.isFreeShipping ? (
-                <span className="text-[11px] font-bold text-white bg-emerald-600 px-2 py-0.5 rounded-full">
-                  ফ্রি ডেলিভারি
-                </span>
-              ) : selectedProduct.shippingFee !== undefined ? (
-                <span className="text-[11px] font-bold text-emerald-800 bg-white px-2 py-0.5 rounded-full border border-emerald-300">
-                  ডেলিভারি চার্জ: {formatPrice(selectedProduct.shippingFee)}
-                </span>
-              ) : (
-                <span className="text-[11px] font-medium text-emerald-800">
-                  ঢাকা {formatPrice(siteSettings.shippingFeeInsideDhaka ?? 60)} | ঢাকার বাইরে {formatPrice(siteSettings.shippingFeeOutsideDhaka ?? 120)}
-                </span>
-              )}
-            </div>
-            <div className="text-slate-600 text-[11px] flex items-center justify-between pt-1 border-t border-emerald-100">
-              <span>{language === 'bn' ? 'ক্যাশ অন ডেলিভারি (COD) উপলব্ধ।' : 'Cash on delivery (COD) available.'}</span>
-              {siteSettings.freeShippingThreshold > 0 && !selectedProduct.isFreeShipping && (
-                <span className="text-emerald-700 font-medium">
-                  {formatPrice(siteSettings.freeShippingThreshold)} টাকার বেশি অর্ডারে ফ্রি ডেলিভারি
-                </span>
-              )}
-            </div>
+          {/* Concise Single-Line Delivery Summary */}
+          <div className="pt-3.5 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-600">
+            <Truck className="w-4 h-4 text-[#00873E] shrink-0" />
+            <span>{deliverySummaryText}</span>
           </div>
         </div>
       </div>
 
-      {/* Tabs: Specifications & Customer Reviews */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
-        <div className="flex items-center gap-3 sm:gap-6 border-b border-slate-200 pb-4 mb-6 overflow-x-auto">
+      {/* Concise 2-Tab Details & Reviews */}
+      <div className="bg-white rounded-2xl p-5 sm:p-7 border border-slate-200/80 shadow-xs">
+        <div className="flex items-center gap-6 border-b border-slate-200 mb-5">
           <button
+            type="button"
             onClick={() => setActiveTab('specs')}
-            className={`text-sm sm:text-base font-bold pb-2 relative transition-colors whitespace-nowrap ${
+            className={`pb-3 text-sm sm:text-base font-bold border-b-2 transition-colors whitespace-nowrap cursor-pointer ${
               activeTab === 'specs'
-                ? 'text-emerald-700 border-b-2 border-emerald-600'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'text-[#00873E] border-[#00873E]'
+                : 'text-slate-500 border-transparent hover:text-slate-800'
             }`}
           >
-            {t.specifications}
+            {language === 'bn' ? 'বিবরণ ও তথ্য' : 'Details'}
           </button>
+
           <button
-            onClick={() => setActiveTab('returns')}
-            className={`text-sm sm:text-base font-bold pb-2 relative transition-colors whitespace-nowrap flex items-center gap-1.5 ${
-              activeTab === 'returns'
-                ? 'text-emerald-700 border-b-2 border-emerald-600'
-                : 'text-slate-500 hover:text-slate-800'
-            }`}
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span>{language === 'bn' ? 'রিটার্ন ও রিপ্লেসমেন্ট নিয়মাবলী' : 'Return Policy'}</span>
-          </button>
-          <button
+            type="button"
             onClick={() => setActiveTab('reviews')}
-            className={`text-sm sm:text-base font-bold pb-2 relative transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+            className={`pb-3 text-sm sm:text-base font-bold border-b-2 transition-colors whitespace-nowrap cursor-pointer tabular-nums ${
               activeTab === 'reviews'
-                ? 'text-emerald-700 border-b-2 border-emerald-600'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'text-[#00873E] border-[#00873E]'
+                : 'text-slate-500 border-transparent hover:text-slate-800'
             }`}
           >
-            <span>{t.reviews}</span>
-            {productReviews.length > 0 && (
-              <span className="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full">
-                {productReviews.length}
-              </span>
-            )}
+            {t.reviews}
+            {productReviews.length > 0 ? ` (${productReviews.length})` : ''}
           </button>
         </div>
 
-        {/* Tab 1: Specifications & Description */}
+        {/* Tab 1: Concise Description & Specifications */}
         {activeTab === 'specs' && (
           <div className="space-y-6">
-            {/* Full Product Description */}
-            {description && (
-              <div className="p-5 bg-slate-50/90 rounded-2xl border border-slate-200 space-y-2">
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <Info className="w-4 h-4 text-[#00873E]" />
-                  <span>{language === 'bn' ? 'পণ্যের পূর্ণাঙ্গ বিবরণ (Product Description)' : 'Product Description'}</span>
-                </h4>
-                <div className="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line font-normal">
-                  {description}
-                </div>
+            {descriptionLines.length > 0 && (
+              <div className="space-y-2 max-w-3xl">
+                {descriptionLines.map((line, index) => {
+                  const colonIdx = line.indexOf(':');
+                  const hasPrefix =
+                    colonIdx > 1 && colonIdx <= 28 && !line.startsWith('http');
+                  if (hasPrefix) {
+                    const label = line.slice(0, colonIdx).trim();
+                    const value = line.slice(colonIdx + 1).trim();
+                    return (
+                      <p key={index} className="text-sm leading-relaxed text-slate-600">
+                        <span className="font-semibold text-slate-900">{label}:</span>{' '}
+                        <span>{value}</span>
+                      </p>
+                    );
+                  }
+                  return (
+                    <p key={index} className="text-sm leading-[1.75] text-slate-600">
+                      {line}
+                    </p>
+                  );
+                })}
               </div>
             )}
 
-            {Object.keys(productSpecifications).length > 0 ? (
-              <div className="space-y-2.5">
-                <h4 className="text-xs sm:text-sm font-bold text-slate-900">
-                  {language === 'bn' ? 'স্পেসিফিকেশন ও তথ্যসমূহ' : 'Specifications'}
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {Object.entries(productSpecifications)
-                    .filter(([key, value]) => {
-                      const k = key.toLowerCase();
-                      const v = String(value || '').toLowerCase();
-                      const forbidden = ['সোর্স', 'উৎস', 'পাইকারি', 'হোলসেল', 'লাভ', 'প্রফিট', 'দাম', 'shopbase', 'রিসেলার', '01929637253'];
-                      return !forbidden.some(term => k.includes(term) || v.includes(term));
-                    })
-                    .map(([key, value]) => {
-                      let cleanVal = String(value || '');
-                      if (key.includes('ব্র্যান্ড') || key.toLowerCase().includes('brand')) {
-                        cleanVal = displayBrand;
-                      } else {
-                        cleanVal = cleanVal
-                          .replace(/Bangla\s*Bazar\s*Mart/gi, displayBrand)
-                          .replace(/বাংলা\s*বাজার\s*Mart/gi, displayBrand)
-                          .replace(/বাংলা\s*বাজার\s*মার্ট/gi, displayBrand)
-                          .replace(/OneRoof\s*Mart/gi, displayBrand)
-                          .replace(/OneRoof/gi, displayBrand)
-                          .replace(/ShopBase\s*BD/gi, displayBrand)
-                          .replace(/ShopBase/gi, displayBrand);
-                      }
-                      return (
-                        <div key={key} className="flex justify-between p-3 bg-slate-50 rounded-xl text-xs sm:text-sm border border-slate-100">
-                          <span className="font-semibold text-slate-500">{key}</span>
-                          <span className="font-bold text-slate-800 text-right">{cleanVal}</span>
-                        </div>
-                      );
-                    })}
-                </div>
+            {filteredSpecs.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 border-t border-slate-100">
+                {filteredSpecs.map(([key, value]) => {
+                  let cleanVal = String(value || '');
+                  if (key.includes('ব্র্যান্ড') || key.toLowerCase().includes('brand')) {
+                    cleanVal = displayBrand;
+                  } else {
+                    cleanVal = cleanVal
+                      .replace(/Bangla\s*Bazar\s*Mart/gi, displayBrand)
+                      .replace(/বাংলা\s*বাজার\s*Mart/gi, displayBrand)
+                      .replace(/বাংলা\s*বাজার\s*মার্ট/gi, displayBrand)
+                      .replace(/OneRoof\s*Mart/gi, displayBrand)
+                      .replace(/OneRoof/gi, displayBrand)
+                      .replace(/ShopBase\s*BD/gi, displayBrand)
+                      .replace(/ShopBase/gi, displayBrand);
+                  }
+                  return (
+                    <div
+                      key={key}
+                      className="flex items-center justify-between gap-4 py-3 border-b border-slate-100 text-xs sm:text-sm"
+                    >
+                      <span className="text-slate-500 font-medium">{key}</span>
+                      <span className="font-semibold text-slate-900 text-right">{cleanVal}</span>
+                    </div>
+                  );
+                })}
               </div>
-            ) : null}
+            )}
 
             {selectedProduct.warranty && (
-              <div className="p-4 bg-amber-50 rounded-xl border border-amber-200 text-xs sm:text-sm text-amber-900 flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-amber-600 shrink-0" />
-                <div>
-                  <span className="font-bold">{language === 'bn' ? 'ওয়ারেন্টি পলিসি: ' : 'Warranty Policy: '}</span>
-                  <span>{selectedProduct.warranty}</span>
-                </div>
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 pt-1">
+                <ShieldCheck className="w-4 h-4 text-[#00873E] shrink-0" />
+                <span>
+                  <strong className="font-semibold">
+                    {language === 'bn' ? 'ওয়ারেন্টি: ' : 'Warranty: '}
+                  </strong>
+                  {selectedProduct.warranty}
+                </span>
               </div>
+            )}
+
+            {!description && filteredSpecs.length === 0 && !selectedProduct.warranty && (
+              <p className="text-sm text-slate-500">
+                {language === 'bn'
+                  ? 'স্টকে আছে — ক্যাশ অন ডেলিভারিতে অর্ডার করুন।'
+                  : 'In stock and ready for Cash on Delivery.'}
+              </p>
             )}
           </div>
         )}
 
-        {/* Tab 2: Return Policy & Rules */}
-        {activeTab === 'returns' && (
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl space-y-2">
-                <div className="flex items-center gap-2 text-emerald-900 font-bold text-sm">
-                  <RotateCcw className="w-4 h-4 text-emerald-700" />
-                  <span>৭ দিনের সহজ ফ্রি রিটার্ন ও রিপ্লেসমেন্ট পলিসি</span>
-                </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  পণ্য হাতে পাওয়ার পর সাইজ সমস্যা, কালার অমিল, কোনো ত্রুটি বা ডিফেক্ট থাকলে পণ্য ডেলিভারির ৭ দিনের মধ্যে সম্পূর্ণ ফ্রিতে রিটার্ন বা রিপ্লেসমেন্ট সুবিধা পাবেন।
-                </p>
-              </div>
-
-              <div className="p-4 bg-blue-50/70 border border-blue-200/80 rounded-2xl space-y-2">
-                <div className="flex items-center gap-2 text-blue-900 font-bold text-sm">
-                  <Truck className="w-4 h-4 text-blue-700" />
-                  <span>ডেলিভারি ম্যানের সামনে পণ্য চেক করার সুযোগ</span>
-                </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  ক্যাশ অন ডেলিভারিতে পার্সেল রিসিভ করার সময় ডেলিভারি রাইডারের সামনে প্যাকেট খুলে পণ্যটি দেখে নেওয়ার ১০০% সুযোগ রয়েছে।
-                </p>
-              </div>
-
-              <div className="p-4 bg-amber-50/70 border border-amber-200/80 rounded-2xl space-y-2">
-                <div className="flex items-center gap-2 text-amber-900 font-bold text-sm">
-                  <ShieldCheck className="w-4 h-4 text-amber-700" />
-                  <span>১০০% মানিব্যাক ও রিফান্ড গ্যারান্টি</span>
-                </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  কোনো কারণে পণ্য পরিবর্তনের সুযোগ না থাকলে বা পণ্য স্টক-আউট থাকলে সম্পূর্ণ মূল্য বিকাশ বা নগদের মাধ্যমে রিফান্ড করা হবে।
-                </p>
-              </div>
-
-              <div className="p-4 bg-purple-50/70 border border-purple-200/80 rounded-2xl space-y-2">
-                <div className="flex items-center gap-2 text-purple-900 font-bold text-sm">
-                  <CheckCircle2 className="w-4 h-4 text-purple-700" />
-                  <span>রিটার্ন ও রিপ্লেসমেন্ট শর্তাবলী</span>
-                </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  পণ্যটি অব্যবহৃত অবস্থায় মূল ট্যাগ ও প্যাকেজিং সহ রাখতে হবে। আমাদের হেল্পলাইনে অথবা ওয়েবসাইটে অর্ডার ট্র্যাকিংয়ের মাধ্যমে যোগাযোগ করুন।
-                </p>
-              </div>
-            </div>
-
-            {selectedProduct.warranty && (
-              <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs sm:text-sm text-emerald-950 flex items-center gap-2.5">
-                <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0" />
-                <div>
-                  <span className="font-bold">অফিসিয়াল পলিসি: </span>
-                  <span>{selectedProduct.warranty}</span>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Tab 2: Reviews & Rating breakdown */}
+        {/* Tab 2: Customer Reviews */}
         {activeTab === 'reviews' && (
-          <div className="space-y-6">
-            {/* Summary Rating */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-200">
-              <div className="text-center sm:text-left">
-                <div className="text-4xl font-black text-slate-900">{selectedProduct.rating}</div>
-                <div className="flex items-center justify-center sm:justify-start gap-1 my-1">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star
-                      key={s}
-                      className={`w-4 h-4 ${
-                        s <= Math.round(selectedProduct.rating)
-                          ? 'fill-amber-400 text-amber-400'
-                          : 'text-slate-300'
-                      }`}
-                    />
-                  ))}
+          <div className="space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+              <div className="flex items-center gap-4">
+                <div className="text-3xl font-extrabold text-slate-900 tabular-nums">
+                  {selectedProduct.rating}
                 </div>
-                <p className="text-xs text-slate-500">
-                  {productReviews.length} {language === 'bn' ? 'টি যাচাইকৃত রেটিং' : 'verified ratings'}
-                </p>
+                <div>
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star
+                        key={s}
+                        className={`w-4 h-4 ${
+                          s <= Math.round(selectedProduct.rating)
+                            ? 'fill-amber-400 text-amber-400'
+                            : 'text-slate-200'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1 tabular-nums">
+                    {productReviews.length} {language === 'bn' ? 'টি রিভিউ' : 'reviews'}
+                  </p>
+                </div>
               </div>
 
               <button
+                type="button"
                 onClick={() => setShowReviewForm(!showReviewForm)}
-                className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all shadow-xs"
+                className="min-h-[42px] px-5 bg-[#00873E] hover:bg-[#007033] text-white text-xs font-bold rounded-xl transition-colors cursor-pointer self-start sm:self-auto"
               >
                 {t.writeReview}
               </button>
             </div>
 
-            {/* Write Review Form */}
             {showReviewForm && (
-              <form onSubmit={handleReviewSubmit} className="p-5 bg-slate-50 rounded-2xl border border-emerald-300 space-y-4">
-                <h4 className="text-sm font-bold text-slate-800">
-                  {language === 'bn' ? 'আপনার মূল্যবান মতামত দিন' : 'Share your review'}
-                </h4>
-
+              <form
+                onSubmit={handleReviewSubmit}
+                className="p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200 space-y-3"
+              >
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-medium text-slate-600">
-                    {language === 'bn' ? 'রেটিং দিন:' : 'Rating:'}
+                  <span className="text-xs font-semibold text-slate-700">
+                    {language === 'bn' ? 'রেটিং:' : 'Rating:'}
                   </span>
                   <div className="flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -951,7 +1024,7 @@ export const ProductDetailPage: React.FC = () => {
                         type="button"
                         key={star}
                         onClick={() => setReviewRating(star)}
-                        className="p-1"
+                        className="p-1 cursor-pointer"
                       >
                         <Star
                           className={`w-5 h-5 ${
@@ -963,90 +1036,85 @@ export const ProductDetailPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    value={reviewName}
-                    onChange={(e) => setReviewName(e.target.value)}
-                    placeholder={language === 'bn' ? 'আপনার নাম' : 'Your name'}
-                    className="p-2.5 text-xs bg-white border border-slate-300 text-slate-900 font-medium placeholder-slate-400 rounded-xl outline-none focus:border-emerald-600"
-                  />
-                </div>
+                <input
+                  type="text"
+                  value={reviewName}
+                  onChange={(e) => setReviewName(e.target.value)}
+                  placeholder={language === 'bn' ? 'আপনার নাম' : 'Your name'}
+                  className="w-full sm:max-w-sm p-2.5 text-xs bg-white border border-slate-300 text-slate-900 rounded-xl outline-none focus:border-[#00873E]"
+                />
 
                 <textarea
                   rows={3}
                   value={reviewComment}
                   onChange={(e) => setReviewComment(e.target.value)}
-                  placeholder={language === 'bn' ? 'পণ্যটি সম্পর্কে আপনার বিস্তারিত অভিজ্ঞতা লিখুন...' : 'Write your detailed review here...'}
-                  className="w-full p-2.5 text-xs bg-white border border-slate-300 text-slate-900 font-medium placeholder-slate-400 rounded-xl outline-none focus:border-emerald-600"
+                  placeholder={language === 'bn' ? 'আপনার মতামত লিখুন...' : 'Write your review...'}
+                  className="w-full p-2.5 text-xs bg-white border border-slate-300 text-slate-900 rounded-xl outline-none focus:border-[#00873E]"
                 />
 
                 <div className="flex justify-end gap-2">
                   <button
                     type="button"
                     onClick={() => setShowReviewForm(false)}
-                    className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-200 rounded-lg"
+                    className="min-h-[40px] px-4 text-xs font-semibold text-slate-600 hover:bg-slate-200 rounded-xl cursor-pointer"
                   >
                     {language === 'bn' ? 'বাতিল' : 'Cancel'}
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2 bg-emerald-600 text-white text-xs font-bold rounded-lg"
+                    className="min-h-[40px] px-5 bg-[#00873E] text-white text-xs font-bold rounded-xl cursor-pointer"
                   >
-                    {language === 'bn' ? 'জমা দিন' : 'Submit Review'}
+                    {language === 'bn' ? 'জমা দিন' : 'Submit'}
                   </button>
                 </div>
               </form>
             )}
 
-            {/* Reviews List */}
             {productReviews.length > 0 ? (
               <div className="divide-y divide-slate-100">
                 {productReviews.map((rev) => (
-                  <div key={rev.id} className="py-4 space-y-2">
+                  <div key={rev.id} className="py-4 space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center text-xs">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-emerald-100 text-[#00873E] font-bold flex items-center justify-center text-xs">
                           {rev.userName.charAt(0)}
                         </div>
                         <div>
                           <div className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
                             <span>{rev.userName}</span>
                             {rev.verifiedPurchase && (
-                              <span className="text-[10px] bg-emerald-50 text-emerald-700 font-medium px-1.5 py-0.2 rounded flex items-center gap-0.5">
+                              <span className="text-[11px] text-[#00873E] font-medium inline-flex items-center gap-0.5">
                                 <Check className="w-3 h-3" />
                                 {t.verifiedPurchase}
                               </span>
                             )}
                           </div>
-                          <div className="text-[10px] text-slate-400">{rev.date}</div>
+                          <div className="text-[11px] text-slate-400">{rev.date}</div>
                         </div>
                       </div>
 
-                      <div className="flex items-center text-amber-400">
+                      <div className="flex items-center">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <Star
                             key={star}
                             className={`w-3.5 h-3.5 ${
-                              star <= rev.rating ? 'fill-amber-400' : 'text-slate-200'
+                              star <= rev.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-200'
                             }`}
                           />
                         ))}
                       </div>
                     </div>
 
-                    <p className="text-xs text-slate-600 pl-10 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 pl-10 leading-relaxed">
                       {rev.comment}
                     </p>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="p-8 text-center bg-white rounded-xl border border-dashed border-slate-200">
-                <p className="text-xs sm:text-sm text-slate-500">
-                  {language === 'bn' ? 'এখনও কোনো কাস্টমার রিভিউ নেই। আপনার রিভিউ দিতে উপরের বাটনে চাপুন।' : 'No customer reviews yet. Click above to be the first to review!'}
-                </p>
-              </div>
+              <p className="py-6 text-center text-sm text-slate-500">
+                {language === 'bn' ? 'এখনও কোনো রিভিউ নেই।' : 'No reviews yet.'}
+              </p>
             )}
           </div>
         )}
@@ -1054,20 +1122,21 @@ export const ProductDetailPage: React.FC = () => {
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <section className="pt-6">
+        <section className="pt-2">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900">
               {t.relatedProducts}
             </h3>
             <button
+              type="button"
               onClick={() => setCurrentPage('shop')}
-              className="text-xs font-bold text-emerald-700 hover:underline"
+              className="text-xs font-semibold text-[#00873E] hover:underline cursor-pointer"
             >
               {language === 'bn' ? 'আরও দেখুন' : 'See more'}
             </button>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {relatedProducts.map((prod, idx) => (
               <ProductCard key={`related-${prod.id}-${idx}`} product={prod} />
             ))}
@@ -1076,69 +1145,64 @@ export const ProductDetailPage: React.FC = () => {
       )}
 
       {/* Mobile Sticky Quick Purchase Bar */}
-      <div className="md:hidden fixed bottom-14 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-4 py-2.5 shadow-[0_-6px_20px_rgba(0,0,0,0.1)] flex items-center justify-between gap-3 animate-in slide-in-from-bottom duration-200">
-        <div>
-          <span className="text-[10px] text-slate-400 font-bold block uppercase leading-tight">
-            {language === 'bn' ? 'মোট মূল্য' : 'Total'}
+      <div className="md:hidden fixed bottom-[56px] left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <span className="text-[11px] text-slate-500 block leading-none">
+            {language === 'bn' ? 'মোট' : 'Total'}
           </span>
-          <span className="text-base font-black text-slate-900 leading-tight">
+          <span className="text-base font-extrabold text-slate-900 leading-tight tabular-nums">
             {formatPrice(selectedProduct.price * selectedQuantity)}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 flex-1 max-w-[270px]">
+        <div className="flex items-center gap-2 flex-1 max-w-[260px]">
           <button
             type="button"
             onClick={handleAddToCart}
-            className="theme-btn-cart flex-1 py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1 shadow-xs cursor-pointer whitespace-nowrap"
+            className="theme-btn-cart flex-1 min-h-[42px] px-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
           >
             <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
-            <span className="whitespace-nowrap">{language === 'bn' ? 'কার্টে যোগ' : 'Add to Cart'}</span>
+            <span>{language === 'bn' ? 'কার্টে যোগ' : 'Add to Cart'}</span>
           </button>
 
           <button
             type="button"
             onClick={handleBuyNow}
-            className="theme-btn-buy flex-1 py-2 px-2 rounded-xl text-xs font-black flex items-center justify-center gap-1 shadow-md cursor-pointer whitespace-nowrap"
+            className="theme-btn-buy flex-1 min-h-[42px] px-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1 cursor-pointer whitespace-nowrap"
           >
             <Zap className="w-3.5 h-3.5 text-amber-200 fill-amber-300 shrink-0" />
-            <span className="whitespace-nowrap">{language === 'bn' ? 'এখনই কিনুন' : 'Buy Now'}</span>
+            <span>{language === 'bn' ? 'এখনই কিনুন' : 'Buy Now'}</span>
           </button>
         </div>
       </div>
+
+      {/* Lightbox Image Viewer */}
       {lightboxImage && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-4 select-none" 
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-md p-4 select-none"
           onClick={() => setLightboxImage(null)}
           onWheel={(e) => {
             const delta = e.deltaY < 0 ? 0.35 : -0.35;
             setLightboxZoom((prev) => Math.min(4, Math.max(1, +(prev + delta).toFixed(2))));
           }}
         >
-          {/* Top Floating HD Zoom & Close Controls */}
-          <div 
-            className="absolute top-4 inset-x-4 max-w-2xl mx-auto flex items-center justify-between gap-3 bg-slate-900/95 border border-slate-700/80 rounded-2xl px-4 py-2.5 shadow-2xl backdrop-blur-md text-white z-60"
+          <div
+            className="absolute top-4 inset-x-4 max-w-xl mx-auto flex items-center justify-between gap-3 bg-slate-900/95 border border-slate-700/80 rounded-2xl px-4 py-2 shadow-2xl text-white z-60"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-emerald-400 flex items-center gap-1">
-                <ZoomIn className="w-4 h-4" />
-                <span>{language === 'bn' ? 'আল্ট্রা এইচডি ভিউয়ার (৪K)' : 'Ultra HD 4K Viewer'}</span>
-              </span>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 font-bold">
+              <ZoomIn className="w-4 h-4 text-emerald-400" />
+              <span className="text-xs font-mono font-bold tabular-nums">
                 {Math.round(lightboxZoom * 100)}%
-              </span>
-              <span className="hidden sm:inline-block text-[10px] text-emerald-300/80 bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded-full">
-                {language === 'bn' ? '✨ জুম করলেও ফাটবে না' : '✨ Crystal Clear'}
               </span>
             </div>
 
-            <div className="flex items-center gap-1 sm:gap-1.5">
+            <div className="flex items-center gap-1">
               <button
                 type="button"
                 onClick={() => setLightboxZoom((prev) => Math.max(1, +(prev - 0.5).toFixed(2)))}
                 disabled={lightboxZoom <= 1}
-                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white disabled:opacity-40 cursor-pointer"
                 title={language === 'bn' ? 'জুম আউট' : 'Zoom Out'}
               >
                 <ZoomOut className="w-4 h-4" />
@@ -1147,7 +1211,7 @@ export const ProductDetailPage: React.FC = () => {
                 type="button"
                 onClick={() => setLightboxZoom((prev) => Math.min(4, +(prev + 0.5).toFixed(2)))}
                 disabled={lightboxZoom >= 4}
-                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white disabled:opacity-40 cursor-pointer"
                 title={language === 'bn' ? 'জুম ইন' : 'Zoom In'}
               >
                 <ZoomIn className="w-4 h-4" />
@@ -1165,15 +1229,14 @@ export const ProductDetailPage: React.FC = () => {
                       ? 'bg-emerald-600 text-white'
                       : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
                   }`}
-                  title={`${level}x Zoom`}
                 >
                   {level}x
                 </button>
               ))}
               <div className="h-4 w-px bg-slate-700 mx-1" />
-              <button 
+              <button
                 type="button"
-                onClick={() => setLightboxImage(null)} 
+                onClick={() => setLightboxImage(null)}
                 className="p-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500 text-rose-300 hover:text-white transition-colors cursor-pointer"
                 title={language === 'bn' ? 'বন্ধ করুন' : 'Close'}
               >
@@ -1182,21 +1245,20 @@ export const ProductDetailPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Previous / Next Arrow Controls in Lightbox (when multiple images) */}
           {sanitizedImages.length > 1 && (
             <>
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  const prevIdx = (activeImageIndex - 1 + sanitizedImages.length) % sanitizedImages.length;
+                  const prevIdx =
+                    (activeImageIndex - 1 + sanitizedImages.length) % sanitizedImages.length;
                   setActiveImageIndex(prevIdx);
                   setLightboxImage(sanitizedImages[prevIdx]);
                   setLightboxZoom(1);
                   setLightboxPan({ x: 0, y: 0 });
                 }}
                 className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-slate-900/80 hover:bg-emerald-600 text-white border border-slate-700 shadow-xl transition-all cursor-pointer z-60"
-                title={language === 'bn' ? 'পূর্ববর্তী ছবি' : 'Previous Image'}
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
@@ -1211,15 +1273,13 @@ export const ProductDetailPage: React.FC = () => {
                   setLightboxPan({ x: 0, y: 0 });
                 }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-slate-900/80 hover:bg-emerald-600 text-white border border-slate-700 shadow-xl transition-all cursor-pointer z-60"
-                title={language === 'bn' ? 'পরবর্তী ছবি' : 'Next Image'}
               >
                 <ChevronRight className="w-6 h-6" />
               </button>
             </>
           )}
 
-          {/* Interactive Pan & Zoom Image Canvas */}
-          <div 
+          <div
             className="w-full h-full flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing"
             onClick={(e) => e.stopPropagation()}
             onDoubleClick={() => {
@@ -1247,18 +1307,18 @@ export const ProductDetailPage: React.FC = () => {
             onMouseUp={() => setIsDragging(false)}
             onMouseLeave={() => setIsDragging(false)}
           >
-            <img 
-              src={lightboxImage} 
-              alt={title} 
+            <img
+              src={lightboxImage}
+              alt={title}
               referrerPolicy="no-referrer"
               style={{
-                transform: `scale(${lightboxZoom}) translate(${lightboxPan.x / lightboxZoom}px, ${lightboxPan.y / lightboxZoom}px)`,
+                transform: `scale(${lightboxZoom}) translate(${lightboxPan.x / lightboxZoom}px, ${
+                  lightboxPan.y / lightboxZoom
+                }px)`,
                 transition: isDragging ? 'none' : 'transform 0.2s ease-out',
                 imageRendering: '-webkit-optimize-contrast' as any,
-                WebkitBackfaceVisibility: 'hidden',
-                backfaceVisibility: 'hidden',
               }}
-              className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl transition-transform" 
+              className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl"
             />
           </div>
         </div>
@@ -1267,75 +1327,75 @@ export const ProductDetailPage: React.FC = () => {
       {/* Share Product Modal */}
       {isShareModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-5 animate-in fade-in zoom-in duration-150">
+          <div className="bg-white rounded-2xl max-w-md w-full p-5 shadow-2xl border border-slate-200 space-y-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-slate-900 font-black text-base">
-                <Share2 className="w-5 h-5 text-emerald-600" />
-                <span>{language === 'bn' ? 'পণ্যটির লিংক শেয়ার করুন' : 'Share this Product'}</span>
+              <div className="flex items-center gap-2 text-slate-900 font-bold text-base">
+                <Share2 className="w-4 h-4 text-[#00873E]" />
+                <span>{language === 'bn' ? 'শেয়ার করুন' : 'Share Product'}</span>
               </div>
               <button
+                type="button"
                 onClick={() => setIsShareModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-200">
+            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
               <img
                 src={sanitizedImages[0]}
                 alt={title}
-                className="w-14 h-14 object-cover rounded-xl border border-slate-200 shrink-0"
+                referrerPolicy="no-referrer"
+                className="w-14 h-14 object-cover rounded-lg border border-slate-200 shrink-0"
               />
-              <div className="overflow-hidden">
+              <div className="min-w-0">
                 <h4 className="text-xs font-bold text-slate-900 truncate">{title}</h4>
-                <p className="text-xs text-emerald-700 font-black mt-0.5">{formatPrice(selectedProduct.price)}</p>
-                <p className="text-[11px] text-slate-400 mt-0.5 font-mono">SKU: {selectedProduct.sku ? selectedProduct.sku.toUpperCase() : `SBP-${selectedProduct.id}`}</p>
+                <p className="text-xs text-[#00873E] font-bold mt-0.5 tabular-nums">
+                  {formatPrice(selectedProduct.price)}
+                </p>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-700">
-                {language === 'bn' ? 'সরাসরি প্রডাক্ট লিঙ্ক:' : 'Direct Product Link:'}
-              </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  readOnly
-                  value={productShareUrl}
-                  className="flex-1 px-3 py-2 text-xs font-mono bg-slate-50 border border-slate-300 rounded-xl text-slate-700 outline-none select-all"
-                />
-                <button
-                  type="button"
-                  onClick={copyProductLink}
-                  className={`px-3.5 py-2 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap shadow-xs ${
-                    copiedLink
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-slate-900 hover:bg-slate-800 text-white'
-                  }`}
-                >
-                  {copiedLink ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedLink ? (language === 'bn' ? 'কপি হয়েছে' : 'Copied') : (language === 'bn' ? 'কপি করুন' : 'Copy')}</span>
-                </button>
-              </div>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                readOnly
+                value={productShareUrl}
+                className="flex-1 px-3 py-2 text-xs font-mono bg-slate-50 border border-slate-300 rounded-xl text-slate-700 outline-none select-all"
+              />
+              <button
+                type="button"
+                onClick={copyProductLink}
+                className={`min-h-[38px] px-3.5 text-xs font-bold rounded-xl inline-flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
+                  copiedLink ? 'bg-[#00873E] text-white' : 'bg-slate-900 text-white'
+                }`}
+              >
+                {copiedLink ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copiedLink ? (language === 'bn' ? 'কপি হয়েছে' : 'Copied') : language === 'bn' ? 'কপি' : 'Copy'}</span>
+              </button>
             </div>
 
-            <div className="pt-2 border-t border-slate-100 flex gap-2">
+            <div className="flex gap-2 pt-1">
               <a
-                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${title}\nদাম: ${formatPrice(selectedProduct.price)}\nসরাসরি অর্ডার করতে ক্লিক করুন: ${productShareUrl}`)}`}
+                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                  `${title}\nদাম: ${formatPrice(selectedProduct.price)}\n${productShareUrl}`
+                )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-xs"
+                className="flex-1 min-h-[42px] bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold flex items-center justify-center transition-colors"
               >
-                <span>WhatsApp</span>
+                WhatsApp
               </a>
               <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productShareUrl)}`}
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                  productShareUrl
+                )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-xs"
+                className="flex-1 min-h-[42px] bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold flex items-center justify-center transition-colors"
               >
-                <span>Facebook</span>
+                Facebook
               </a>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Star, Eye, Zap, ChevronRight } from 'lucide-react';
+import { Heart, Star, ChevronRight } from 'lucide-react';
 import { Product } from '../types';
 import { useApp } from '../context/AppContext';
 import { getProductImageCandidates, getCategoryFallbackImage } from '../utils/productImageUtils';
@@ -18,7 +18,6 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
   } = useApp();
 
   const isSaved = isInWishlist(product.id);
-  // All 11,902 products strictly branded as বাংলা বাজার (Bangla Bazar without "Mart")
   const displayBrand = language === 'bn' ? 'বাংলা বাজার' : 'Bangla Bazar';
 
   const rawTitle = language === 'bn' ? product.titleBn : product.titleEn;
@@ -29,8 +28,10 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
     .replace(/বাংলা\s*বাজার\s*মার্ট/gi, displayBrand)
     .replace(/OneRoof/gi, displayBrand);
 
-  // Robust candidate waterfall: tries .jpg HD, then .jpeg HD, then original thumbnail before category fallback
-  const imageCandidates = React.useMemo(() => getProductImageCandidates(product), [product.id, product.images, product.image, product.category]);
+  const imageCandidates = React.useMemo(
+    () => getProductImageCandidates(product),
+    [product.id, product.images, product.image, product.category]
+  );
   const [candidateIndex, setCandidateIndex] = React.useState(0);
 
   React.useEffect(() => {
@@ -48,88 +49,88 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
     });
   };
 
+  // Single concise badge max to avoid pill clutter
+  const badgeText = product.discountPercentage
+    ? `-${product.discountPercentage}%`
+    : product.isFreeShipping
+    ? language === 'bn'
+      ? 'ফ্রি ডেলিভারি'
+      : 'Free Delivery'
+    : null;
+  const badgeColorClass = product.discountPercentage ? 'bg-[#DC2626]' : 'bg-[#00873E]';
+
   if (layout === 'list') {
     return (
-      <div className="bg-white rounded-2xl p-4 border border-slate-200/80 hover:border-amber-500/60 hover:shadow-xl transition-all duration-300 flex flex-col sm:flex-row gap-4 items-center group">
-        <div 
-          onClick={() => viewProductDetails(product)}
-          className="relative w-full sm:w-48 h-48 sm:h-36 shrink-0 rounded-xl overflow-hidden bg-slate-100 cursor-pointer"
-        >
+      <div
+        onClick={() => viewProductDetails(product)}
+        className="bg-white rounded-2xl p-4 border border-slate-200/80 hover:border-[#00873E]/50 hover:shadow-lg transition-all duration-200 flex flex-col sm:flex-row gap-4 items-center group cursor-pointer"
+      >
+        <div className="relative w-full sm:w-44 h-44 sm:h-36 shrink-0 rounded-xl overflow-hidden bg-slate-100">
           <img
             src={currentImg}
             alt={title}
             referrerPolicy="no-referrer"
             onError={handleImageError}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            style={{ imageRendering: '-webkit-optimize-contrast' as any }}
             loading="lazy"
             decoding="async"
           />
-          <div className="absolute top-2 left-2 flex flex-col gap-1">
-            {product.discountPercentage && (
-              <span className="bg-rose-600 text-white text-[10px] font-black px-2 py-0.5 rounded-md shadow-xs">
-                -{product.discountPercentage}%
-              </span>
-            )}
-            {product.isFreeShipping && (
-              <span className="bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md shadow-xs">
-                ফ্রি ডেলিভারি
-              </span>
-            )}
-          </div>
+          {badgeText && (
+            <span className={`absolute top-2 left-2 ${badgeColorClass} text-white text-[11px] font-bold px-2 py-0.5 rounded-md tabular-nums`}>
+              {badgeText}
+            </span>
+          )}
         </div>
 
-        <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
+        <div className="flex-1 min-w-0 flex flex-col justify-between h-full w-full">
           <div>
-            <div className="flex items-center justify-between gap-2 mb-1">
-              <span className="text-[11px] font-bold tracking-wider text-[#00873E] uppercase bg-emerald-50 px-2 py-0.5 rounded">
-                {displayBrand}
-              </span>
-              <div className="flex items-center text-amber-500 text-xs font-bold gap-1">
+            <div className="flex items-center justify-between gap-2 mb-1 text-xs">
+              <span className="font-bold text-[#00873E]">{displayBrand}</span>
+              <div className="flex items-center text-slate-600 font-semibold gap-1 tabular-nums">
                 <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 <span>{product.rating}</span>
                 <span className="text-slate-400 font-normal">({product.reviewCount})</span>
               </div>
             </div>
 
-            <h3
-              onClick={() => viewProductDetails(product)}
-              className="text-sm sm:text-base font-semibold text-slate-800 hover:text-[#00873E] cursor-pointer line-clamp-2 transition-colors mb-2"
-            >
+            <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-[#00873E] line-clamp-2 transition-colors mb-1.5">
               {title}
             </h3>
 
-            <p className="text-xs text-slate-500 line-clamp-2 hidden sm:block">
-              {language === 'bn' ? product.descriptionBn : product.descriptionEn}
-            </p>
+            {(product.descriptionBn || product.descriptionEn) && (
+              <p className="text-xs text-slate-500 line-clamp-2 hidden sm:block">
+                {language === 'bn' ? product.descriptionBn : product.descriptionEn}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3 mt-3 pt-3 border-t border-slate-100">
-            <div>
-              <div className="text-lg font-black text-slate-900">
+            <div className="flex items-baseline gap-2">
+              <span className="text-lg font-black text-slate-900 tabular-nums">
                 {formatPrice(product.price)}
-              </div>
+              </span>
               {product.originalPrice && (
-                <div className="text-xs text-slate-400 line-through">
+                <span className="text-xs text-slate-400 line-through tabular-nums">
                   {formatPrice(product.originalPrice)}
-                </div>
+                </span>
               )}
             </div>
 
             <div className="flex items-center gap-2">
               <button
+                type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleWishlist(product.id);
                 }}
-                className={`p-2.5 rounded-xl border transition-colors shrink-0 ${
+                className={`w-10 h-10 rounded-xl border flex items-center justify-center transition-colors shrink-0 cursor-pointer ${
                   isSaved
-                    ? 'border-rose-200 bg-rose-50 text-rose-600'
-                    : 'border-slate-200 bg-slate-50 text-slate-500 hover:text-rose-600 hover:bg-rose-50'
+                    ? 'border-rose-200 bg-rose-50 text-[#DC2626]'
+                    : 'border-slate-200 bg-slate-50 text-slate-500 hover:text-[#DC2626]'
                 }`}
                 title={t.wishlist}
               >
-                <Heart className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
+                <Heart className={`w-4 h-4 ${isSaved ? 'fill-[#DC2626]' : ''}`} />
               </button>
 
               <button
@@ -138,9 +139,9 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
                   e.stopPropagation();
                   viewProductDetails(product);
                 }}
-                className="py-2.5 px-4 bg-slate-900 hover:bg-[#00873E] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer whitespace-nowrap"
+                className="h-10 px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
               >
-                <span>{language === 'bn' ? 'বিস্তারিত দেখুন' : 'View Details'}</span>
+                <span>{language === 'bn' ? 'বিস্তারিত' : 'Details'}</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -151,109 +152,78 @@ export const ProductCard: React.FC<{ product: Product; layout?: 'grid' | 'list' 
   }
 
   return (
-    <div 
+    <div
       onClick={() => viewProductDetails(product)}
-      className="bg-white rounded-2xl p-3 sm:p-3.5 border border-slate-200/80 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative cursor-pointer"
+      className="bg-white rounded-2xl p-3 sm:p-3.5 border border-slate-200/80 hover:border-[#00873E]/50 hover:shadow-lg transition-all duration-200 flex flex-col justify-between group relative cursor-pointer"
     >
-      <div className="relative w-full pt-[100%] rounded-xl overflow-hidden bg-slate-100 mb-3">
+      <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-100 mb-3">
         <img
           src={currentImg}
           alt={title}
           referrerPolicy="no-referrer"
           onError={handleImageError}
-          className="absolute inset-0 w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-          style={{ imageRendering: '-webkit-optimize-contrast' as any }}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
           decoding="async"
         />
 
-        <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
-          {product.discountPercentage && (
-            <span className="bg-rose-600 text-white text-[10px] font-black px-2 py-0.5 rounded-md shadow-xs">
-              -{product.discountPercentage}%
-            </span>
-          )}
-          {product.isFlashSale && (
-            <span className="bg-amber-500 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded-md flex items-center gap-0.5 shadow-xs">
-              <Zap className="w-2.5 h-2.5 fill-slate-950" />
-              FLASH
-            </span>
-          )}
-          {product.isFreeShipping && (
-            <span className="bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md shadow-xs">
-              ফ্রি ডেলিভারি
-            </span>
-          )}
-        </div>
+        {badgeText && (
+          <span
+            className={`absolute top-2 left-2 ${badgeColorClass} text-white text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md z-10 tabular-nums`}
+          >
+            {badgeText}
+          </span>
+        )}
 
         <button
+          type="button"
           onClick={(e) => {
             e.stopPropagation();
             toggleWishlist(product.id);
           }}
-          className={`absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-transform active:scale-90 z-20 ${
+          className={`absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all active:scale-90 z-20 cursor-pointer ${
             isSaved
-              ? 'bg-rose-500 text-white shadow-md'
-              : 'bg-white/85 text-slate-600 hover:bg-white hover:text-rose-500'
+              ? 'bg-[#DC2626] text-white shadow-sm'
+              : 'bg-white/90 text-slate-500 hover:bg-white hover:text-[#DC2626] shadow-xs'
           }`}
           title={t.wishlist}
+          aria-label={t.wishlist}
         >
           <Heart className={`w-4 h-4 ${isSaved ? 'fill-white' : ''}`} />
         </button>
-
-        <div className="absolute inset-x-2 bottom-2 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block z-10">
-          <div
-            className="w-full py-2 bg-slate-900/80 hover:bg-slate-900 text-white text-xs font-semibold rounded-lg backdrop-blur-xs flex items-center justify-center gap-1.5 transition-colors shadow-md"
-          >
-            <Eye className="w-3.5 h-3.5" />
-            <span>{language === 'bn' ? 'বিস্তারিত দেখুন' : 'Quick View'}</span>
-          </div>
-        </div>
       </div>
 
       <div className="flex-1 flex flex-col justify-between">
         <div>
-          <div className="flex items-center justify-between text-[11px] mb-1.5 gap-1">
-            <div className="flex items-center gap-1.5 overflow-hidden">
-              <span className="font-bold text-[#00873E] bg-emerald-50 px-2 py-0.5 rounded uppercase tracking-wider text-[10px] shrink-0">
-                {displayBrand}
-              </span>
-              <span className="text-[10px] text-slate-400 font-mono truncate">
-                {product.sku ? product.sku.toUpperCase() : `SBP-${product.id.replace(/\D/g, '') || product.id.toUpperCase()}`}
-              </span>
-            </div>
-            <div className="flex items-center text-amber-500 font-bold gap-1 shrink-0">
+          <div className="flex items-center justify-between text-[11px] mb-1 gap-2">
+            <span className="font-bold text-[#00873E] truncate">{displayBrand}</span>
+            <div className="flex items-center text-slate-600 font-semibold gap-0.5 shrink-0 tabular-nums">
               <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
               <span>{product.rating}</span>
-              <span className="text-slate-400 font-normal">({product.reviewCount})</span>
             </div>
           </div>
 
-          <h3
-            className="text-xs sm:text-sm font-semibold text-slate-800 hover:text-[#00873E] line-clamp-2 transition-colors min-h-[2.5rem] leading-snug"
-          >
+          <h3 className="text-xs sm:text-sm font-semibold text-slate-900 group-hover:text-[#00873E] line-clamp-2 transition-colors min-h-[2.5rem] leading-snug">
             {title}
           </h3>
         </div>
 
-        <div className="mt-3 pt-2.5 border-t border-slate-100">
-          <div className="flex items-baseline justify-between gap-1.5">
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-base sm:text-lg font-black text-slate-900">
-                {formatPrice(product.price)}
-              </span>
-              {product.originalPrice && (
-                <span className="text-xs text-slate-400 line-through">
-                  {formatPrice(product.originalPrice)}
-                </span>
-              )}
-            </div>
-
-            <span className="text-xs font-bold text-[#00873E] group-hover:text-emerald-700 flex items-center gap-0.5 transition-colors">
-              <span>{language === 'bn' ? 'বিস্তারিত' : 'Details'}</span>
-              <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+        <div className="mt-2.5 pt-2.5 border-t border-slate-100 flex items-baseline justify-between gap-1.5">
+          <div className="flex items-baseline gap-1.5 flex-wrap">
+            <span className="text-sm sm:text-base font-black text-slate-900 tabular-nums">
+              {formatPrice(product.price)}
             </span>
+            {product.originalPrice && (
+              <span className="text-[11px] text-slate-400 line-through tabular-nums">
+                {formatPrice(product.originalPrice)}
+              </span>
+            )}
           </div>
+
+          <span className="text-xs font-bold text-[#00873E] flex items-center gap-0.5 shrink-0">
+            <span className="hidden xs:inline">{language === 'bn' ? 'দেখুন' : 'View'}</span>
+            <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+          </span>
         </div>
       </div>
     </div>

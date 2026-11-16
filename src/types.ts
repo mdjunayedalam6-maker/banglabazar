@@ -255,6 +255,18 @@ export interface ReferralRecord {
   bonusAmount: number; // 30 BDT
 }
 
+export interface DeliveryAddress {
+  id: string;
+  title: string;
+  recipientName?: string;
+  phone?: string;
+  division?: string;
+  district: string;
+  thana?: string;
+  address: string;
+  isDefault: boolean;
+}
+
 export interface User {
   id: string;
   name: string;
@@ -275,13 +287,7 @@ export interface User {
   pendingWelcomeBonus?: number; // 50 BDT welcome bonus for new accounts (unlocked on first order)
   hasCompletedFirstOrder?: boolean; // Set to true once the first order is placed
   firstOrderBonusUnlocked?: boolean; // Set to true once the 50 BDT bonus is credited to wallet
-  addresses: {
-    id: string;
-    title: string;
-    address: string;
-    district: string;
-    isDefault: boolean;
-  }[];
+  addresses: DeliveryAddress[];
 }
 
 export interface FilterState {

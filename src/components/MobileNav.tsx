@@ -25,89 +25,98 @@ import { usePWAInstall } from '../hooks/usePWAInstall';
 import brandAppIcon from '../assets/images/bangla_bazar_logo_trimmed.png';
 
 export const MobileBottomBar: React.FC = () => {
-  const { 
-    currentPage, 
-    setCurrentPage, 
-    cartItemsCount, 
-    wishlist, 
-    currentUser, 
+  const {
+    currentPage,
+    setCurrentPage,
+    cartItemsCount,
+    wishlist,
+    currentUser,
     setIsAuthModalOpen,
     setIsCartDrawerOpen,
-    language 
+    setProfileActiveTab,
+    language,
   } = useApp();
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 px-2 py-1.5 shadow-lg flex items-center justify-around select-none">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200/90 px-2 py-1 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] flex items-center justify-around select-none">
       <button
+        type="button"
         onClick={() => setCurrentPage('home')}
-        className={`flex flex-col items-center justify-center p-1.5 rounded-lg transition-colors ${
-          currentPage === 'home' ? 'text-emerald-700' : 'text-slate-500'
+        className={`flex flex-col items-center justify-center min-h-[46px] min-w-[56px] px-2 rounded-xl transition-colors cursor-pointer ${
+          currentPage === 'home' ? 'text-[#00873E] font-bold' : 'text-slate-500'
         }`}
       >
         <Home className="w-5 h-5" />
-        <span className="text-[10px] font-medium mt-0.5">{language === 'bn' ? 'হোম' : 'Home'}</span>
+        <span className="text-[11px] mt-0.5">{language === 'bn' ? 'হোম' : 'Home'}</span>
       </button>
 
       <button
+        type="button"
         onClick={() => setCurrentPage('shop')}
-        className={`flex flex-col items-center justify-center p-1.5 rounded-lg transition-colors ${
-          currentPage === 'shop' ? 'text-emerald-700' : 'text-slate-500'
+        className={`flex flex-col items-center justify-center min-h-[46px] min-w-[56px] px-2 rounded-xl transition-colors cursor-pointer ${
+          currentPage === 'shop' ? 'text-[#00873E] font-bold' : 'text-slate-500'
         }`}
       >
         <Grid className="w-5 h-5" />
-        <span className="text-[10px] font-medium mt-0.5">{language === 'bn' ? 'শপ' : 'Shop'}</span>
+        <span className="text-[11px] mt-0.5">{language === 'bn' ? 'শপ' : 'Shop'}</span>
       </button>
 
       {/* Center Highlighted Cart */}
       <button
+        type="button"
         onClick={() => setIsCartDrawerOpen(true)}
-        className="relative flex flex-col items-center justify-center -mt-4 p-2 bg-emerald-600 text-white rounded-full shadow-lg hover:bg-emerald-700 transition-transform active:scale-95"
+        className="relative flex flex-col items-center justify-center -mt-3 w-12 h-12 bg-[#00873E] hover:bg-[#007033] text-white rounded-full shadow-md transition-transform active:scale-95 cursor-pointer"
+        aria-label={language === 'bn' ? 'কার্ট' : 'Cart'}
       >
         <ShoppingBag className="w-5 h-5" />
         {cartItemsCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-amber-400 text-slate-900 text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+          <span className="absolute -top-1 -right-1 bg-[#DC2626] text-white text-[10px] font-black min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center tabular-nums">
             {cartItemsCount}
           </span>
         )}
       </button>
 
       <button
+        type="button"
         onClick={() => {
           if (currentUser) {
+            setProfileActiveTab('wishlist');
             setCurrentPage('profile');
           } else {
             setIsAuthModalOpen(true);
           }
         }}
-        className={`relative flex flex-col items-center justify-center p-1.5 rounded-lg transition-colors ${
-          currentPage === 'profile' ? 'text-emerald-700' : 'text-slate-500'
+        className={`relative flex flex-col items-center justify-center min-h-[46px] min-w-[56px] px-2 rounded-xl transition-colors cursor-pointer ${
+          currentPage === 'profile' ? 'text-[#00873E] font-bold' : 'text-slate-500'
         }`}
       >
         <Heart className="w-5 h-5" />
         {wishlist.length > 0 && (
-          <span className="absolute top-1 right-2 bg-amber-500 text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+          <span className="absolute top-1 right-2.5 bg-amber-500 text-white text-[9px] font-bold min-w-[16px] h-4 px-1 rounded-full flex items-center justify-center tabular-nums">
             {wishlist.length}
           </span>
         )}
-        <span className="text-[10px] font-medium mt-0.5">{language === 'bn' ? 'উইশলিস্ট' : 'Wishlist'}</span>
+        <span className="text-[11px] mt-0.5">{language === 'bn' ? 'পছন্দ' : 'Wishlist'}</span>
       </button>
 
       <button
+        type="button"
         onClick={() => {
           if (currentUser) {
+            setProfileActiveTab('settings');
             setCurrentPage('profile');
           } else {
             setIsAuthModalOpen(true);
           }
         }}
-        className={`flex flex-col items-center justify-center p-1.5 rounded-lg transition-colors ${
-          currentPage === 'profile' ? 'text-emerald-700' : 'text-slate-500'
+        className={`flex flex-col items-center justify-center min-h-[46px] min-w-[56px] px-2 rounded-xl transition-colors cursor-pointer ${
+          currentPage === 'profile' ? 'text-[#00873E] font-bold' : 'text-slate-500'
         }`}
       >
         <User className="w-5 h-5" />
-        <span className="text-[10px] font-medium mt-0.5">{language === 'bn' ? 'অ্যাকাউন্ট' : 'Account'}</span>
+        <span className="text-[11px] mt-0.5">{language === 'bn' ? 'অ্যাকাউন্ট' : 'Account'}</span>
       </button>
-    </div>
+    </nav>
   );
 };
 
@@ -162,23 +171,32 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
           {currentUser ? (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setProfileActiveTab('settings');
+                    setCurrentPage('profile');
+                    onClose();
+                  }}
+                  className="flex items-center gap-3 text-left cursor-pointer group"
+                >
                   <img
                     src={currentUser.avatar}
                     alt={currentUser.name}
+                    referrerPolicy="no-referrer"
                     className="w-10 h-10 rounded-full border border-emerald-500 object-cover"
                   />
                   <div>
-                    <div className="text-xs font-bold text-slate-800">{currentUser.name}</div>
-                    <div className="text-[11px] text-slate-500">{currentUser.phone}</div>
+                    <div className="text-xs font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">{currentUser.name}</div>
+                    <div className="text-[11px] text-slate-500">{currentUser.phone} · প্রোফাইল দেখুন</div>
                   </div>
-                </div>
+                </button>
                 <button
                   onClick={() => {
                     logoutUser();
                     onClose();
                   }}
-                  className="text-xs text-rose-600 font-semibold cursor-pointer"
+                  className="text-xs text-rose-600 font-semibold cursor-pointer px-2 py-1"
                 >
                   লগআউট
                 </button>

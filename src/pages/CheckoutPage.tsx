@@ -57,14 +57,16 @@ export const CheckoutPage: React.FC = () => {
       ) || initialDivObj.districts[0]
     : initialDivObj.districts[0];
 
+  const defaultSavedAddress = currentUser?.addresses?.find((a) => a.isDefault) || currentUser?.addresses?.[0];
+
   // Form State
-  const [fullName, setFullName] = useState(currentUser?.name || '');
-  const [phone, setPhone] = useState(currentUser?.phone || '');
-  const [division, setDivision] = useState(initialDivObj.nameBn);
-  const [district, setDistrict] = useState(initialDistrict);
-  const [thana, setThana] = useState(currentUser?.thana || '');
+  const [fullName, setFullName] = useState(defaultSavedAddress?.recipientName || currentUser?.name || '');
+  const [phone, setPhone] = useState(defaultSavedAddress?.phone || currentUser?.phone || '');
+  const [division, setDivision] = useState(defaultSavedAddress?.division || initialDivObj.nameBn);
+  const [district, setDistrict] = useState(defaultSavedAddress?.district || initialDistrict);
+  const [thana, setThana] = useState(defaultSavedAddress?.thana || currentUser?.thana || '');
   const [address, setAddress] = useState(
-    currentUser?.addresses?.[0]?.address || currentUser?.village || ''
+    defaultSavedAddress?.address || currentUser?.village || ''
   );
   // Payment Method: Cash on Delivery, Bangla QR, or Customer Wallet Balance
   const [paymentMethod, setPaymentMethod] = useState<'cod' | 'bangla_qr' | 'wallet'>('cod');
@@ -82,19 +84,23 @@ export const CheckoutPage: React.FC = () => {
   // Sync state if currentUser logs in or loads
   useEffect(() => {
     if (currentUser) {
-      if (currentUser.name && !fullName) setFullName(currentUser.name);
-      if (currentUser.phone && !phone) setPhone(currentUser.phone);
-      if (currentUser.division) {
+      const defAddr = currentUser.addresses?.find((a) => a.isDefault) || currentUser.addresses?.[0];
+      if ((defAddr?.recipientName || currentUser.name) && !fullName) setFullName(defAddr?.recipientName || currentUser.name);
+      if ((defAddr?.phone || currentUser.phone) && !phone) setPhone(defAddr?.phone || currentUser.phone);
+      const targetDiv = defAddr?.division || currentUser.division;
+      const targetDist = defAddr?.district || currentUser.district;
+      if (targetDiv) {
         const found = BANGLADESH_DIVISIONS.find(
           (d) =>
-            d.nameBn === currentUser.division ||
-            d.nameEn.toLowerCase() === currentUser.division.toLowerCase()
+            d.nameBn === targetDiv ||
+            d.nameEn.toLowerCase() === targetDiv.toLowerCase()
         );
         if (found) {
           setDivision(found.nameBn);
-          const foundDist = currentUser.district
+          const foundDist = targetDist
             ? found.districts.find((dist) =>
-                dist.toLowerCase().includes(currentUser.district.toLowerCase())
+                dist.toLowerCase().includes(targetDist.toLowerCase()) ||
+                targetDist.toLowerCase().includes(dist.toLowerCase())
               ) || found.districts[0]
             : found.districts[0];
           setDistrict(foundDist);
@@ -105,9 +111,9 @@ export const CheckoutPage: React.FC = () => {
           }
         }
       }
-      if (currentUser.thana && !thana) setThana(currentUser.thana);
-      if (currentUser.addresses?.[0]?.address && !address) {
-        setAddress(currentUser.addresses[0].address);
+      if ((defAddr?.thana || currentUser.thana) && !thana) setThana(defAddr?.thana || currentUser.thana);
+      if (defAddr?.address && !address) {
+        setAddress(defAddr.address);
       } else if (currentUser.village && !address) {
         setAddress(currentUser.village);
       }
@@ -305,6 +311,15 @@ export const CheckoutPage: React.FC = () => {
                         type="button"
                         onClick={() => {
                           setAddress(addr.address);
+                          if (addr.recipientName) setFullName(addr.recipientName);
+                          if (addr.phone) setPhone(addr.phone);
+                          if (addr.thana) setThana(addr.thana);
+                          if (addr.division) {
+                            const matchedDiv = BANGLADESH_DIVISIONS.find(
+                              (d) => d.nameBn === addr.division || d.nameEn === addr.division
+                            );
+                            if (matchedDiv) setDivision(matchedDiv.nameBn);
+                          }
                           if (addr.district) {
                             for (const d of BANGLADESH_DIVISIONS) {
                               const matched = d.districts.find(

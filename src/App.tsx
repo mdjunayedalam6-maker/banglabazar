@@ -21,6 +21,7 @@ import { PWAInstallBanner } from './components/PWAInstallBanner';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { InitialLoadingScreen } from './components/InitialLoadingScreen';
 import { AppInstallModal } from './components/AppInstallModal';
+import { AboutPage, ContactPage } from './components/InfoPages';
 import { ArrowUp, ShieldAlert, Lock } from 'lucide-react';
 
 const MainAppContent: React.FC = () => {
@@ -101,7 +102,7 @@ const MainAppContent: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50/50 text-slate-800 font-sans selection:bg-emerald-200 selection:text-emerald-900">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-900 font-sans selection:bg-emerald-200 selection:text-emerald-950">
       {/* Top Main Header */}
       <Header />
 
@@ -109,9 +110,9 @@ const MainAppContent: React.FC = () => {
       <Navbar />
 
       {/* Dynamic Page Views */}
-      <main className="flex-1 pb-16 md:pb-0">
+      <main className="flex-1 pb-20 md:pb-0">
         {currentPage === 'home' && (
-          <div className="space-y-2">
+          <div className="space-y-4 sm:space-y-6">
             <BannerSlider />
             <CategoryGrid />
             <FeaturedSections />
@@ -129,6 +130,10 @@ const MainAppContent: React.FC = () => {
         {currentPage === 'order-success' && <OrderSuccessView />}
 
         {currentPage === 'profile' && <ProfilePage />}
+
+        {currentPage === 'about' && <AboutPage />}
+
+        {currentPage === 'contact' && <ContactPage />}
       </main>
 
       {/* Main Footer */}
@@ -161,7 +166,7 @@ const MainAppContent: React.FC = () => {
       {/* Floating Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="fixed bottom-20 md:bottom-6 right-4 z-40 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-slate-700 border border-slate-200 shadow-md flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer"
+        className="fixed bottom-20 md:bottom-6 right-4 z-40 w-11 h-11 rounded-full bg-white hover:bg-emerald-50 text-slate-700 hover:text-[#00873E] border border-slate-200 shadow-md flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer"
         title="Scroll to Top"
         aria-label="Scroll to Top"
       >

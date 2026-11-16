@@ -208,13 +208,10 @@ export const Header: React.FC = () => {
                   setIsDrawerOpen(true);
                 }
               }}
-              className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none cursor-pointer relative"
+              className="p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none cursor-pointer relative transition-colors"
               aria-label="Toggle Menu"
             >
-              <MoreVertical className="w-6 h-6" />
-              {siteSettings.appDownloadUrl?.trim() && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-500 rounded-full ring-2 ring-white"></span>
-              )}
+              <MoreVertical className="w-5 h-5" />
             </button>
 
             {/* Dropdown Menu directly below Three-Dot Button */}
@@ -325,7 +322,7 @@ export const Header: React.FC = () => {
           }
         >
           {!isSearchOpen ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-end gap-2">
               {!isInstalled && (
                 <button
                   type="button"
@@ -337,26 +334,42 @@ export const Header: React.FC = () => {
                       } catch (_) {}
                     }
                   }}
-                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#00873E] hover:bg-[#007033] active:scale-95 text-white text-xs font-bold shadow-xs transition-all md:hidden cursor-pointer"
+                  className="flex items-center gap-1 px-2.5 py-2 rounded-xl bg-[#00873E] hover:bg-[#007033] active:scale-95 text-white text-xs font-bold shadow-xs transition-all md:hidden cursor-pointer"
                   title={language === 'bn' ? 'বাংলা বাজার মোবাইল অ্যাপ ইন্সটল' : 'Install Bangla Bazar App'}
                 >
                   <Download className="w-3.5 h-3.5" />
-                  <span className="text-[11px] font-bold">{language === 'bn' ? 'ইন্সটল' : 'Install'}</span>
+                  <span className="text-[11px] font-bold">{language === 'bn' ? 'অ্যাপ' : 'App'}</span>
                 </button>
               )}
 
-              {/* Standalone Search Button Icon - Only the Search Icon is shown until clicked */}
+              {/* Desktop Full Search Pill Trigger + Mobile Search Icon */}
               <button
                 type="button"
                 onClick={() => {
                   setIsSearchOpen(true);
                   setTimeout(() => searchInputRef.current?.focus(), 80);
                 }}
-                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center bg-gradient-to-tr from-[#00873E] to-[#059669] hover:from-[#007033] hover:to-[#047857] text-white shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-emerald-500/25 group"
-                aria-label={language === 'bn' ? 'চার্জ বাটন (পণ্য বা SKU খুঁজুন)' : 'Search Button (Search products or SKU)'}
-                title={language === 'bn' ? 'চার্জ বাটন: ক্লিক করে পণ্যের নাম বা SKU কোড দিয়ে খুঁজুন' : 'Click to search by name or SKU'}
+                className="hidden md:flex items-center justify-between w-full max-w-md lg:max-w-lg h-11 px-4 rounded-xl bg-slate-100 hover:bg-slate-200/70 border border-slate-200/90 text-slate-500 text-xs sm:text-sm transition-all cursor-pointer group"
+                aria-label={language === 'bn' ? 'পণ্য বা SKU খুঁজুন' : 'Search products or SKU'}
               >
-                <Search className="w-5 h-5 sm:w-5.5 sm:h-5.5 stroke-[2.4] transition-transform duration-200 group-hover:scale-110" />
+                <span className="truncate font-medium">
+                  {language === 'bn' ? 'পণ্য, ব্র্যান্ড বা SKU কোড খুঁজুন...' : 'Search products, brands, or SKU...'}
+                </span>
+                <span className="w-7 h-7 rounded-lg bg-[#00873E] text-white flex items-center justify-center shrink-0 group-hover:bg-[#007033] transition-colors">
+                  <Search className="w-4 h-4" />
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSearchOpen(true);
+                  setTimeout(() => searchInputRef.current?.focus(), 80);
+                }}
+                className="md:hidden w-10 h-10 rounded-xl flex items-center justify-center bg-[#00873E] hover:bg-[#007033] text-white shadow-xs transition-all active:scale-95 cursor-pointer"
+                aria-label={language === 'bn' ? 'পণ্য খুঁজুন' : 'Search products'}
+              >
+                <Search className="w-5 h-5" />
               </button>
             </div>
           ) : (
@@ -581,9 +594,8 @@ export const Header: React.FC = () => {
           )}
         </div>
 
-        {/* Right: Desktop Action Icons (Track, Admin, Cart, Wishlist, User) */}
-        <div className="hidden md:flex items-center gap-3 shrink-0 pl-3">
-          {/* In-App PWA Install / App Download Button on Desktop */}
+        {/* Right: Desktop Action Controls */}
+        <div className="hidden md:flex items-center gap-2 lg:gap-2.5 shrink-0">
           {!isInstalled && (
             <button
               onClick={async () => {
@@ -594,21 +606,21 @@ export const Header: React.FC = () => {
                   } catch (_) {}
                 }
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#00873E] hover:bg-[#007033] text-white text-xs font-bold transition-all shadow-sm cursor-pointer active:scale-95"
+              className="hidden xl:flex items-center gap-1.5 h-10 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#00873E] text-xs font-bold transition-colors cursor-pointer whitespace-nowrap"
               title={language === 'bn' ? 'বাংলা বাজার অ্যাপ ইন্সটল' : 'Install Bangla Bazar App'}
             >
-              <Download className="w-3.5 h-3.5 text-white" />
-              <span>{language === 'bn' ? 'অ্যাপ ইন্সটল' : 'Install App'}</span>
+              <Download className="w-4 h-4" />
+              <span>{language === 'bn' ? 'অ্যাপ' : 'App'}</span>
             </button>
           )}
 
           {/* Universal Track Order Button */}
           <button
             onClick={() => openTrackOrder()}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-orange-50 hover:text-[#FF6B00] text-slate-700 text-xs font-bold transition-all border border-slate-200 cursor-pointer"
+            className="flex items-center gap-1.5 h-10 px-3 rounded-xl bg-slate-100 hover:bg-slate-200/70 text-slate-700 text-xs font-bold transition-colors cursor-pointer whitespace-nowrap"
             title={language === 'bn' ? 'অর্ডার লাইভ ট্র্যাক করুন' : 'Track Order'}
           >
-            <Truck className="w-4 h-4 text-emerald-600" />
+            <Truck className="w-4 h-4 text-[#00873E]" />
             <span className="hidden lg:inline">{language === 'bn' ? 'অর্ডার ট্র্যাক' : 'Track Order'}</span>
           </button>
 
@@ -619,72 +631,75 @@ export const Header: React.FC = () => {
                 loginAdmin();
                 setCurrentPage('admin');
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs shadow-sm transition-all cursor-pointer"
+              className="flex items-center gap-1.5 h-10 px-3 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs transition-colors cursor-pointer whitespace-nowrap"
               title="এডমিন ড্যাশবোর্ডে প্রবেশ করুন"
             >
-              <ShieldCheck className="w-4 h-4 text-slate-950" />
+              <ShieldCheck className="w-4 h-4" />
               <span>{language === 'bn' ? 'এডমিন' : 'Admin'}</span>
             </button>
           )}
 
-          {/* Customer Wallet Balance Button */}
-          {currentUser && (
+          {/* Customer Account & Wallet Unified Control */}
+          {currentUser ? (
+            <div className="flex items-center bg-slate-100 rounded-xl p-0.5 border border-slate-200/80">
+              <button
+                onClick={() => {
+                  setProfileActiveTab('wallet');
+                  setCurrentPage('profile');
+                }}
+                className="flex items-center gap-1.5 h-9 px-2.5 rounded-lg hover:bg-white text-emerald-800 text-xs font-black transition-colors cursor-pointer tabular-nums"
+                title={language === 'bn' ? 'ওয়ালেট ব্যালেন্স' : 'Wallet Balance'}
+              >
+                <Wallet className="w-3.5 h-3.5 text-[#00873E]" />
+                <span>{formatPrice(currentUser.balance || 0)}</span>
+              </button>
+              <div className="w-px h-5 bg-slate-200" />
+              <button
+                onClick={() => {
+                  setProfileActiveTab('settings');
+                  setCurrentPage('profile');
+                }}
+                className="flex items-center gap-2 h-9 px-2.5 rounded-lg hover:bg-white text-slate-800 text-xs font-bold transition-colors cursor-pointer max-w-[140px]"
+                title={language === 'bn' ? 'আমার অ্যাকাউন্ট' : 'My Account'}
+              >
+                {currentUser.avatar ? (
+                  <img
+                    src={currentUser.avatar}
+                    alt={currentUser.name}
+                    referrerPolicy="no-referrer"
+                    className="w-6 h-6 rounded-full object-cover border border-emerald-500/70 shrink-0"
+                  />
+                ) : (
+                  <User className="w-4 h-4 text-slate-600 shrink-0" />
+                )}
+                <span className="truncate hidden xl:inline">{currentUser.name.split(' ')[0]}</span>
+              </button>
+            </div>
+          ) : (
             <button
-              onClick={() => {
-                setProfileActiveTab('wallet');
-                setCurrentPage('profile');
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300/80 text-emerald-900 text-xs font-black transition-all cursor-pointer shadow-2xs active:scale-95"
-              title={language === 'bn' ? 'আপনার ওয়ালেট ব্যালেন্স (ক্লিক করে ডিপোজিট বা উত্তোলন করুন)' : 'Wallet Balance (Click to deposit/withdraw)'}
+              onClick={() => setIsAuthModalOpen(true)}
+              className="flex items-center gap-1.5 h-10 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/70 text-slate-800 text-xs font-bold transition-colors cursor-pointer whitespace-nowrap"
             >
-              <Wallet className="w-3.5 h-3.5 text-emerald-700 stroke-[2.5]" />
-              <span>{formatPrice(currentUser.balance || 0)}</span>
-            </button>
-          )}
-
-          {/* Refer & Earn Shortcut Pill */}
-          {currentUser && (
-            <button
-              onClick={() => {
-                setProfileActiveTab('referral');
-                setCurrentPage('profile');
-              }}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black transition-all cursor-pointer shadow-2xs active:scale-95"
-              title="বন্ধুকে রেফার করে আয় করুন ৳৩০"
-            >
-              <Gift className="w-3.5 h-3.5 text-amber-600 stroke-[2.5]" />
-              <span className="hidden xl:inline">রেফার:</span>
-              <span>৳৩০</span>
+              <User className="w-4 h-4 text-[#00873E]" />
+              <span>{language === 'bn' ? 'লগইন / অ্যাকাউন্ট' : 'Sign In'}</span>
             </button>
           )}
 
           <button
             onClick={() => {
               if (currentUser) {
+                setProfileActiveTab('wishlist');
                 setCurrentPage('profile');
               } else {
                 setIsAuthModalOpen(true);
               }
             }}
-            className="relative p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
-            title={language === 'bn' ? 'লগইন / রেজিস্ট্রেশন' : 'Login / Register'}
+            className="relative w-10 h-10 text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer flex items-center justify-center"
+            aria-label="Wishlist"
           >
-            <User className="w-6 h-6" />
-          </button>
-          
-          <button
-            onClick={() => {
-              if (currentUser) {
-                setCurrentPage('profile');
-              } else {
-                setIsAuthModalOpen(true);
-              }
-            }}
-            className="relative p-2 text-slate-600 hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
-          >
-            <Heart className="w-6 h-6" />
+            <Heart className="w-5 h-5" />
             {wishlist.length > 0 && (
-              <span className="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-[10px] font-bold min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center tabular-nums">
                 {wishlist.length}
               </span>
             )}
@@ -692,14 +707,14 @@ export const Header: React.FC = () => {
 
           <button
             onClick={() => setIsCartDrawerOpen(true)}
-            className="relative flex items-center gap-2 bg-[#00873E] hover:bg-[#007033] text-white px-4 py-2 rounded-xl transition-colors cursor-pointer shadow-md shadow-emerald-900/10"
+            className="relative flex items-center gap-2 bg-[#00873E] hover:bg-[#007033] text-white h-10 px-3.5 lg:px-4 rounded-xl transition-colors cursor-pointer shadow-xs"
           >
-            <ShoppingCart className="w-5 h-5" />
-            <span className="font-bold text-sm hidden lg:inline">
+            <ShoppingCart className="w-4 h-4 shrink-0" />
+            <span className="font-bold text-xs sm:text-sm hidden lg:inline whitespace-nowrap">
               {language === 'bn' ? 'কার্ট' : 'Cart'}
             </span>
             {cartItemsCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-[#DC2626] text-white text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
+              <span className="bg-[#DC2626] text-white text-[11px] font-black min-w-[20px] h-5 px-1.5 rounded-full flex items-center justify-center tabular-nums">
                 {cartItemsCount}
               </span>
             )}

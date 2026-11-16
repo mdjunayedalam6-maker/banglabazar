@@ -185,24 +185,24 @@ export const ShopPage: React.FC = () => {
 
             {/* Category Filter */}
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <label className="text-xs font-bold text-slate-500">
                 {language === 'bn' ? 'ক্যাটাগরি' : 'Category'}
               </label>
-              <div className="space-y-1 max-h-52 overflow-y-auto pr-1">
+              <div className="space-y-1 max-h-60 overflow-y-auto pr-1">
                 <button
                   onClick={() => handleCategorySelect('all')}
-                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-semibold text-left transition-colors ${
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-left transition-colors cursor-pointer ${
                     filterState.category === 'all'
-                      ? 'bg-emerald-50 text-emerald-800'
+                      ? 'bg-emerald-50 text-[#00873E] font-bold'
                       : 'text-slate-600 hover:bg-slate-50'
                   }`}
                 >
                   <span>{language === 'bn' ? 'সকল ক্যাটাগরি' : 'All Categories'}</span>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-mono">
+                    <span className="text-[11px] text-slate-400 tabular-nums">
                       {language === 'bn' ? toBengaliNumber(products.length) : products.length}
                     </span>
-                    {filterState.category === 'all' && <Check className="w-3.5 h-3.5 text-emerald-600" />}
+                    {filterState.category === 'all' && <Check className="w-3.5 h-3.5 text-[#00873E]" />}
                   </div>
                 </button>
                 {categories.map((c) => {
@@ -211,30 +211,30 @@ export const ShopPage: React.FC = () => {
                     <div key={c.id} className="space-y-1">
                       <button
                         onClick={() => handleCategorySelect(c.id)}
-                        className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-semibold text-left transition-colors cursor-pointer ${
+                        className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-left transition-colors cursor-pointer ${
                           isSelected
-                            ? 'bg-emerald-50 text-emerald-800'
+                            ? 'bg-emerald-50 text-[#00873E] font-bold'
                             : 'text-slate-600 hover:bg-slate-50'
                         }`}
                       >
-                        <span>{language === 'bn' ? c.nameBn : c.nameEn}</span>
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-mono">
+                        <span className="truncate">{language === 'bn' ? c.nameBn : c.nameEn}</span>
+                        <div className="flex items-center gap-1.5 shrink-0 pl-2">
+                          <span className="text-[11px] text-slate-400 tabular-nums">
                             {language === 'bn' ? toBengaliNumber(c.itemCount) : c.itemCount}
                           </span>
-                          {isSelected && <Check className="w-3.5 h-3.5 text-emerald-600" />}
+                          {isSelected && <Check className="w-3.5 h-3.5 text-[#00873E]" />}
                         </div>
                       </button>
 
-                      {/* If selected on desktop, show subcategories indented */}
+                      {/* Indented subcategories */}
                       {isSelected && c.subcategories && c.subcategories.length > 0 && (
-                        <div className="pl-3 space-y-0.5 border-l-2 border-emerald-300 ml-2 py-0.5 animate-in fade-in duration-150">
+                        <div className="pl-4 space-y-0.5 py-0.5">
                           <button
                             onClick={() => setFilterState((prev) => ({ ...prev, subcategory: 'all' }))}
-                            className={`w-full flex items-center gap-1.5 px-2 py-1 rounded text-[11px] font-medium transition-colors cursor-pointer ${
+                            className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-medium transition-colors cursor-pointer ${
                               filterState.subcategory === 'all'
-                                ? 'text-emerald-700 font-bold bg-emerald-50/80'
-                                : 'text-slate-500 hover:text-slate-800'
+                                ? 'text-[#00873E] font-bold bg-emerald-50/70'
+                                : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'
                             }`}
                           >
                             <img
@@ -245,18 +245,18 @@ export const ShopPage: React.FC = () => {
                             <span>{language === 'bn' ? 'সকল আইটেম' : 'All Items'}</span>
                           </button>
                           {c.subcategories.map((sub) => {
-                            const isSubSelected = 
-                              filterState.subcategory === sub.id || 
+                            const isSubSelected =
+                              filterState.subcategory === sub.id ||
                               filterState.subcategory.toLowerCase() === sub.nameBn.toLowerCase();
 
                             return (
                               <button
                                 key={sub.id}
                                 onClick={() => setFilterState((prev) => ({ ...prev, subcategory: sub.id }))}
-                                className={`w-full flex items-center gap-1.5 px-2 py-1 rounded text-[11px] font-medium transition-colors cursor-pointer ${
+                                className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[11px] font-medium transition-colors cursor-pointer ${
                                   isSubSelected
-                                    ? 'text-emerald-700 font-bold bg-emerald-50/80'
-                                    : 'text-slate-500 hover:text-slate-800'
+                                    ? 'text-[#00873E] font-bold bg-emerald-50/70'
+                                    : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'
                                 }`}
                               >
                                 <img
@@ -267,7 +267,7 @@ export const ShopPage: React.FC = () => {
                                     (e.target as HTMLImageElement).src = getSubcategoryImage(sub.id, sub.nameBn, undefined, undefined, c.id);
                                   }}
                                 />
-                                <span>{language === 'bn' ? sub.nameBn : sub.nameEn}</span>
+                                <span className="truncate">{language === 'bn' ? sub.nameBn : sub.nameEn}</span>
                               </button>
                             );
                           })}
@@ -603,19 +603,19 @@ export const ShopPage: React.FC = () => {
 
               {/* Categories */}
               <div className="py-4 border-b border-slate-100 space-y-2">
-                <div className="text-xs font-bold uppercase text-slate-400">ক্যাটাগরি</div>
+                <div className="text-xs font-bold text-slate-500">ক্যাটাগরি</div>
                 <div className="space-y-1">
                   <button
                     onClick={() => {
                       handleCategorySelect('all');
                       setIsMobileFilterOpen(false);
                     }}
-                    className={`w-full flex items-center justify-between px-2 py-1 text-xs font-medium rounded ${
-                      filterState.category === 'all' ? 'bg-emerald-50 text-emerald-800 font-bold' : 'text-slate-700'
+                    className={`w-full flex items-center justify-between px-2.5 py-2 text-xs font-medium rounded-lg ${
+                      filterState.category === 'all' ? 'bg-emerald-50 text-[#00873E] font-bold' : 'text-slate-700'
                     }`}
                   >
                     <span>{language === 'bn' ? 'সকল ক্যাটাগরি' : 'All Categories'}</span>
-                    <span className="text-[10px] text-slate-400 font-mono">
+                    <span className="text-[11px] text-slate-400 tabular-nums">
                       {language === 'bn' ? toBengaliNumber(products.length) : products.length}
                     </span>
                   </button>
@@ -627,27 +627,27 @@ export const ShopPage: React.FC = () => {
                           onClick={() => {
                             handleCategorySelect(c.id);
                           }}
-                          className={`w-full flex items-center justify-between px-2 py-1.5 text-xs font-semibold rounded ${
-                            isSelected ? 'bg-emerald-50 text-emerald-800 font-bold' : 'text-slate-700'
+                          className={`w-full flex items-center justify-between px-2.5 py-2 text-xs font-semibold rounded-lg ${
+                            isSelected ? 'bg-emerald-50 text-[#00873E] font-bold' : 'text-slate-700'
                           }`}
                         >
                           <span>{language === 'bn' ? c.nameBn : c.nameEn}</span>
-                          <span className="text-[10px] text-slate-400 font-mono">
+                          <span className="text-[11px] text-slate-400 tabular-nums">
                             {language === 'bn' ? toBengaliNumber(c.itemCount) : c.itemCount}
                           </span>
                         </button>
 
-                        {/* Indented subcategories if category is selected in mobile drawer */}
+                        {/* Indented subcategories in mobile drawer */}
                         {isSelected && c.subcategories && c.subcategories.length > 0 && (
-                          <div className="pl-3 space-y-0.5 border-l-2 border-emerald-300 ml-2 py-0.5">
+                          <div className="pl-4 space-y-0.5 py-0.5">
                             <button
                               onClick={() => {
                                 setFilterState((prev) => ({ ...prev, subcategory: 'all' }));
                                 setIsMobileFilterOpen(false);
                               }}
-                              className={`w-full flex items-center gap-1.5 px-2 py-1 rounded text-[11px] font-medium transition-colors ${
+                              className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[11px] font-medium transition-colors ${
                                 filterState.subcategory === 'all'
-                                  ? 'text-emerald-700 font-bold bg-emerald-50/80'
+                                  ? 'text-[#00873E] font-bold bg-emerald-50/70'
                                   : 'text-slate-500 hover:text-slate-800'
                               }`}
                             >
@@ -659,8 +659,8 @@ export const ShopPage: React.FC = () => {
                               <span>{language === 'bn' ? 'সকল আইটেম' : 'All Items'}</span>
                             </button>
                             {c.subcategories.map((sub) => {
-                              const isSubSelected = 
-                                filterState.subcategory === sub.id || 
+                              const isSubSelected =
+                                filterState.subcategory === sub.id ||
                                 filterState.subcategory.toLowerCase() === sub.nameBn.toLowerCase();
 
                               return (
@@ -670,9 +670,9 @@ export const ShopPage: React.FC = () => {
                                     setFilterState((prev) => ({ ...prev, subcategory: sub.id }));
                                     setIsMobileFilterOpen(false);
                                   }}
-                                  className={`w-full flex items-center gap-1.5 px-2 py-1 rounded text-[11px] font-medium transition-colors ${
+                                  className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[11px] font-medium transition-colors ${
                                     isSubSelected
-                                      ? 'text-emerald-700 font-bold bg-emerald-50/80'
+                                      ? 'text-[#00873E] font-bold bg-emerald-50/70'
                                       : 'text-slate-500 hover:text-slate-800'
                                   }`}
                                 >

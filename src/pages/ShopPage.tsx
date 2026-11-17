@@ -17,6 +17,7 @@ import { CategorySlimBanner } from '../components/CategorySlimBanner';
 import { toBengaliNumber } from '../utils/translations';
 import { isProductInCategory } from '../utils/categoryMatcher';
 import { getSubcategoryImage } from '../utils/subcategoryImages';
+import catOtherImg from '../assets/images/cat_other_categories_1794884636754.jpg';
 
 export const ShopPage: React.FC = () => {
   const {
@@ -238,7 +239,7 @@ export const ShopPage: React.FC = () => {
                             }`}
                           >
                             <img
-                              src={c.image || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=100&auto=format&fit=crop&q=80'}
+                              src={c.image || catOtherImg}
                               alt={c.nameBn}
                               className="w-4 h-4 rounded object-cover shrink-0 border border-slate-200"
                             />
@@ -652,7 +653,7 @@ export const ShopPage: React.FC = () => {
                               }`}
                             >
                               <img
-                                src={c.image || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=100&auto=format&fit=crop&q=80'}
+                                src={c.image || catOtherImg}
                                 alt={c.nameBn}
                                 className="w-4 h-4 rounded object-cover shrink-0 border border-slate-200"
                               />

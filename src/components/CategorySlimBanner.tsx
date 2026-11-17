@@ -9,6 +9,7 @@ import { Category } from '../types';
 import { toBengaliNumber } from '../utils/translations';
 import { getSubcategoryImage } from '../utils/subcategoryImages';
 import { useApp } from '../context/AppContext';
+import catOtherImg from '../assets/images/cat_other_categories_1794884636754.jpg';
 
 interface CategorySlimBannerProps {
   currentCategory: string; // 'all' or category id
@@ -177,14 +178,14 @@ export const CategorySlimBanner: React.FC<CategorySlimBannerProps> = ({
                 }`}
               >
                 <img
-                  src={categoryObj.image || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=100&auto=format&fit=crop&q=80'}
+                  src={categoryObj.image || catOtherImg}
                   alt={categoryObj.nameBn}
                   className={`w-5 h-5 sm:w-5.5 sm:h-5.5 rounded-md object-cover shrink-0 ${
                     currentSubcategory === 'all' ? 'ring-1 ring-white/60' : 'border border-slate-200'
                   }`}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=100&auto=format&fit=crop&q=80';
+                    target.src = catOtherImg;
                   }}
                 />
                 <span>{language === 'bn' ? `সকল ${categoryObj.nameBn}` : 'All Items'}</span>
@@ -253,7 +254,7 @@ export const CategorySlimBanner: React.FC<CategorySlimBannerProps> = ({
           {/* 11 Main Category Buttons */}
           {categories.map((cat) => {
             const isSelected = currentCategory.toLowerCase() === cat.id.toLowerCase() || currentCategory.toLowerCase() === cat.slug.toLowerCase();
-            const displayImg = cat.image || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=100&auto=format&fit=crop&q=80';
+            const displayImg = cat.image || catOtherImg;
 
             return (
               <button
@@ -276,7 +277,7 @@ export const CategorySlimBanner: React.FC<CategorySlimBannerProps> = ({
                   }`}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=100&auto=format&fit=crop&q=80';
+                    target.src = catOtherImg;
                   }}
                 />
                 <span>{language === 'bn' ? cat.nameBn : cat.nameEn}</span>

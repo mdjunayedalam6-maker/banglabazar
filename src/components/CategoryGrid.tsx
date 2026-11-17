@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { toBengaliNumber } from '../utils/translations';
+import defaultCatImg from '../assets/images/cat_other_categories_1794884636754.jpg';
 
 export const CategoryGrid: React.FC = () => {
   const { categories, openCategory, language, setCurrentPage, setFilterState } = useApp();
@@ -14,8 +15,14 @@ export const CategoryGrid: React.FC = () => {
         </h2>
 
         <button
+          type="button"
           onClick={() => {
-            setFilterState((prev) => ({ ...prev, category: 'all', subcategory: 'all', searchQuery: '' }));
+            setFilterState((prev) => ({
+              ...prev,
+              category: 'all',
+              subcategory: 'all',
+              searchQuery: '',
+            }));
             setCurrentPage('shop');
           }}
           className="text-xs sm:text-sm font-bold text-[#00873E] hover:text-[#007033] flex items-center gap-1 group active:scale-95 transition-all cursor-pointer shrink-0"
@@ -29,8 +36,9 @@ export const CategoryGrid: React.FC = () => {
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-2.5 sm:gap-3">
         {categories.map((cat) => {
           const displayName = language === 'bn' ? cat.nameBn : cat.nameEn;
-          const countText = language === 'bn' ? `${toBengaliNumber(cat.itemCount)}টি` : `${cat.itemCount}`;
-          const displayImage = cat.image || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&auto=format&fit=crop&q=80';
+          const countText =
+            language === 'bn' ? `${toBengaliNumber(cat.itemCount)}টি` : `${cat.itemCount}`;
+          const displayImage = cat.image || defaultCatImg;
 
           return (
             <button
@@ -48,8 +56,10 @@ export const CategoryGrid: React.FC = () => {
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&auto=format&fit=crop&q=80';
+                    const target = e.currentTarget;
+                    if (target.src !== defaultCatImg) {
+                      target.src = defaultCatImg;
+                    }
                   }}
                 />
               </div>

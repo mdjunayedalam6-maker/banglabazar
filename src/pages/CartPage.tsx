@@ -12,6 +12,7 @@ import {
   X
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import catOtherImg from '../assets/images/cat_other_categories_1794884636754.jpg';
 
 export const CartPage: React.FC = () => {
   const {
@@ -131,7 +132,7 @@ export const CartPage: React.FC = () => {
                     src={
                       (item.selectedImage || item.product?.images?.[0])?.includes('_L_') && (item.selectedImage || item.product?.images?.[0]).endsWith('.jpg')
                         ? (item.selectedImage || item.product?.images?.[0]).replace(/\.jpg$/i, '.jpeg')
-                        : item.selectedImage || item.product?.images?.[0] || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80'
+                        : item.selectedImage || item.product?.images?.[0] || catOtherImg
                     }
                     alt={title}
                     referrerPolicy="no-referrer"
@@ -140,7 +141,7 @@ export const CartPage: React.FC = () => {
                       if (target.src.includes('_L_')) {
                         target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
                       } else {
-                        target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80';
+                        target.src = catOtherImg;
                       }
                     }}
                     className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-xl border border-slate-200 bg-slate-50 shrink-0"
@@ -405,7 +406,7 @@ export const CartDrawer: React.FC = () => {
                     src={
                       (item.selectedImage || item.product?.images?.[0])?.includes('_L_') && (item.selectedImage || item.product?.images?.[0]).endsWith('.jpg')
                         ? (item.selectedImage || item.product?.images?.[0]).replace(/\.jpg$/i, '.jpeg')
-                        : item.selectedImage || item.product?.images?.[0] || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80'
+                        : item.selectedImage || item.product?.images?.[0] || catOtherImg
                     }
                     alt={title}
                     referrerPolicy="no-referrer"
@@ -414,7 +415,7 @@ export const CartDrawer: React.FC = () => {
                       if (target.src.includes('_L_')) {
                         target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
                       } else {
-                        target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80';
+                        target.src = catOtherImg;
                       }
                     }}
                     className="w-16 h-16 object-cover rounded-xl border border-slate-200 shrink-0"

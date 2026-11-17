@@ -10,15 +10,14 @@ import {
   Lock,
   Copy,
   Check,
-  QrCode,
-  Eye,
   X,
   Wallet,
   Edit3,
+  Plus,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BANGLADESH_DIVISIONS } from '../data/mockData';
-import { DeliveryAddress } from '../types';
+import { DeliveryAddress, WalletPaymentMethod } from '../types';
 
 function resolveDivisionAndDistrict(divInput?: string, distInput?: string) {
   let matchedDiv = BANGLADESH_DIVISIONS[0];
@@ -74,6 +73,8 @@ export const CheckoutPage: React.FC = () => {
     currentUser,
     addDeliveryAddress,
     placeOrder,
+    depositToWallet,
+    setIsAuthModalOpen,
     language,
     t,
     formatPrice,
@@ -120,11 +121,16 @@ export const CheckoutPage: React.FC = () => {
   const [deliveryArea, setDeliveryArea] = useState<'dhaka' | 'outside'>(initialLocation.area);
 
   const [checkoutStep, setCheckoutStep] = useState<'address' | 'payment'>('address');
-  const [paymentMethod, setPaymentMethod] = useState<'cod' | 'bangla_qr' | 'wallet'>('cod');
-  const [isQrModalOpen, setIsQrModalOpen] = useState(false);
-  const [senderNumber, setSenderNumber] = useState('');
-  const [trxId, setTrxId] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState<'cod' | 'wallet'>('cod');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Quick Add Money (Wallet Deposit) Modal State
+  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
+  const [depositAmount, setDepositAmount] = useState<string>('500');
+  const [depositMethod, setDepositMethod] = useState<WalletPaymentMethod>('bangla_qr');
+  const [depositSenderNumber, setDepositSenderNumber] = useState<string>('');
+  const [depositTrxId, setDepositTrxId] = useState<string>('');
+  const [isDepositing, setIsDepositing] = useState(false);
 
   const applySavedAddress = (addr?: DeliveryAddress) => {
     if (addr) {
@@ -273,6 +279,57 @@ export const CheckoutPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const walletBalance = currentUser?.balance || 0;
+  const walletShortfall = Math.max(0, calculatedTotal - walletBalance);
+
+  const openQuickDepositModal = () => {
+    if (!currentUser) {
+      setIsAuthModalOpen(true);
+      return;
+    }
+    const suggested = walletShortfall > 0 ? walletShortfall : 500;
+    setDepositAmount(String(suggested));
+    setIsDepositModalOpen(true);
+  };
+
+  const handleQuickDepositSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const amt = parseInt(depositAmount, 10);
+    if (!amt || amt <= 0) {
+      addToast(language === 'bn' ? 'সঠিক টাকার পরিমাণ দিন' : 'Enter a valid amount', 'error');
+      return;
+    }
+    if (!depositSenderNumber.trim()) {
+      addToast(
+        language === 'bn' ? 'যে নম্বর থেকে টাকা পাঠিয়েছেন তা দিন' : 'Enter sender number',
+        'error'
+      );
+      return;
+    }
+    if (!depositTrxId.trim()) {
+      addToast(language === 'bn' ? 'TrxID প্রদান করুন' : 'Enter TrxID', 'error');
+      return;
+    }
+
+    setIsDepositing(true);
+    try {
+      const res = await depositToWallet(
+        amt,
+        depositMethod,
+        depositSenderNumber.trim(),
+        depositTrxId.trim().toUpperCase()
+      );
+      if (res.success) {
+        setIsDepositModalOpen(false);
+        setDepositSenderNumber('');
+        setDepositTrxId('');
+        setPaymentMethod('wallet');
+      }
+    } finally {
+      setIsDepositing(false);
+    }
+  };
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (checkoutStep === 'address') {
@@ -280,22 +337,25 @@ export const CheckoutPage: React.FC = () => {
       return;
     }
     if (!validateAddressFields()) return;
-    if (paymentMethod === 'bangla_qr' && (!senderNumber.trim() || !trxId.trim())) {
-      addToast(
-        language === 'bn' ? 'প্রেরক নম্বর ও TrxID দিন' : 'Enter Sender Number & TrxID',
-        'error'
-      );
-      return;
-    }
     if (paymentMethod === 'wallet') {
-      const userBal = currentUser?.balance || 0;
-      if (userBal < calculatedTotal) {
+      if (!currentUser) {
         addToast(
           language === 'bn'
-            ? `ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই (প্রয়োজন ${formatPrice(calculatedTotal)})`
-            : `Insufficient wallet balance`,
+            ? 'অ্যাকাউন্ট ব্যালেন্স দিয়ে পেমেন্ট করতে লগইন করুন'
+            : 'Login to pay with account balance',
           'error'
         );
+        setIsAuthModalOpen(true);
+        return;
+      }
+      if (walletBalance < calculatedTotal) {
+        addToast(
+          language === 'bn'
+            ? `অ্যাকাউন্টে পর্যাপ্ত ব্যালেন্স নেই (প্রয়োজন ${formatPrice(calculatedTotal)})`
+            : `Insufficient account balance`,
+          'error'
+        );
+        openQuickDepositModal();
         return;
       }
     }
@@ -325,8 +385,6 @@ export const CheckoutPage: React.FC = () => {
           thana: thana.trim() || undefined,
           address: thana.trim() ? `${address.trim()}, ${thana.trim()}` : address.trim(),
           deliverySpeed: 'regular',
-          senderNumber: paymentMethod === 'bangla_qr' ? senderNumber.trim() : undefined,
-          trxId: paymentMethod === 'bangla_qr' ? trxId.trim() : undefined,
           email: currentUser?.email || '',
         },
         paymentMethod,
@@ -703,186 +761,168 @@ export const CheckoutPage: React.FC = () => {
 
               {/* Step 2: Payment Method Card */}
               <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4">
-                <h2 className="text-sm sm:text-base font-bold text-slate-900">
-                  {language === 'bn' ? 'পেমেন্ট পদ্ধতি' : 'Payment Method'}
-                </h2>
-
-            <div
-              className={`grid grid-cols-1 ${
-                currentUser && (currentUser.balance || 0) > 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-2'
-              } gap-3`}
-            >
-              {/* Cash on Delivery */}
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('cod')}
-                className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
-                  paymentMethod === 'cod'
-                    ? 'border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]'
-                    : 'border-slate-200 hover:border-slate-300 bg-white'
-                }`}
-              >
-                <div
-                  className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                    paymentMethod === 'cod' ? 'border-[#00873E] bg-[#00873E]' : 'border-slate-300'
-                  }`}
-                >
-                  {paymentMethod === 'cod' && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
-                </div>
-                <div className="min-w-0">
-                  <div className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                    <Truck className="w-4 h-4 text-[#00873E] shrink-0" />
-                    <span className="truncate">
-                      {language === 'bn' ? 'ক্যাশ অন ডেলিভারি' : 'Cash on Delivery'}
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-slate-500 truncate mt-0.5">
-                    {language === 'bn' ? 'পণ্য হাতে পেয়ে পরিশোধ' : 'Pay when delivered'}
-                  </div>
-                </div>
-              </button>
-
-              {/* Bangla QR */}
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('bangla_qr')}
-                className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
-                  paymentMethod === 'bangla_qr'
-                    ? 'border-[#DC2626] bg-red-50/70 ring-1 ring-[#DC2626]'
-                    : 'border-slate-200 hover:border-slate-300 bg-white'
-                }`}
-              >
-                <div
-                  className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                    paymentMethod === 'bangla_qr'
-                      ? 'border-[#DC2626] bg-[#DC2626]'
-                      : 'border-slate-300'
-                  }`}
-                >
-                  {paymentMethod === 'bangla_qr' && (
-                    <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                <div className="flex items-center justify-between gap-2">
+                  <h2 className="text-sm sm:text-base font-bold text-slate-900">
+                    {language === 'bn' ? 'পেমেন্ট পদ্ধতি' : 'Payment Method'}
+                  </h2>
+                  {currentUser && (
+                    <button
+                      type="button"
+                      onClick={openQuickDepositModal}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#00873E] hover:text-[#007033] cursor-pointer"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>{language === 'bn' ? 'টাকা এড করুন' : 'Add Money'}</span>
+                    </button>
                   )}
-                </div>
-                <div className="min-w-0">
-                  <div className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                    <QrCode className="w-4 h-4 text-[#DC2626] shrink-0" />
-                    <span className="truncate">Bangla QR</span>
-                  </div>
-                  <div className="text-[11px] text-slate-500 truncate mt-0.5">
-                    {language === 'bn' ? 'বিকাশ, নগদ ও ব্যাংক' : 'bKash, Nagad & Bank'}
-                  </div>
-                </div>
-              </button>
-
-              {/* Wallet Balance */}
-              {currentUser && (currentUser.balance || 0) > 0 && (
-                <button
-                  type="button"
-                  onClick={() => setPaymentMethod('wallet')}
-                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
-                    paymentMethod === 'wallet'
-                      ? 'border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]'
-                      : 'border-slate-200 hover:border-slate-300 bg-white'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                      paymentMethod === 'wallet'
-                        ? 'border-[#00873E] bg-[#00873E]'
-                        : 'border-slate-300'
-                    }`}
-                  >
-                    {paymentMethod === 'wallet' && (
-                      <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                    )}
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                      <Wallet className="w-4 h-4 text-[#00873E] shrink-0" />
-                      <span className="truncate">
-                        {language === 'bn' ? 'ওয়ালেট' : 'Wallet'}
-                      </span>
-                    </div>
-                    <div className="text-[11px] text-[#00873E] font-semibold truncate mt-0.5 tabular-nums">
-                      {formatPrice(currentUser.balance || 0)}
-                    </div>
-                  </div>
-                </button>
-              )}
-            </div>
-
-            {paymentMethod === 'wallet' && (currentUser?.balance || 0) < calculatedTotal && (
-              <p className="text-xs text-[#DC2626] font-medium">
-                {language === 'bn'
-                  ? `ওয়ালেটে ${formatPrice(calculatedTotal - (currentUser?.balance || 0))} কম রয়েছে। অন্য মাধ্যম বেছে নিন।`
-                  : `Insufficient wallet balance.`}
-              </p>
-            )}
-
-            {/* Compact Bangla QR Box */}
-            {paymentMethod === 'bangla_qr' && (
-              <div className="p-4 rounded-xl bg-slate-50 border border-red-200/80 space-y-4">
-                <div className="flex flex-col sm:flex-row items-center gap-4">
-                  <button
-                    type="button"
-                    onClick={() => setIsQrModalOpen(true)}
-                    className="relative group shrink-0 cursor-pointer"
-                  >
-                    <img
-                      src="/assets/bangla_qr_code.png"
-                      alt="Bangla QR"
-                      className="w-32 h-32 object-contain rounded-xl bg-white p-1.5 border border-slate-200"
-                    />
-                    <span className="absolute bottom-1.5 right-1.5 w-7 h-7 rounded-lg bg-slate-900/80 text-white flex items-center justify-center">
-                      <Eye className="w-3.5 h-3.5" />
-                    </span>
-                  </button>
-
-                  <div className="flex-1 w-full space-y-2 text-xs">
-                    <div className="flex items-center justify-between py-1.5 border-b border-slate-200/70">
-                      <span className="text-slate-500">
-                        {language === 'bn' ? 'টালিপে নম্বর' : 'Merchant'}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => copyToClipboard('01929637253', 'নম্বর')}
-                        className="inline-flex items-center gap-1.5 font-mono font-bold text-slate-900 hover:text-[#DC2626] cursor-pointer"
-                      >
-                        <span>01929-637253</span>
-                        <Copy className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                    <div className="flex items-center justify-between py-1.5">
-                      <span className="text-slate-500">
-                        {language === 'bn' ? 'প্রদেয়' : 'Payable'}
-                      </span>
-                      <span className="font-bold text-[#DC2626] tabular-nums text-sm">
-                        {formatPrice(calculatedTotal)}
-                      </span>
-                    </div>
-                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    type="tel"
-                    required
-                    value={senderNumber}
-                    onChange={(e) => setSenderNumber(e.target.value)}
-                    placeholder={language === 'bn' ? 'প্রেরক নম্বর (01XXXXXXXXX)' : 'Sender Number'}
-                    className="h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs text-slate-900 outline-none focus:border-[#DC2626]"
-                  />
-                  <input
-                    type="text"
-                    required
-                    value={trxId}
-                    onChange={(e) => setTrxId(e.target.value.toUpperCase())}
-                    placeholder="TrxID"
-                    className="h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs text-slate-900 font-mono uppercase outline-none focus:border-[#DC2626]"
-                  />
+                  {/* Option 1: Cash on Delivery */}
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('cod')}
+                    className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
+                      paymentMethod === 'cod'
+                        ? 'border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]'
+                        : 'border-slate-200 hover:border-slate-300 bg-white'
+                    }`}
+                  >
+                    <div
+                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                        paymentMethod === 'cod'
+                          ? 'border-[#00873E] bg-[#00873E]'
+                          : 'border-slate-300'
+                      }`}
+                    >
+                      {paymentMethod === 'cod' && (
+                        <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                        <Truck className="w-4 h-4 text-[#00873E] shrink-0" />
+                        <span className="truncate">
+                          {language === 'bn' ? 'ক্যাশ অন ডেলিভারি' : 'Cash on Delivery'}
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-slate-500 truncate mt-0.5">
+                        {language === 'bn' ? 'পণ্য হাতে পেয়ে পরিশোধ' : 'Pay when delivered'}
+                      </div>
+                    </div>
+                  </button>
+
+                  {/* Option 2: Customer Account Balance (Wallet) */}
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('wallet')}
+                    className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
+                      paymentMethod === 'wallet'
+                        ? 'border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]'
+                        : 'border-slate-200 hover:border-slate-300 bg-white'
+                    }`}
+                  >
+                    <div
+                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                        paymentMethod === 'wallet'
+                          ? 'border-[#00873E] bg-[#00873E]'
+                          : 'border-slate-300'
+                      }`}
+                    >
+                      {paymentMethod === 'wallet' && (
+                        <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                        <Wallet className="w-4 h-4 text-[#00873E] shrink-0" />
+                        <span className="truncate">
+                          {language === 'bn' ? 'অ্যাকাউন্ট ব্যালেন্স' : 'Account Balance'}
+                        </span>
+                      </div>
+                      <div className="text-[11px] font-semibold mt-0.5 tabular-nums truncate">
+                        {currentUser ? (
+                          <span
+                            className={
+                              walletBalance >= calculatedTotal
+                                ? 'text-[#00873E]'
+                                : 'text-slate-600'
+                            }
+                          >
+                            {language === 'bn' ? 'ব্যালেন্স:' : 'Balance:'}{' '}
+                            {formatPrice(walletBalance)}
+                          </span>
+                        ) : (
+                          <span className="text-slate-500 font-normal">
+                            {language === 'bn' ? 'লগইন করে ব্যবহার করুন' : 'Login to use'}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </button>
                 </div>
-              </div>
-            )}
+
+                {/* Account Balance Status / Quick Top-up */}
+                {paymentMethod === 'wallet' && (
+                  <div className="p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/80 text-xs space-y-2.5">
+                    {!currentUser ? (
+                      <div className="flex items-center justify-between gap-3 flex-wrap">
+                        <span className="text-slate-600">
+                          {language === 'bn'
+                            ? 'অ্যাকাউন্টের টাকা দিয়ে পেমেন্ট করতে লগইন করুন'
+                            : 'Login to pay using your account balance'}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setIsAuthModalOpen(true)}
+                          className="min-h-[36px] px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold cursor-pointer"
+                        >
+                          {language === 'bn' ? 'লগইন করুন' : 'Login'}
+                        </button>
+                      </div>
+                    ) : walletBalance >= calculatedTotal ? (
+                      <div className="flex items-center justify-between gap-2 flex-wrap">
+                        <span className="text-slate-600">
+                          {language === 'bn' ? 'বর্তমান ব্যালেন্স:' : 'Current Balance:'}{' '}
+                          <strong className="text-slate-900 tabular-nums">
+                            {formatPrice(walletBalance)}
+                          </strong>
+                        </span>
+                        <span className="text-[#00873E] font-semibold tabular-nums">
+                          {language === 'bn' ? 'অর্ডারের পর থাকবে:' : 'Remaining:'}{' '}
+                          {formatPrice(walletBalance - calculatedTotal)}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-between gap-3 flex-wrap">
+                        <div className="space-y-0.5">
+                          <p className="font-semibold text-slate-900 tabular-nums">
+                            {language === 'bn'
+                              ? `ব্যালেন্স ${formatPrice(walletBalance)} · আরও ${formatPrice(
+                                  walletShortfall
+                                )} প্রয়োজন`
+                              : `Balance ${formatPrice(walletBalance)} · Need ${formatPrice(
+                                  walletShortfall
+                                )} more`}
+                          </p>
+                          <p className="text-[11px] text-slate-500">
+                            {language === 'bn'
+                              ? 'অ্যাকাউন্টে টাকা এড করেই পেমেন্ট করতে পারবেন'
+                              : 'Add money to your account to pay now'}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={openQuickDepositModal}
+                          className="min-h-[38px] px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold inline-flex items-center gap-1.5 cursor-pointer shrink-0"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>{language === 'bn' ? 'টাকা এড করুন' : 'Add Money'}</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </>
           )}
@@ -1027,31 +1067,154 @@ export const CheckoutPage: React.FC = () => {
         </div>
       </form>
 
-      {/* Bangla QR Full Preview Modal */}
-      {isQrModalOpen && (
+      {/* Quick Add Money Modal */}
+      {isDepositModalOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4"
-          onClick={() => setIsQrModalOpen(false)}
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setIsDepositModalOpen(false)}
         >
           <div
-            className="bg-white rounded-2xl max-w-sm w-full p-4 shadow-2xl space-y-3"
+            className="bg-white rounded-2xl max-w-md w-full p-5 shadow-2xl space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-slate-900">Bangla QR · বাংলা বাজার</span>
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <Wallet className="w-4 h-4 text-[#00873E]" />
+                <h3 className="text-sm sm:text-base font-bold text-slate-900">
+                  {language === 'bn' ? 'অ্যাকাউন্টে টাকা এড করুন' : 'Add Money to Account'}
+                </h3>
+              </div>
               <button
                 type="button"
-                onClick={() => setIsQrModalOpen(false)}
+                onClick={() => setIsDepositModalOpen(false)}
                 className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <img
-              src="/assets/bangla_qr_card.png"
-              alt="Bangla QR"
-              className="w-full max-h-[65vh] object-contain rounded-xl border border-slate-200"
-            />
+
+            <form onSubmit={handleQuickDepositSubmit} className="space-y-3.5 text-xs">
+              <div>
+                <label className="block font-semibold text-slate-700 mb-1">
+                  {language === 'bn' ? 'টাকার পরিমাণ (৳)' : 'Amount (BDT)'} *
+                </label>
+                <input
+                  type="number"
+                  min="10"
+                  required
+                  value={depositAmount}
+                  onChange={(e) => setDepositAmount(e.target.value)}
+                  className="w-full h-11 bg-slate-50 border border-slate-300 rounded-xl px-3.5 text-sm font-bold font-mono text-slate-900 outline-none focus:border-[#00873E] focus:bg-white tabular-nums"
+                />
+                <div className="flex flex-wrap gap-1.5 mt-2">
+                  {[
+                    ...(walletShortfall > 0 ? [walletShortfall] : []),
+                    200,
+                    500,
+                    1000,
+                  ]
+                    .filter((v, i, arr) => arr.indexOf(v) === i)
+                    .map((amt) => (
+                      <button
+                        key={amt}
+                        type="button"
+                        onClick={() => setDepositAmount(String(amt))}
+                        className={`px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold cursor-pointer transition-colors ${
+                          depositAmount === String(amt)
+                            ? 'bg-[#00873E] text-white'
+                            : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                        }`}
+                      >
+                        ৳{amt}
+                      </button>
+                    ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { id: 'bangla_qr', label: 'Bangla QR' },
+                  { id: 'bkash', label: 'বিকাশ' },
+                  { id: 'nagad', label: 'নগদ' },
+                ].map((m) => (
+                  <button
+                    key={m.id}
+                    type="button"
+                    onClick={() => setDepositMethod(m.id as WalletPaymentMethod)}
+                    className={`min-h-[38px] rounded-xl border text-xs font-bold cursor-pointer transition-all ${
+                      depositMethod === m.id
+                        ? 'border-[#00873E] bg-emerald-50 text-[#00873E]'
+                        : 'border-slate-200 text-slate-700 hover:border-slate-300'
+                    }`}
+                  >
+                    {m.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
+                {depositMethod === 'bangla_qr' && (
+                  <img
+                    src="/assets/bangla_qr_code.png"
+                    alt="Bangla QR"
+                    className="w-20 h-20 object-contain rounded-lg bg-white p-1 border border-slate-200 shrink-0"
+                  />
+                )}
+                <div className="flex-1 min-w-0 space-y-1.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-slate-500">
+                      {language === 'bn' ? 'পাঠানোর নম্বর:' : 'Send to:'}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => copyToClipboard('01929637253', 'নম্বর')}
+                      className="inline-flex items-center gap-1 font-mono font-bold text-slate-900 hover:text-[#00873E] cursor-pointer"
+                    >
+                      <span>01929-637253</span>
+                      <Copy className="w-3 h-3" />
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-slate-500 leading-snug">
+                    {language === 'bn'
+                      ? `উপরের নম্বরে ৳${depositAmount || 0} পাঠিয়ে নিচে প্রেরক নম্বর ও TrxID দিন`
+                      : `Send ৳${depositAmount || 0} above and enter Sender & TrxID below`}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <input
+                  type="tel"
+                  required
+                  value={depositSenderNumber}
+                  onChange={(e) => setDepositSenderNumber(e.target.value)}
+                  placeholder={language === 'bn' ? 'প্রেরক নম্বর' : 'Sender Number'}
+                  className="h-10 bg-slate-50 border border-slate-300 rounded-xl px-3 text-xs text-slate-900 outline-none focus:border-[#00873E] focus:bg-white"
+                />
+                <input
+                  type="text"
+                  required
+                  value={depositTrxId}
+                  onChange={(e) => setDepositTrxId(e.target.value.toUpperCase())}
+                  placeholder="TrxID"
+                  className="h-10 bg-slate-50 border border-slate-300 rounded-xl px-3 text-xs font-mono uppercase text-slate-900 outline-none focus:border-[#00873E] focus:bg-white"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isDepositing}
+                className="w-full min-h-[44px] bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs sm:text-sm font-bold cursor-pointer disabled:opacity-50"
+              >
+                {isDepositing
+                  ? language === 'bn'
+                    ? 'যোগ হচ্ছে...'
+                    : 'Adding...'
+                  : language === 'bn'
+                  ? `৳${depositAmount || 0} অ্যাকাউন্টে এড করুন`
+                  : `Add ৳${depositAmount || 0} to Account`}
+              </button>
+            </form>
           </div>
         </div>
       )}

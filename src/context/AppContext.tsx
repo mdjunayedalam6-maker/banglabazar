@@ -470,6 +470,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     'other-categories',
   ];
 
+  const isCustomRasterOrExternal = (url?: string): boolean => {
+    if (!url) return false;
+    if (url.startsWith('data:image/') && !url.startsWith('data:image/svg+xml')) return true;
+    if (url.startsWith('https://') && !url.includes('images.unsplash.com') && !url.includes('oneroof')) {
+      return true;
+    }
+    return false;
+  };
+
   const sanitizeCategories = (cats: Category[]): Category[] => {
     if (!Array.isArray(cats) || cats.length === 0) return CATEGORIES;
     const defMap = new Map(CATEGORIES.map((c) => [c.id, c]));
@@ -477,13 +486,26 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const processed: Category[] = cats.map((c) => {
       const def = defMap.get(c.id);
       const defSubMap = new Map((def?.subcategories || []).map((s) => [s.id, s.image]));
-      const updatedSubs = (c.subcategories || def?.subcategories || []).map((s) => ({
-        ...s,
-        image: s.image || defSubMap.get(s.id) || getSubcategoryImage(s.id, s.nameBn),
-      }));
+      const updatedSubs = (c.subcategories || def?.subcategories || []).map((s) => {
+        const defSubImg = defSubMap.get(s.id);
+        const keepSub =
+          s.image &&
+          (s.image === defSubImg ||
+            s.image.includes('shopbasebd.com') ||
+            (s.image.startsWith('data:image/') && !s.image.startsWith('data:image/svg+xml')));
+        return {
+          ...s,
+          image: keepSub ? s.image : defSubImg || getSubcategoryImage(s.id, s.nameBn, undefined, undefined, c.id),
+        };
+      });
+
+      const keepCatImage =
+        c.image &&
+        (c.image === def?.image || isCustomRasterOrExternal(c.image));
+
       return {
         ...c,
-        image: c.image || def?.image || '',
+        image: keepCatImage ? c.image : def?.image || c.image || '',
         subcategories: updatedSubs,
       };
     });
@@ -505,6 +527,54 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (idxB !== -1) return 1;
       return 0;
     });
+  };
+
+  const OLD_DEFAULT_SLIDE_IDS = new Set([
+    'slide-eid',
+    'slide-tech',
+    'slide-grocery',
+    'slide-home',
+    'slide-beauty',
+    'slide-delivery',
+  ]);
+
+  const sanitizeBannerSlides = (slides: AdminBannerSlide[]): AdminBannerSlide[] => {
+    if (!Array.isArray(slides) || slides.length === 0) return DEFAULT_BANNER_SLIDES;
+    const defaultSlideMap = new Map(DEFAULT_BANNER_SLIDES.map((s) => [s.id, s]));
+
+    // Keep any admin-created custom slides or legacy slides explicitly given custom uploaded photos
+    const customSlides = slides
+      .filter((s) => {
+        if (!s || !s.id) return false;
+        if (defaultSlideMap.has(s.id)) return false;
+        if (OLD_DEFAULT_SLIDE_IDS.has(s.id)) {
+          return Boolean(s.image && s.image.startsWith('data:image/') && !s.image.startsWith('data:image/svg+xml'));
+        }
+        return !s.image?.includes('images.unsplash.com');
+      })
+      .map((s) => ({
+        ...s,
+        showTextOverlay: s.showTextOverlay !== false,
+      }));
+
+    // Preserve any custom image edits applied to the new 2026 default slides while keeping fresh bundled assets
+    const existingNewMap = new Map(
+      slides.filter((s) => s && defaultSlideMap.has(s.id)).map((s) => [s.id, s])
+    );
+
+    const refreshedDefaults = DEFAULT_BANNER_SLIDES.map((defSlide) => {
+      const existing = existingNewMap.get(defSlide.id);
+      if (!existing) return defSlide;
+      const keepExistingImage = existing.image === defSlide.image || isCustomRasterOrExternal(existing.image);
+      return {
+        ...defSlide,
+        ...existing,
+        image: keepExistingImage ? existing.image : defSlide.image,
+        showTextOverlay: existing.showTextOverlay !== false,
+      };
+    });
+
+    return [...refreshedDefaults, ...customSlides];
   };
 
   // Persistent Categories (maintains all admin updates and custom categories)
@@ -555,10 +625,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (saved !== null) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed.map((slide: AdminBannerSlide) => ({
-            ...slide,
-            showTextOverlay: Boolean(slide.showTextOverlay),
-          }));
+          return sanitizeBannerSlides(parsed);
         }
       }
       return DEFAULT_BANNER_SLIDES;
@@ -893,7 +960,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           safeLocalStorage.setItem('oneroof_categories', JSON.stringify(cleanCats));
         }
         if (cachedSlides && Array.isArray(cachedSlides) && cachedSlides.length > 0) {
-          setBannerSlides(cachedSlides);
+          const cleanSlides = sanitizeBannerSlides(cachedSlides);
+          setBannerSlides(cleanSlides);
+          idbSet('oneroof_cached_slides', cleanSlides).catch(() => {});
+          safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(cleanSlides));
         }
         if (cachedSettings) {
           setSiteSettings((prev) => ({ ...prev, ...cachedSettings }));
@@ -1092,9 +1162,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             idbSet('oneroof_cached_categories', cleanCats).catch(() => {});
           }
           if (remoteSlides && Array.isArray(remoteSlides) && remoteSlides.length > 0) {
-            setBannerSlides(remoteSlides);
-            safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(remoteSlides));
-            idbSet('oneroof_cached_slides', remoteSlides).catch(() => {});
+            const cleanSlides = sanitizeBannerSlides(remoteSlides);
+            setBannerSlides(cleanSlides);
+            safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(cleanSlides));
+            idbSet('oneroof_cached_slides', cleanSlides).catch(() => {});
           }
           if (remoteUsers && remoteUsers.length > 0) setUsers(remoteUsers);
           setIsProductsLoading(false);

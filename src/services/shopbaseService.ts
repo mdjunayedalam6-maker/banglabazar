@@ -992,6 +992,88 @@ export function parseShopBaseInput(input: string): ShopBaseInputParseResult | nu
   return null;
 }
 
+export function decodeHtmlEntities(str: string): string {
+  return (str || '')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
+}
+
+export function extractShopBaseDescriptionFromHtml(html: string, title?: string): string {
+  if (!html) return '';
+  const pMatches =
+    html.match(/<p[^>]*class=["'][^"']*text-muted[^"']*["'][^>]*>([\s\S]*?)<\/p>/gi) || [];
+
+  const wholesaleTerms = [
+    'পাইকারি রেট',
+    'পাইকারি মূল্য',
+    'হোলসেল প্রাইস',
+    'হোলসেল রেট',
+    'সাজেস্টেড বিক্রয়মূল্য',
+    'রিসেলার একাউন্ট',
+    'wholesale price',
+    '01929637253',
+  ];
+
+  let best = '';
+  for (let i = pMatches.length - 1; i >= 0; i--) {
+    const candidate = decodeHtmlEntities(
+      pMatches[i]
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<\/?(?:p|div|li|tr)[^>]*>/gi, '\n')
+        .replace(/<[^>]+>/g, '')
+    )
+      .replace(/\r\n/g, '\n')
+      .replace(/\r/g, '\n')
+      .split('\n')
+      .map((l) => l.replace(/[ \t]+/g, ' ').trim())
+      .filter((l) => {
+        if (!l) return true;
+        const low = l.toLowerCase();
+        return !wholesaleTerms.some((term) => low.includes(term));
+      })
+      .join('\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/ShopBase\s*BD/gi, 'বাংলা বাজার')
+      .replace(/ShopBase/gi, 'বাংলা বাজার')
+      .trim();
+
+    if (title && candidate.toLowerCase() === title.trim().toLowerCase()) {
+      continue;
+    }
+    if (candidate && candidate.length > best.length) {
+      best = candidate;
+      break;
+    }
+  }
+  return best;
+}
+
+/**
+ * Live fetch exact Shopbasebd.com product description by ShopBase PID
+ */
+export async function fetchLiveShopBaseProductDescription(
+  pidOrId: string | number,
+  title?: string
+): Promise<string> {
+  const pid = String(pidOrId).replace(/\D/g, '');
+  if (!pid) return '';
+  try {
+    const res = await fetch(`/api/shopbase/store/sample/product/details/${pid}`);
+    if (!res.ok) return '';
+    const html = await res.text();
+    const titleMatch = html.match(/<h4[^>]*class=["'][^"']*fw-bold[^"']*["'][^>]*>([^<]+)<\/h4>/i);
+    const detectedTitle = titleMatch ? decodeHtmlEntities(titleMatch[1].trim()) : title;
+    return extractShopBaseDescriptionFromHtml(html, detectedTitle);
+  } catch {
+    return '';
+  }
+}
+
 /**
  * Fetch a single product by ShopBaseBD Product ID or URL
  */
@@ -1025,8 +1107,8 @@ export async function fetchShopBaseSingleProduct(
       const html = await res.text();
       
       // Extract title
-      const titleMatch = html.match(/<h4 class="fw-bold mb-0">([^<]+)<\/h4>/);
-      const title = titleMatch ? titleMatch[1].trim() : `ShopBase Product #${pid}`;
+      const titleMatch = html.match(/<h4[^>]*class=["'][^"']*fw-bold[^"']*["'][^>]*>([^<]+)<\/h4>/i);
+      const title = titleMatch ? decodeHtmlEntities(titleMatch[1].trim()) : `ShopBase Product #${pid}`;
 
       // Extract wholesale price
       const spriceMatch = html.match(/হোলসেল প্রাইসঃ?\s*([0-9.]+)\s*টাকা/);
@@ -1040,9 +1122,8 @@ export async function fetchShopBaseSingleProduct(
       const imgMatches = [...html.matchAll(/src="(https:\/\/shopbasebd\.com\/public\/uploads\/shop\/products\/[^"]+)"/g)];
       const images = [...new Set(imgMatches.map((m) => m[1]))];
 
-      // Extract description
-      const descMatch = html.match(/<p class="text-muted">([\s\S]*?)<\/p>/);
-      const description = descMatch ? descMatch[1].replace(/<br\s*\/?>/gi, '\n').trim() : '';
+      // Extract exact Shopbasebd.com description
+      const description = extractShopBaseDescriptionFromHtml(html, title);
 
       const rawItem: ShopBaseRawProduct = {
         pid,

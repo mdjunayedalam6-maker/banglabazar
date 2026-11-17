@@ -1,37 +1,78 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Truck, 
-  CheckCircle2, 
-  CheckCircle,
-  MapPin, 
-  Phone, 
-  User as UserIcon, 
+import React, { useState, useEffect, useMemo } from 'react';
+import {
+  Truck,
+  CheckCircle2,
+  MapPin,
   ArrowRight,
   ArrowLeft,
   Clock,
-  Sparkles,
   ShoppingBag,
   Lock,
   Copy,
   Check,
   QrCode,
-  Download,
   Eye,
   X,
   Wallet,
-  Gift
+  Edit3,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BANGLADESH_DIVISIONS } from '../data/mockData';
+import { DeliveryAddress } from '../types';
+
+function resolveDivisionAndDistrict(divInput?: string, distInput?: string) {
+  let matchedDiv = BANGLADESH_DIVISIONS[0];
+  if (divInput) {
+    const foundDiv = BANGLADESH_DIVISIONS.find(
+      (d) =>
+        d.nameBn === divInput.trim() ||
+        d.nameEn.toLowerCase() === divInput.trim().toLowerCase()
+    );
+    if (foundDiv) matchedDiv = foundDiv;
+  }
+
+  let matchedDist = matchedDiv.districts[0];
+  if (distInput) {
+    const cleanDist = distInput.trim().toLowerCase();
+    // Search within matchedDiv first
+    const inDiv = matchedDiv.districts.find(
+      (d) => d.toLowerCase().includes(cleanDist) || cleanDist.includes(d.toLowerCase())
+    );
+    if (inDiv) {
+      matchedDist = inDiv;
+    } else {
+      // Search across all divisions if only district was stored
+      for (const divObj of BANGLADESH_DIVISIONS) {
+        const found = divObj.districts.find(
+          (d) => d.toLowerCase().includes(cleanDist) || cleanDist.includes(d.toLowerCase())
+        );
+        if (found) {
+          matchedDiv = divObj;
+          matchedDist = found;
+          break;
+        }
+      }
+    }
+  }
+
+  const area: 'dhaka' | 'outside' =
+    matchedDiv.nameBn === 'ঢাকা' && matchedDist.includes('ঢাকা') ? 'dhaka' : 'outside';
+
+  return {
+    division: matchedDiv.nameBn,
+    district: matchedDist,
+    area,
+  };
+}
 
 export const CheckoutPage: React.FC = () => {
   const {
     cart,
     cartSubtotal,
     cartDiscount,
-    siteSettings,
     calculateShippingFee,
     currentUser,
+    addDeliveryAddress,
     placeOrder,
     language,
     t,
@@ -40,98 +81,127 @@ export const CheckoutPage: React.FC = () => {
     addToast,
   } = useApp();
 
-  // Auto-resolve initial state from currentUser if logged in
-  const initialDivObj = currentUser?.division
-    ? BANGLADESH_DIVISIONS.find(
-        (d) =>
-          d.nameBn === currentUser.division ||
-          d.nameEn.toLowerCase() === currentUser.division.toLowerCase()
-      ) || BANGLADESH_DIVISIONS[0]
-    : BANGLADESH_DIVISIONS[0];
+  const savedAddresses = useMemo<DeliveryAddress[]>(() => {
+    return currentUser?.addresses || [];
+  }, [currentUser?.addresses]);
 
-  const initialDistrict = currentUser?.district
-    ? initialDivObj.districts.find(
-        (dist) =>
-          dist.toLowerCase().includes(currentUser.district.toLowerCase()) ||
-          dist === currentUser.district
-      ) || initialDivObj.districts[0]
-    : initialDivObj.districts[0];
+  const defaultSavedAddress = useMemo(() => {
+    return savedAddresses.find((a) => a.isDefault) || savedAddresses[0];
+  }, [savedAddresses]);
 
-  const defaultSavedAddress = currentUser?.addresses?.find((a) => a.isDefault) || currentUser?.addresses?.[0];
+  const hasProfileAddress = Boolean(
+    currentUser &&
+      ((defaultSavedAddress?.address && defaultSavedAddress.address.trim()) ||
+        (currentUser.village && currentUser.village.trim()))
+  );
+
+  const initialLocation = resolveDivisionAndDistrict(
+    defaultSavedAddress?.division || currentUser?.division,
+    defaultSavedAddress?.district || currentUser?.district
+  );
+
+  const [selectedAddressId, setSelectedAddressId] = useState<string>(
+    defaultSavedAddress?.id || (hasProfileAddress ? 'profile' : '')
+  );
+  const [isEditingAddress, setIsEditingAddress] = useState<boolean>(!hasProfileAddress);
+  const [saveAddressToProfile, setSaveAddressToProfile] = useState<boolean>(!hasProfileAddress);
 
   // Form State
-  const [fullName, setFullName] = useState(defaultSavedAddress?.recipientName || currentUser?.name || '');
+  const [fullName, setFullName] = useState(
+    defaultSavedAddress?.recipientName || currentUser?.name || ''
+  );
   const [phone, setPhone] = useState(defaultSavedAddress?.phone || currentUser?.phone || '');
-  const [division, setDivision] = useState(defaultSavedAddress?.division || initialDivObj.nameBn);
-  const [district, setDistrict] = useState(defaultSavedAddress?.district || initialDistrict);
+  const [division, setDivision] = useState(initialLocation.division);
+  const [district, setDistrict] = useState(initialLocation.district);
   const [thana, setThana] = useState(defaultSavedAddress?.thana || currentUser?.thana || '');
   const [address, setAddress] = useState(
     defaultSavedAddress?.address || currentUser?.village || ''
   );
-  // Payment Method: Cash on Delivery, Bangla QR, or Customer Wallet Balance
+  const [deliveryArea, setDeliveryArea] = useState<'dhaka' | 'outside'>(initialLocation.area);
+
+  const [checkoutStep, setCheckoutStep] = useState<'address' | 'payment'>('address');
   const [paymentMethod, setPaymentMethod] = useState<'cod' | 'bangla_qr' | 'wallet'>('cod');
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
-  const [deliveryArea, setDeliveryArea] = useState<'dhaka' | 'outside'>(() => {
-    if (initialDivObj.nameBn === 'ঢাকা' && initialDistrict.includes('ঢাকা')) {
-      return 'dhaka';
-    }
-    return 'outside';
-  });
   const [senderNumber, setSenderNumber] = useState('');
   const [trxId, setTrxId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Sync state if currentUser logs in or loads
+  const applySavedAddress = (addr?: DeliveryAddress) => {
+    if (addr) {
+      const loc = resolveDivisionAndDistrict(
+        addr.division || currentUser?.division,
+        addr.district || currentUser?.district
+      );
+      setSelectedAddressId(addr.id);
+      setFullName(addr.recipientName || currentUser?.name || '');
+      setPhone(addr.phone || currentUser?.phone || '');
+      setDivision(loc.division);
+      setDistrict(loc.district);
+      setThana(addr.thana || '');
+      setAddress(addr.address || '');
+      setDeliveryArea(loc.area);
+      setIsEditingAddress(false);
+    } else if (currentUser) {
+      const loc = resolveDivisionAndDistrict(currentUser.division, currentUser.district);
+      setSelectedAddressId('profile');
+      setFullName(currentUser.name || '');
+      setPhone(currentUser.phone || '');
+      setDivision(loc.division);
+      setDistrict(loc.district);
+      setThana(currentUser.thana || '');
+      setAddress(currentUser.village || '');
+      setDeliveryArea(loc.area);
+      setIsEditingAddress(!(currentUser.village || '').trim());
+    }
+  };
+
+  // Auto-populate when customer profile or saved addresses load/change
   useEffect(() => {
-    if (currentUser) {
-      const defAddr = currentUser.addresses?.find((a) => a.isDefault) || currentUser.addresses?.[0];
-      if ((defAddr?.recipientName || currentUser.name) && !fullName) setFullName(defAddr?.recipientName || currentUser.name);
-      if ((defAddr?.phone || currentUser.phone) && !phone) setPhone(defAddr?.phone || currentUser.phone);
-      const targetDiv = defAddr?.division || currentUser.division;
-      const targetDist = defAddr?.district || currentUser.district;
-      if (targetDiv) {
-        const found = BANGLADESH_DIVISIONS.find(
-          (d) =>
-            d.nameBn === targetDiv ||
-            d.nameEn.toLowerCase() === targetDiv.toLowerCase()
-        );
-        if (found) {
-          setDivision(found.nameBn);
-          const foundDist = targetDist
-            ? found.districts.find((dist) =>
-                dist.toLowerCase().includes(targetDist.toLowerCase()) ||
-                targetDist.toLowerCase().includes(dist.toLowerCase())
-              ) || found.districts[0]
-            : found.districts[0];
-          setDistrict(foundDist);
-          if (found.nameBn === 'ঢাকা' && foundDist.includes('ঢাকা')) {
-            setDeliveryArea('dhaka');
-          } else {
-            setDeliveryArea('outside');
-          }
-        }
+    if (!currentUser) return;
+    const def = currentUser.addresses?.find((a) => a.isDefault) || currentUser.addresses?.[0];
+    if (def) {
+      const loc = resolveDivisionAndDistrict(
+        def.division || currentUser.division,
+        def.district || currentUser.district
+      );
+      setSelectedAddressId(def.id);
+      setFullName((prev) => prev || def.recipientName || currentUser.name || '');
+      setPhone((prev) => prev || def.phone || currentUser.phone || '');
+      setDivision(loc.division);
+      setDistrict(loc.district);
+      setThana((prev) => prev || def.thana || currentUser.thana || '');
+      setAddress((prev) => prev || def.address || currentUser.village || '');
+      setDeliveryArea(loc.area);
+      if (def.address?.trim()) setIsEditingAddress(false);
+    } else {
+      const loc = resolveDivisionAndDistrict(currentUser.division, currentUser.district);
+      setFullName((prev) => prev || currentUser.name || '');
+      setPhone((prev) => prev || currentUser.phone || '');
+      if (currentUser.division || currentUser.district) {
+        setDivision(loc.division);
+        setDistrict(loc.district);
+        setDeliveryArea(loc.area);
       }
-      if ((defAddr?.thana || currentUser.thana) && !thana) setThana(defAddr?.thana || currentUser.thana);
-      if (defAddr?.address && !address) {
-        setAddress(defAddr.address);
-      } else if (currentUser.village && !address) {
-        setAddress(currentUser.village);
+      setThana((prev) => prev || currentUser.thana || '');
+      setAddress((prev) => prev || currentUser.village || '');
+      if (currentUser.village?.trim()) {
+        setSelectedAddressId('profile');
+        setIsEditingAddress(false);
       }
     }
-  }, [currentUser]);
+  }, [currentUser?.id, currentUser?.addresses?.length]);
 
-  // If cart is empty, redirect
   if (cart.length === 0) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-16 text-center space-y-4">
-        <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2">
-          <ShoppingBag className="w-8 h-8" />
+        <div className="w-14 h-14 bg-emerald-50 text-[#00873E] rounded-full flex items-center justify-center mx-auto">
+          <ShoppingBag className="w-7 h-7" />
         </div>
-        <h2 className="text-xl font-bold text-slate-800">{t.emptyCart}</h2>
-        <p className="text-xs text-slate-500">{t.emptyCartDesc}</p>
+        <h2 className="text-xl font-bold text-slate-900">{t.emptyCart}</h2>
         <button
+          type="button"
           onClick={() => setCurrentPage('shop')}
-          className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
+          className="min-h-[44px] px-6 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
         >
           {t.startShopping}
         </button>
@@ -139,9 +209,9 @@ export const CheckoutPage: React.FC = () => {
     );
   }
 
-  const currentDivObj = BANGLADESH_DIVISIONS.find(
-    (d) => d.nameBn === division || d.nameEn === division
-  ) || BANGLADESH_DIVISIONS[0];
+  const currentDivObj =
+    BANGLADESH_DIVISIONS.find((d) => d.nameBn === division || d.nameEn === division) ||
+    BANGLADESH_DIVISIONS[0];
 
   const handleDivisionChange = (newDiv: string) => {
     setDivision(newDiv);
@@ -149,63 +219,70 @@ export const CheckoutPage: React.FC = () => {
     if (divObj && divObj.districts.length > 0) {
       const firstDist = divObj.districts[0];
       setDistrict(firstDist);
-      if (newDiv === 'ঢাকা' && firstDist.includes('ঢাকা')) {
-        setDeliveryArea('dhaka');
-      } else {
-        setDeliveryArea('outside');
-      }
+      setDeliveryArea(newDiv === 'ঢাকা' && firstDist.includes('ঢাকা') ? 'dhaka' : 'outside');
     }
   };
 
   const handleDistrictChange = (newDist: string) => {
     setDistrict(newDist);
-    if (division === 'ঢাকা' && newDist.includes('ঢাকা')) {
-      setDeliveryArea('dhaka');
-    } else {
-      setDeliveryArea('outside');
-    }
+    setDeliveryArea(division === 'ঢাকা' && newDist.includes('ঢাকা') ? 'dhaka' : 'outside');
   };
 
   const dynamicShippingFee = calculateShippingFee(deliveryArea, 'regular', cartSubtotal);
   const calculatedTotal = Math.max(0, cartSubtotal - cartDiscount + dynamicShippingFee);
 
   const copyToClipboard = (text: string, label: string) => {
-    navigator.clipboard.writeText(text);
+    navigator.clipboard?.writeText(text);
     addToast(
-      language === 'bn' 
-        ? `${label} নম্বর (${text}) কপি করা হয়েছে!` 
-        : `${label} number (${text}) copied!`, 
+      language === 'bn' ? `${label} কপি করা হয়েছে` : `${label} copied`,
       'success'
     );
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const validateAddressFields = (): boolean => {
     if (!fullName.trim()) {
-      addToast(language === 'bn' ? 'দয়া করে আপনার নাম লিখুন' : 'Please enter your name', 'error');
-      return;
+      addToast(language === 'bn' ? 'আপনার নাম লিখুন' : 'Enter your name', 'error');
+      setCheckoutStep('address');
+      setIsEditingAddress(true);
+      return false;
     }
     if (!phone.trim() || phone.replace(/\D/g, '').length < 11) {
-      addToast(language === 'bn' ? 'দয়া করে সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন' : 'Please enter a valid 11-digit phone number', 'error');
-      return;
-    }
-    if (!division.trim()) {
-      addToast(language === 'bn' ? 'দয়া করে আপনার বিভাগ নির্বাচন করুন' : 'Please select your division', 'error');
-      return;
-    }
-    if (!district.trim()) {
-      addToast(language === 'bn' ? 'দয়া করে আপনার জেলা নির্বাচন করুন' : 'Please select your district', 'error');
-      return;
+      addToast(
+        language === 'bn' ? 'সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন' : 'Enter valid 11-digit phone number',
+        'error'
+      );
+      setCheckoutStep('address');
+      setIsEditingAddress(true);
+      return false;
     }
     if (!address.trim()) {
-      addToast(language === 'bn' ? 'দয়া করে সম্পূর্ণ ঠিকানা লিখুন' : 'Please provide your full address', 'error');
+      addToast(
+        language === 'bn' ? 'সম্পূর্ণ ডেলিভারি ঠিকানা লিখুন' : 'Enter delivery address',
+        'error'
+      );
+      setCheckoutStep('address');
+      setIsEditingAddress(true);
+      return false;
+    }
+    return true;
+  };
+
+  const handleProceedToPayment = () => {
+    if (!validateAddressFields()) return;
+    setCheckoutStep('payment');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (checkoutStep === 'address') {
+      handleProceedToPayment();
       return;
     }
+    if (!validateAddressFields()) return;
     if (paymentMethod === 'bangla_qr' && (!senderNumber.trim() || !trxId.trim())) {
       addToast(
-        language === 'bn' 
-          ? 'বাংলা কিউআর পেমেন্টের জন্য দয়া করে প্রেরক নম্বর এবং TrxID প্রদান করুন' 
-          : 'Please provide your Sender Number and TrxID for Bangla QR payment', 
+        language === 'bn' ? 'প্রেরক নম্বর ও TrxID দিন' : 'Enter Sender Number & TrxID',
         'error'
       );
       return;
@@ -215,12 +292,25 @@ export const CheckoutPage: React.FC = () => {
       if (userBal < calculatedTotal) {
         addToast(
           language === 'bn'
-            ? `ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই! আপনার ব্যালেন্স ৳${userBal}, প্রয়োজন ৳${calculatedTotal}`
-            : `Insufficient wallet balance! You have ৳${userBal}, needed ৳${calculatedTotal}`,
+            ? `ওয়ালেটে পর্যাপ্ত ব্যালেন্স নেই (প্রয়োজন ${formatPrice(calculatedTotal)})`
+            : `Insufficient wallet balance`,
           'error'
         );
         return;
       }
+    }
+
+    if (currentUser && isEditingAddress && saveAddressToProfile) {
+      addDeliveryAddress({
+        title: language === 'bn' ? 'ডেলিভারি ঠিকানা' : 'Delivery Address',
+        recipientName: fullName.trim(),
+        phone: phone.trim(),
+        division,
+        district,
+        thana: thana.trim() || undefined,
+        address: address.trim(),
+        isDefault: savedAddresses.length === 0,
+      });
     }
 
     setIsSubmitting(true);
@@ -228,693 +318,633 @@ export const CheckoutPage: React.FC = () => {
     setTimeout(() => {
       placeOrder(
         {
-          fullName,
-          phone,
+          fullName: fullName.trim(),
+          phone: phone.trim(),
           division: deliveryArea === 'dhaka' ? 'ঢাকা' : division,
           district: deliveryArea === 'dhaka' ? 'ঢাকা' : district,
           thana: thana.trim() || undefined,
-          address: thana ? `${address} (থানা: ${thana})` : address,
+          address: thana.trim() ? `${address.trim()}, ${thana.trim()}` : address.trim(),
           deliverySpeed: 'regular',
-          senderNumber: paymentMethod === 'bangla_qr' ? senderNumber : undefined,
-          trxId: paymentMethod === 'bangla_qr' ? trxId : undefined,
+          senderNumber: paymentMethod === 'bangla_qr' ? senderNumber.trim() : undefined,
+          trxId: paymentMethod === 'bangla_qr' ? trxId.trim() : undefined,
           email: currentUser?.email || '',
         },
         paymentMethod,
         dynamicShippingFee
       );
       setIsSubmitting(false);
-    }, 1000);
+    }, 600);
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 animate-fade-in">
-      {/* Clean Header Bar */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-200">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 sm:py-8 space-y-6">
+      {/* Compact Header & 2-Step Indicator */}
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-3.5 border-b border-slate-200">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-5">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900">
             {language === 'bn' ? 'অর্ডার কনফার্ম করুন' : 'Confirm Order'}
           </h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            {language === 'bn' ? 'প্রয়োজনীয় তথ্য দিয়ে অর্ডারটি সম্পন্ন করুন' : 'Enter required details to complete your order'}
-          </p>
+
+          <div className="flex items-center gap-2 text-xs font-semibold">
+            <button
+              type="button"
+              onClick={() => setCheckoutStep('address')}
+              className={`inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
+                checkoutStep === 'address'
+                  ? 'text-[#00873E]'
+                  : 'text-slate-600 hover:text-[#00873E]'
+              }`}
+            >
+              <span
+                className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold ${
+                  checkoutStep === 'payment'
+                    ? 'bg-[#00873E] text-white'
+                    : 'bg-[#062919] text-white'
+                }`}
+              >
+                {checkoutStep === 'payment' ? <Check className="w-3 h-3" /> : '১'}
+              </span>
+              <span>{language === 'bn' ? 'ঠিকানা' : 'Address'}</span>
+            </button>
+
+            <span className="text-slate-300">/</span>
+
+            <button
+              type="button"
+              onClick={handleProceedToPayment}
+              className={`inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
+                checkoutStep === 'payment'
+                  ? 'text-[#00873E]'
+                  : 'text-slate-400 hover:text-slate-600'
+              }`}
+            >
+              <span
+                className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold ${
+                  checkoutStep === 'payment'
+                    ? 'bg-[#062919] text-white'
+                    : 'bg-slate-200 text-slate-600'
+                }`}
+              >
+                ২
+              </span>
+              <span>{language === 'bn' ? 'পেমেন্ট' : 'Payment'}</span>
+            </button>
+          </div>
         </div>
 
         <button
           type="button"
-          onClick={() => setCurrentPage('cart')}
-          className="flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-700 bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 transition-all cursor-pointer shadow-2xs"
+          onClick={() =>
+            checkoutStep === 'payment' ? setCheckoutStep('address') : setCurrentPage('cart')
+          }
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-[#00873E] transition-colors cursor-pointer"
         >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>{language === 'bn' ? 'কার্টে ফিরুন' : 'Back to Cart'}</span>
+          <ArrowLeft className="w-4 h-4" />
+          <span>
+            {checkoutStep === 'payment'
+              ? language === 'bn'
+                ? 'ঠিকানায় ফিরুন'
+                : 'Back to Address'
+              : language === 'bn'
+              ? 'কার্টে ফিরুন'
+              : 'Back to Cart'}
+          </span>
         </button>
       </div>
 
-      <form onSubmit={handleFormSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-        {/* Left Form: All essentials in one clean flow (7 cols) */}
+      <form
+        onSubmit={handleFormSubmit}
+        className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start"
+      >
+        {/* Left Column: Step 1 (Address) or Step 2 (Payment) */}
         <div className="lg:col-span-7 space-y-5">
-          {/* 1. Customer & Delivery Address Card */}
-          <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-slate-200/90 shadow-xs space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          {checkoutStep === 'address' ? (
+            /* Step 1: Delivery Address Card */
+            <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4">
+            <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-black text-xs">
-                  ১
-                </div>
+                <MapPin className="w-4 h-4 text-[#00873E] shrink-0" />
                 <h2 className="text-sm sm:text-base font-bold text-slate-900">
-                  {language === 'bn' ? 'ডেলিভারির তথ্য' : 'Delivery Information'}
+                  {language === 'bn' ? 'ডেলিভারি ঠিকানা' : 'Delivery Address'}
                 </h2>
               </div>
 
-              {currentUser && (
-                <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>অ্যাকাউন্ট থেকে অটো-পূরণ</span>
-                </span>
+              {hasProfileAddress && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isEditingAddress) {
+                      applySavedAddress(defaultSavedAddress);
+                    } else {
+                      setIsEditingAddress(true);
+                    }
+                  }}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#00873E] hover:text-[#007033] cursor-pointer"
+                >
+                  <Edit3 className="w-3.5 h-3.5" />
+                  <span>
+                    {isEditingAddress
+                      ? language === 'bn'
+                        ? 'সেভ করা ঠিকানা দেখুন'
+                        : 'Use Saved'
+                      : language === 'bn'
+                      ? 'ঠিকানা পরিবর্তন করুন'
+                      : 'Change Address'}
+                  </span>
+                </button>
               )}
             </div>
 
-            {/* If logged in: User notice & 1-click address selector */}
-            {currentUser && (
-              <div className="p-3 bg-emerald-50/70 rounded-xl border border-emerald-100/90 space-y-2 animate-fade-in">
-                <div className="flex items-center justify-between text-xs text-emerald-950 font-medium">
-                  <span className="flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>আপনার অ্যাকাউন্ট থেকে তথ্য বসে গেছে। প্রয়োজনে যেকোনো ফিল্ডে ক্লিক করে এডিট করতে পারেন।</span>
-                  </span>
-                </div>
-
-                {currentUser.addresses && currentUser.addresses.length > 0 && (
-                  <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-emerald-100/60">
-                    <span className="text-[11px] text-slate-600 font-semibold">সেভ করা ঠিকানা:</span>
-                    {currentUser.addresses.map((addr) => (
-                      <button
-                        key={addr.id}
-                        type="button"
-                        onClick={() => {
-                          setAddress(addr.address);
-                          if (addr.recipientName) setFullName(addr.recipientName);
-                          if (addr.phone) setPhone(addr.phone);
-                          if (addr.thana) setThana(addr.thana);
-                          if (addr.division) {
-                            const matchedDiv = BANGLADESH_DIVISIONS.find(
-                              (d) => d.nameBn === addr.division || d.nameEn === addr.division
-                            );
-                            if (matchedDiv) setDivision(matchedDiv.nameBn);
-                          }
-                          if (addr.district) {
-                            for (const d of BANGLADESH_DIVISIONS) {
-                              const matched = d.districts.find(
-                                (item) => item.toLowerCase().includes(addr.district.toLowerCase()) || addr.district.toLowerCase().includes(item.toLowerCase())
-                              );
-                              if (matched) {
-                                setDivision(d.nameBn);
-                                setDistrict(matched);
-                                if (d.nameBn === 'ঢাকা' && matched.includes('ঢাকা')) {
-                                  setDeliveryArea('dhaka');
-                                } else {
-                                  setDeliveryArea('outside');
-                                }
-                                break;
-                              }
-                            }
-                          }
-                          addToast(
-                            language === 'bn' 
-                              ? `"${addr.title}" ঠিকানা সিলেক্ট করা হয়েছে` 
-                              : `Selected "${addr.title}" address`, 
-                            'info'
-                          );
-                        }}
-                        className={`text-xs px-2.5 py-1 rounded-lg border font-semibold transition-all cursor-pointer ${
-                          address === addr.address
-                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
-                            : 'bg-white text-slate-700 hover:bg-slate-50 border-slate-200'
-                        }`}
-                      >
-                        {addr.title}
-                      </button>
-                    ))}
-                  </div>
+            {/* Quick Saved Address Switcher (when user has saved profile addresses) */}
+            {savedAddresses.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2">
+                {savedAddresses.map((addr) => {
+                  const isActive = !isEditingAddress && selectedAddressId === addr.id;
+                  return (
+                    <button
+                      key={addr.id}
+                      type="button"
+                      onClick={() => applySavedAddress(addr)}
+                      className={`min-h-[36px] px-3 rounded-xl text-xs font-semibold border transition-all cursor-pointer inline-flex items-center gap-1.5 ${
+                        isActive
+                          ? 'bg-[#062919] text-white border-[#062919]'
+                          : 'bg-white text-slate-700 border-slate-200 hover:border-slate-400'
+                      }`}
+                    >
+                      {isActive && <Check className="w-3 h-3" />}
+                      <span>{addr.title}</span>
+                    </button>
+                  );
+                })}
+                {!isEditingAddress && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsEditingAddress(true);
+                      setSelectedAddressId('custom');
+                    }}
+                    className="min-h-[36px] px-3 rounded-xl text-xs font-semibold border border-dashed border-slate-300 text-slate-600 hover:border-[#00873E] hover:text-[#00873E] transition-colors cursor-pointer"
+                  >
+                    + {language === 'bn' ? 'অন্য ঠিকানা' : 'New Address'}
+                  </button>
                 )}
               </div>
             )}
 
-            {/* Sequence 1 & 2: Name and Phone Number */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  {language === 'bn' ? 'আপনার নাম' : 'Your Full Name'} <span className="text-rose-500">*</span>
-                </label>
-                <div className="relative">
+            {/* Clean Auto-Filled Address Summary OR Inline Edit Form */}
+            {!isEditingAddress && address.trim() ? (
+              <div className="bg-[#F8FAFC] rounded-xl p-4 border border-slate-200/80 space-y-1.5">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="text-sm font-bold text-slate-900">{fullName}</span>
+                  <span className="text-xs font-semibold text-slate-700 font-mono tabular-nums">
+                    {phone}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  {address}
+                  {thana ? `, ${thana}` : ''}, {district}, {division}
+                </p>
+                <div className="pt-1 flex items-center gap-2 text-xs text-[#00873E] font-semibold tabular-nums">
+                  <Truck className="w-3.5 h-3.5 shrink-0" />
+                  <span>
+                    {deliveryArea === 'dhaka'
+                      ? language === 'bn'
+                        ? 'ঢাকার ভেতরে'
+                        : 'Inside Dhaka'
+                      : language === 'bn'
+                      ? 'ঢাকার বাইরে'
+                      : 'Outside Dhaka'}{' '}
+                    ·{' '}
+                    {dynamicShippingFee === 0
+                      ? language === 'bn'
+                        ? 'ফ্রি ডেলিভারি'
+                        : 'Free Delivery'
+                      : formatPrice(dynamicShippingFee)}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      {language === 'bn' ? 'নাম' : 'Full Name'} *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder={language === 'bn' ? 'আপনার নাম' : 'Full Name'}
+                      className="w-full h-11 bg-slate-50/70 border border-slate-300 rounded-xl px-3.5 text-xs sm:text-sm text-slate-900 outline-none focus:border-[#00873E] focus:bg-white transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      {language === 'bn' ? 'মোবাইল নম্বর' : 'Phone'} *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="01XXXXXXXXX"
+                      className="w-full h-11 bg-slate-50/70 border border-slate-300 rounded-xl px-3.5 text-xs sm:text-sm text-slate-900 font-mono outline-none focus:border-[#00873E] focus:bg-white transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      {language === 'bn' ? 'বিভাগ' : 'Division'} *
+                    </label>
+                    <select
+                      value={division}
+                      onChange={(e) => handleDivisionChange(e.target.value)}
+                      className="w-full h-11 bg-slate-50/70 border border-slate-300 rounded-xl px-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-[#00873E] focus:bg-white cursor-pointer"
+                    >
+                      {BANGLADESH_DIVISIONS.map((div) => (
+                        <option key={div.nameBn} value={div.nameBn}>
+                          {div.nameBn}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      {language === 'bn' ? 'জেলা' : 'District'} *
+                    </label>
+                    <select
+                      value={district}
+                      onChange={(e) => handleDistrictChange(e.target.value)}
+                      className="w-full h-11 bg-slate-50/70 border border-slate-300 rounded-xl px-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-[#00873E] focus:bg-white cursor-pointer"
+                    >
+                      {currentDivObj.districts.map((dist) => (
+                        <option key={dist} value={dist}>
+                          {dist}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      {language === 'bn' ? 'থানা / উপজেলা' : 'Thana'}
+                    </label>
+                    <input
+                      type="text"
+                      value={thana}
+                      onChange={(e) => setThana(e.target.value)}
+                      placeholder={language === 'bn' ? 'থানা' : 'Thana'}
+                      className="w-full h-11 bg-slate-50/70 border border-slate-300 rounded-xl px-3.5 text-xs sm:text-sm text-slate-900 outline-none focus:border-[#00873E] focus:bg-white transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    {language === 'bn' ? 'বিস্তারিত ঠিকানা' : 'Full Address'} *
+                  </label>
                   <input
                     type="text"
                     required
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    placeholder={language === 'bn' ? 'আপনার পুরো নাম লিখুন' : 'Full Name'}
-                    className="w-full bg-slate-50/80 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-medium placeholder-slate-400 outline-none focus:border-emerald-600 focus:bg-white transition-all shadow-2xs"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder={
+                      language === 'bn' ? 'বাসা নং, রোড, এলাকা' : 'House, Road, Area'
+                    }
+                    className="w-full h-11 bg-slate-50/70 border border-slate-300 rounded-xl px-3.5 text-xs sm:text-sm text-slate-900 outline-none focus:border-[#00873E] focus:bg-white transition-colors"
                   />
-                  <UserIcon className="w-4 h-4 text-slate-400 absolute right-3 top-2.5" />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  {language === 'bn' ? 'মোবাইল নম্বর' : 'Phone Number'} <span className="text-rose-500">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="tel"
-                    required
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="017XXXXXXXX"
-                    className="w-full bg-slate-50/80 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-medium placeholder-slate-400 outline-none focus:border-emerald-600 focus:bg-white transition-all shadow-2xs"
-                  />
-                  <Phone className="w-4 h-4 text-slate-400 absolute right-3 top-2.5" />
+                <div className="flex items-center justify-between flex-wrap gap-3 pt-1">
+                  {currentUser ? (
+                    <label className="inline-flex items-center gap-2 text-xs text-slate-600 cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={saveAddressToProfile}
+                        onChange={(e) => setSaveAddressToProfile(e.target.checked)}
+                        className="w-4 h-4 accent-[#00873E] rounded cursor-pointer"
+                      />
+                      <span>
+                        {language === 'bn' ? 'প্রোফাইলে ঠিকানাটি সেভ রাখুন' : 'Save to profile'}
+                      </span>
+                    </label>
+                  ) : (
+                    <span />
+                  )}
+
+                  <span className="text-xs font-semibold text-[#00873E] tabular-nums">
+                    {deliveryArea === 'dhaka'
+                      ? language === 'bn'
+                        ? 'ঢাকার ভেতরে'
+                        : 'Inside Dhaka'
+                      : language === 'bn'
+                      ? 'ঢাকার বাইরে'
+                      : 'Outside Dhaka'}{' '}
+                    ·{' '}
+                    {dynamicShippingFee === 0
+                      ? language === 'bn'
+                        ? 'ফ্রি ডেলিভারি'
+                        : 'Free Delivery'
+                      : formatPrice(dynamicShippingFee)}
+                  </span>
                 </div>
-              </div>
-            </div>
-
-            {/* Sequence 3 & 4: Division & Dynamic District */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  {language === 'bn' ? 'বিভাগ (Division)' : 'Division'} <span className="text-rose-500">*</span>
-                </label>
-                <select
-                  value={division}
-                  onChange={(e) => handleDivisionChange(e.target.value)}
-                  className="w-full bg-slate-50/80 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-medium outline-none focus:border-emerald-600 focus:bg-white transition-all cursor-pointer shadow-2xs"
-                >
-                  {BANGLADESH_DIVISIONS.map((div) => (
-                    <option key={div.nameBn} value={div.nameBn} className="text-slate-900">
-                      {div.nameBn} ({div.nameEn})
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  {language === 'bn' ? 'জেলা (District)' : 'District'} <span className="text-rose-500">*</span>
-                </label>
-                <select
-                  value={district}
-                  onChange={(e) => handleDistrictChange(e.target.value)}
-                  className="w-full bg-slate-50/80 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-medium outline-none focus:border-emerald-600 focus:bg-white transition-all cursor-pointer shadow-2xs"
-                >
-                  {currentDivObj.districts.map((dist) => (
-                    <option key={dist} value={dist} className="text-slate-900">
-                      {dist}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Sequence 5: Thana / Upazila */}
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <label className="block text-xs font-bold text-slate-800">
-                  {language === 'bn' ? 'থানা / উপজেলা' : 'Thana / Upazila'} <span className="text-rose-500">*</span>
-                </label>
-                {division === 'ঢাকা' && (
-                  <span className="text-[10px] text-slate-400">যেমন: মিরপুর, ধানমন্ডি, গুলশান, উত্তরা, বনানী...</span>
-                )}
-              </div>
-              <input
-                type="text"
-                required
-                value={thana}
-                onChange={(e) => setThana(e.target.value)}
-                placeholder={language === 'bn' ? 'আপনার থানা বা উপজেলার নাম লিখুন' : 'Thana / Upazila'}
-                className="w-full bg-slate-50/80 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-medium placeholder-slate-400 outline-none focus:border-emerald-600 focus:bg-white transition-all shadow-2xs"
-              />
-            </div>
-
-            {/* Sequence 6: Area / Detailed Delivery Address */}
-            <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1">
-                {language === 'bn' ? 'নিজের এলাকা বা ডেলিভারির সম্পূর্ণ ঠিকানা' : 'Area & Detailed Delivery Address'} <span className="text-rose-500">*</span>
-              </label>
-              <textarea
-                required
-                rows={2}
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder={language === 'bn' ? 'বাসা/রোড নং, এলাকা, পাড়া বা চেনার কোনো সহজ উপায় লিখুন...' : 'House/Road, Area, landmarks...'}
-                className="w-full bg-slate-50/80 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-medium placeholder-slate-400 outline-none focus:border-emerald-600 focus:bg-white transition-all resize-none shadow-2xs"
-              />
-            </div>
-
-            {/* Delivery Charge & Location Indicator */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs">
-              <div className="flex items-center gap-2">
-                <Truck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="font-semibold text-slate-700">
-                  ডেলিভারি এলাকা: <strong className="text-slate-900">{deliveryArea === 'dhaka' ? 'ঢাকার ভেতরে' : 'ঢাকার বাইরে'}</strong>
-                </span>
-              </div>
-              <span className="font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                চার্জ: {dynamicShippingFee === 0 ? 'ফ্রি' : `৳${dynamicShippingFee}`}
-              </span>
-            </div>
-          </div>
-
-          {/* 2. Advanced & Attractive Payment Method Card: Strictly COD & Bangla QR */}
-          <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200/90 shadow-xs space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-black text-xs">
-                  ২
-                </div>
-                <h2 className="text-sm sm:text-base font-bold text-slate-900">
-                  {language === 'bn' ? 'পেমেন্ট পদ্ধতি' : 'Payment Method'}
-                </h2>
-              </div>
-              <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${
-                paymentMethod === 'cod' 
-                  ? 'text-emerald-700 bg-emerald-50 border-emerald-200' 
-                  : paymentMethod === 'wallet'
-                  ? 'text-emerald-800 bg-emerald-100 border-emerald-300'
-                  : 'text-red-700 bg-red-50 border-red-200'
-              }`}>
-                {paymentMethod === 'cod' 
-                  ? 'ক্যাশ অন ডেলিভারি' 
-                  : paymentMethod === 'wallet'
-                  ? 'ওয়ালেট ব্যালেন্স'
-                  : 'বাংলা কিউআর (Bangla QR)'}
-              </span>
-            </div>
-
-            {/* Welcome Bonus Notice for 1st order */}
-            {currentUser && !currentUser.hasCompletedFirstOrder && (
-              <div className="p-2.5 rounded-xl bg-gradient-to-r from-amber-50 to-emerald-50 border border-amber-300 flex items-center justify-between gap-3 shadow-2xs">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
-                    <Gift className="w-4 h-4" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-xs font-black text-slate-900 flex items-center gap-1.5">
-                      <span>১ম অর্ডার বোনাস: ৳৫০</span>
-                      <span className="text-[9px] font-black bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded-full">অফার</span>
-                    </div>
-                    <div className="text-[11px] text-slate-600 truncate">অর্ডার শেষ হলেই ওয়ালেটে ৫০ টাকা জমা হবে (২য় অর্ডারে ব্যবহার্য)</div>
-                  </div>
-                </div>
-                <span className="text-xs font-black text-amber-700 bg-white px-2.5 py-1 rounded-lg border border-amber-200 shadow-2xs shrink-0">
-                  +৳৫০
-                </span>
               </div>
             )}
 
-            {/* Wallet Balance Usage Card */}
-            {currentUser && (currentUser.balance || 0) > 0 && (
-              <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 flex items-center justify-between gap-3 shadow-2xs">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
-                    <Sparkles className="w-4 h-4" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-xs font-black text-emerald-950 flex items-center gap-1.5">
-                      <span>ওয়ালেট ব্যালেন্স: {formatPrice(currentUser.balance || 0)}</span>
+            {/* Step 1 Primary CTA -> Advance to Payment Options */}
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={handleProceedToPayment}
+                className="w-full min-h-[48px] px-5 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-sm font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+              >
+                <span>
+                  {language === 'bn' ? 'পরবর্তী: পেমেন্ট অপশন' : 'Next: Payment Options'}
+                </span>
+                <ArrowRight className="w-4 h-4 shrink-0" />
+              </button>
+            </div>
+          </div>
+          ) : (
+            <>
+              {/* Step 2: Compact Confirmed Address Strip */}
+              <div className="bg-white rounded-2xl px-5 py-4 border border-slate-200/80 shadow-xs flex items-start justify-between gap-3">
+                <div className="flex items-start gap-2.5 min-w-0">
+                  <MapPin className="w-4 h-4 text-[#00873E] shrink-0 mt-0.5" />
+                  <div className="min-w-0 space-y-0.5">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs sm:text-sm font-bold text-slate-900">
+                        {fullName}
+                      </span>
+                      <span className="text-xs font-mono text-slate-600 tabular-nums">
+                        {phone}
+                      </span>
                     </div>
-                    <div className="text-[11px] text-emerald-800 truncate">ওয়ালেট থেকে ১-ক্লিকে পরিশোধ করতে নিচে অপশনটি সিলেক্ট করুন</div>
+                    <p className="text-xs text-slate-600 truncate sm:whitespace-normal">
+                      {address}
+                      {thana ? `, ${thana}` : ''}, {district}, {division}
+                    </p>
                   </div>
                 </div>
                 <button
                   type="button"
-                  onClick={() => setPaymentMethod('wallet')}
-                  className="text-xs font-black text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-lg shadow-xs shrink-0 cursor-pointer transition-colors"
+                  onClick={() => setCheckoutStep('address')}
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#00873E] hover:text-[#007033] shrink-0 cursor-pointer"
                 >
-                  ব্যবহার করুন
+                  <Edit3 className="w-3.5 h-3.5" />
+                  <span>{language === 'bn' ? 'পরিবর্তন' : 'Edit'}</span>
                 </button>
               </div>
-            )}
 
-            {/* Payment Options: 1. Cash On Delivery, 2. Bangla QR, 3. Wallet Balance (if balance > 0) */}
-            <div className={`grid grid-cols-1 ${currentUser && (currentUser.balance || 0) > 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-2'} gap-3`}>
-              {/* 1. Cash On Delivery */}
+              {/* Step 2: Payment Method Card */}
+              <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4">
+                <h2 className="text-sm sm:text-base font-bold text-slate-900">
+                  {language === 'bn' ? 'পেমেন্ট পদ্ধতি' : 'Payment Method'}
+                </h2>
+
+            <div
+              className={`grid grid-cols-1 ${
+                currentUser && (currentUser.balance || 0) > 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-2'
+              } gap-3`}
+            >
+              {/* Cash on Delivery */}
               <button
                 type="button"
                 onClick={() => setPaymentMethod('cod')}
-                className={`p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
+                className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
                   paymentMethod === 'cod'
-                    ? 'border-[#00873E] bg-emerald-50/80 ring-2 ring-[#00873E]/15 shadow-sm'
+                    ? 'border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]'
                     : 'border-slate-200 hover:border-slate-300 bg-white'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                    paymentMethod === 'cod' ? 'border-[#00873E] bg-[#00873E]' : 'border-slate-300 bg-white'
-                  }`}>
-                    {paymentMethod === 'cod' && <div className="w-2 h-2 rounded-full bg-white" />}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <Truck className="w-4 h-4 text-emerald-700" />
-                      <span className="text-xs sm:text-sm font-black text-slate-900">ক্যাশ অন ডেলিভারি</span>
-                    </div>
-                    <span className="text-[11px] text-slate-500 font-medium block mt-0.5">
-                      পণ্য হাতে পেয়ে দেখে পরিশোধ
+                <div
+                  className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                    paymentMethod === 'cod' ? 'border-[#00873E] bg-[#00873E]' : 'border-slate-300'
+                  }`}
+                >
+                  {paymentMethod === 'cod' && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                    <Truck className="w-4 h-4 text-[#00873E] shrink-0" />
+                    <span className="truncate">
+                      {language === 'bn' ? 'ক্যাশ অন ডেলিভারি' : 'Cash on Delivery'}
                     </span>
                   </div>
+                  <div className="text-[11px] text-slate-500 truncate mt-0.5">
+                    {language === 'bn' ? 'পণ্য হাতে পেয়ে পরিশোধ' : 'Pay when delivered'}
+                  </div>
                 </div>
-                <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-md shrink-0">
-                  জনপ্রিয়
-                </span>
               </button>
 
-              {/* 2. Bangla QR Payment */}
+              {/* Bangla QR */}
               <button
                 type="button"
                 onClick={() => setPaymentMethod('bangla_qr')}
-                className={`p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
+                className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
                   paymentMethod === 'bangla_qr'
-                    ? 'border-red-600 bg-red-50/80 ring-2 ring-red-600/15 shadow-sm'
+                    ? 'border-[#DC2626] bg-red-50/70 ring-1 ring-[#DC2626]'
                     : 'border-slate-200 hover:border-slate-300 bg-white'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                    paymentMethod === 'bangla_qr' ? 'border-red-600 bg-red-600' : 'border-slate-300 bg-white'
-                  }`}>
-                    {paymentMethod === 'bangla_qr' && <div className="w-2 h-2 rounded-full bg-white" />}
+                <div
+                  className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                    paymentMethod === 'bangla_qr'
+                      ? 'border-[#DC2626] bg-[#DC2626]'
+                      : 'border-slate-300'
+                  }`}
+                >
+                  {paymentMethod === 'bangla_qr' && (
+                    <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                    <QrCode className="w-4 h-4 text-[#DC2626] shrink-0" />
+                    <span className="truncate">Bangla QR</span>
                   </div>
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <QrCode className="w-4 h-4 text-red-600" />
-                      <span className="text-xs sm:text-sm font-black text-slate-900">Bangla QR</span>
-                    </div>
-                    <span className="text-[11px] text-slate-500 font-medium block mt-0.5">
-                      বিকাশ, নগদ ও সকল ব্যাংক
-                    </span>
+                  <div className="text-[11px] text-slate-500 truncate mt-0.5">
+                    {language === 'bn' ? 'বিকাশ, নগদ ও ব্যাংক' : 'bKash, Nagad & Bank'}
                   </div>
                 </div>
-                <span className="text-[10px] font-bold text-red-800 bg-red-100/80 px-2 py-0.5 rounded-md shrink-0">
-                  ০% চার্জ
-                </span>
               </button>
 
-              {/* 3. Wallet Balance Option (If customer has balance) */}
+              {/* Wallet Balance */}
               {currentUser && (currentUser.balance || 0) > 0 && (
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('wallet')}
-                  className={`p-3.5 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
+                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
                     paymentMethod === 'wallet'
-                      ? 'border-emerald-600 bg-emerald-50/90 ring-2 ring-emerald-600/15 shadow-sm'
+                      ? 'border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]'
                       : 'border-slate-200 hover:border-slate-300 bg-white'
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                      paymentMethod === 'wallet' ? 'border-emerald-600 bg-emerald-600' : 'border-slate-300 bg-white'
-                    }`}>
-                      {paymentMethod === 'wallet' && <div className="w-2 h-2 rounded-full bg-white" />}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <Wallet className="w-4 h-4 text-emerald-700" />
-                        <span className="text-xs sm:text-sm font-black text-slate-900">ওয়ালেট ব্যালেন্স</span>
-                      </div>
-                      <span className="text-[11px] text-emerald-700 font-bold block mt-0.5">
-                        জমা: {formatPrice(currentUser.balance || 0)}
+                  <div
+                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                      paymentMethod === 'wallet'
+                        ? 'border-[#00873E] bg-[#00873E]'
+                        : 'border-slate-300'
+                    }`}
+                  >
+                    {paymentMethod === 'wallet' && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                      <Wallet className="w-4 h-4 text-[#00873E] shrink-0" />
+                      <span className="truncate">
+                        {language === 'bn' ? 'ওয়ালেট' : 'Wallet'}
                       </span>
                     </div>
+                    <div className="text-[11px] text-[#00873E] font-semibold truncate mt-0.5 tabular-nums">
+                      {formatPrice(currentUser.balance || 0)}
+                    </div>
                   </div>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md shrink-0 ${
-                    (currentUser.balance || 0) >= calculatedTotal
-                      ? 'bg-emerald-100 text-emerald-800'
-                      : 'bg-amber-100 text-amber-800'
-                  }`}>
-                    {(currentUser.balance || 0) >= calculatedTotal ? '১-ক্লিক পে' : 'ঘাটতি'}
-                  </span>
                 </button>
               )}
             </div>
 
-            {/* Wallet Details Block */}
-            {paymentMethod === 'wallet' && (
-              <div className="p-4 rounded-2xl bg-emerald-50/90 border border-emerald-300 text-xs text-emerald-950 space-y-2 animate-fade-in">
-                <div className="flex items-center justify-between">
-                  <div className="font-bold flex items-center gap-2">
-                    <Wallet className="w-4 h-4 text-emerald-700" />
-                    <span>অ্যাকাউন্ট ব্যালেন্স থেকে মূল্য পরিশোধ:</span>
-                  </div>
-                  <span className="font-black text-sm text-emerald-900">
-                    {formatPrice(calculatedTotal)}
-                  </span>
-                </div>
-
-                {(currentUser?.balance || 0) >= calculatedTotal ? (
-                  <p className="text-[11px] text-emerald-800">
-                    অর্ডার কনফার্মে ওয়ালেট থেকে <strong>{formatPrice(calculatedTotal)}</strong> পরিশোধ হবে। ডেলিভারিতে কোনো টাকা লাগবে না।
-                  </p>
-                ) : (
-                  <div className="p-2 bg-amber-50 rounded-xl border border-amber-200 text-amber-900 text-[11px]">
-                    ব্যালেন্স ঘাটতি: {formatPrice(calculatedTotal - (currentUser?.balance || 0))}। অনুগ্রহ করে ক্যাশ অন ডেলিভারি বা বাংলা কিউআর বেছে নিন।
-                  </div>
-                )}
-              </div>
+            {paymentMethod === 'wallet' && (currentUser?.balance || 0) < calculatedTotal && (
+              <p className="text-xs text-[#DC2626] font-medium">
+                {language === 'bn'
+                  ? `ওয়ালেটে ${formatPrice(calculatedTotal - (currentUser?.balance || 0))} কম রয়েছে। অন্য মাধ্যম বেছে নিন।`
+                  : `Insufficient wallet balance.`}
+              </p>
             )}
 
-            {/* COD Details */}
-            {paymentMethod === 'cod' && (
-              <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200/80 text-xs text-emerald-950 flex items-center gap-2 animate-fade-in">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="text-[11px] text-emerald-900 font-medium">
-                  <strong>অগ্রিম চার্জ নেই:</strong> পণ্য হাতে পেয়ে দেখে নগদ টাকায় মূল্য পরিশোধ করবেন।
-                </span>
-              </div>
-            )}
-
-            {/* Bangla QR Details */}
+            {/* Compact Bangla QR Box */}
             {paymentMethod === 'bangla_qr' && (
-              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-b from-red-50/80 via-white to-red-50/40 border border-red-200/90 text-slate-800 space-y-4 animate-fade-in">
-                {/* Header banner */}
-                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-red-100">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-red-600 text-white flex items-center justify-center font-black text-xs shadow-xs">
-                      QR
-                    </div>
-                    <div>
-                      <h4 className="text-xs sm:text-sm font-black text-slate-900 flex items-center gap-1.5">
-                        <span>সার্বজনীন বাংলা কিউআর পেমেন্ট</span>
-                        <span className="text-[10px] font-bold bg-red-100 text-red-800 px-2 py-0.2 rounded-full">
-                          বাংলাদেশ ব্যাংক অনুমোদিত
-                        </span>
-                      </h4>
-                      <p className="text-[11px] text-slate-500">
-                        যেকোনো ব্যাংকিং বা MFS অ্যাপ দিয়ে স্ক্যান করে সরাসরি পে করুন
-                      </p>
-                    </div>
-                  </div>
+              <div className="p-4 rounded-xl bg-slate-50 border border-red-200/80 space-y-4">
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setIsQrModalOpen(true)}
+                    className="relative group shrink-0 cursor-pointer"
+                  >
+                    <img
+                      src="/assets/bangla_qr_code.png"
+                      alt="Bangla QR"
+                      className="w-32 h-32 object-contain rounded-xl bg-white p-1.5 border border-slate-200"
+                    />
+                    <span className="absolute bottom-1.5 right-1.5 w-7 h-7 rounded-lg bg-slate-900/80 text-white flex items-center justify-center">
+                      <Eye className="w-3.5 h-3.5" />
+                    </span>
+                  </button>
 
-                  <span className="text-xs font-mono font-black text-red-700 bg-white px-3 py-1 rounded-xl border border-red-200 shadow-2xs">
-                    প্রদেয়: {formatPrice(calculatedTotal)}
-                  </span>
-                </div>
-
-                {/* QR Code + Merchant Details Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-                  {/* Left: QR Code card */}
-                  <div className="sm:col-span-5 flex flex-col items-center text-center p-3.5 bg-white rounded-2xl border-2 border-red-500/25 shadow-xs space-y-2">
-                    <div className="relative group cursor-pointer" onClick={() => setIsQrModalOpen(true)}>
-                      <img
-                        src="/assets/bangla_qr_code.png"
-                        alt="Bangla QR Code - Bangla Bazar"
-                        className="w-44 h-44 object-contain rounded-xl p-1 bg-white border border-slate-200 transition-transform group-hover:scale-102"
-                      />
-                      <div className="absolute inset-0 bg-black/40 rounded-xl opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-[11px] font-bold transition-opacity">
-                        <Eye className="w-4 h-4 mr-1" /> বড় করে দেখুন
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <a
-                        href="/assets/bangla_qr_code.png"
-                        download="BanglaBazar_BanglaQR.png"
-                        className="text-[11px] font-bold text-red-700 hover:text-red-800 bg-red-50 hover:bg-red-100 px-2.5 py-1 rounded-lg border border-red-200 flex items-center gap-1 transition-all"
-                      >
-                        <Download className="w-3 h-3" />
-                        <span>QR সেভ</span>
-                      </a>
+                  <div className="flex-1 w-full space-y-2 text-xs">
+                    <div className="flex items-center justify-between py-1.5 border-b border-slate-200/70">
+                      <span className="text-slate-500">
+                        {language === 'bn' ? 'টালিপে নম্বর' : 'Merchant'}
+                      </span>
                       <button
                         type="button"
-                        onClick={() => setIsQrModalOpen(true)}
-                        className="text-[11px] font-bold text-slate-700 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200 flex items-center gap-1 transition-all cursor-pointer"
+                        onClick={() => copyToClipboard('01929637253', 'নম্বর')}
+                        className="inline-flex items-center gap-1.5 font-mono font-bold text-slate-900 hover:text-[#DC2626] cursor-pointer"
                       >
-                        <Eye className="w-3 h-3" />
-                        <span>স্ট্যান্ডি দেখুন</span>
+                        <span>01929-637253</span>
+                        <Copy className="w-3.5 h-3.5" />
                       </button>
                     </div>
-                  </div>
-
-                  {/* Right: Merchant Information & Easy Steps */}
-                  <div className="sm:col-span-7 space-y-3">
-                    {/* Merchant & TallyPay Number */}
-                    <div className="space-y-2 bg-white/95 p-3 rounded-xl border border-red-100">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-500">মার্চেন্ট নাম:</span>
-                        <strong className="text-slate-900 font-black">বাংলা বাজার (Bangla Bazar)</strong>
-                      </div>
-
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-500">টালিপে নম্বর:</span>
-                        <div className="flex items-center gap-1.5">
-                          <strong className="text-red-700 font-mono font-black text-sm">01929-637253</strong>
-                          <button
-                            type="button"
-                            onClick={() => copyToClipboard('01929637253', 'মার্চেন্ট')}
-                            className="px-2 py-0.5 bg-red-600 hover:bg-red-700 text-white rounded text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-colors"
-                          >
-                            <Copy className="w-2.5 h-2.5" />
-                            <span>কপি</span>
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-500">টাকার পরিমাণ:</span>
-                        <div className="flex items-center gap-1.5">
-                          <strong className="text-emerald-700 font-mono font-black text-sm">{formatPrice(calculatedTotal)}</strong>
-                          <button
-                            type="button"
-                            onClick={() => copyToClipboard(String(calculatedTotal), 'টাকা')}
-                            className="px-2 py-0.5 bg-slate-800 hover:bg-slate-900 text-white rounded text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-colors"
-                          >
-                            <Copy className="w-2.5 h-2.5" />
-                            <span>কপি</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Supported Apps Chips */}
-                    <div className="space-y-1">
-                      <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
-                        পেমেন্ট সমর্থিত অ্যাপস:
+                    <div className="flex items-center justify-between py-1.5">
+                      <span className="text-slate-500">
+                        {language === 'bn' ? 'প্রদেয়' : 'Payable'}
                       </span>
-                      <div className="flex flex-wrap gap-1">
-                        {['বিকাশ', 'নগদ', 'রকেট', 'সেলফিন', 'নেক্সাস পে', 'সিটি টাচ', 'ব্র্যাক ব্যাংক', 'ইবিএল', 'ইসলামী ব্যাংক'].map((app) => (
-                          <span key={app} className="text-[10px] font-bold bg-white text-slate-700 px-2 py-0.5 rounded-md border border-slate-200 shadow-2xs">
-                            {app}
-                          </span>
-                        ))}
-                        <span className="text-[10px] font-bold bg-red-50 text-red-700 px-2 py-0.5 rounded-md border border-red-200">
-                          + সকল ব্যাংক
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* 3 Step Instruction */}
-                    <div className="text-[11px] text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-200/70 space-y-1">
-                      <div className="font-bold text-slate-800">পেমেন্ট করার সহজ ধাপ:</div>
-                      <ol className="list-decimal list-inside space-y-0.5 text-[10.5px]">
-                        <li>বিকাশ/নগদ/ব্যাংক অ্যাপ খুলে <strong>"QR স্ক্যান"</strong> অপশন চাপুন</li>
-                        <li>উপরের কোডটি স্ক্যান করে <strong>{formatPrice(calculatedTotal)}</strong> পরিশোধ করুন</li>
-                        <li>পেমেন্ট শেষে নিচের ঘরে প্রেরক নম্বর ও TrxID লিখে কনফার্ম করুন</li>
-                      </ol>
+                      <span className="font-bold text-[#DC2626] tabular-nums text-sm">
+                        {formatPrice(calculatedTotal)}
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Verification Fields: Sender Phone & TrxID */}
-                <div className="pt-2 border-t border-red-100">
-                  <div className="text-xs font-bold text-slate-900 mb-2 flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>পেমেন্ট নিশ্চিতকরণ তথ্য প্রদান করুন</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                        যে নম্বর/অ্যাকাউন্ট থেকে পেমেন্ট করেছেন <span className="text-rose-500">*</span>
-                      </label>
-                      <input
-                        type="tel"
-                        required={paymentMethod === 'bangla_qr'}
-                        value={senderNumber}
-                        onChange={(e) => setSenderNumber(e.target.value)}
-                        placeholder="01XXXXXXXXX"
-                        className="w-full bg-white border border-red-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 font-medium placeholder-slate-400 outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 shadow-2xs"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                        TrxID (ট্রানজেকশন আইডি) <span className="text-rose-500">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        required={paymentMethod === 'bangla_qr'}
-                        value={trxId}
-                        onChange={(e) => setTrxId(e.target.value.toUpperCase())}
-                        placeholder="9H87G6F5"
-                        className="w-full bg-white border border-red-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 font-medium placeholder-slate-400 outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 uppercase shadow-2xs"
-                      />
-                    </div>
-                  </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <input
+                    type="tel"
+                    required
+                    value={senderNumber}
+                    onChange={(e) => setSenderNumber(e.target.value)}
+                    placeholder={language === 'bn' ? 'প্রেরক নম্বর (01XXXXXXXXX)' : 'Sender Number'}
+                    className="h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs text-slate-900 outline-none focus:border-[#DC2626]"
+                  />
+                  <input
+                    type="text"
+                    required
+                    value={trxId}
+                    onChange={(e) => setTrxId(e.target.value.toUpperCase())}
+                    placeholder="TrxID"
+                    className="h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs text-slate-900 font-mono uppercase outline-none focus:border-[#DC2626]"
+                  />
                 </div>
               </div>
             )}
-          </div>
+              </div>
+            </>
+          )}
         </div>
 
-        {/* Right Summary Card (5 cols) */}
-        <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm space-y-4 sticky top-24">
-            <h3 className="text-sm sm:text-base font-black text-slate-900 pb-3 border-b border-slate-100 flex items-center justify-between">
-              <span>{t.orderSummary}</span>
-              <span className="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-bold">
-                {cart.length} টি পণ্য
+        {/* Right Column: Order Summary (5 cols) */}
+        <div className="lg:col-span-5">
+          <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4 lg:sticky lg:top-24">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h3 className="text-sm sm:text-base font-bold text-slate-900">{t.orderSummary}</h3>
+              <span className="text-xs text-slate-500 tabular-nums">
+                {cart.length} {language === 'bn' ? 'টি আইটেম' : 'items'}
               </span>
-            </h3>
+            </div>
 
-            {/* Mini Cart Items List */}
-            <div className="max-h-52 overflow-y-auto divide-y divide-slate-100 pr-1 space-y-2">
+            <div className="max-h-56 overflow-y-auto divide-y divide-slate-100 pr-1">
               {cart.map((item) => {
                 const title = language === 'bn' ? item.product.titleBn : item.product.titleEn;
+                const variantParts = [
+                  item.selectedSize,
+                  item.selectedColor,
+                  `${item.quantity}x`,
+                ].filter(Boolean);
                 return (
-                  <div key={item.product.id} className="pt-2 flex items-center gap-2.5">
+                  <div
+                    key={`${item.product.id}-${item.selectedSize || ''}-${item.selectedColor || ''}`}
+                    className="py-2.5 flex items-center gap-3"
+                  >
                     <img
                       src={
-                        (item.selectedImage || item.product?.images?.[0])?.includes('_L_') && (item.selectedImage || item.product?.images?.[0]).endsWith('.jpg')
-                          ? (item.selectedImage || item.product?.images?.[0]).replace(/\.jpg$/i, '.jpeg')
-                          : item.selectedImage || item.product?.images?.[0] || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80'
+                        (item.selectedImage || item.product?.images?.[0])?.includes('_L_') &&
+                        (item.selectedImage || item.product?.images?.[0]).endsWith('.jpg')
+                          ? (item.selectedImage || item.product?.images?.[0]).replace(
+                              /\.jpg$/i,
+                              '.jpeg'
+                            )
+                          : item.selectedImage ||
+                            item.product?.images?.[0] ||
+                            'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80'
                       }
                       alt={title}
                       referrerPolicy="no-referrer"
                       onError={(e) => {
                         const target = e.currentTarget;
                         if (target.src.includes('_L_')) {
-                          target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
+                          target.src = target.src
+                            .replace('_L_', '_S_')
+                            .replace(/\.jpeg$/i, '.jpg');
                         } else {
-                          target.src = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80';
+                          target.src =
+                            'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&auto=format&fit=crop&q=80';
                         }
                       }}
                       className="w-12 h-12 object-cover rounded-xl border border-slate-200 shrink-0"
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold text-slate-800 truncate">{title}</p>
-                      <div className="flex flex-wrap items-center gap-1 mt-0.5">
-                        {item.selectedSize && (
-                          <span className="text-[10px] font-bold bg-indigo-50 text-indigo-700 px-1.5 py-0.2 rounded border border-indigo-100">
-                            সাইজ: {item.selectedSize}
-                          </span>
-                        )}
-                        {item.selectedColor && (
-                          <span className="text-[10px] font-bold bg-amber-50 text-amber-800 px-1.5 py-0.2 rounded border border-amber-100">
-                            কালার: {item.selectedColor}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-[11px] text-slate-400 mt-0.5">
-                        {item.quantity} x {formatPrice(item.product.price)}
+                      <p className="text-xs font-semibold text-slate-900 truncate">{title}</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5 truncate">
+                        {variantParts.join(' · ')}
                       </p>
                     </div>
-                    <span className="text-xs font-black text-slate-900">
+                    <span className="text-xs font-bold text-slate-900 tabular-nums shrink-0">
                       {formatPrice(item.product.price * item.quantity)}
                     </span>
                   </div>
@@ -922,123 +952,106 @@ export const CheckoutPage: React.FC = () => {
               })}
             </div>
 
-            {/* Cost Breakdown */}
             <div className="space-y-2 pt-3 border-t border-slate-100 text-xs sm:text-sm">
               <div className="flex justify-between text-slate-600">
                 <span>{t.subtotal}</span>
-                <span className="font-bold text-slate-800">{formatPrice(cartSubtotal)}</span>
+                <span className="font-semibold text-slate-900 tabular-nums">
+                  {formatPrice(cartSubtotal)}
+                </span>
               </div>
 
               {cartDiscount > 0 && (
-                <div className="flex justify-between text-rose-600 font-semibold">
+                <div className="flex justify-between text-[#DC2626] font-medium">
                   <span>{t.discount}</span>
-                  <span>-{formatPrice(cartDiscount)}</span>
+                  <span className="tabular-nums">-{formatPrice(cartDiscount)}</span>
                 </div>
               )}
 
-              <div className="flex justify-between text-slate-600 items-center">
-                <span>ডেলিভারি চার্জ ({deliveryArea === 'dhaka' ? 'ঢাকার ভিতরে' : 'ঢাকার বাইরে'})</span>
-                <span className="font-bold text-slate-800">
-                  {dynamicShippingFee === 0 ? (
-                    <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-bold uppercase text-[11px]">
-                      ফ্রি ডেলিভারি
-                    </span>
-                  ) : (
-                    formatPrice(dynamicShippingFee)
-                  )}
-                </span>
-              </div>
-
-              <div className="flex justify-between text-base sm:text-lg font-black text-slate-900 pt-3 border-t border-slate-200">
-                <span>সর্বমোট প্রদেয়:</span>
-                <span className="text-[#00873E] font-black">{formatPrice(calculatedTotal)}</span>
-              </div>
-            </div>
-
-            {/* 1-Click Direct Order Confirm Button */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-4 bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-800 hover:from-emerald-700 hover:to-teal-900 active:scale-98 text-white font-black rounded-2xl text-base transition-all shadow-lg shadow-emerald-700/20 disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer group"
-            >
-              {isSubmitting ? (
-                <span>{language === 'bn' ? 'অর্ডার সংরক্ষিত হচ্ছে...' : 'Placing Order...'}</span>
-              ) : (
-                <>
-                  <Lock className="w-4 h-4 text-emerald-200" />
-                  <span>
-                    {language === 'bn' 
-                      ? `অর্ডার কনফার্ম করুন • ${formatPrice(calculatedTotal)}` 
-                      : `Confirm Order • ${formatPrice(calculatedTotal)}`}
-                  </span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </>
-              )}
-            </button>
-
-            {/* Micro reassurance badge */}
-            <div className="text-center pt-1">
-              <span className="text-[11px] text-slate-500 font-medium inline-flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600" />
+              <div className="flex justify-between text-slate-600">
                 <span>
-                  {paymentMethod === 'cod' 
-                    ? 'ক্যাশ অন ডেলিভারিতে কোনো অগ্রিম টাকা নেওয়া হয় না' 
-                    : 'নিরাপদ ও তাৎক্ষণিক ট্রানজেকশন গ্যারান্টি'}
+                  {language === 'bn' ? 'ডেলিভারি' : 'Delivery'} (
+                  {deliveryArea === 'dhaka'
+                    ? language === 'bn'
+                      ? 'ঢাকা'
+                      : 'Dhaka'
+                    : language === 'bn'
+                    ? 'বাইরে'
+                    : 'Outside'}
+                  )
                 </span>
-              </span>
+                <span className="font-semibold text-slate-900 tabular-nums">
+                  {dynamicShippingFee === 0
+                    ? language === 'bn'
+                      ? 'ফ্রি'
+                      : 'Free'
+                    : formatPrice(dynamicShippingFee)}
+                </span>
+              </div>
+
+              <div className="flex justify-between text-base sm:text-lg font-extrabold text-slate-900 pt-3 border-t border-slate-200">
+                <span>{language === 'bn' ? 'সর্বমোট' : 'Total'}</span>
+                <span className="text-[#00873E] tabular-nums">
+                  {formatPrice(calculatedTotal)}
+                </span>
+              </div>
             </div>
+
+            {checkoutStep === 'payment' ? (
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="theme-btn-cart w-full min-h-[50px] px-5 rounded-xl text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                {isSubmitting ? (
+                  <span>{language === 'bn' ? 'অর্ডার হচ্ছে...' : 'Placing Order...'}</span>
+                ) : (
+                  <>
+                    <Lock className="w-4 h-4 shrink-0" />
+                    <span className="tabular-nums">
+                      {language === 'bn'
+                        ? `অর্ডার কনফার্ম করুন · ${formatPrice(calculatedTotal)}`
+                        : `Confirm Order · ${formatPrice(calculatedTotal)}`}
+                    </span>
+                    <ArrowRight className="w-4 h-4 shrink-0" />
+                  </>
+                )}
+              </button>
+            ) : (
+              <p className="text-xs text-slate-500 text-center pt-1">
+                {language === 'bn'
+                  ? 'ঠিকানা নিশ্চিত করার পর পেমেন্ট অপশন দেখতে পাবেন'
+                  : 'Select payment method in the next step'}
+              </p>
+            )}
           </div>
         </div>
       </form>
 
-      {/* Full Bangla QR Standee Modal Preview */}
+      {/* Bangla QR Full Preview Modal */}
       {isQrModalOpen && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in"
+        <div
+          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4"
           onClick={() => setIsQrModalOpen(false)}
         >
-          <div 
-            className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-200 relative flex flex-col max-h-[90vh]"
+          <div
+            className="bg-white rounded-2xl max-w-sm w-full p-4 shadow-2xl space-y-3"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-4 bg-gradient-to-r from-red-600 to-rose-700 text-white flex items-center justify-between">
-              <div>
-                <h4 className="font-black text-sm">বাংলাদেশ ব্যাংক সার্বজনীন বাংলা কিউআর</h4>
-                <p className="text-[11px] text-red-100">মার্চেন্ট: বাংলা বাজার • টালিপে নম্বর: 01929-637253</p>
-              </div>
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-bold text-slate-900">Bangla QR · বাংলা বাজার</span>
               <button
                 type="button"
                 onClick={() => setIsQrModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 cursor-pointer"
               >
-                <X className="w-4 h-4 text-white" />
+                <X className="w-4 h-4" />
               </button>
             </div>
-
-            <div className="p-4 overflow-y-auto flex flex-col items-center text-center space-y-3">
-              <img
-                src="/assets/bangla_qr_card.png"
-                alt="Bangla QR Standee"
-                className="max-h-[60vh] w-auto object-contain rounded-xl border border-slate-200 shadow-md"
-              />
-              <div className="flex items-center gap-2 w-full pt-1">
-                <a
-                  href="/assets/bangla_qr_card.png"
-                  download="Bangla_Bazar_BanglaQR_Standee.png"
-                  className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition-all"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>স্ট্যান্ডি ছবি ডাউনলোড</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setIsQrModalOpen(false)}
-                  className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-all cursor-pointer"
-                >
-                  বন্ধ করুন
-                </button>
-              </div>
-            </div>
+            <img
+              src="/assets/bangla_qr_card.png"
+              alt="Bangla QR"
+              className="w-full max-h-[65vh] object-contain rounded-xl border border-slate-200"
+            />
           </div>
         </div>
       )}
@@ -1053,8 +1066,9 @@ export const OrderSuccessView: React.FC = () => {
     return (
       <div className="max-w-2xl mx-auto px-4 py-16 text-center">
         <button
+          type="button"
           onClick={() => setCurrentPage('home')}
-          className="px-6 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-bold"
+          className="min-h-[44px] px-6 bg-[#00873E] text-white rounded-xl text-xs font-bold cursor-pointer"
         >
           {t.home}
         </button>
@@ -1063,105 +1077,80 @@ export const OrderSuccessView: React.FC = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 space-y-8">
-      <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-md text-center space-y-6">
-        {/* Animated Checkmark */}
-        <div className="w-20 h-20 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto ring-8 ring-emerald-50">
-          <CheckCircle2 className="w-12 h-12" />
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-xs text-center space-y-6">
+        <div className="w-16 h-16 bg-emerald-50 text-[#00873E] rounded-full flex items-center justify-center mx-auto">
+          <CheckCircle2 className="w-10 h-10" />
         </div>
 
-        <div>
-          {lastPlacedOrder.isOfflineOrder ? (
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 border border-amber-300 px-3.5 py-1.5 rounded-full inline-block">
-              {language === 'bn' ? 'অফলাইন অর্ডার সংরক্ষিত (ইন্টারনেট পেলেই স্বয়ংক্রিয় সিঙ্ক হবে)' : 'Offline Order Saved (Auto-Syncs Online)'}
-            </span>
-          ) : (
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
-              {language === 'bn' ? 'অর্ডার নিশ্চিত হয়েছে' : 'Order Confirmed'}
-            </span>
-          )}
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 mt-2">
-            {t.orderSuccessTitle}
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-md mx-auto">
-            {language === 'bn' 
-              ? 'আপনার অর্ডারটির প্যাকেজিং শুরু হয়েছে। শীঘ্রই ডেলিভারি প্রতিনিধির মাধ্যমে আপনার ঠিকানায় পৌঁছে যাবে।'
-              : 'Your order is currently being packaged and will be handed over to courier shortly.'}
+        <div className="space-y-1">
+          <h1 className="text-2xl font-bold text-slate-900">{t.orderSuccessTitle}</h1>
+          <p className="text-xs sm:text-sm text-slate-500">
+            {language === 'bn' ? 'অর্ডার নম্বর:' : 'Order ID:'}{' '}
+            <span className="font-mono font-bold text-slate-800">{lastPlacedOrder.id}</span>
           </p>
         </div>
 
-        {/* Order Details Badge Box */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200/80 text-left text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-[#F8FAFC] p-4 rounded-xl border border-slate-200/70 text-left text-xs">
           <div>
-            <span className="text-slate-400 block">{t.orderIdText}</span>
-            <span className="font-black text-slate-900 text-sm">{lastPlacedOrder.id}</span>
+            <span className="text-slate-500 block">
+              {language === 'bn' ? 'ট্র্যাকিং কোড' : 'Tracking'}
+            </span>
+            <span className="font-mono font-bold text-[#00873E] mt-0.5 block">
+              {lastPlacedOrder.trackingNumber}
+            </span>
           </div>
           <div>
-            <span className="text-slate-400 block">{language === 'bn' ? 'ট্র্যাকিং কোড:' : 'Tracking #:'}</span>
-            <span className="font-bold text-emerald-700 text-xs">{lastPlacedOrder.trackingNumber}</span>
-          </div>
-          <div>
-            <span className="text-slate-400 block">{language === 'bn' ? 'পেমেন্ট মেথড:' : 'Payment:'}</span>
-            <span className="font-bold text-slate-800">
+            <span className="text-slate-500 block">
+              {language === 'bn' ? 'পেমেন্ট' : 'Payment'}
+            </span>
+            <span className="font-semibold text-slate-900 mt-0.5 block">
               {lastPlacedOrder.paymentMethod === 'bangla_qr'
-                ? (language === 'bn' ? 'বাংলা কিউআর (Bangla QR)' : 'Bangla QR')
+                ? 'Bangla QR'
                 : lastPlacedOrder.paymentMethod === 'wallet'
-                ? (language === 'bn' ? 'ওয়ালেট ব্যালেন্স (Wallet)' : 'Wallet Balance')
-                : lastPlacedOrder.paymentMethod === 'cod'
-                ? (language === 'bn' ? 'ক্যাশ অন ডেলিভারি' : 'Cash on Delivery')
-                : lastPlacedOrder.paymentMethod.toUpperCase()}
+                ? language === 'bn'
+                  ? 'ওয়ালেট'
+                  : 'Wallet'
+                : language === 'bn'
+                ? 'ক্যাশ অন ডেলিভারি'
+                : 'Cash on Delivery'}
             </span>
           </div>
-          <div>
-            <span className="text-slate-400 block">{t.total}</span>
-            <span className="font-black text-slate-900 text-sm">{formatPrice(lastPlacedOrder.total)}</span>
+          <div className="col-span-2 sm:col-span-1">
+            <span className="text-slate-500 block">{t.total}</span>
+            <span className="font-bold text-slate-900 text-sm tabular-nums mt-0.5 block">
+              {formatPrice(lastPlacedOrder.total)}
+            </span>
           </div>
         </div>
 
-        {/* If Bangla QR, show TrxID info */}
-        {lastPlacedOrder.paymentMethod === 'bangla_qr' && lastPlacedOrder.shippingAddress.trxId && (
-          <div className="p-3.5 bg-red-50/70 rounded-2xl text-left text-xs border border-red-200/80 flex items-center justify-between gap-3">
-            <div>
-              <span className="text-[10px] font-bold text-red-600 uppercase block">বাংলা কিউআর পেমেন্ট তথ্য:</span>
-              <div className="text-slate-800 font-bold mt-0.5">
-                <span>TrxID: </span>
-                <span className="font-mono text-emerald-700">{lastPlacedOrder.shippingAddress.trxId}</span>
-                {lastPlacedOrder.shippingAddress.senderNumber && (
-                  <span className="text-slate-500 font-normal ml-2">
-                    (প্রেরক: <span className="font-mono text-slate-700">{lastPlacedOrder.shippingAddress.senderNumber}</span>)
-                  </span>
-                )}
-              </div>
-            </div>
-            <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full border border-amber-300 shrink-0">
-              যাচাই প্রক্রিয়াধীন
+        <div className="text-left text-xs sm:text-sm text-slate-600 bg-[#F8FAFC] p-4 rounded-xl border border-slate-200/70 space-y-1">
+          <div className="font-semibold text-slate-900 flex items-center gap-1.5">
+            <MapPin className="w-4 h-4 text-[#00873E] shrink-0" />
+            <span>
+              {lastPlacedOrder.shippingAddress.fullName} ·{' '}
+              <span className="font-mono tabular-nums">{lastPlacedOrder.shippingAddress.phone}</span>
             </span>
           </div>
-        )}
-
-        {/* Shipping Address Summary */}
-        <div className="p-4 bg-emerald-50/60 rounded-2xl text-left text-xs space-y-1 border border-emerald-200/60">
-          <div className="font-bold text-emerald-900 flex items-center gap-1.5">
-            <MapPin className="w-3.5 h-3.5 text-emerald-700" />
-            <span>{language === 'bn' ? 'ডেলিভারি ঠিকানা' : 'Shipping Address'}:</span>
-          </div>
-          <p className="text-slate-700 font-semibold">{lastPlacedOrder.shippingAddress.fullName} ({lastPlacedOrder.shippingAddress.phone})</p>
-          <p className="text-slate-600">{lastPlacedOrder.shippingAddress.address}, {lastPlacedOrder.shippingAddress.district}</p>
+          <p className="pl-5.5">
+            {lastPlacedOrder.shippingAddress.address}, {lastPlacedOrder.shippingAddress.district}
+          </p>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
           <button
+            type="button"
             onClick={() => openTrackOrder(lastPlacedOrder.trackingNumber || lastPlacedOrder.id)}
-            className="w-full sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
+            className="w-full sm:w-auto min-h-[44px] px-6 bg-[#00873E] hover:bg-[#007033] text-white font-bold rounded-xl text-xs inline-flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
             <Clock className="w-4 h-4" />
             <span>{t.trackOrderBtn}</span>
           </button>
 
           <button
+            type="button"
             onClick={() => setCurrentPage('home')}
-            className="w-full sm:w-auto px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl text-xs transition-colors"
+            className="w-full sm:w-auto min-h-[44px] px-6 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl text-xs transition-colors cursor-pointer"
           >
             {language === 'bn' ? 'আরও কেনাকাটা করুন' : 'Continue Shopping'}
           </button>

@@ -55,7 +55,7 @@ import {
 } from '../lib/supabase';
 import { safeLocalStorage, safeSessionStorage } from '../utils/safeStorage';
 import { idbGet, idbSet } from '../utils/idbStorage';
-import { getShopBaseCategoryMetadata } from '../services/shopbaseService';
+import { getShopBaseCategoryMetadata, fetchLiveShopBaseProductDescription } from '../services/shopbaseService';
 import { getSubcategoryImage } from '../utils/subcategoryImages';
 import { calculateCategoryCounts } from '../utils/categoryMatcher';
 
@@ -833,6 +833,36 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           );
           setProducts(cleanCached);
           setIsProductsLoading(false);
+
+          // Backfill exact Shopbasebd descriptions from bundled /products.json if old cache lacks them
+          const missingDescCount = cleanCached.slice(0, 25).filter((p) => !p.descriptionBn?.trim()).length;
+          if (missingDescCount > 5) {
+            fetch('/products.json')
+              .then((res) => (res.ok ? res.json() : null))
+              .then((localProducts: Product[] | null) => {
+                if (!isMounted || !Array.isArray(localProducts) || localProducts.length === 0) return;
+                const descById = new Map<string, { bn: string; en: string }>();
+                for (const lp of localProducts) {
+                  if (lp.descriptionBn?.trim()) {
+                    descById.set(lp.id, {
+                      bn: lp.descriptionBn,
+                      en: lp.descriptionEn || lp.descriptionBn,
+                    });
+                  }
+                }
+                if (descById.size === 0) return;
+                setProducts((prev) => {
+                  const enriched = prev.map((p) => {
+                    if (p.descriptionBn?.trim()) return p;
+                    const found = descById.get(p.id);
+                    return found ? { ...p, descriptionBn: found.bn, descriptionEn: found.en } : p;
+                  });
+                  idbSet('oneroof_cached_products', enriched).catch(() => {});
+                  return enriched;
+                });
+              })
+              .catch(() => {});
+          }
         } else {
           // Immediately load all 12,118 products from website's bundled /products.json
           fetch('/products.json')
@@ -2134,6 +2164,39 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const removeToast = (id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
+
+  // Automatically fetch live Shopbasebd.com description if the selected ShopBase product lacks one
+  useEffect(() => {
+    if (!selectedProduct) return;
+    if (!selectedProduct.id.startsWith('sbp-')) return;
+    if (selectedProduct.descriptionBn && selectedProduct.descriptionBn.trim().length > 10) return;
+
+    let cancelled = false;
+    const targetId = selectedProduct.id;
+    fetchLiveShopBaseProductDescription(targetId, selectedProduct.titleEn || selectedProduct.titleBn)
+      .then((liveDesc) => {
+        if (cancelled || !liveDesc || liveDesc.trim().length < 5) return;
+        setSelectedProduct((curr) =>
+          curr && curr.id === targetId
+            ? { ...curr, descriptionBn: liveDesc, descriptionEn: curr.descriptionEn || liveDesc }
+            : curr
+        );
+        setProducts((prev) => {
+          const next = prev.map((p) =>
+            p.id === targetId
+              ? { ...p, descriptionBn: liveDesc, descriptionEn: p.descriptionEn || liveDesc }
+              : p
+          );
+          idbSet('oneroof_cached_products', next).catch(() => {});
+          return next;
+        });
+      })
+      .catch(() => {});
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedProduct?.id]);
 
   const viewProductDetails = (product: Product) => {
     setSelectedProduct(product);

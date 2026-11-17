@@ -199,9 +199,41 @@ export const ProductDetailPage: React.FC = () => {
     if (!description) return [];
     return description
       .split(/\r?\n/)
-      .map((line) => line.replace(/^[•\-–*]\s*/, '').trim())
+      .map((line) => line.replace(/^[•\-–*📌✨✅🔸🔹▪️►👉]+\s*/u, '').trim())
       .filter(Boolean);
   }, [description]);
+
+  const renderDescriptionLine = (line: string, index: number, sizeClass: string) => {
+    const isSubheading =
+      /^(প্রোডাক্ট ডিটেইলস|product details|size measurement|বৈশিষ্ট্য|বিবরণ|ফিচার|মাপ)/i.test(line) ||
+      (/[ঃ:]$/.test(line) && line.length <= 40);
+    if (isSubheading) {
+      return (
+        <p key={index} className={`${sizeClass} font-bold text-slate-900 pt-1`}>
+          {line}
+        </p>
+      );
+    }
+
+    const colonIdx = line.indexOf(':');
+    const hasPrefix = colonIdx > 1 && colonIdx <= 30 && !line.startsWith('http');
+    if (hasPrefix) {
+      const label = line.slice(0, colonIdx).trim();
+      const value = line.slice(colonIdx + 1).trim();
+      return (
+        <p key={index} className={`${sizeClass} leading-relaxed text-slate-600`}>
+          <span className="font-semibold text-slate-900">{label}:</span>{' '}
+          <span>{value}</span>
+        </p>
+      );
+    }
+
+    return (
+      <p key={index} className={`${sizeClass} leading-[1.7] text-slate-600`}>
+        {line}
+      </p>
+    );
+  };
 
   const productShareUrl = useMemo(() => {
     if (typeof window === 'undefined' || !selectedProduct) return '';
@@ -611,35 +643,12 @@ export const ProductDetailPage: React.FC = () => {
                     <div className="space-y-1.5">
                       {(isDescriptionExpanded
                         ? descriptionLines
-                        : descriptionLines.slice(0, 4)
-                      ).map((line, index) => {
-                        const colonIdx = line.indexOf(':');
-                        const hasPrefix =
-                          colonIdx > 1 && colonIdx <= 28 && !line.startsWith('http');
-                        if (hasPrefix) {
-                          const label = line.slice(0, colonIdx).trim();
-                          const value = line.slice(colonIdx + 1).trim();
-                          return (
-                            <p
-                              key={index}
-                              className="text-[13px] sm:text-sm leading-relaxed text-slate-600"
-                            >
-                              <span className="font-semibold text-slate-900">{label}:</span>{' '}
-                              <span>{value}</span>
-                            </p>
-                          );
-                        }
-                        return (
-                          <p
-                            key={index}
-                            className="text-[13px] sm:text-sm leading-[1.7] text-slate-600"
-                          >
-                            {line}
-                          </p>
-                        );
-                      })}
+                        : descriptionLines.slice(0, 6)
+                      ).map((line, index) =>
+                        renderDescriptionLine(line, index, 'text-[13px] sm:text-sm')
+                      )}
                     </div>
-                    {descriptionLines.length > 4 && (
+                    {descriptionLines.length > 6 && (
                       <button
                         type="button"
                         onClick={() => setIsDescriptionExpanded((prev) => !prev)}
@@ -899,26 +908,9 @@ export const ProductDetailPage: React.FC = () => {
           <div className="space-y-6">
             {descriptionLines.length > 0 && (
               <div className="space-y-2 max-w-3xl">
-                {descriptionLines.map((line, index) => {
-                  const colonIdx = line.indexOf(':');
-                  const hasPrefix =
-                    colonIdx > 1 && colonIdx <= 28 && !line.startsWith('http');
-                  if (hasPrefix) {
-                    const label = line.slice(0, colonIdx).trim();
-                    const value = line.slice(colonIdx + 1).trim();
-                    return (
-                      <p key={index} className="text-sm leading-relaxed text-slate-600">
-                        <span className="font-semibold text-slate-900">{label}:</span>{' '}
-                        <span>{value}</span>
-                      </p>
-                    );
-                  }
-                  return (
-                    <p key={index} className="text-sm leading-[1.75] text-slate-600">
-                      {line}
-                    </p>
-                  );
-                })}
+                {descriptionLines.map((line, index) =>
+                  renderDescriptionLine(line, index, 'text-sm')
+                )}
               </div>
             )}
 

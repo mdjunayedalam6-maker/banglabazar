@@ -818,22 +818,29 @@ export async function fetchShopBaseCategories(): Promise<ShopBaseCategoryItem[]>
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const html = await res.text();
     
-    // Parse categories from HTML
-    const regex = /href="https:\/\/shopbasebd\.com\/store\/sample\/products\/(\d+)"[^>]*>[\s\S]*?<img[^>]*src="([^"]+)"[^>]*alt="([^"]*)"[\s\S]*?<h6[^>]*>([^<]+)<\/h6>/g;
+    // Parse all categories from HTML
+    const regex = /href="https:\/\/shopbasebd\.com\/store\/(?:sample\/)?products\/(\d+)[^"]*"[^>]*>[\s\S]*?<img[^>]*src="([^"]+)"[^>]*alt="([^"]*)"[\s\S]*?<h6[^>]*>([^<]+)<\/h6>/g;
     const matches = [...html.matchAll(regex)];
     
     if (matches.length > 0) {
-      return matches.map((m) => {
-        const id = parseInt(m[1], 10);
-        const name = m[4].trim();
-        const img = m[2];
-        return {
-          id,
-          name,
-          image: img,
-          targetSlug: mapNameToCategorySlug(name),
-        };
-      });
+      const seen = new Set<number>();
+      return matches
+        .map((m) => {
+          const id = parseInt(m[1], 10);
+          const name = decodeHtmlEntities(m[4].trim());
+          const img = m[2];
+          return {
+            id,
+            name,
+            image: img,
+            targetSlug: mapNameToCategorySlug(name),
+          };
+        })
+        .filter((c) => {
+          if (seen.has(c.id)) return false;
+          seen.add(c.id);
+          return true;
+        });
     }
   } catch (err) {
     console.warn('Live fetch categories failed, using standard ShopBase category catalog:', err);

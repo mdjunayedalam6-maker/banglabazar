@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useMemo, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { 
   Language, 
   PageView, 
@@ -54,8 +54,6 @@ import {
   supabase,
   SUPABASE_URL,
   SUPABASE_SETUP_SQL,
-  GOOGLE_CLIENT_ID,
-  checkSupabaseGoogleProviderStatus,
 } from '../lib/supabase';
 import { safeLocalStorage, safeSessionStorage } from '../utils/safeStorage';
 import { idbGet, idbSet } from '../utils/idbStorage';
@@ -115,7 +113,6 @@ interface AppContextType {
   addToast: (message: string, type?: 'success' | 'info' | 'error') => void;
   removeToast: (id: string) => void;
   loginUser: (identifier: string, password?: string) => boolean;
-  loginWithGoogle: () => Promise<{ ok: boolean; reason?: 'provider_not_enabled' | 'popup_blocked' | 'error'; error?: string }>;
   registerUser: (userData: Partial<User>) => boolean;
   updateUserProfile: (userData: Partial<User>) => boolean;
   addDeliveryAddress: (addr: Omit<DeliveryAddress, 'id'>) => void;
@@ -307,9 +304,9 @@ export const deduplicateProducts = (list: Product[]): Product[] => {
         if (typeof rawImg !== 'string') continue;
         let img = rawImg.trim();
 
-        // ShopBaseBD: Upgrade low-res thumbnail (_S_) to full-size Large HD (_L_) with .jpg
+        // ShopBaseBD: Upgrade low-res thumbnail (_S_) to full-size Large HD (_L_) preserving exact extension
         if (img.includes('shopbasebd.com')) {
-          img = img.replace('_S_', '_L_').replace(/\.jpeg$/i, '.jpg');
+          img = img.replace('_S_', '_L_');
         }
 
         // Unsplash: Upgrade to ultra HD 1600px+ with q=95 quality
@@ -824,224 +821,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   });
 
-  const usersRef = useRef<User[]>(users);
-  useEffect(() => {
-    usersRef.current = users;
-  }, [users]);
-
-  const currentUserRef = useRef<User | null>(currentUser);
-  useEffect(() => {
-    currentUserRef.current = currentUser;
-  }, [currentUser]);
-
-  const activeReferralCodeRef = useRef<string | null>(activeReferralCode);
-  useEffect(() => {
-    activeReferralCodeRef.current = activeReferralCode;
-  }, [activeReferralCode]);
-
-  const languageRef = useRef<Language>(language);
-  useEffect(() => {
-    languageRef.current = language;
-  }, [language]);
-
-  // Helper to complete Google Login or Registration cleanly across OAuth callbacks & popups
-  const completeGoogleUserLogin = (
-    profile: { id?: string; email: string; name?: string; avatar?: string; phone?: string },
-    options?: { fromOAuthCallback?: boolean; silentIfAlreadyActive?: boolean }
-  ): User | null => {
-    const cleanEmail = (profile.email || '').trim().toLowerCase();
-    if (!cleanEmail && !profile.id) return null;
-
-    const latestUsers = usersRef.current;
-    const existingUser = latestUsers.find(
-      (u) =>
-        (profile.id && u.id === profile.id) ||
-        (cleanEmail && (u.email || '').trim().toLowerCase() === cleanEmail)
-    );
-
-    const isOwner =
-      isUserAdmin(existingUser) ||
-      cleanEmail === SECRET_ADMIN_CONFIG.email ||
-      cleanEmail === SECRET_ADMIN_CONFIG.secondaryEmail;
-
-    if (existingUser && !isOwner && existingUser.accountStatus === 'blocked') {
-      supabase.auth.signOut().catch(() => {});
-      addToast(
-        languageRef.current === 'bn'
-          ? 'আপনার অ্যাকাউন্টটি অ্যাডমিন কর্তৃক সাময়িকভাবে স্থগিত করা হয়েছে। সহায়তার জন্য যোগাযোগ করুন।'
-          : 'Your account has been suspended by admin.',
-        'error'
-      );
-      return null;
-    }
-
-    const alreadyLoggedInSame =
-      options?.silentIfAlreadyActive &&
-      currentUserRef.current &&
-      ((profile.id && currentUserRef.current.id === profile.id) ||
-        (cleanEmail && (currentUserRef.current.email || '').trim().toLowerCase() === cleanEmail));
-
-    const defaultAvatar =
-      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80';
-
-    let userObj: User;
-    let nextUsers: User[];
-    let isNewRegistration = false;
-
-    if (existingUser) {
-      userObj = {
-        ...existingUser,
-        name: existingUser.name || profile.name?.trim() || (cleanEmail ? cleanEmail.split('@')[0] : 'Customer'),
-        email: existingUser.email || cleanEmail,
-        avatar:
-          (existingUser.avatar && existingUser.avatar !== defaultAvatar
-            ? existingUser.avatar
-            : profile.avatar) ||
-          existingUser.avatar ||
-          defaultAvatar,
-        role: isOwner ? 'admin' : existingUser.role || 'user',
-        accountStatus: existingUser.accountStatus || 'active',
-      };
-      nextUsers = latestUsers.map((u) => (u.id === existingUser.id ? userObj : u));
-    } else {
-      isNewRegistration = true;
-      const newId = profile.id || `user-${Date.now()}`;
-      const displayName =
-        profile.name?.trim() || (cleanEmail ? cleanEmail.split('@')[0] : 'Google User');
-      const myReferralCode = generateUserReferralCode({
-        id: newId,
-        phone: profile.phone || '',
-        name: displayName,
-      });
-
-      const rawRefCode = (
-        activeReferralCodeRef.current ||
-        safeLocalStorage.getItem('oneroof_referrer_code') ||
-        ''
-      )
-        .trim()
-        .toUpperCase();
-
-      const matchedReferrer = rawRefCode
-        ? latestUsers.find(
-            (u) =>
-              (u.referralCode && u.referralCode.toUpperCase() === rawRefCode) ||
-              (u.phone && `BB-${u.phone.replace(/\D/g, '').slice(-6)}` === rawRefCode) ||
-              rawRefCode === 'BB-637253'
-          )
-        : undefined;
-
-      userObj = {
-        id: newId,
-        name: displayName,
-        email: cleanEmail,
-        phone: profile.phone || '',
-        password: '',
-        role: isOwner ? 'admin' : 'user',
-        accountStatus: 'active',
-        createdAt: new Date().toISOString(),
-        division: '',
-        district: '',
-        thana: '',
-        village: '',
-        avatar: profile.avatar || defaultAvatar,
-        balance: 0,
-        pendingWelcomeBonus: 50,
-        hasCompletedFirstOrder: false,
-        firstOrderBonusUnlocked: false,
-        referralCode: myReferralCode,
-        referredBy: matchedReferrer ? matchedReferrer.referralCode || rawRefCode : rawRefCode || undefined,
-        referrals: [],
-        walletTransactions: [],
-        addresses: [],
-      };
-
-      let updatedList = [...latestUsers];
-      if (matchedReferrer) {
-        const now = new Date();
-        const dateFormatted =
-          languageRef.current === 'bn'
-            ? `আজ, ${now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' })}`
-            : now.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
-        const newRefRecord: ReferralRecord = {
-          friendId: userObj.id,
-          friendName: userObj.name,
-          friendPhone: userObj.phone ? maskPhoneNumber(userObj.phone) : cleanEmail,
-          date: dateFormatted,
-          firstOrderPlaced: false,
-          rewardClaimed: false,
-          bonusAmount: 30,
-        };
-        const updatedReferrer: User = {
-          ...matchedReferrer,
-          referrals: [newRefRecord, ...(matchedReferrer.referrals || [])],
-        };
-        updatedList = updatedList.map((u) => (u.id === updatedReferrer.id ? updatedReferrer : u));
-        syncUserToSupabase(updatedReferrer).catch(() => {});
-      }
-
-      nextUsers = [userObj, ...updatedList];
-    }
-
-    usersRef.current = nextUsers;
-    currentUserRef.current = userObj;
-    setUsers(nextUsers);
-    safeLocalStorage.setItem('oneroof_users', JSON.stringify(nextUsers));
-    setCurrentUser(userObj);
-    safeLocalStorage.setItem('oneroof_current_user', JSON.stringify(userObj));
-
-    if (isOwner || userObj.role === 'admin') {
-      setIsAdminAuthenticated(true);
-      safeSessionStorage.setItem('oneroof_admin_auth', 'true');
-    }
-
-    syncUserToSupabase(userObj).catch(() => {});
-    setIsAuthModalOpen(false);
-
-    if (!alreadyLoggedInSame) {
-      addToast(
-        isNewRegistration
-          ? languageRef.current === 'bn'
-            ? `অভিনন্দন ${userObj.name}! গুগল অ্যাকাউন্টে রেজিস্ট্রেশন সম্পন্ন হয়েছে এবং ৳৫০ ওয়েলকাম বোনাস যুক্ত হয়েছে!`
-            : `Welcome ${userObj.name}! Registered via Google with ৳50 welcome bonus!`
-          : languageRef.current === 'bn'
-          ? `স্বাগতম, ${userObj.name}! গুগল অ্যাকাউন্ট দিয়ে সফলভাবে লগইন হয়েছে।`
-          : `Welcome back, ${userObj.name}! Signed in with Google.`,
-        'success'
-      );
-    }
-
-    // Notify parent opener tab / other tabs & auto-close popup if this was an OAuth redirect tab
-    if (options?.fromOAuthCallback && typeof window !== 'undefined') {
-      try {
-        if ('BroadcastChannel' in window) {
-          const bc = new BroadcastChannel('oneroof_auth_sync');
-          bc.postMessage({ type: 'ONEROOF_GOOGLE_AUTH_SUCCESS', user: userObj, isNew: isNewRegistration });
-          bc.close();
-        }
-      } catch (_) {}
-
-      try {
-        if (window.opener && window.opener !== window) {
-          window.opener.postMessage(
-            { type: 'ONEROOF_GOOGLE_AUTH_SUCCESS', user: userObj, isNew: isNewRegistration },
-            '*'
-          );
-          window.history.replaceState({}, document.title, window.location.pathname);
-          setTimeout(() => {
-            try {
-              window.close();
-            } catch (_) {}
-          }, 300);
-        } else {
-          window.history.replaceState({}, document.title, window.location.pathname);
-        }
-      } catch (_) {}
-    }
-
-    return userObj;
-  };
-
   // Customer-specific orders: strictly only orders placed by the current user
   const userOrders = useMemo(() => {
     if (!currentUser) return [];
@@ -1121,45 +900,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     ])
       .then(([cachedProducts, cachedCategories, cachedSlides, cachedSettings, cachedOrders]) => {
         if (!isMounted) return;
-        if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length >= 12000) {
+        const CATALOG_SYNC_VERSION = 'bb_shopbase_full_v3_13768';
+        const savedCatalogVer = safeLocalStorage.getItem('oneroof_catalog_version');
+        if (
+          cachedProducts &&
+          Array.isArray(cachedProducts) &&
+          cachedProducts.length >= 13700 &&
+          savedCatalogVer === CATALOG_SYNC_VERSION
+        ) {
           const deletedIds = getDeletedProductIds();
           const cleanCached = deduplicateProducts(
             cachedProducts.filter((p) => !deletedIds.has(p.id))
           );
           setProducts(cleanCached);
           setIsProductsLoading(false);
-
-          // Backfill exact Shopbasebd descriptions from bundled /products.json if old cache lacks them
-          const missingDescCount = cleanCached.slice(0, 25).filter((p) => !p.descriptionBn?.trim()).length;
-          if (missingDescCount > 5) {
-            fetch('/products.json')
-              .then((res) => (res.ok ? res.json() : null))
-              .then((localProducts: Product[] | null) => {
-                if (!isMounted || !Array.isArray(localProducts) || localProducts.length === 0) return;
-                const descById = new Map<string, { bn: string; en: string }>();
-                for (const lp of localProducts) {
-                  if (lp.descriptionBn?.trim()) {
-                    descById.set(lp.id, {
-                      bn: lp.descriptionBn,
-                      en: lp.descriptionEn || lp.descriptionBn,
-                    });
-                  }
-                }
-                if (descById.size === 0) return;
-                setProducts((prev) => {
-                  const enriched = prev.map((p) => {
-                    if (p.descriptionBn?.trim()) return p;
-                    const found = descById.get(p.id);
-                    return found ? { ...p, descriptionBn: found.bn, descriptionEn: found.en } : p;
-                  });
-                  idbSet('oneroof_cached_products', enriched).catch(() => {});
-                  return enriched;
-                });
-              })
-              .catch(() => {});
-          }
         } else {
-          // Immediately load all 12,118 products from website's bundled /products.json
+          // Immediately load all 13,768+ products from website/app bundled /products.json
           fetch('/products.json')
             .then((res) => {
               if (!res.ok) throw new Error('Status ' + res.status);
@@ -1174,11 +930,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                 );
                 setProducts(clean);
                 idbSet('oneroof_cached_products', clean).catch(() => {});
+                safeLocalStorage.setItem('oneroof_catalog_version', CATALOG_SYNC_VERSION);
                 setIsProductsLoading(false);
               }
             })
             .catch((err) => {
               console.warn('Local products.json load notice:', err);
+              if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 0) {
+                const deletedIds = getDeletedProductIds();
+                setProducts(deduplicateProducts(cachedProducts.filter((p) => !deletedIds.has(p.id))));
+                setIsProductsLoading(false);
+              }
             });
         }
         if (cachedCategories && Array.isArray(cachedCategories) && cachedCategories.length > 0) {
@@ -1311,7 +1073,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Initial Supabase Sync on mount - unblocked & parallel for lightning load speed
   useEffect(() => {
     let isMounted = true;
-    let authUnsub: (() => void) | null = null;
     let channelObj: any = null;
 
     const initSupabase = async () => {
@@ -1359,11 +1120,21 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             const cleanRemote = deduplicateProducts(
               remoteProducts.filter((p) => !deletedIds.has(p.id))
             );
-            setProducts(cleanRemote);
-            idbSet('oneroof_cached_products', cleanRemote).catch(() => {});
-            try {
-              safeLocalStorage.setItem('oneroof_products', JSON.stringify(cleanRemote.slice(0, 200)));
-            } catch (_) {}
+            setProducts((prev) => {
+              const mergedMap = new Map<string, Product>();
+              for (const localP of prev) {
+                if (!deletedIds.has(localP.id)) mergedMap.set(localP.id, localP);
+              }
+              for (const remoteP of cleanRemote) {
+                mergedMap.set(remoteP.id, remoteP);
+              }
+              const merged = Array.from(mergedMap.values());
+              idbSet('oneroof_cached_products', merged).catch(() => {});
+              try {
+                safeLocalStorage.setItem('oneroof_products', JSON.stringify(merged.slice(0, 200)));
+              } catch (_) {}
+              return merged;
+            });
 
             // Auto-clean any products in Supabase that were previously marked as deleted
             const ghostIds = remoteProducts
@@ -1412,118 +1183,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           setTimeout(() => {
             if (isMounted) setIsAppReady(true);
           }, 250);
-        }
-
-        // Handle OAuth URL callback parameters (Direct Google OAuth token or OAuth errors)
-        let isOAuthCallbackUrl = false;
-        try {
-          if (typeof window !== 'undefined') {
-            const hashStr = window.location.hash || '';
-            const searchStr = window.location.search || '';
-            const hashParams = new URLSearchParams(hashStr.replace(/^#/, ''));
-            const searchParams = new URLSearchParams(searchStr);
-
-            const oauthErr = searchParams.get('error') || hashParams.get('error');
-            const oauthErrDesc = searchParams.get('error_description') || hashParams.get('error_description');
-            if (oauthErr) {
-              isOAuthCallbackUrl = true;
-              const errText = oauthErrDesc || oauthErr;
-              addToast(
-                languageRef.current === 'bn'
-                  ? `গুগল লগইন সম্পন্ন হয়নি: ${errText}`
-                  : `Google login error: ${errText}`,
-                'error'
-              );
-              if (window.opener && window.opener !== window) {
-                window.opener.postMessage({ type: 'ONEROOF_GOOGLE_AUTH_ERROR', error: errText }, '*');
-                setTimeout(() => {
-                  try { window.close(); } catch (_) {}
-                }, 800);
-              }
-              window.history.replaceState({}, document.title, window.location.pathname);
-            }
-
-            const googleAccessToken = hashParams.get('access_token');
-            const supabaseRefreshToken = hashParams.get('refresh_token');
-            if (googleAccessToken && !supabaseRefreshToken) {
-              isOAuthCallbackUrl = true;
-              fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-                headers: { Authorization: `Bearer ${googleAccessToken}` },
-              })
-                .then((r) => (r.ok ? r.json() : null))
-                .then((profile) => {
-                  if (isMounted && profile && profile.email) {
-                    completeGoogleUserLogin(
-                      {
-                        id: profile.sub ? `google-${profile.sub}` : undefined,
-                        email: profile.email,
-                        name: profile.name || profile.given_name || profile.email.split('@')[0],
-                        avatar: profile.picture || '',
-                      },
-                      { fromOAuthCallback: true }
-                    );
-                  }
-                })
-                .catch(() => {});
-            } else if (searchParams.get('code') || hashParams.get('access_token')) {
-              isOAuthCallbackUrl = true;
-            }
-          }
-        } catch (_) {}
-
-        // Setup real Supabase auth listener + initial session check
-        try {
-          supabase.auth
-            .getSession()
-            .then(({ data }) => {
-              if (!isMounted) return;
-              const sUser = data?.session?.user;
-              if (sUser && sUser.email && (isOAuthCallbackUrl || !currentUserRef.current)) {
-                completeGoogleUserLogin(
-                  {
-                    id: sUser.id,
-                    email: sUser.email,
-                    phone: sUser.phone || '',
-                    name: sUser.user_metadata?.full_name || sUser.user_metadata?.name || '',
-                    avatar: sUser.user_metadata?.avatar_url || sUser.user_metadata?.picture || '',
-                  },
-                  { fromOAuthCallback: isOAuthCallbackUrl, silentIfAlreadyActive: !isOAuthCallbackUrl }
-                );
-              }
-            })
-            .catch(() => {});
-
-          const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-            if (!isMounted) return;
-            if (session?.user && (event === 'SIGNED_IN' || (event === 'INITIAL_SESSION' && isOAuthCallbackUrl))) {
-              const sUser = session.user;
-              const email = sUser.email || '';
-              if (!email) return;
-              completeGoogleUserLogin(
-                {
-                  id: sUser.id,
-                  email,
-                  phone: sUser.phone || '',
-                  name: sUser.user_metadata?.full_name || sUser.user_metadata?.name || '',
-                  avatar: sUser.user_metadata?.avatar_url || sUser.user_metadata?.picture || '',
-                },
-                { fromOAuthCallback: isOAuthCallbackUrl, silentIfAlreadyActive: true }
-              );
-            } else if (event === 'SIGNED_OUT') {
-              setCurrentUser(null);
-              safeLocalStorage.removeItem('oneroof_current_user');
-            }
-          });
-
-          if (authListener?.subscription) {
-            authUnsub = () => {
-              try {
-                authListener.subscription.unsubscribe();
-              } catch (_) {}
-            };
-          }
-        } catch (authErr) {
-          console.warn('Supabase auth listener notice:', authErr);
         }
         
         // Setup real-time listeners for live sync across devices with graceful error handling
@@ -1709,98 +1368,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     initSupabase();
 
-    // Cross-tab & OAuth popup sync listeners (postMessage, BroadcastChannel, localStorage)
-    const handlePostMessage = (event: MessageEvent) => {
-      if (!isMounted) return;
-      const origin = event.origin || '';
-      const sameOrigin = typeof window !== 'undefined' && origin === window.location.origin;
-      const trustedHost = origin.endsWith('.run.app') || origin.includes('localhost') || origin.includes('vercel.app');
-      if (!sameOrigin && !trustedHost) return;
-
-      if (event.data?.type === 'ONEROOF_GOOGLE_AUTH_SUCCESS' && event.data?.user) {
-        const incomingUser = event.data.user as User;
-        completeGoogleUserLogin(
-          {
-            id: incomingUser.id,
-            email: incomingUser.email,
-            name: incomingUser.name,
-            avatar: incomingUser.avatar,
-            phone: incomingUser.phone,
-          },
-          { silentIfAlreadyActive: true }
-        );
-      } else if (event.data?.type === 'ONEROOF_GOOGLE_AUTH_ERROR' && event.data?.error) {
-        addToast(
-          languageRef.current === 'bn'
-            ? `গুগল লগইন ব্যর্থ হয়েছে: ${event.data.error}`
-            : `Google login failed: ${event.data.error}`,
-          'error'
-        );
-      }
-    };
-
-    const handleStorageSync = (e: StorageEvent) => {
-      if (!isMounted) return;
-      if (e.key === 'oneroof_current_user' && e.newValue) {
-        try {
-          const parsed = JSON.parse(e.newValue) as User;
-          if (parsed && parsed.email) {
-            completeGoogleUserLogin(
-              {
-                id: parsed.id,
-                email: parsed.email,
-                name: parsed.name,
-                avatar: parsed.avatar,
-                phone: parsed.phone,
-              },
-              { silentIfAlreadyActive: true }
-            );
-          }
-        } catch (_) {}
-      }
-    };
-
-    let bc: BroadcastChannel | null = null;
-    try {
-      if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
-        bc = new BroadcastChannel('oneroof_auth_sync');
-        bc.onmessage = (ev) => {
-          if (!isMounted) return;
-          if (ev.data?.type === 'ONEROOF_GOOGLE_AUTH_SUCCESS' && ev.data?.user) {
-            const incomingUser = ev.data.user as User;
-            completeGoogleUserLogin(
-              {
-                id: incomingUser.id,
-                email: incomingUser.email,
-                name: incomingUser.name,
-                avatar: incomingUser.avatar,
-                phone: incomingUser.phone,
-              },
-              { silentIfAlreadyActive: true }
-            );
-          }
-        };
-      }
-    } catch (_) {}
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('message', handlePostMessage);
-      window.addEventListener('storage', handleStorageSync);
-    }
-
     return () => {
       isMounted = false;
       clearTimeout(safetyTimer);
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('message', handlePostMessage);
-        window.removeEventListener('storage', handleStorageSync);
-      }
-      try {
-        if (bc) bc.close();
-      } catch (_) {}
-      try {
-        if (authUnsub) authUnsub();
-      } catch (_) {}
       try {
         if (channelObj) supabase.removeChannel(channelObj);
       } catch (_) {}
@@ -1890,9 +1460,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         await syncUserToSupabase(u);
       }
       setSupabaseConnected(true);
-      setSupabaseStatusMsg('সকল তথ্য Supabase এ সিঙ্ক হয়েছে');
+      setSupabaseStatusMsg(`সকল তথ্য (${products.length}টি পণ্য) Supabase এ সিঙ্ক হয়েছে`);
       addToast(
-        language === 'bn' ? 'সকল প্রডাক্ট, অর্ডার ও সেটিংস Supabase এ সিঙ্ক হয়েছে!' : 'All data synced to Supabase!',
+        language === 'bn'
+          ? `সকল ${products.length}টি প্রডাক্ট, অর্ডার ও সেটিংস Supabase এ সিঙ্ক হয়েছে!`
+          : `All ${products.length} products and settings synced to Supabase!`,
         'success'
       );
       return true;
@@ -2413,7 +1985,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     addToast(language === 'bn' ? 'ডিফল্ট সেটিংস ও কালার রিস্টোর করা হয়েছে' : 'Default settings restored', 'info');
   };
 
-  const globalProfitMargin = siteSettings.globalProfitMargin || siteSettings.shopbaseConfig?.profitMargin || 15;
+  const globalProfitMargin = siteSettings.globalProfitMargin || siteSettings.shopbaseConfig?.profitMargin || 5;
 
   // Universal Profit Margin & Dynamic Pricing Controller
   const updateGlobalProfitMargin = async (newMargin: number): Promise<boolean> => {
@@ -2464,8 +2036,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
       addToast(
         language === 'bn'
-          ? `সকল ১১,৮৯৬+ প্রোডাক্টে ${validMargin}% প্রফিট মার্জিন সফলভাবে কার্যকর হয়েছে!`
-          : `Applied ${validMargin}% profit margin across all products!`,
+          ? `সকল ${products.length}টি প্রোডাক্টে ${validMargin}% প্রফিট মার্জিন সফলভাবে কার্যকর হয়েছে!`
+          : `Applied ${validMargin}% profit margin across all ${products.length} products!`,
         'success'
       );
       return true;
@@ -3237,123 +2809,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return newOrder;
   };
 
-  const loginWithGoogle = async (): Promise<{
-    ok: boolean;
-    reason?: 'provider_not_enabled' | 'popup_blocked' | 'error';
-    error?: string;
-  }> => {
-    try {
-      const origin = typeof window !== 'undefined' ? window.location.origin : '';
-      const width = 500;
-      const height = 640;
-      const left = typeof window !== 'undefined' ? Math.max(0, (window.screen.width - width) / 2) : 100;
-      const top = typeof window !== 'undefined' ? Math.max(0, (window.screen.height - height) / 2) : 100;
-      const popupFeatures = `width=${width},height=${height},left=${left},top=${top},scrollbars=yes,resizable=yes`;
-
-      // Option 1: Direct Google OAuth 2.0 Client ID (if configured via VITE_GOOGLE_CLIENT_ID)
-      if (GOOGLE_CLIENT_ID) {
-        const params = new URLSearchParams({
-          client_id: GOOGLE_CLIENT_ID,
-          redirect_uri: origin,
-          response_type: 'token',
-          scope: 'openid email profile',
-          prompt: 'select_account',
-          include_granted_scopes: 'true',
-        });
-        const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
-        const authWindow = window.open(googleOAuthUrl, 'oneroof_google_oauth', popupFeatures);
-        if (!authWindow || authWindow.closed || typeof authWindow.closed === 'undefined') {
-          const isIframe = window.self !== window.top;
-          if (!isIframe) {
-            window.location.href = googleOAuthUrl;
-            return { ok: true };
-          }
-          addToast(
-            language === 'bn'
-              ? 'পপ-আপ ব্লক করা হয়েছে! অনুগ্রহ করে ব্রাউজারে পপ-আপ Allow করে আবার ক্লিক করুন।'
-              : 'Popup blocked! Please allow popups and try again.',
-            'error'
-          );
-          return { ok: false, reason: 'popup_blocked' };
-        }
-        addToast(
-          language === 'bn'
-            ? 'গুগল অ্যাকাউন্ট নির্বাচন উইন্ডো ওপেন হয়েছে। আপনার ইমেইল সিলেক্ট করুন।'
-            : 'Google account selector opened. Please choose your email.',
-          'info'
-        );
-        return { ok: true };
-      }
-
-      // Option 2: Supabase Google OAuth (verify provider status first to avoid broken JSON error page)
-      const googleEnabled = await checkSupabaseGoogleProviderStatus();
-      if (googleEnabled === false) {
-        addToast(
-          language === 'bn'
-            ? 'Supabase ড্যাশবোর্ডে Google Provider এখনো চালু করা হয়নি। প্রদর্শিত নির্দেশনা দেখে চালু করুন।'
-            : 'Google Provider is not enabled in Supabase Dashboard yet.',
-          'error'
-        );
-        return { ok: false, reason: 'provider_not_enabled' };
-      }
-
-      // In iframe preview environments, opening OAuth inside the iframe causes Google to throw a 403 Forbidden
-      // because Google prohibits accounts.google.com from running inside an iframe.
-      // skipBrowserRedirect: true opens the OAuth URL in a clean centered popup/tab with prompt=select_account.
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: origin,
-          queryParams: {
-            prompt: 'select_account',
-            access_type: 'offline',
-          },
-          skipBrowserRedirect: true,
-        },
-      });
-      if (error) throw error;
-
-      if (data?.url) {
-        const authWindow = window.open(data.url, 'oneroof_google_oauth', popupFeatures);
-        if (!authWindow || authWindow.closed || typeof authWindow.closed === 'undefined') {
-          const isIframe = window.self !== window.top;
-          if (!isIframe) {
-            window.location.href = data.url;
-            return { ok: true };
-          }
-          addToast(
-            language === 'bn'
-              ? 'পপ-আপ ব্লক করা হয়েছে! অনুগ্রহ করে ব্রাউজারে পপ-আপ Allow করে আবার ক্লিক করুন।'
-              : 'Popup blocked! Please allow popups and try again.',
-            'error'
-          );
-          return { ok: false, reason: 'popup_blocked' };
-        }
-        addToast(
-          language === 'bn'
-            ? 'গুগল অ্যাকাউন্ট নির্বাচন উইন্ডো ওপেন হয়েছে। আপনার ইমেইল সিলেক্ট করে লগইন/রেজিস্ট্রেশন করুন।'
-            : 'Google account selector opened. Select your email to sign in or register.',
-          'info'
-        );
-        return { ok: true };
-      }
-      return { ok: false, reason: 'error', error: 'OAuth URL missing' };
-    } catch (err: any) {
-      console.error('Google login error:', err);
-      const msg = err?.message || '';
-      if (msg.toLowerCase().includes('not enabled') || msg.toLowerCase().includes('unsupported provider')) {
-        return { ok: false, reason: 'provider_not_enabled', error: msg };
-      }
-      addToast(
-        language === 'bn'
-          ? `গুগল লগইন ব্যর্থ হয়েছে: ${msg || 'আবার চেষ্টা করুন'}`
-          : `Google login failed: ${msg || 'Please try again'}`,
-        'error'
-      );
-      return { ok: false, reason: 'error', error: msg };
-    }
-  };
-
   const loginUser = (identifier: string, password?: string): boolean => {
     const cleanId = identifier.trim().toLowerCase();
     const cleanDigits = identifier.replace(/[^0-9]/g, '');
@@ -3702,10 +3157,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const logoutUser = () => {
-    currentUserRef.current = null;
     setCurrentUser(null);
     safeLocalStorage.removeItem('oneroof_current_user');
-    supabase.auth.signOut().catch(() => {});
     addToast(
       language === 'bn' ? 'লগআউট সম্পন্ন হয়েছে' : 'Logged out',
       'info'
@@ -4207,7 +3660,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         addToast,
         removeToast,
         loginUser,
-        loginWithGoogle,
         registerUser,
         updateUserProfile,
         addDeliveryAddress,

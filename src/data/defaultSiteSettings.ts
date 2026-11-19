@@ -33,16 +33,16 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   appDownloadUrl: '',
   appNameBn: 'বাংলা বাজার মোবাইল অ্যাপ',
   appSubtitleBn: 'সহজ ও দ্রুত কেনাকাটায় সরাসরি ডাউনলোড ও ইনস্টল করুন',
-  globalProfitMargin: 15,
+  globalProfitMargin: 5,
   shopbaseConfig: {
     connected: true,
     accountNumber: '01929637253',
     password: 'junaid$#',
-    profitMargin: 15,
+    profitMargin: 5,
     autoSync: true,
     autoForwardOrders: true,
-    lastSyncTime: 'আজকের লাইভ সিঙ্ক সফল (১২,১১৮টি পণ্য যুক্ত)',
-    totalSyncedProducts: 12118,
+    lastSyncTime: 'আজকের লাইভ সিঙ্ক সফল (১৩,৭৬৮টি পণ্য যুক্ত)',
+    totalSyncedProducts: 13768,
   },
 };
 

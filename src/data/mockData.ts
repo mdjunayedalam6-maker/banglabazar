@@ -22,7 +22,7 @@ export const CATEGORIES: Category[] = [
     slug: 'womens-clothing',
     iconName: 'Sparkles',
     image: catWomensImg,
-    itemCount: 3414,
+    itemCount: 3550,
     featured: true,
     subcategories: [
       { id: 'saree', nameBn: 'শাড়ি', nameEn: 'Saree', image: 'https://shopbasebd.com/public/uploads/shop/category/scategory-1691436424.png' },
@@ -47,7 +47,7 @@ export const CATEGORIES: Category[] = [
     slug: 'mens-clothing',
     iconName: 'Shirt',
     image: catMensImg,
-    itemCount: 3455,
+    itemCount: 3490,
     featured: true,
     subcategories: [
       { id: 'polo-shirts', nameBn: 'পলো শার্ট', nameEn: 'Polo Shirts', image: 'https://shopbasebd.com/public/uploads/shop/products/1789381529_L_5.jpeg' },
@@ -75,7 +75,7 @@ export const CATEGORIES: Category[] = [
     slug: 'baby-collection',
     iconName: 'Smile',
     image: catBabyImg,
-    itemCount: 470,
+    itemCount: 1196,
     featured: true,
     subcategories: [
       { id: 'boys-tshirt-set', nameBn: 'বয়েজ টিশার্ট সেট', nameEn: 'Boys T-Shirt Set', image: 'https://shopbasebd.com/public/uploads/shop/category/scategory-1769590419.png' },
@@ -97,7 +97,7 @@ export const CATEGORIES: Category[] = [
     slug: 'couple-combo',
     iconName: 'Heart',
     image: catCoupleImg,
-    itemCount: 417,
+    itemCount: 898,
     featured: true,
     subcategories: [
       { id: 'couple-saree', nameBn: 'কাপল শাড়ী', nameEn: 'Couple Saree', image: 'https://shopbasebd.com/public/uploads/shop/category/scategory-1691436695.png' },
@@ -113,7 +113,7 @@ export const CATEGORIES: Category[] = [
     slug: 'home-living',
     iconName: 'Home',
     image: catHomeImg,
-    itemCount: 678,
+    itemCount: 978,
     featured: true,
     subcategories: [
       { id: 'bedsheet', nameBn: 'রেগুলার বেডশীট', nameEn: 'Regular Bedsheets', image: 'https://shopbasebd.com/public/uploads/shop/category/scategory-1788866862.jpeg' },
@@ -133,7 +133,7 @@ export const CATEGORIES: Category[] = [
     slug: 'bag-collection',
     iconName: 'ShoppingBag',
     image: catBagImg,
-    itemCount: 279,
+    itemCount: 603,
     featured: true,
     subcategories: [
       { id: 'girls-bag', nameBn: 'মেয়েদের ব্যাগ', nameEn: 'Girls Handbag', image: catBagImg },
@@ -149,7 +149,7 @@ export const CATEGORIES: Category[] = [
     slug: 'jewelry-accessories',
     iconName: 'Gem',
     image: catJewelryImg,
-    itemCount: 421,
+    itemCount: 615,
     featured: true,
     subcategories: [
       { id: 'clip-band', nameBn: 'ক্লিপ & ব্যান্ড', nameEn: 'Clips & Bands', image: catJewelryImg },
@@ -167,7 +167,7 @@ export const CATEGORIES: Category[] = [
     slug: 'electronics-gadgets',
     iconName: 'Smartphone',
     image: catElectronicsImg,
-    itemCount: 249,
+    itemCount: 252,
     featured: true,
     subcategories: [
       { id: 'fan', nameBn: 'ফ্যান', nameEn: 'Fans', image: catElectronicsImg },
@@ -184,7 +184,7 @@ export const CATEGORIES: Category[] = [
     slug: 'winter-collection',
     iconName: 'Snowflake',
     image: catWinterImg,
-    itemCount: 1708,
+    itemCount: 2184,
     featured: true,
     subcategories: [
       { id: 'gents-hoodie', nameBn: 'জেন্টস হুডি', nameEn: 'Gents Hoodie', image: 'https://shopbasebd.com/public/uploads/shop/category/scategory-1698096670.jpeg' },
@@ -206,7 +206,7 @@ export const CATEGORIES: Category[] = [
     slug: 'seasonal-products',
     iconName: 'Calendar',
     image: catSeasonalImg,
-    itemCount: 400,
+    itemCount: 175,
     featured: true,
     subcategories: [
       { id: 'world-cup', nameBn: 'ওয়ার্ল্ড কাপ', nameEn: 'World Cup Collection', image: 'https://shopbasebd.com/public/uploads/shop/category/scategory-1779218008.png' },
@@ -221,7 +221,7 @@ export const CATEGORIES: Category[] = [
     slug: 'other-categories',
     iconName: 'Grid',
     image: catOtherImg,
-    itemCount: 1027,
+    itemCount: 85,
     featured: true,
     subcategories: [
       { id: 'shoes', nameBn: 'জুতা', nameEn: 'Shoes & Footwear', image: catOtherImg },

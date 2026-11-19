@@ -45,14 +45,18 @@ export function expandImageCandidates(rawUrl: string): string[] {
   const candidates: string[] = [];
 
   if (trimmed.includes('shopbasebd.com')) {
-    // 1. Large HD with .jpg
-    candidates.push(trimmed.replace('_S_', '_L_').replace(/\.jpeg$/i, '.jpg'));
-    // 2. Large HD with .jpeg
-    candidates.push(trimmed.replace('_S_', '_L_').replace(/\.jpg$/i, '.jpeg'));
-    // 3. Small thumbnail with .jpg (100% available on ShopBase CDN)
-    candidates.push(trimmed.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg'));
-    // 4. Small thumbnail with .jpeg
-    candidates.push(trimmed.replace('_L_', '_S_').replace(/\.jpg$/i, '.jpeg'));
+    const isJpeg = /\.jpeg$/i.test(trimmed);
+    const largeExact = trimmed.replace('_S_', '_L_');
+    const largeJpg = largeExact.replace(/\.jpeg$/i, '.jpg');
+    const largeJpeg = largeExact.replace(/\.jpg$/i, '.jpeg');
+    const smallJpg = trimmed.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
+    const smallJpeg = trimmed.replace('_L_', '_S_').replace(/\.jpg$/i, '.jpeg');
+
+    if (isJpeg) {
+      candidates.push(largeJpeg, largeJpg, smallJpeg, smallJpg);
+    } else {
+      candidates.push(largeJpg, largeJpeg, smallJpg, smallJpeg);
+    }
   } else if (trimmed.includes('unsplash.com')) {
     // Upgrade unsplash to high definition
     const hd = trimmed.replace(/w=\d+/, 'w=1000').replace(/q=\d+/, 'q=95');

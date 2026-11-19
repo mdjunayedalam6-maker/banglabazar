@@ -69,7 +69,10 @@ export const ShopBaseImporter: React.FC<ShopBaseImporterProps> = ({
 
   const { globalProfitMargin, updateGlobalProfitMargin, enforceWhiteLabelPurge } = useApp();
   // Profit margin state (customizable dynamically from admin panel!)
-  const [profitMargin, setProfitMargin] = useState<number>(() => globalProfitMargin || 15);
+  const [profitMargin, setProfitMargin] = useState<number>(() => globalProfitMargin || 5);
+  useEffect(() => {
+    if (globalProfitMargin) setProfitMargin(globalProfitMargin);
+  }, [globalProfitMargin]);
   const [isApplyingGlobalMargin, setIsApplyingGlobalMargin] = useState(false);
   const [isPurgingSupplierReferences, setIsPurgingSupplierReferences] = useState(false);
 
@@ -586,7 +589,7 @@ export const ShopBaseImporter: React.FC<ShopBaseImporterProps> = ({
               ) : (
                 <>
                   <Sparkles className="w-4 h-4 text-slate-950" />
-                  <span>সকল ১১,৮৯৬+ প্রোডাক্টে এই {profitMargin}% লাভ প্রয়োগ করুন</span>
+                  <span>সকল {products.length.toLocaleString('bn-BD')}+ প্রোডাক্টে এই {profitMargin}% লাভ প্রয়োগ করুন</span>
                 </>
               )}
             </button>
@@ -692,7 +695,7 @@ export const ShopBaseImporter: React.FC<ShopBaseImporterProps> = ({
                 ShopBaseBD এর সর্বাধিক বিক্রিত ভেরিফায়েড পণ্যসমূহ
               </h3>
               <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
-                পলো শার্ট, ড্রপসোল্ডার টিশার্ট, কাতুয়া, পাঞ্জাবি ও কম্বো সেটের বেস্ট কালেকশন (১৫% লাভসহ হিসাবকৃত)।
+                পলো শার্ট, ড্রপসোল্ডার টিশার্ট, কাতুয়া, পাঞ্জাবি ও কম্বো সেটের বেস্ট কালেকশন ({profitMargin}% লাভসহ হিসাবকৃত)।
               </p>
             </div>
 
@@ -1244,7 +1247,7 @@ export const ShopBaseImporter: React.FC<ShopBaseImporterProps> = ({
                     className="w-full py-3 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white rounded-xl font-bold text-sm shadow-md shadow-orange-600/20 flex items-center justify-center gap-2"
                   >
                     <Download className="w-4 h-4" />
-                    <span>এই প্রডাক্ট বাংলা বাজার সাইটে আপলোড করুন (১৫% লাভসহ)</span>
+                    <span>এই প্রডাক্ট বাংলা বাজার সাইটে আপলোড করুন ({profitMargin}% লাভসহ)</span>
                   </button>
                 </div>
               </div>
@@ -1275,7 +1278,7 @@ export const ShopBaseImporter: React.FC<ShopBaseImporterProps> = ({
                 প্রোডাক্ট আপলোড
               </h4>
               <p className="text-xs text-neutral-600 dark:text-neutral-400">
-                এই পেজ থেকে ১৫% লাভে আপনার পছন্দের প্রোডাক্টগুলো ১-ক্লিকে বাংলা বাজার সাইটে আপলোড করুন।
+                এই পেজ থেকে {profitMargin}% লাভে আপনার পছন্দের প্রোডাক্টগুলো ১-ক্লিকে বাংলা বাজার সাইটে আপলোড করুন।
               </p>
             </div>
 
@@ -1308,7 +1311,7 @@ export const ShopBaseImporter: React.FC<ShopBaseImporterProps> = ({
                 ৪
               </div>
               <h4 className="font-bold text-sm text-neutral-900 dark:text-white">
-                ১৫% লাভ অ্যাকাউন্টে
+                {profitMargin}% লাভ অ্যাকাউন্টে
               </h4>
               <p className="text-xs text-neutral-600 dark:text-neutral-400">
                 ShopBaseBD আপনার শপের নামে কাস্টমারকে পণ্য পৌঁছে দেবে এবং বাকি লাভ আপনার বিকাশ/ব্যাংকে পাঠাবে।

@@ -26,8 +26,6 @@ export const SUPABASE_ANON_KEY = getEnvVar(
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBwd2Fvc2ptYmR5b2NybWhud2FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0OTExOTgsImV4cCI6MjEwNjA2NzE5OH0.8zZnNTMhFZnUWXfkKwUzV07pgGOEnQSCKn7xg5GHLN4'
 ).trim();
 
-export const GOOGLE_CLIENT_ID = getEnvVar('VITE_GOOGLE_CLIENT_ID', '').trim();
-
 // Custom storage adapter ensuring iframe and mobile compatibility without throwing SecurityError
 const safeSupabaseStorage = {
   getItem: (key: string): string | null => safeLocalStorage.getItem(key),
@@ -40,27 +38,9 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     storage: safeSupabaseStorage,
     persistSession: true,
     autoRefreshToken: true,
-    detectSessionInUrl: true,
+    detectSessionInUrl: false,
   },
 });
-
-export async function checkSupabaseGoogleProviderStatus(): Promise<boolean | null> {
-  try {
-    const res = await fetch(`${SUPABASE_URL}/auth/v1/settings`, {
-      headers: {
-        apikey: SUPABASE_ANON_KEY,
-      },
-    });
-    if (!res.ok) return null;
-    const json = await res.json();
-    if (json && json.external && typeof json.external.google === 'boolean') {
-      return json.external.google;
-    }
-    return null;
-  } catch {
-    return null;
-  }
-}
 
 // SQL Schema for Supabase SQL Editor
 export const SUPABASE_SETUP_SQL = `-- =========================================================
@@ -356,29 +336,54 @@ export async function syncProductToSupabase(product: Product): Promise<boolean> 
   }
 }
 
-export async function syncProductsBatchToSupabase(products: Product[]): Promise<boolean> {
+export async function syncProductsBatchToSupabase(
+  products: Product[],
+  onProgress?: (synced: number, total: number) => void
+): Promise<boolean> {
   try {
-    const batchSize = 50;
+    const batchSize = 200;
+    const chunks: Product[][] = [];
     for (let i = 0; i < products.length; i += batchSize) {
-      const chunk = products.slice(i, i + batchSize);
-      const rows = chunk.map((product) => ({
-        id: product.id,
-        title_bn: product.titleBn,
-        title_en: product.titleEn,
-        price: product.price,
-        original_price: product.originalPrice || null,
-        category: product.category,
-        subcategory: product.subcategory || null,
-        stock: product.stock,
-        data: product,
-        updated_at: new Date().toISOString(),
-      }));
-      const { error } = await supabase.from('products').upsert(rows);
-      if (error) {
-        console.warn('Batch product sync notice:', error.message);
-      }
+      chunks.push(products.slice(i, i + batchSize));
     }
-    return true;
+
+    let synced = 0;
+    let hadError = false;
+    const concurrency = 3;
+
+    for (let i = 0; i < chunks.length; i += concurrency) {
+      const wave = chunks.slice(i, i + concurrency);
+      await Promise.all(
+        wave.map(async (chunk) => {
+          const rows = chunk.map((product) => ({
+            id: product.id,
+            title_bn: product.titleBn,
+            title_en: product.titleEn,
+            price: product.price,
+            original_price: product.originalPrice || null,
+            category: product.category,
+            subcategory: product.subcategory || null,
+            stock: product.stock,
+            data: product,
+            updated_at: new Date().toISOString(),
+          }));
+
+          for (let attempt = 0; attempt < 2; attempt++) {
+            const { error } = await supabase.from('products').upsert(rows);
+            if (!error) {
+              synced += chunk.length;
+              if (onProgress) onProgress(synced, products.length);
+              return;
+            }
+            if (attempt === 1) {
+              console.warn('Batch product sync notice:', error.message);
+              hadError = true;
+            }
+          }
+        })
+      );
+    }
+    return !hadError;
   } catch (e) {
     console.warn('Batch product sync exception:', e);
     return false;
@@ -416,80 +421,125 @@ export async function deleteMultipleProductsFromSupabase(productIds: string[]): 
   }
 }
 
+const mapSupabaseRowToProduct = (row: any): Product | null => {
+  if (!row) return null;
+  const item: Product = row.data && typeof row.data === 'object' ? { ...(row.data as Product) } : ({} as Product);
+  item.id = row.id || item.id;
+  if (row.title_bn) item.titleBn = row.title_bn;
+  if (row.title_en) item.titleEn = row.title_en;
+  if (row.price !== undefined && row.price !== null) item.price = Number(row.price);
+  if (row.original_price !== undefined && row.original_price !== null) item.originalPrice = Number(row.original_price);
+  if (row.category) item.category = row.category;
+  if (row.subcategory) item.subcategory = row.subcategory;
+  if (row.stock !== undefined && row.stock !== null) item.stock = Number(row.stock);
+
+  if (!item.id) return null;
+  // White-label safety: strictly enforce বাংলা বাজার brand for all products
+  item.brand = 'বাংলা বাজার';
+  if (!item.sku) {
+    const cleanNum = item.id.replace(/\D/g, '');
+    item.sku = `SBP-${cleanNum || item.id.toUpperCase()}`;
+  }
+  if (!item.wholesalePrice) {
+    item.wholesalePrice = item.price;
+  }
+  if (!item.profitMarginPercent) {
+    item.profitMarginPercent = 5;
+  }
+  return item;
+};
+
+const fetchProductPageWithRetry = async (from: number, to: number): Promise<any[] | null> => {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const { data, error } = await supabase
+      .from('products')
+      .select('id, title_bn, title_en, price, original_price, category, subcategory, stock, data')
+      .order('id', { ascending: true })
+      .range(from, to);
+
+    if (!error && Array.isArray(data)) {
+      return data;
+    }
+    if (error) {
+      console.warn(`Supabase fetchProducts retry ${attempt + 1} (${from}-${to}):`, error.message);
+    }
+    await new Promise((r) => setTimeout(r, 250 * (attempt + 1)));
+  }
+  return null;
+};
+
 export async function fetchProductsFromSupabase(
   onBatch?: (currentBatch: Product[], totalSoFar: number) => void
 ): Promise<Product[] | null> {
   try {
-    const allProducts: Product[] = [];
-    const step = 1000;
-    let from = 0;
-    const maxPages = 25; // Supports up to 25,000+ products
+    const step = 400;
+    const { count } = await supabase.from('products').select('id', { count: 'exact', head: true });
+    const allProductsMap = new Map<string, Product>();
 
-    for (let page = 0; page < maxPages; page++) {
-      const { data, error } = await supabase
-        .from('products')
-        .select('id, title_bn, title_en, price, original_price, category, subcategory, stock, data')
-        .order('id', { ascending: true })
-        .range(from, from + step - 1);
+    if (typeof count === 'number' && count > 0) {
+      const totalPages = Math.ceil(count / step);
+      const concurrency = 3;
 
-      if (error) {
-        console.warn('Supabase fetchProducts error on page', page, error.message);
-        break;
-      }
+      for (let pageStart = 0; pageStart < totalPages; pageStart += concurrency) {
+        const pageIndices: number[] = [];
+        for (let k = 0; k < concurrency && pageStart + k < totalPages; k++) {
+          pageIndices.push(pageStart + k);
+        }
 
-      if (!data || data.length === 0) {
-        break;
-      }
+        const results = await Promise.all(
+          pageIndices.map((pageIdx) => {
+            const from = pageIdx * step;
+            return fetchProductPageWithRetry(from, from + step - 1);
+          })
+        );
 
-      const batchProducts: Product[] = [];
-
-      for (const row of data) {
-        if (row) {
-          const item: Product = (row.data && typeof row.data === 'object') ? { ...(row.data as Product) } : ({} as Product);
-          item.id = row.id || item.id;
-          if (row.title_bn) item.titleBn = row.title_bn;
-          if (row.title_en) item.titleEn = row.title_en;
-          if (row.price !== undefined && row.price !== null) item.price = Number(row.price);
-          if (row.original_price !== undefined && row.original_price !== null) item.originalPrice = Number(row.original_price);
-          if (row.category) item.category = row.category;
-          if (row.subcategory) item.subcategory = row.subcategory;
-          if (row.stock !== undefined && row.stock !== null) item.stock = Number(row.stock);
-          
-          if (item.id) {
-            // White-label safety: strictly enforce বাংলা বাজার brand for all products
-            item.brand = 'বাংলা বাজার';
-            if (!item.sku) {
-              const cleanNum = item.id.replace(/\D/g, '');
-              item.sku = `SBP-${cleanNum || item.id.toUpperCase()}`;
+        const waveBatch: Product[] = [];
+        for (const rows of results) {
+          if (!rows) continue;
+          for (const row of rows) {
+            const mapped = mapSupabaseRowToProduct(row);
+            if (mapped) {
+              allProductsMap.set(mapped.id, mapped);
+              waveBatch.push(mapped);
             }
-            if (!item.wholesalePrice) {
-              item.wholesalePrice = item.price;
-            }
-            if (!item.profitMarginPercent) {
-              item.profitMarginPercent = 15;
-            }
-            allProducts.push(item);
-            batchProducts.push(item);
           }
         }
-      }
 
-      if (onBatch && batchProducts.length > 0) {
-        try {
-          onBatch(batchProducts, allProducts.length);
-        } catch (_) {}
+        if (onBatch && waveBatch.length > 0) {
+          try {
+            onBatch(waveBatch, allProductsMap.size);
+          } catch (_) {}
+        }
       }
+    } else {
+      const maxPages = 60;
+      for (let page = 0; page < maxPages; page++) {
+        const from = page * step;
+        const data = await fetchProductPageWithRetry(from, from + step - 1);
+        if (!data || data.length === 0) break;
 
-      if (data.length < step) {
-        break;
+        const batchProducts: Product[] = [];
+        for (const row of data) {
+          const mapped = mapSupabaseRowToProduct(row);
+          if (mapped) {
+            allProductsMap.set(mapped.id, mapped);
+            batchProducts.push(mapped);
+          }
+        }
+
+        if (onBatch && batchProducts.length > 0) {
+          try {
+            onBatch(batchProducts, allProductsMap.size);
+          } catch (_) {}
+        }
+        if (data.length < step) break;
       }
-      from += step;
     }
 
-    if (allProducts.length === 0) {
+    if (allProductsMap.size === 0) {
       return null;
     }
-    return allProducts;
+    return Array.from(allProductsMap.values());
   } catch (e) {
     console.warn('Supabase fetchProducts notice:', e);
     return null;
@@ -503,6 +553,8 @@ export async function updateAllProductsProfitMarginInSupabase(
 ): Promise<boolean> {
   try {
     const validMargin = Math.max(1, Math.min(100, Math.round(newMargin)));
+    const { count } = await supabase.from('products').select('id', { count: 'exact', head: true });
+    const totalExpected = typeof count === 'number' && count > 0 ? count : 13768;
     const step = 300;
     let from = 0;
     let processed = 0;
@@ -548,7 +600,7 @@ export async function updateAllProductsProfitMarginInSupabase(
       const { error: upsertErr } = await supabase.from('products').upsert(updatedBatch);
       if (!upsertErr) {
         processed += updatedBatch.length;
-        if (onProgress) onProgress(processed, 12118);
+        if (onProgress) onProgress(processed, totalExpected);
       }
 
       if (data.length < step) break;

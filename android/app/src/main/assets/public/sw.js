@@ -1,1 +1,110 @@
-if(!self.define){let e,n={};const s=(s,i)=>(s=new URL(s+".js",i).href,n[s]||new Promise(n=>{if("document"in self){const e=document.createElement("script");e.src=s,e.onload=n,document.head.appendChild(e)}else e=s,importScripts(s),n()}).then(()=>{let e=n[s];if(!e)throw new Error(`Module ${s} didn’t register its module`);return e}));self.define=(i,o)=>{const a=e||("document"in self?document.currentScript.src:"")||location.href;if(n[a])return;let r={};const c=e=>s(e,a),t={module:{uri:a},exports:r,require:c};n[a]=Promise.all(i.map(e=>t[e]||c(e))).then(e=>(o(...e),r))}}define(["./workbox-835c8c05"],function(e){"use strict";self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"registerSW.js",revision:"1872c500de691dce40960bb85481de07"},{url:"pwa-maskable-512x512.png",revision:"f680f22e046815a5ff9f9c92c95616aa"},{url:"pwa-512x512.png",revision:"c57dbdc85c4e6f5bf6892c67331d03af"},{url:"pwa-192x192.png",revision:"1419bfe6e2436531db14085687886a3e"},{url:"index.html",revision:"52e1dac11db3ab466aee4374414ee9c5"},{url:"favicon.png",revision:"c01beb3c2f31b21dd2a73965cd3dbf91"},{url:"apple-touch-icon.png",revision:"5ffcbaf82572cf7a1827dade288275d2"},{url:"assets/oneroof_tech_banner_1789265651663-CBR8tuDv.jpg",revision:null},{url:"assets/oneroof_logo_clean-DT7O8JM9.png",revision:null},{url:"assets/oneroof_eid_banner_1789265637891-CU42R97N.jpg",revision:null},{url:"assets/index-oORdQMCR.css",revision:null},{url:"assets/index-C1-5eLC8.js",revision:null},{url:"apple-touch-icon.png",revision:"5ffcbaf82572cf7a1827dade288275d2"},{url:"favicon.png",revision:"c01beb3c2f31b21dd2a73965cd3dbf91"},{url:"pwa-192x192.png",revision:"1419bfe6e2436531db14085687886a3e"},{url:"pwa-512x512.png",revision:"c57dbdc85c4e6f5bf6892c67331d03af"},{url:"pwa-maskable-512x512.png",revision:"f680f22e046815a5ff9f9c92c95616aa"},{url:"manifest.webmanifest",revision:"bbdab62cbf86aaf849a02ee7fa1f29fc"}],{}),e.cleanupOutdatedCaches(),e.registerRoute(new e.NavigationRoute(e.createHandlerBoundToURL("index.html"))),e.registerRoute(/^https:\/\/fonts\.googleapis\.com\/.*/i,new e.CacheFirst({cacheName:"google-fonts-cache",plugins:[new e.ExpirationPlugin({maxEntries:10,maxAgeSeconds:31536e3}),new e.CacheableResponsePlugin({statuses:[0,200]})]}),"GET"),e.registerRoute(/^https:\/\/fonts\.gstatic\.com\/.*/i,new e.CacheFirst({cacheName:"gstatic-fonts-cache",plugins:[new e.ExpirationPlugin({maxEntries:10,maxAgeSeconds:31536e3}),new e.CacheableResponsePlugin({statuses:[0,200]})]}),"GET")});
+const CACHE_NAME = 'banglabazar-pwa-v6';
+const PRECACHE_URLS = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/favicon.png',
+  '/pwa-192x192.png',
+  '/pwa-512x512.png',
+  '/pwa-maskable-512x512.png',
+  '/apple-touch-icon.png',
+  '/app-icon-512.png'
+];
+
+// Install Service Worker
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(async (cache) => {
+      await Promise.allSettled(
+        PRECACHE_URLS.map(async (url) => {
+          try {
+            const res = await fetch(url, { cache: 'no-cache' });
+            if (res.ok) {
+              await cache.put(url, res);
+            }
+          } catch (e) {
+            // Silently continue for optional precache items
+          }
+        })
+      );
+    }).then(() => self.skipWaiting())
+  );
+});
+
+// Activate & Cleanup
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+// Fetch Strategy: Network-First for navigation / HTML, Cache-First for static assets & offline fallbacks
+self.addEventListener('fetch', (event) => {
+  // Only handle GET requests and http/https
+  if (event.request.method !== 'GET' || !event.request.url.startsWith('http')) {
+    return;
+  }
+
+  const url = new URL(event.request.url);
+  // Bypass internal dev modules and Supabase auth/realtime from service worker cache
+  if (
+    url.pathname.startsWith('/api') || 
+    url.pathname.startsWith('/@vite') ||
+    url.pathname.startsWith('/@fs') ||
+    url.pathname.startsWith('/src') ||
+    url.pathname.startsWith('/rest/v1') ||
+    url.pathname.startsWith('/realtime')
+  ) {
+    return;
+  }
+
+  // Network-first strategy for page navigations to always show latest app version
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match('/') || caches.match('/index.html');
+        })
+    );
+    return;
+  }
+
+  // Stale-while-revalidate for static assets, products.json, and product images
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      const fetchPromise = fetch(event.request)
+        .then((networkResponse) => {
+          if (
+            networkResponse && 
+            (networkResponse.status === 200 || networkResponse.type === 'opaque' || networkResponse.type === 'cors')
+          ) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => cachedResponse);
+
+      return cachedResponse || fetchPromise;
+    })
+  );
+});

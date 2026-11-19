@@ -61,7 +61,6 @@ import { OrderInvoiceModal } from '../components/admin/OrderInvoiceModal';
 import { ShopBaseImporter } from '../components/admin/ShopBaseImporter';
 import { ShopBaseDropshipModal } from '../components/admin/ShopBaseDropshipModal';
 import { compressImageFile } from '../utils/imageCompressor';
-import { checkSupabaseGoogleProviderStatus, GOOGLE_CLIENT_ID } from '../lib/supabase';
 
 export const AdminPage: React.FC = () => {
   const {
@@ -148,17 +147,6 @@ export const AdminPage: React.FC = () => {
   const [sqlCopied, setSqlCopied] = useState(false);
   const [isSyncingSupabase, setIsSyncingSupabase] = useState(false);
   const [isCheckingConnection, setIsCheckingConnection] = useState(false);
-  const [googleOAuthEnabled, setGoogleOAuthEnabled] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    if (activeTab === 'supabase') {
-      if (GOOGLE_CLIENT_ID) {
-        setGoogleOAuthEnabled(true);
-      } else {
-        checkSupabaseGoogleProviderStatus().then((res) => setGoogleOAuthEnabled(res));
-      }
-    }
-  }, [activeTab]);
 
   // Product management state
   const [productSearch, setProductSearch] = useState('');
@@ -1009,7 +997,7 @@ export const AdminPage: React.FC = () => {
               badge: pendingWithdrawalsCount > 0 ? `${pendingWithdrawalsCount} পেন্ডিং` : undefined
             },
             { id: 'products', label: 'প্রডাক্ট আপলোড ও ম্যানেজমেন্ট', icon: ShoppingBag, count: products.length },
-            { id: 'shopbase', label: '💰 প্রফিট মার্জিন ও অটোমেশন', icon: Sparkles, badge: `${globalProfitMargin || 15}% লাভ` },
+            { id: 'shopbase', label: '💰 প্রফিট মার্জিন ও অটোমেশন', icon: Sparkles, badge: `${globalProfitMargin || 5}% লাভ` },
             { id: 'categories', label: 'ক্যাটাগরি ম্যানেজমেন্ট', icon: Layers, count: categories.length },
             { id: 'design', label: 'কালার, থিম ও ডিজাইন', icon: Palette },
             { id: 'banners', label: 'ব্যানার স্লাইডার কন্ট্রোল', icon: ImageIcon },
@@ -1883,7 +1871,7 @@ export const AdminPage: React.FC = () => {
                   className="px-3.5 py-2 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-md shadow-orange-600/20 transition-all active:scale-95 cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 text-yellow-300" />
-                  <span>ShopBaseBD আপলোড (১৫% লাভ)</span>
+                  <span>ShopBaseBD আপলোড ({globalProfitMargin || 5}% লাভ)</span>
                 </button>
 
                 <button
@@ -2008,10 +1996,10 @@ export const AdminPage: React.FC = () => {
                 </div>
                 <div>
                   <h5 className="font-bold text-white text-xs">
-                    ShopBaseBD কানেক্টর সক্রিয় (১৫% লাভ মার্জিন)
+                    ShopBaseBD কানেক্টর সক্রিয় ({globalProfitMargin || 5}% লাভ মার্জিন)
                   </h5>
                   <p className="text-[11px] text-slate-300">
-                    shopbasebd.com থেকে ক্যাটাগরি বা লিংক দিয়ে পাইকারি রেটের পণ্যে ১৫% লাভ যোগ করে সরাসরি আপলোড করুন।
+                    shopbasebd.com থেকে ক্যাটাগরি বা লিংক দিয়ে পাইকারি রেটের পণ্যে {globalProfitMargin || 5}% লাভ যোগ করে সরাসরি আপলোড করুন।
                   </p>
                 </div>
               </div>
@@ -3984,8 +3972,10 @@ export const AdminPage: React.FC = () => {
                   <span className="text-slate-200">{supabaseStatusMsg}</span>
                 </div>
                 <div className="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-1">
-                  <span className="text-slate-400 font-bold block">অটো-সিঙ্ক কার্যকারিতা:</span>
-                  <span className="text-emerald-400 font-bold">নতুন অর্ডার ও প্রোডাক্ট স্বয়ংক্রিয়ভাবে সিঙ্ক হবে</span>
+                  <span className="text-slate-400 font-bold block">অটো-সিঙ্ক ও মোট পণ্য:</span>
+                  <span className="text-emerald-400 font-bold">
+                    সর্বমোট {products.length}টি পণ্য ওয়েবসাইট ও Supabase এ সক্রিয়
+                  </span>
                 </div>
               </div>
 
@@ -4019,116 +4009,6 @@ export const AdminPage: React.FC = () => {
                   <Upload className={`w-4 h-4 ${isSyncingSupabase ? 'animate-bounce' : ''}`} />
                   <span>{isSyncingSupabase ? 'সিঙ্ক হচ্ছে...' : 'সব পণ্য ও অর্ডার Supabase এ সিঙ্ক করুন'}</span>
                 </button>
-              </div>
-            </div>
-
-            {/* Google OAuth Login & Registration Config Card */}
-            <div className="bg-slate-800/80 p-6 rounded-3xl border border-slate-700/80 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-700/80">
-                <div>
-                  <h4 className="text-sm font-bold text-white flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                    <span>গুগল লগইন ও রেজিস্ট্রেশন (Google OAuth) সেটআপ</span>
-                  </h4>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    কাস্টমাররা গুগল বাটনে ক্লিক করে ইমেইল সিলেক্ট করলেই অটো লগইন/রেজিস্ট্রেশন সম্পন্ন হবে।
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2 shrink-0">
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold ${
-                      googleOAuthEnabled === true
-                        ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                        : googleOAuthEnabled === false
-                        ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
-                        : 'bg-slate-700 text-slate-300 border border-slate-600'
-                    }`}
-                  >
-                    <span
-                      className={`w-2 h-2 rounded-full ${
-                        googleOAuthEnabled === true
-                          ? 'bg-emerald-400'
-                          : googleOAuthEnabled === false
-                          ? 'bg-rose-400'
-                          : 'bg-slate-400'
-                      }`}
-                    />
-                    <span>
-                      {googleOAuthEnabled === true
-                        ? 'গুগল OAuth সক্রিয়'
-                        : googleOAuthEnabled === false
-                        ? 'Supabase-এ Google Provider চালু করুন'
-                        : 'স্ট্যাটাস যাচাই হচ্ছে'}
-                    </span>
-                  </span>
-                  <a
-                    href={`https://supabase.com/dashboard/project/${supabaseUrl.replace('https://', '').split('.')[0]}/auth/providers`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-1.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black rounded-xl text-xs inline-flex items-center gap-1.5 transition-colors"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span>Google Provider চালু করুন</span>
-                  </a>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                <div className="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 space-y-1.5">
-                  <span className="text-slate-400 font-bold block">Supabase Callback URL (Google Cloud Console-এ দিন):</span>
-                  <div className="flex items-center gap-2">
-                    <code className="font-mono text-[11px] text-emerald-300 break-all flex-1">
-                      {supabaseUrl}/auth/v1/callback
-                    </code>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        navigator.clipboard?.writeText(`${supabaseUrl}/auth/v1/callback`);
-                        addToast('Callback URL কপি হয়েছে!', 'success');
-                      }}
-                      className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[11px] shrink-0 cursor-pointer"
-                    >
-                      কপি
-                    </button>
-                  </div>
-                </div>
-
-                <div className="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 space-y-2">
-                  <span className="text-slate-400 font-bold block">Site / Redirect URLs (Supabase URL Configuration-এ দিন):</span>
-                  <div className="flex items-center gap-2">
-                    <code className="font-mono text-[11px] text-cyan-300 break-all flex-1">
-                      https://banglabazarbd.vercel.app
-                    </code>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        navigator.clipboard?.writeText('https://banglabazarbd.vercel.app');
-                        addToast('লাইভ Redirect URL কপি হয়েছে!', 'success');
-                      }}
-                      className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[11px] shrink-0 cursor-pointer"
-                    >
-                      কপি
-                    </button>
-                  </div>
-                  {typeof window !== 'undefined' && window.location.origin !== 'https://banglabazarbd.vercel.app' && (
-                    <div className="flex items-center gap-2 pt-1 border-t border-slate-800/80">
-                      <code className="font-mono text-[11px] text-slate-300 break-all flex-1">
-                        {window.location.origin}
-                      </code>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          navigator.clipboard?.writeText(window.location.origin);
-                          addToast('প্রিভিউ Redirect URL কপি হয়েছে!', 'success');
-                        }}
-                        className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[11px] shrink-0 cursor-pointer"
-                      >
-                        কপি
-                      </button>
-                    </div>
-                  )}
-                </div>
               </div>
             </div>
 
@@ -5170,7 +5050,7 @@ export const AdminPage: React.FC = () => {
                     <span className="text-[10px] font-bold text-slate-500 block">পাসওয়ার্ড</span>
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className="font-mono text-slate-200">
-                        {showInspectedPassword ? (liveCustomer.password || 'সেট করা নেই (Google)') : '••••••••'}
+                        {showInspectedPassword ? (liveCustomer.password || 'সেট করা নেই') : '••••••••'}
                       </span>
                       <button
                         type="button"

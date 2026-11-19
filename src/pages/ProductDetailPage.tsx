@@ -471,9 +471,12 @@ export const ProductDetailPage: React.FC = () => {
                 const target = e.currentTarget;
                 const fallback = getCategoryFallbackImage(selectedProduct.category);
                 if (target.src === fallback) return;
-                if (target.src.includes('.jpeg') && !(target as any)._jpegTried) {
-                  (target as any)._jpegTried = true;
+                if (/\.jpeg$/i.test(target.src) && !(target as any)._jpgTried) {
+                  (target as any)._jpgTried = true;
                   target.src = target.src.replace(/\.jpeg$/i, '.jpg');
+                } else if (/\.jpg$/i.test(target.src) && !(target as any)._jpegTried) {
+                  (target as any)._jpegTried = true;
+                  target.src = target.src.replace(/\.jpg$/i, '.jpeg');
                 } else if (target.src.includes('_L_') && !(target as any)._smallTried) {
                   (target as any)._smallTried = true;
                   target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');
@@ -531,9 +534,12 @@ export const ProductDetailPage: React.FC = () => {
                       const target = e.currentTarget;
                       const fallback = getCategoryFallbackImage(selectedProduct.category);
                       if (target.src === fallback) return;
-                      if (target.src.includes('.jpeg') && !(target as any)._jpegTried) {
-                        (target as any)._jpegTried = true;
+                      if (/\.jpeg$/i.test(target.src) && !(target as any)._jpgTried) {
+                        (target as any)._jpgTried = true;
                         target.src = target.src.replace(/\.jpeg$/i, '.jpg');
+                      } else if (/\.jpg$/i.test(target.src) && !(target as any)._jpegTried) {
+                        (target as any)._jpegTried = true;
+                        target.src = target.src.replace(/\.jpg$/i, '.jpeg');
                       } else if (target.src.includes('_L_') && !(target as any)._fallbackTried) {
                         (target as any)._fallbackTried = true;
                         target.src = target.src.replace('_L_', '_S_').replace(/\.jpeg$/i, '.jpg');

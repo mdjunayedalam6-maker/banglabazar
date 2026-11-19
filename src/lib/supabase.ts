@@ -26,6 +26,8 @@ export const SUPABASE_ANON_KEY = getEnvVar(
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBwd2Fvc2ptYmR5b2NybWhud2FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0OTExOTgsImV4cCI6MjEwNjA2NzE5OH0.8zZnNTMhFZnUWXfkKwUzV07pgGOEnQSCKn7xg5GHLN4'
 ).trim();
 
+export const GOOGLE_CLIENT_ID = getEnvVar('VITE_GOOGLE_CLIENT_ID', '').trim();
+
 // Custom storage adapter ensuring iframe and mobile compatibility without throwing SecurityError
 const safeSupabaseStorage = {
   getItem: (key: string): string | null => safeLocalStorage.getItem(key),
@@ -38,9 +40,27 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     storage: safeSupabaseStorage,
     persistSession: true,
     autoRefreshToken: true,
-    detectSessionInUrl: false,
+    detectSessionInUrl: true,
   },
 });
+
+export async function checkSupabaseGoogleProviderStatus(): Promise<boolean | null> {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/settings`, {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+      },
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (json && json.external && typeof json.external.google === 'boolean') {
+      return json.external.google;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
 
 // SQL Schema for Supabase SQL Editor
 export const SUPABASE_SETUP_SQL = `-- =========================================================
@@ -652,6 +672,15 @@ export async function fetchUsersFromSupabase(): Promise<User[] | null> {
     return data.map((row) => row.data as User);
   } catch {
     return null;
+  }
+}
+
+export async function deleteUserFromSupabase(userId: string): Promise<boolean> {
+  try {
+    const { error } = await supabase.from('users').delete().eq('id', userId);
+    return !error;
+  } catch {
+    return false;
   }
 }
 

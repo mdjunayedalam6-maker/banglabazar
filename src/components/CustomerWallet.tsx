@@ -9,24 +9,21 @@ import {
   Check,
   CheckCircle2,
   Clock,
-  XCircle,
-  QrCode,
   Smartphone,
-  Building2,
-  AlertCircle,
   X,
-  Eye,
-  Download,
-  Info,
   ShieldCheck,
-  RefreshCw,
   Search,
-  Filter,
   Gift,
-  Sparkles
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { WalletTransaction, WalletPaymentMethod } from '../types';
+import { WalletPaymentMethod } from '../types';
+import {
+  PERSONAL_PAYMENT_ACCOUNTS,
+  PersonalSendMoneyMethod,
+  getPersonalPaymentAccount,
+  WITHDRAW_MOBILE_BANKS,
+  getPaymentMethodDisplayLabel,
+} from '../data/paymentConfig';
 
 export const CustomerWallet: React.FC = () => {
   const {
@@ -41,23 +38,20 @@ export const CustomerWallet: React.FC = () => {
 
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
-  const [isQrStandeeModalOpen, setIsQrStandeeModalOpen] = useState(false);
 
-  // Deposit Form State
+  // Deposit Form State (ONLY Nagad, bKash, Upay Personal Send Money)
   const [depositAmount, setDepositAmount] = useState<string>('500');
-  const [depositMethod, setDepositMethod] = useState<WalletPaymentMethod>('bangla_qr');
+  const [depositMethod, setDepositMethod] = useState<PersonalSendMoneyMethod>('nagad');
   const [depositSenderNumber, setDepositSenderNumber] = useState<string>('');
   const [depositTrxId, setDepositTrxId] = useState<string>('');
   const [depositNote, setDepositNote] = useState<string>('');
   const [isDepositing, setIsDepositing] = useState(false);
 
-  // Withdraw Form State
+  // Withdraw Form State (All Mobile Banks: bKash, Nagad, Upay, Rocket, CellFin, Tap, etc.)
   const [withdrawAmount, setWithdrawAmount] = useState<string>('500');
-  const [withdrawMethod, setWithdrawMethod] = useState<'bkash' | 'nagad' | 'rocket' | 'bank'>('bkash');
+  const [withdrawMethod, setWithdrawMethod] = useState<WalletPaymentMethod>('bkash');
   const [withdrawAccount, setWithdrawAccount] = useState<string>('');
-  const [withdrawBankName, setWithdrawBankName] = useState<string>('');
-  const [withdrawAccountHolder, setWithdrawAccountHolder] = useState<string>('');
-  const [withdrawBranch, setWithdrawBranch] = useState<string>('');
+  const [withdrawOtherBankName, setWithdrawOtherBankName] = useState<string>('');
   const [isWithdrawing, setIsWithdrawing] = useState(false);
 
   // History Filter
@@ -158,35 +152,49 @@ export const CustomerWallet: React.FC = () => {
       return;
     }
 
-    if (!withdrawAccount.trim()) {
-      addToast(language === 'bn' ? 'সঠিক অ্যাকাউন্ট বা মোবাইল নম্বর দিন' : 'Enter account number', 'error');
+    if (!withdrawAccount.trim() || withdrawAccount.replace(/\D/g, '').length < 11) {
+      addToast(
+        language === 'bn'
+          ? 'সঠিক ১১ ডিজিটের মোবাইল ব্যাংকিং নম্বর দিন'
+          : 'Enter a valid 11-digit mobile banking number',
+        'error'
+      );
+      return;
+    }
+
+    if (withdrawMethod === 'other_mfs' && !withdrawOtherBankName.trim()) {
+      addToast(
+        language === 'bn' ? 'মোবাইল ব্যাংকের নাম লিখুন' : 'Enter mobile banking name',
+        'error'
+      );
       return;
     }
 
     setIsWithdrawing(true);
     try {
-      const bankDetails = withdrawMethod === 'bank' ? {
-        bankName: withdrawBankName,
-        accountHolder: withdrawAccountHolder,
-        branchName: withdrawBranch
-      } : undefined;
+      const customDetails =
+        withdrawMethod === 'other_mfs'
+          ? { bankName: withdrawOtherBankName.trim() }
+          : undefined;
 
       await withdrawFromWallet(
         amt,
         withdrawMethod,
         withdrawAccount.trim(),
-        bankDetails
+        customDetails
       );
       setIsWithdrawModalOpen(false);
       setWithdrawAmount('500');
       setWithdrawAccount('');
-      setWithdrawBankName('');
-      setWithdrawAccountHolder('');
-      setWithdrawBranch('');
+      setWithdrawOtherBankName('');
     } finally {
       setIsWithdrawing(false);
     }
   };
+
+  const activeDepositAccount = getPersonalPaymentAccount(depositMethod);
+  const selectedWithdrawBank =
+    WITHDRAW_MOBILE_BANKS.find((m) => m.id === withdrawMethod) || WITHDRAW_MOBILE_BANKS[0];
 
   return (
     <div className="space-y-6">
@@ -451,8 +459,8 @@ export const CustomerWallet: React.FC = () => {
                         {txn.method && (
                           <>
                             <span>•</span>
-                            <span className="font-medium uppercase bg-slate-100 px-1.5 py-0.2 rounded text-[10px]">
-                              {txn.method === 'bangla_qr' ? 'Bangla QR' : txn.method}
+                            <span className="font-medium bg-slate-100 px-1.5 py-0.2 rounded text-[10px]">
+                              {getPaymentMethodDisplayLabel(txn.method, language, txn.bankDetails?.bankName)}
                             </span>
                           </>
                         )}
@@ -516,7 +524,7 @@ export const CustomerWallet: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-black text-sm sm:text-base">টাকা ডিপোজিট করুন (Deposit Money)</h4>
-                  <p className="text-[11px] text-emerald-200">বাংলা কিউআর, বিকাশ বা নগদ দিয়ে সরাসরি ওয়ালেটে ব্যালেন্স নিন</p>
+                  <p className="text-[11px] text-emerald-200">নগদ, বিকাশ বা উপায় পার্সোনাল অ্যাকাউন্টে সেন্ড মানি করে ব্যালেন্স নিন</p>
                 </div>
               </div>
               <button
@@ -567,162 +575,86 @@ export const CustomerWallet: React.FC = () => {
                 </div>
               </div>
 
-              {/* Step 2: Payment Method Choice */}
+              {/* Step 2: Payment Method Choice (ONLY Nagad, bKash, Upay Personal Send Money) */}
               <div>
                 <label className="block text-[11px] font-bold text-slate-700 mb-1.5">
-                  পেমেন্ট মাধ্যম বেছে নিন: <span className="text-rose-500">*</span>
+                  পেমেন্ট মাধ্যম বেছে নিন (পার্সোনাল • সেন্ড মানি): <span className="text-rose-500">*</span>
                 </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {[
-                    { id: 'bangla_qr', name: 'বাংলা কিউআর', sub: 'সার্বজনীন QR', popular: true },
-                    { id: 'bkash', name: 'বিকাশ', sub: 'bKash App' },
-                    { id: 'nagad', name: 'নগদ', sub: 'Nagad App' },
-                    { id: 'bank', name: 'ব্যাংক', sub: 'Bank Transfer' },
-                  ].map((m) => (
+                <div className="grid grid-cols-3 gap-2">
+                  {PERSONAL_PAYMENT_ACCOUNTS.map((m) => (
                     <button
                       key={m.id}
                       type="button"
-                      onClick={() => setDepositMethod(m.id as any)}
-                      className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer relative ${
+                      onClick={() => setDepositMethod(m.id)}
+                      className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                         depositMethod === m.id
-                          ? 'bg-emerald-50 border-emerald-600 ring-2 ring-emerald-500/20'
+                          ? m.activeCardClass
                           : 'bg-slate-50 border-slate-200 hover:bg-slate-100'
                       }`}
                     >
-                      {m.popular && (
-                        <span className="absolute -top-1.5 right-1.5 bg-red-600 text-white text-[8px] font-black px-1.5 py-0.2 rounded-full">
-                          অনুমোদিত
-                        </span>
-                      )}
-                      <div className="font-bold text-slate-900 text-xs">{m.name}</div>
-                      <div className="text-[10px] text-slate-500 mt-0.5">{m.sub}</div>
+                      <div className="font-bold text-slate-900 text-xs">{m.nameBn}</div>
+                      <div className={`text-[10px] font-semibold mt-0.5 ${m.accentText}`}>
+                        {m.accountTypeBn}
+                      </div>
+                      <div className="text-[10px] font-mono text-slate-600 mt-0.5 tabular-nums">
+                        {m.number}
+                      </div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Step 3: Instructions & Details for Chosen Method */}
-              <div className="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
-                {depositMethod === 'bangla_qr' && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-                      <div>
-                        <span className="text-[10px] font-black text-red-600 uppercase tracking-wider block">
-                          বাংলাদেশ ব্যাংক অনুমোদিত সার্বজনীন বাংলা কিউআর
-                        </span>
-                        <div className="font-bold text-slate-900 text-xs mt-0.5">মার্চেন্ট: বাংলা বাজার (Bangla Bazar)</div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setIsQrStandeeModalOpen(true)}
-                        className="text-[10px] font-bold text-slate-700 bg-white hover:bg-slate-100 px-2 py-1 rounded-md border border-slate-300 flex items-center gap-1 cursor-pointer"
-                      >
-                        <Eye className="w-3 h-3 text-slate-600" />
-                        <span>স্ট্যান্ডি</span>
-                      </button>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row items-center gap-3">
-                      {/* Clean cropped QR Image */}
-                      <div className="p-2 bg-white rounded-xl border border-slate-200 shadow-xs shrink-0 text-center">
-                        <img
-                          src="/assets/bangla_qr_code.png"
-                          alt="Bangla QR Code"
-                          className="w-28 h-28 object-contain mx-auto"
-                        />
-                        <span className="text-[9px] font-bold text-slate-400 block mt-1">ক্যামেরা দিয়ে স্ক্যান করুন</span>
-                      </div>
-
-                      <div className="space-y-2 flex-1 text-[11px] w-full">
-                        <div className="flex items-center justify-between p-1.5 bg-white rounded-lg border border-slate-200">
-                          <span className="text-slate-500">টালিপে নম্বর:</span>
-                          <div className="flex items-center gap-1">
-                            <strong className="font-mono text-red-700 text-xs font-black">01929-637253</strong>
-                            <button
-                              type="button"
-                              onClick={() => copyToClipboard('01929637253', 'মার্চেন্ট নম্বর')}
-                              className="px-1.5 py-0.5 bg-red-600 text-white rounded text-[10px] font-bold cursor-pointer"
-                            >
-                              কপি
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between p-1.5 bg-white rounded-lg border border-slate-200">
-                          <span className="text-slate-500">প্রদেয় টাকা:</span>
-                          <div className="flex items-center gap-1">
-                            <strong className="font-mono text-emerald-700 text-xs font-black">৳{depositAmount || '0'}</strong>
-                            <button
-                              type="button"
-                              onClick={() => copyToClipboard(depositAmount, 'টাকা')}
-                              className="px-1.5 py-0.5 bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer"
-                            >
-                              কপি
-                            </button>
-                          </div>
-                        </div>
-
-                        <p className="text-[10px] text-slate-500 leading-tight">
-                          বিকাশ, নগদ, রকেট, সেলফিন বা যেকোনো ব্যাংকের অ্যাপ খুলে QR স্ক্যান করে টাকা পাঠান।
-                        </p>
-                      </div>
-                    </div>
+              {/* Step 3: Personal Account Send Money Instructions */}
+              <div className={`p-4 rounded-2xl border ${activeDepositAccount.accentBg} ${activeDepositAccount.accentBorder} space-y-2.5`}>
+                <div className="flex items-center justify-between gap-2 pb-2 border-b border-slate-200/70">
+                  <div>
+                    <span className={`text-[10px] font-bold block ${activeDepositAccount.accentText}`}>
+                      {activeDepositAccount.nameBn} পার্সোনাল নম্বর ({activeDepositAccount.actionTypeBn}):
+                    </span>
+                    <strong className="font-mono text-base sm:text-lg font-black text-slate-900 tabular-nums">
+                      {activeDepositAccount.formattedNumber}
+                    </strong>
                   </div>
-                )}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      copyToClipboard(
+                        activeDepositAccount.number,
+                        `${activeDepositAccount.nameBn} নম্বর`
+                      )
+                    }
+                    className={`px-3 py-1.5 rounded-lg text-[11px] font-bold cursor-pointer inline-flex items-center gap-1 ${activeDepositAccount.buttonClass}`}
+                  >
+                    {copiedKey === `${activeDepositAccount.nameBn} নম্বর` ? (
+                      <>
+                        <Check className="w-3 h-3" />
+                        <span>কপি হয়েছে</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3 h-3" />
+                        <span>কপি করুন</span>
+                      </>
+                    )}
+                  </button>
+                </div>
 
-                {depositMethod === 'bkash' && (
-                  <div className="space-y-2">
-                    <div className="font-bold text-pink-700 text-xs flex items-center justify-between">
-                      <span>বিকাশ মার্চেন্ট / পার্সোনাল নম্বর:</span>
-                      <div className="flex items-center gap-1">
-                        <strong className="font-mono text-sm text-pink-800">01929-637253</strong>
-                        <button
-                          type="button"
-                          onClick={() => copyToClipboard('01929637253', 'বিকাশ নম্বর')}
-                          className="px-2 py-0.5 bg-pink-600 text-white rounded text-[10px] font-bold cursor-pointer"
-                        >
-                          কপি
-                        </button>
-                      </div>
-                    </div>
-                    <p className="text-[10.5px] text-slate-600">
-                      বিকাশ অ্যাপ থেকে <strong>"Send Money"</strong> বা <strong>"Payment"</strong> করে ৳{depositAmount} পাঠান।
-                    </p>
-                  </div>
-                )}
+                <div className="flex items-center justify-between text-[11px] bg-white/80 px-3 py-2 rounded-xl border border-slate-200/70">
+                  <span className="text-slate-600 font-medium">সেন্ড মানি পরিমাণ:</span>
+                  <strong className="font-mono text-emerald-700 text-xs font-black">
+                    ৳{depositAmount || '0'}
+                  </strong>
+                </div>
 
-                {depositMethod === 'nagad' && (
-                  <div className="space-y-2">
-                    <div className="font-bold text-orange-700 text-xs flex items-center justify-between">
-                      <span>নগদ নম্বর:</span>
-                      <div className="flex items-center gap-1">
-                        <strong className="font-mono text-sm text-orange-800">01929-637253</strong>
-                        <button
-                          type="button"
-                          onClick={() => copyToClipboard('01929637253', 'নগদ নম্বর')}
-                          className="px-2 py-0.5 bg-orange-600 text-white rounded text-[10px] font-bold cursor-pointer"
-                        >
-                          কপি
-                        </button>
-                      </div>
-                    </div>
-                    <p className="text-[10.5px] text-slate-600">
-                      নগদ অ্যাপ থেকে সেন্ড মানি বা ক্যাশ আউট করে ৳{depositAmount} প্রদান করুন।
-                    </p>
-                  </div>
-                )}
-
-                {depositMethod === 'bank' && (
-                  <div className="space-y-2 text-[11px] bg-white p-2.5 rounded-xl border border-slate-200">
-                    <div className="font-bold text-slate-900">ব্যাংক ট্রান্সফার তথ্য:</div>
-                    <div className="grid grid-cols-2 gap-2 text-slate-600">
-                      <div>ব্যাংক: <strong>City Bank PLC</strong></div>
-                      <div>হিসাব নাম: <strong>Bangla Bazar</strong></div>
-                      <div>হিসাব নম্বর: <strong className="font-mono text-emerald-700">1102938472001</strong></div>
-                      <div>শাখা: <strong>Banani Branch, Dhaka</strong></div>
-                    </div>
-                  </div>
-                )}
+                <p className="text-[11px] text-slate-700 leading-relaxed flex items-start gap-1.5">
+                  <Smartphone className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${activeDepositAccount.accentText}`} />
+                  <span>
+                    আপনার <strong>{activeDepositAccount.nameBn}</strong> অ্যাপ থেকে{' '}
+                    <strong>"Send Money (সেন্ড মানি)"</strong> অপশনে গিয়ে{' '}
+                    <strong className="font-mono">{activeDepositAccount.number}</strong> (পার্সোনাল) নম্বরে{' '}
+                    <strong>৳{depositAmount || '0'}</strong> পাঠান এবং নিচে প্রেরক নম্বর ও TrxID দিন।
+                  </span>
+                </p>
               </div>
 
               {/* Step 4: Verification Inputs */}
@@ -794,7 +726,7 @@ export const CustomerWallet: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-black text-sm sm:text-base">টাকা উত্তোলন করুন (Withdraw Money)</h4>
-                  <p className="text-[11px] text-slate-300">আপনার ওয়ালেটের টাকা বিকাশ, নগদ বা ব্যাংক একাউন্টে নিন</p>
+                  <p className="text-[11px] text-slate-300">বিকাশ, নগদ, উপায়, রকেট, সেলফিন সহ যেকোনো মোবাইল ব্যাংকে টাকা নিন</p>
                 </div>
               </div>
               <button
@@ -867,94 +799,63 @@ export const CustomerWallet: React.FC = () => {
                 </div>
               </div>
 
-              {/* Withdraw Method */}
+              {/* Withdraw Method: All Mobile Banking Platforms */}
               <div>
                 <label className="block text-[11px] font-bold text-slate-700 mb-1.5">
-                  টাকা গ্রহণের মাধ্যম: <span className="text-rose-500">*</span>
+                  মোবাইল ব্যাংক নির্বাচন করুন: <span className="text-rose-500">*</span>
                 </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {[
-                    { id: 'bkash', name: 'বিকাশ (bKash)' },
-                    { id: 'nagad', name: 'নগদ (Nagad)' },
-                    { id: 'rocket', name: 'রকেট (Rocket)' },
-                    { id: 'bank', name: 'ব্যাংক হিসাব' },
-                  ].map((m) => (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {WITHDRAW_MOBILE_BANKS.map((m) => (
                     <button
                       key={m.id}
                       type="button"
-                      onClick={() => setWithdrawMethod(m.id as any)}
+                      onClick={() => setWithdrawMethod(m.id)}
                       className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
                         withdrawMethod === m.id
                           ? 'bg-emerald-50 border-emerald-600 ring-2 ring-emerald-500/20 text-emerald-900 font-bold'
                           : 'bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-700'
                       }`}
                     >
-                      <span className="text-xs">{m.name}</span>
+                      <span className="text-xs">{m.shortLabel}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Account Number */}
+              {/* Other Mobile Bank Name Input */}
+              {withdrawMethod === 'other_mfs' && (
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                    মোবাইল ব্যাংকের নাম <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={withdrawOtherBankName}
+                    onChange={(e) => setWithdrawOtherBankName(e.target.value)}
+                    placeholder="যেমন: MeghnaPay / MyCash / FastPay"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs outline-none focus:border-emerald-600 focus:bg-white"
+                  />
+                </div>
+              )}
+
+              {/* Mobile Banking Account Number */}
               <div>
                 <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                  {withdrawMethod === 'bank' ? 'ব্যাংক হিসাব নম্বর' : 'মোবাইল অ্যাকাউন্ট নম্বর'} <span className="text-rose-500">*</span>
+                  {withdrawMethod === 'other_mfs'
+                    ? `${withdrawOtherBankName.trim() || 'মোবাইল ব্যাংক'} নম্বর`
+                    : `${selectedWithdrawBank.nameBn} মোবাইল নম্বর`}{' '}
+                  <span className="text-rose-500">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="tel"
                   required
                   value={withdrawAccount}
                   onChange={(e) => setWithdrawAccount(e.target.value)}
-                  placeholder={withdrawMethod === 'bank' ? 'যেমন: 1102938472001' : '01XXXXXXXXX'}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs font-mono outline-none focus:border-emerald-600 focus:bg-white"
+                  placeholder="01XXXXXXXXX"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-mono outline-none focus:border-emerald-600 focus:bg-white"
                 />
               </div>
-
-              {/* Bank-specific Fields */}
-              {withdrawMethod === 'bank' && (
-                <div className="space-y-3 p-3 bg-slate-50 rounded-2xl border border-slate-200">
-                  <div>
-                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                      ব্যাংকের নাম (Bank Name) <span className="text-rose-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={withdrawBankName}
-                      onChange={(e) => setWithdrawBankName(e.target.value)}
-                      placeholder="যেমন: Islami Bank / City Bank / BRAC Bank"
-                      className="w-full bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-emerald-600"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                        হিসাবধারীর নাম (Account Holder)
-                      </label>
-                      <input
-                        type="text"
-                        value={withdrawAccountHolder}
-                        onChange={(e) => setWithdrawAccountHolder(e.target.value)}
-                        placeholder="আপনার নাম"
-                        className="w-full bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-emerald-600"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                        শাখার নাম (Branch)
-                      </label>
-                      <input
-                        type="text"
-                        value={withdrawBranch}
-                        onChange={(e) => setWithdrawBranch(e.target.value)}
-                        placeholder="যেমন: বনানী শাখা"
-                        className="w-full bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-emerald-600"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {/* Submit Button */}
               <button
@@ -972,58 +873,6 @@ export const CustomerWallet: React.FC = () => {
                 )}
               </button>
             </form>
-          </div>
-        </div>
-      )}
-
-      {/* 5. FULL BANGLA QR STANDEE PREVIEW MODAL */}
-      {isQrStandeeModalOpen && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in"
-          onClick={() => setIsQrStandeeModalOpen(false)}
-        >
-          <div 
-            className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-200 relative flex flex-col max-h-[90vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-4 bg-gradient-to-r from-red-600 to-rose-700 text-white flex items-center justify-between">
-              <div>
-                <h4 className="font-black text-sm">বাংলাদেশ ব্যাংক সার্বজনীন বাংলা কিউআর</h4>
-                <p className="text-[11px] text-red-100">মার্চেন্ট: বাংলা বাজার • টালিপে নম্বর: 01929-637253</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsQrStandeeModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors cursor-pointer"
-              >
-                <X className="w-4 h-4 text-white" />
-              </button>
-            </div>
-
-            <div className="p-4 overflow-y-auto flex flex-col items-center text-center space-y-3">
-              <img
-                src="/assets/bangla_qr_card.png"
-                alt="Bangla QR Standee"
-                className="max-h-[60vh] w-auto object-contain rounded-xl border border-slate-200 shadow-md"
-              />
-              <div className="flex items-center gap-2 w-full pt-1">
-                <a
-                  href="/assets/bangla_qr_card.png"
-                  download="Bangla_Bazar_BanglaQR_Standee.png"
-                  className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition-all"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>স্ট্যান্ডি ছবি ডাউনলোড</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setIsQrStandeeModalOpen(false)}
-                  className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-all cursor-pointer"
-                >
-                  বন্ধ করুন
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       )}

@@ -42,15 +42,26 @@ import {
   ArrowDownLeft,
   ArrowUpRight,
   CheckCircle2,
-  XCircle
+  XCircle,
+  Users,
+  UserPlus,
+  Ban,
+  Unlock,
+  Phone,
+  Mail,
+  MapPin,
+  Lock,
+  EyeOff
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { Product, Category, Order, OrderStatus, AdminBannerSlide } from '../types';
+import { Product, Category, Order, OrderStatus, AdminBannerSlide, User } from '../types';
+import { BANGLADESH_DIVISIONS } from '../data/mockData';
 import { ProductEditModal } from '../components/admin/ProductEditModal';
 import { OrderInvoiceModal } from '../components/admin/OrderInvoiceModal';
 import { ShopBaseImporter } from '../components/admin/ShopBaseImporter';
 import { ShopBaseDropshipModal } from '../components/admin/ShopBaseDropshipModal';
 import { compressImageFile } from '../utils/imageCompressor';
+import { checkSupabaseGoogleProviderStatus, GOOGLE_CLIENT_ID } from '../lib/supabase';
 
 export const AdminPage: React.FC = () => {
   const {
@@ -92,11 +103,17 @@ export const AdminPage: React.FC = () => {
     allWalletTransactions,
     updateWalletTransactionStatus,
     adminAdjustUserBalance,
-    currentUser
+    currentUser,
+    users,
+    isUserAdmin,
+    adminCreateUser,
+    adminUpdateUser,
+    adminDeleteUser,
+    adminToggleUserBlock
   } = useApp();
 
   const [activeTab, setActiveTab] = useState<
-    'overview' | 'orders' | 'products' | 'categories' | 'design' | 'banners' | 'security' | 'supabase' | 'shopbase' | 'wallet'
+    'overview' | 'orders' | 'customers' | 'products' | 'categories' | 'design' | 'banners' | 'security' | 'supabase' | 'shopbase' | 'wallet'
   >('overview');
 
   // Wallet admin state
@@ -108,9 +125,40 @@ export const AdminPage: React.FC = () => {
   const [adjustType, setAdjustType] = useState<'credit' | 'debit'>('credit');
   const [adjustNote, setAdjustNote] = useState('');
 
+  // Customer management state
+  const [customerSearch, setCustomerSearch] = useState('');
+  const [customerFilter, setCustomerFilter] = useState<'all' | 'active' | 'blocked' | 'with_orders' | 'admin'>('all');
+  const [customerToInspect, setCustomerToInspect] = useState<User | null>(null);
+  const [showInspectedPassword, setShowInspectedPassword] = useState(false);
+  const [isCustomerFormModalOpen, setIsCustomerFormModalOpen] = useState(false);
+  const [customerToEdit, setCustomerToEdit] = useState<User | null>(null);
+  const [custFormName, setCustFormName] = useState('');
+  const [custFormPhone, setCustFormPhone] = useState('');
+  const [custFormEmail, setCustFormEmail] = useState('');
+  const [custFormPassword, setCustFormPassword] = useState('');
+  const [custFormDivision, setCustFormDivision] = useState(BANGLADESH_DIVISIONS[0].nameBn);
+  const [custFormDistrict, setCustFormDistrict] = useState(BANGLADESH_DIVISIONS[0].districts[0]);
+  const [custFormThana, setCustFormThana] = useState('');
+  const [custFormVillage, setCustFormVillage] = useState('');
+  const [custFormRole, setCustFormRole] = useState<'user' | 'admin'>('user');
+  const [custFormStatus, setCustFormStatus] = useState<'active' | 'blocked'>('active');
+  const [custFormAdminNote, setCustFormAdminNote] = useState('');
+  const [custFormInitialBalance, setCustFormInitialBalance] = useState('0');
+
   const [sqlCopied, setSqlCopied] = useState(false);
   const [isSyncingSupabase, setIsSyncingSupabase] = useState(false);
   const [isCheckingConnection, setIsCheckingConnection] = useState(false);
+  const [googleOAuthEnabled, setGoogleOAuthEnabled] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (activeTab === 'supabase') {
+      if (GOOGLE_CLIENT_ID) {
+        setGoogleOAuthEnabled(true);
+      } else {
+        checkSupabaseGoogleProviderStatus().then((res) => setGoogleOAuthEnabled(res));
+      }
+    }
+  }, [activeTab]);
 
   // Product management state
   const [productSearch, setProductSearch] = useState('');
@@ -398,7 +446,7 @@ export const AdminPage: React.FC = () => {
 
   // Universal Delete Confirmation Dialog State (100% Reliable in iframe sandbox)
   const [deleteConfirmation, setDeleteConfirmation] = useState<{
-    type: 'product' | 'category' | 'order' | 'banner' | 'reset-products' | 'reset-categories' | 'reset-settings' | 'factory-reset' | 'bulk-products';
+    type: 'product' | 'category' | 'order' | 'banner' | 'user' | 'reset-products' | 'reset-categories' | 'reset-settings' | 'factory-reset' | 'bulk-products';
     id?: string;
     name: string;
     details?: string;
@@ -449,6 +497,19 @@ export const AdminPage: React.FC = () => {
           deleteBannerSlide(deleteConfirmation.id);
           if (bannerToEdit?.id === deleteConfirmation.id) {
             setBannerToEdit(null);
+          }
+        }
+        break;
+
+      case 'user':
+        if (deleteConfirmation.id) {
+          adminDeleteUser(deleteConfirmation.id);
+          if (customerToInspect?.id === deleteConfirmation.id) {
+            setCustomerToInspect(null);
+          }
+          if (customerToEdit?.id === deleteConfirmation.id) {
+            setCustomerToEdit(null);
+            setIsCustomerFormModalOpen(false);
           }
         }
         break;
@@ -516,6 +577,101 @@ export const AdminPage: React.FC = () => {
       return true;
     });
   }, [allWalletTransactions, walletTxnSearch, walletTxnFilter]);
+
+  // Customer order matcher & metrics
+  const getCustomerOrders = (user: User): Order[] => {
+    const uPhoneDigits = (user.phone || '').replace(/[^0-9]/g, '').slice(-10);
+    const uEmail = (user.email || '').trim().toLowerCase();
+    return orders.filter((ord) => {
+      if (ord.userId && ord.userId === user.id) return true;
+      const oPhone = (ord.customerPhone || ord.shippingAddress?.phone || '').replace(/[^0-9]/g, '').slice(-10);
+      if (uPhoneDigits.length >= 10 && oPhone === uPhoneDigits) return true;
+      const oEmail = (ord.customerEmail || ord.shippingAddress?.email || '').trim().toLowerCase();
+      if (uEmail && oEmail && oEmail === uEmail) return true;
+      return false;
+    });
+  };
+
+  const customerMetrics = useMemo(() => {
+    const activeCount = users.filter((u) => u.accountStatus !== 'blocked').length;
+    const blockedCount = users.filter((u) => u.accountStatus === 'blocked').length;
+    const adminCount = users.filter((u) => isUserAdmin(u) || u.role === 'admin').length;
+    const totalWalletBalance = users.reduce((sum, u) => sum + (u.balance || 0), 0);
+    return {
+      total: users.length,
+      active: activeCount,
+      blocked: blockedCount,
+      adminCount,
+      totalWalletBalance,
+    };
+  }, [users, isUserAdmin]);
+
+  const filteredCustomers = useMemo(() => {
+    const q = customerSearch.toLowerCase().trim();
+    return users.filter((u) => {
+      const matchesSearch =
+        !q ||
+        (u.name && u.name.toLowerCase().includes(q)) ||
+        (u.phone && u.phone.toLowerCase().includes(q)) ||
+        (u.email && u.email.toLowerCase().includes(q)) ||
+        (u.id && u.id.toLowerCase().includes(q)) ||
+        (u.referralCode && u.referralCode.toLowerCase().includes(q)) ||
+        (u.district && u.district.toLowerCase().includes(q)) ||
+        (u.division && u.division.toLowerCase().includes(q)) ||
+        (u.adminNote && u.adminNote.toLowerCase().includes(q));
+
+      if (!matchesSearch) return false;
+
+      if (customerFilter === 'active') return u.accountStatus !== 'blocked';
+      if (customerFilter === 'blocked') return u.accountStatus === 'blocked';
+      if (customerFilter === 'admin') return isUserAdmin(u) || u.role === 'admin';
+      if (customerFilter === 'with_orders') return getCustomerOrders(u).length > 0;
+      return true;
+    });
+  }, [users, customerSearch, customerFilter, orders, isUserAdmin]);
+
+  const openCreateCustomerModal = () => {
+    setCustomerToEdit(null);
+    setCustFormName('');
+    setCustFormPhone('');
+    setCustFormEmail('');
+    setCustFormPassword('');
+    setCustFormDivision(BANGLADESH_DIVISIONS[0].nameBn);
+    setCustFormDistrict(BANGLADESH_DIVISIONS[0].districts[0]);
+    setCustFormThana('');
+    setCustFormVillage('');
+    setCustFormRole('user');
+    setCustFormStatus('active');
+    setCustFormAdminNote('');
+    setCustFormInitialBalance('0');
+    setIsCustomerFormModalOpen(true);
+  };
+
+  const openEditCustomerModal = (u: User) => {
+    setCustomerToEdit(u);
+    setCustFormName(u.name || '');
+    setCustFormPhone(u.phone || '');
+    setCustFormEmail(u.email || '');
+    setCustFormPassword('');
+    setCustFormDivision(u.division || BANGLADESH_DIVISIONS[0].nameBn);
+    setCustFormDistrict(u.district || BANGLADESH_DIVISIONS[0].districts[0]);
+    setCustFormThana(u.thana || '');
+    setCustFormVillage(u.village || '');
+    setCustFormRole(u.role === 'admin' || isUserAdmin(u) ? 'admin' : 'user');
+    setCustFormStatus(u.accountStatus === 'blocked' ? 'blocked' : 'active');
+    setCustFormAdminNote(u.adminNote || '');
+    setCustFormInitialBalance(String(u.balance || 0));
+    setIsCustomerFormModalOpen(true);
+  };
+
+  const selectedCustomerDivisionObj =
+    BANGLADESH_DIVISIONS.find((d) => d.nameBn === custFormDivision || d.nameEn === custFormDivision) ||
+    BANGLADESH_DIVISIONS[0];
+
+  const adjustTargetUser = useMemo(
+    () => users.find((u) => u.id === adjustUserId) || users[0] || currentUser,
+    [users, adjustUserId, currentUser]
+  );
 
   // Memoized Filtered Products (Supports searching by title, SKU, brand, ID across all 11,902 products)
   const filteredProducts = useMemo(() => {
@@ -834,11 +990,17 @@ export const AdminPage: React.FC = () => {
         <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-3 mb-6 border-b border-slate-800 scrollbar-none">
           {[
             { id: 'overview', label: 'ওভারভিউ (Overview)', icon: TrendingUp },
-            { 
-              id: 'orders', 
-              label: 'কাস্টমার অর্ডারসমূহ (Orders)', 
-              icon: Package, 
-              badge: pendingOrdersCount > 0 ? pendingOrdersCount : undefined 
+            {
+              id: 'orders',
+              label: 'কাস্টমার অর্ডারসমূহ (Orders)',
+              icon: Package,
+              badge: pendingOrdersCount > 0 ? pendingOrdersCount : undefined
+            },
+            {
+              id: 'customers',
+              label: 'কাস্টমার অ্যাকাউন্টস (Customers)',
+              icon: Users,
+              count: users.length
             },
             {
               id: 'wallet',
@@ -923,26 +1085,22 @@ export const AdminPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80">
+              <button
+                type="button"
+                onClick={() => setActiveTab('customers')}
+                className="bg-slate-800/80 hover:bg-slate-800 p-5 rounded-2xl border border-slate-700/80 hover:border-cyan-500/50 text-left transition-all cursor-pointer group"
+              >
                 <div className="flex items-center justify-between text-slate-400 text-xs font-bold mb-2">
-                  <span>বর্তমান অ্যাক্টিভ থিম</span>
-                  <Palette className="w-4 h-4 text-rose-400" />
+                  <span>মোট কাস্টমার অ্যাকাউন্ট</span>
+                  <Users className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
                 </div>
-                <div className="flex items-center gap-2 mt-1">
-                  <span
-                    className="w-5 h-5 rounded-full border border-white/20 shadow-inner"
-                    style={{ backgroundColor: siteSettings.primaryColor }}
-                  />
-                  <span
-                    className="w-5 h-5 rounded-full border border-white/20 shadow-inner"
-                    style={{ backgroundColor: siteSettings.accentColor }}
-                  />
-                  <span className="font-bold text-xs uppercase text-slate-300">
-                    {siteSettings.themePreset}
-                  </span>
+                <div className="text-xl sm:text-2xl font-black text-white">
+                  {users.length} জন
                 </div>
-                <div className="text-[11px] text-slate-400 mt-2">রিয়েলটাইম ওয়েবসাইট কালার সক্রিয়</div>
-              </div>
+                <div className="text-[11px] text-cyan-400 font-bold mt-1">
+                  সক্রিয়: {customerMetrics.active} জন {customerMetrics.blocked > 0 ? `• স্থগিত: ${customerMetrics.blocked}` : ''}
+                </div>
+              </button>
             </div>
 
             {/* Quick Action Shortcuts */}
@@ -951,7 +1109,7 @@ export const AdminPage: React.FC = () => {
                 <Sparkles className="w-4 h-4 text-amber-400" />
                 <span>দ্রুত এডমিন অ্যাকশনসমূহ</span>
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
                 <button
                   onClick={() => {
                     setProductToEdit(null);
@@ -971,6 +1129,15 @@ export const AdminPage: React.FC = () => {
                   <Package className="w-5 h-5 text-amber-400 mb-2 group-hover:scale-110 transition-transform" />
                   <div className="font-bold text-xs text-white">অর্ডার ম্যানেজ করুন</div>
                   <div className="text-[10px] text-slate-400 mt-0.5">কাস্টমার অর্ডার ও ইনভয়েস</div>
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('customers')}
+                  className="p-4 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/30 rounded-2xl text-left transition-all cursor-pointer group"
+                >
+                  <Users className="w-5 h-5 text-cyan-400 mb-2 group-hover:scale-110 transition-transform" />
+                  <div className="font-bold text-xs text-white">কাস্টমার অ্যাকাউন্টস</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">অ্যাকাউন্ট দেখুন, এডিট ও নিয়ন্ত্রণ</div>
                 </button>
 
                 <button
@@ -1130,7 +1297,13 @@ export const AdminPage: React.FC = () => {
                           {ord.paymentStatus === 'paid' ? 'Paid' : 'Pending'}
                         </span>
                         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
-                          {ord.paymentMethod === 'bangla_qr' ? 'বাংলা কিউআর (Bangla QR)' : ord.paymentMethod}
+                          {ord.paymentMethod === 'nagad'
+                            ? 'নগদ (পার্সোনাল)'
+                            : ord.paymentMethod === 'bkash'
+                            ? 'বিকাশ (পার্সোনাল)'
+                            : ord.paymentMethod === 'upay'
+                            ? 'উপায় (পার্সোনাল)'
+                            : ord.paymentMethod}
                         </span>
                       </div>
                     </div>
@@ -1152,7 +1325,18 @@ export const AdminPage: React.FC = () => {
                       <div>
                         <span className="text-[10px] font-bold text-slate-500 uppercase block mb-1">পেমেন্ট ও ট্রানজেকশন তথ্য:</span>
                         <div className="text-white font-bold uppercase flex items-center gap-1.5">
-                          <span>পেমেন্ট: {ord.paymentMethod === 'cod' ? 'Cash on Delivery' : ord.paymentMethod === 'bangla_qr' ? 'বাংলা কিউআর (Bangla QR)' : ord.paymentMethod}</span>
+                          <span>
+                            পেমেন্ট:{' '}
+                            {ord.paymentMethod === 'nagad'
+                              ? 'নগদ (পার্সোনাল)'
+                              : ord.paymentMethod === 'bkash'
+                              ? 'বিকাশ (পার্সোনাল)'
+                              : ord.paymentMethod === 'upay'
+                              ? 'উপায় (পার্সোনাল)'
+                              : ord.paymentMethod === 'cod'
+                              ? 'Cash on Delivery'
+                              : ord.paymentMethod}
+                          </span>
                           <span className={`px-2 py-0.5 rounded text-[9px] ${ord.paymentStatus === 'paid' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>
                             {ord.paymentStatus}
                           </span>
@@ -1298,6 +1482,337 @@ export const AdminPage: React.FC = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* TAB 2B: CUSTOMER ACCOUNTS MANAGEMENT (কাস্টমার অ্যাকাউন্টস) */}
+        {activeTab === 'customers' && (
+          <div className="space-y-6">
+            {/* Header & Primary Actions */}
+            <div className="p-6 bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 rounded-3xl border border-cyan-500/20 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-3 mb-1.5">
+                  <div className="w-10 h-10 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                    <Users className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-black text-white">
+                    কাস্টমার অ্যাকাউন্ট ম্যানেজমেন্ট (Customer Accounts)
+                  </h2>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-400">
+                  ওয়েবসাইটে নিবন্ধিত সকল কাস্টমারের অ্যাকাউন্ট দেখুন, প্রোফাইল ও ঠিকানা এডিট করুন, ওয়ালেট ব্যালেন্স নিয়ন্ত্রণ এবং অ্যাকাউন্ট সক্রিয় বা স্থগিত করুন।
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={async () => {
+                    setIsCheckingConnection(true);
+                    await checkSupabaseConnection();
+                    setIsCheckingConnection(false);
+                    addToast('সার্ভার থেকে কাস্টমার তালিকা রিফ্রেশ করা হয়েছে', 'info');
+                  }}
+                  className="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center gap-1.5 border border-slate-700 transition-colors cursor-pointer"
+                >
+                  <RotateCcw className={`w-3.5 h-3.5 ${isCheckingConnection ? 'animate-spin' : ''}`} />
+                  <span>রিফ্রেশ</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={openCreateCustomerModal}
+                  className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-cyan-500/20 active:scale-95 transition-all cursor-pointer"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  <span>নতুন কাস্টমার অ্যাকাউন্ট</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Customer Metrics Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="p-5 bg-slate-950/80 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+                  <span>মোট অ্যাকাউন্ট</span>
+                  <Users className="w-4 h-4 text-cyan-400" />
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-white">{customerMetrics.total} জন</div>
+                <div className="text-[11px] text-slate-500 mt-1">নিবন্ধিত সর্বমোট সদস্য</div>
+              </div>
+
+              <div className="p-5 bg-slate-950/80 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+                  <span>সক্রিয় কাস্টমার</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-emerald-400">{customerMetrics.active} জন</div>
+                <div className="text-[11px] text-slate-500 mt-1">স্বাভাবিক লগইন ও অর্ডার সচল</div>
+              </div>
+
+              <div className="p-5 bg-slate-950/80 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+                  <span>স্থগিত (Blocked)</span>
+                  <Ban className="w-4 h-4 text-rose-400" />
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-rose-400">{customerMetrics.blocked} জন</div>
+                <div className="text-[11px] text-slate-500 mt-1">লগইন বন্ধ রাখা অ্যাকাউন্ট</div>
+              </div>
+
+              <div className="p-5 bg-slate-950/80 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between text-slate-400 text-xs mb-2">
+                  <span>মোট ওয়ালেট ব্যালেন্স</span>
+                  <Wallet className="w-4 h-4 text-amber-400" />
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-amber-400">
+                  {formatPrice(customerMetrics.totalWalletBalance)}
+                </div>
+                <div className="text-[11px] text-slate-500 mt-1">সকল গ্রাহকের ওয়ালেটে জমা</div>
+              </div>
+            </div>
+
+            {/* Search & Filter Controls */}
+            <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between bg-slate-800/80 p-4 rounded-2xl border border-slate-700/80">
+              <div className="relative flex-1">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                <input
+                  type="text"
+                  value={customerSearch}
+                  onChange={(e) => setCustomerSearch(e.target.value)}
+                  placeholder="নাম, মোবাইল নম্বর, ইমেইল, জেলা বা রেফারেল কোড দিয়ে খুঁজুন..."
+                  className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none"
+                />
+              </div>
+
+              <div className="flex flex-wrap gap-1.5">
+                {(
+                  [
+                    { id: 'all', label: `সব (${users.length})` },
+                    { id: 'active', label: `সক্রিয় (${customerMetrics.active})` },
+                    { id: 'blocked', label: `স্থগিত (${customerMetrics.blocked})` },
+                    { id: 'with_orders', label: 'অর্ডার আছে' },
+                    { id: 'admin', label: `অ্যাডমিন (${customerMetrics.adminCount})` },
+                  ] as const
+                ).map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setCustomerFilter(tab.id)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      customerFilter === tab.id
+                        ? 'bg-cyan-500 text-slate-950'
+                        : 'bg-slate-900 text-slate-300 hover:bg-slate-700'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Customer List */}
+            {filteredCustomers.length === 0 ? (
+              <div className="bg-slate-800/50 p-12 rounded-3xl border border-slate-700 text-center">
+                <Users className="w-12 h-12 text-slate-600 mx-auto mb-3" />
+                <h4 className="text-slate-300 font-bold">কোনো কাস্টমার অ্যাকাউন্ট পাওয়া যায়নি</h4>
+                <p className="text-xs text-slate-500 mt-1">সার্চ বা ফিল্টার পরিবর্তন করে পুনরায় চেষ্টা করুন</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-4">
+                {filteredCustomers.map((u) => {
+                  const custOrders = getCustomerOrders(u);
+                  const totalSpent = custOrders.reduce((sum, ord) => sum + ord.total, 0);
+                  const isOwner = isUserAdmin(u);
+                  const isBlocked = u.accountStatus === 'blocked';
+                  const fullAddress = [u.village, u.thana, u.district, u.division].filter(Boolean).join(', ');
+
+                  return (
+                    <div
+                      key={u.id}
+                      className={`p-5 rounded-2xl border transition-all ${
+                        isBlocked
+                          ? 'bg-rose-950/20 border-rose-500/30'
+                          : 'bg-slate-800/80 border-slate-700/80 hover:border-slate-600'
+                      }`}
+                    >
+                      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                        {/* Left: Avatar & Profile Info */}
+                        <div className="flex items-start gap-4 min-w-0 flex-1">
+                          <div className="relative shrink-0">
+                            {u.avatar ? (
+                              <img
+                                src={u.avatar}
+                                alt={u.name}
+                                className="w-14 h-14 rounded-2xl object-cover border-2 border-slate-700 bg-slate-900"
+                              />
+                            ) : (
+                              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-black text-lg border-2 border-slate-700">
+                                {(u.name || 'U').charAt(0).toUpperCase()}
+                              </div>
+                            )}
+                            <span
+                              className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-slate-900 ${
+                                isBlocked ? 'bg-rose-500' : 'bg-emerald-500'
+                              }`}
+                              title={isBlocked ? 'Blocked' : 'Active'}
+                            />
+                          </div>
+
+                          <div className="min-w-0 flex-1 space-y-1.5">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <h3 className="text-base font-black text-white truncate">{u.name}</h3>
+                              {isOwner ? (
+                                <span className="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold">
+                                  মূল অ্যাডমিন
+                                </span>
+                              ) : u.role === 'admin' ? (
+                                <span className="px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 text-[10px] font-bold">
+                                  অ্যাডমিন স্টাফ
+                                </span>
+                              ) : null}
+
+                              {isBlocked ? (
+                                <span className="px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[10px] font-bold">
+                                  স্থগিত (Blocked)
+                                </span>
+                              ) : (
+                                <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold">
+                                  সক্রিয়
+                                </span>
+                              )}
+
+                              {u.referralCode && (
+                                <span className="px-2 py-0.5 rounded-md bg-slate-900 text-slate-300 border border-slate-700 font-mono text-[10px]">
+                                  রেফার: {u.referralCode}
+                                </span>
+                              )}
+                            </div>
+
+                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-300">
+                              {u.phone && (
+                                <span className="inline-flex items-center gap-1.5 font-mono text-amber-300">
+                                  <Phone className="w-3.5 h-3.5 text-slate-400" />
+                                  {u.phone}
+                                </span>
+                              )}
+                              {u.email && (
+                                <span className="inline-flex items-center gap-1.5 text-slate-300">
+                                  <Mail className="w-3.5 h-3.5 text-slate-400" />
+                                  {u.email}
+                                </span>
+                              )}
+                              {fullAddress && (
+                                <span className="inline-flex items-center gap-1.5 text-slate-400">
+                                  <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                                  <span className="truncate max-w-xs sm:max-w-md">{fullAddress}</span>
+                                </span>
+                              )}
+                            </div>
+
+                            {u.adminNote && (
+                              <div className="text-[11px] text-cyan-300 bg-cyan-950/40 border border-cyan-500/20 px-2.5 py-1 rounded-lg inline-block">
+                                নোট: {u.adminNote}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Middle: Metrics */}
+                        <div className="grid grid-cols-3 gap-2 sm:gap-3 bg-slate-900/70 p-3 rounded-xl border border-slate-800 shrink-0">
+                          <div className="px-2 text-center">
+                            <div className="text-[10px] text-slate-400 font-bold">মোট অর্ডার</div>
+                            <div className="text-sm font-black text-white mt-0.5">{custOrders.length} টি</div>
+                          </div>
+                          <div className="px-2 text-center border-x border-slate-800">
+                            <div className="text-[10px] text-slate-400 font-bold">মোট কেনাকাটা</div>
+                            <div className="text-sm font-black text-emerald-400 mt-0.5">{formatPrice(totalSpent)}</div>
+                          </div>
+                          <div className="px-2 text-center">
+                            <div className="text-[10px] text-slate-400 font-bold">ওয়ালেট ব্যালেন্স</div>
+                            <div className="text-sm font-black text-amber-400 mt-0.5">{formatPrice(u.balance || 0)}</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Bottom Actions Row */}
+                      <div className="flex flex-wrap items-center justify-between gap-3 pt-3 mt-3 border-t border-slate-700/60">
+                        <div className="text-[11px] text-slate-500 font-mono">
+                          ID: {u.id}
+                          {u.createdAt && ` • নিবন্ধন: ${new Date(u.createdAt).toLocaleDateString('bn-BD')}`}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setShowInspectedPassword(false);
+                              setCustomerToInspect(u);
+                            }}
+                            className="px-3 py-1.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                          >
+                            <Eye className="w-3.5 h-3.5" />
+                            <span>বিস্তারিত</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => openEditCustomerModal(u)}
+                            className="px-3 py-1.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/30 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                          >
+                            <Edit3 className="w-3.5 h-3.5" />
+                            <span>এডিট</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setAdjustUserId(u.id);
+                              setIsAdjustModalOpen(true);
+                            }}
+                            className="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-slate-950 border border-amber-500/30 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                          >
+                            <Wallet className="w-3.5 h-3.5" />
+                            <span>ব্যালেন্স +/-</span>
+                          </button>
+
+                          {!isOwner && (
+                            <>
+                              <button
+                                type="button"
+                                onClick={() => adminToggleUserBlock(u.id)}
+                                className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 border transition-colors cursor-pointer ${
+                                  isBlocked
+                                    ? 'bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border-emerald-500/30'
+                                    : 'bg-orange-600/20 hover:bg-orange-600 text-orange-300 hover:text-white border-orange-500/30'
+                                }`}
+                              >
+                                {isBlocked ? <Unlock className="w-3.5 h-3.5" /> : <Ban className="w-3.5 h-3.5" />}
+                                <span>{isBlocked ? 'সক্রিয় করুন' : 'ব্লক করুন'}</span>
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setDeleteConfirmation({
+                                    type: 'user',
+                                    id: u.id,
+                                    name: u.name,
+                                    details: `ফোন: ${u.phone || 'নেই'} • ইমেইল: ${u.email || 'নেই'} • ব্যালেন্স: ${formatPrice(u.balance || 0)}`,
+                                  })
+                                }
+                                className="px-3 py-1.5 rounded-xl bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/30 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                                <span>ডিলিট</span>
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -3507,6 +4022,116 @@ export const AdminPage: React.FC = () => {
               </div>
             </div>
 
+            {/* Google OAuth Login & Registration Config Card */}
+            <div className="bg-slate-800/80 p-6 rounded-3xl border border-slate-700/80 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-700/80">
+                <div>
+                  <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                    <span>গুগল লগইন ও রেজিস্ট্রেশন (Google OAuth) সেটআপ</span>
+                  </h4>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    কাস্টমাররা গুগল বাটনে ক্লিক করে ইমেইল সিলেক্ট করলেই অটো লগইন/রেজিস্ট্রেশন সম্পন্ন হবে।
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold ${
+                      googleOAuthEnabled === true
+                        ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                        : googleOAuthEnabled === false
+                        ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                        : 'bg-slate-700 text-slate-300 border border-slate-600'
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        googleOAuthEnabled === true
+                          ? 'bg-emerald-400'
+                          : googleOAuthEnabled === false
+                          ? 'bg-rose-400'
+                          : 'bg-slate-400'
+                      }`}
+                    />
+                    <span>
+                      {googleOAuthEnabled === true
+                        ? 'গুগল OAuth সক্রিয়'
+                        : googleOAuthEnabled === false
+                        ? 'Supabase-এ Google Provider চালু করুন'
+                        : 'স্ট্যাটাস যাচাই হচ্ছে'}
+                    </span>
+                  </span>
+                  <a
+                    href={`https://supabase.com/dashboard/project/${supabaseUrl.replace('https://', '').split('.')[0]}/auth/providers`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black rounded-xl text-xs inline-flex items-center gap-1.5 transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>Google Provider চালু করুন</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                <div className="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 space-y-1.5">
+                  <span className="text-slate-400 font-bold block">Supabase Callback URL (Google Cloud Console-এ দিন):</span>
+                  <div className="flex items-center gap-2">
+                    <code className="font-mono text-[11px] text-emerald-300 break-all flex-1">
+                      {supabaseUrl}/auth/v1/callback
+                    </code>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard?.writeText(`${supabaseUrl}/auth/v1/callback`);
+                        addToast('Callback URL কপি হয়েছে!', 'success');
+                      }}
+                      className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[11px] shrink-0 cursor-pointer"
+                    >
+                      কপি
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 space-y-2">
+                  <span className="text-slate-400 font-bold block">Site / Redirect URLs (Supabase URL Configuration-এ দিন):</span>
+                  <div className="flex items-center gap-2">
+                    <code className="font-mono text-[11px] text-cyan-300 break-all flex-1">
+                      https://banglabazarbd.vercel.app
+                    </code>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard?.writeText('https://banglabazarbd.vercel.app');
+                        addToast('লাইভ Redirect URL কপি হয়েছে!', 'success');
+                      }}
+                      className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[11px] shrink-0 cursor-pointer"
+                    >
+                      কপি
+                    </button>
+                  </div>
+                  {typeof window !== 'undefined' && window.location.origin !== 'https://banglabazarbd.vercel.app' && (
+                    <div className="flex items-center gap-2 pt-1 border-t border-slate-800/80">
+                      <code className="font-mono text-[11px] text-slate-300 break-all flex-1">
+                        {window.location.origin}
+                      </code>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard?.writeText(window.location.origin);
+                          addToast('প্রিভিউ Redirect URL কপি হয়েছে!', 'success');
+                        }}
+                        className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[11px] shrink-0 cursor-pointer"
+                      >
+                        কপি
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
             {/* SQL Setup Instructions & Code */}
             <div className="bg-slate-800/80 p-6 rounded-3xl border border-slate-700/80 space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-700/80">
@@ -3599,13 +4224,18 @@ export const AdminPage: React.FC = () => {
                   </h2>
                 </div>
                 <p className="text-xs sm:text-sm text-slate-400">
-                  গ্রাহকদের একাউন্ট জমা (Bangla QR / bKash / নগদ / ব্যাংক), উত্তোলন আবেদন অনুমোদন ও ব্যালেন্স সমন্বয় করুন।
+                  গ্রাহকদের একাউন্ট জমা (নগদ / বিকাশ / উপায় পার্সোনাল), সব মোবাইল ব্যাংকে উত্তোলন অনুমোদন ও ব্যালেন্স সমন্বয় করুন।
                 </p>
               </div>
 
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => setIsAdjustModalOpen(true)}
+                  onClick={() => {
+                    if (!users.some((u) => u.id === adjustUserId) && users[0]) {
+                      setAdjustUserId(users[0].id);
+                    }
+                    setIsAdjustModalOpen(true);
+                  }}
                   className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
@@ -3626,7 +4256,7 @@ export const AdminPage: React.FC = () => {
                 <div className="text-xl sm:text-2xl font-black text-emerald-400">
                   {formatPrice(totalWalletDeposits)}
                 </div>
-                <div className="text-[11px] text-slate-500 mt-1">Bangla QR ও MFS জমা</div>
+                <div className="text-[11px] text-slate-500 mt-1">নগদ, বিকাশ ও উপায় জমা</div>
               </div>
 
               <div className="p-5 bg-slate-950/80 rounded-2xl border border-slate-800">
@@ -3803,11 +4433,18 @@ export const AdminPage: React.FC = () => {
 
                             {/* Method */}
                             <td className="py-3.5 px-4 whitespace-nowrap">
-                              <div className="font-medium text-slate-300 capitalize">
-                                {txn.method === 'bangla_qr' && 'বাংলা QR (TallyPay)'}
-                                {txn.method === 'bkash' && 'bKash'}
-                                {txn.method === 'nagad' && 'Nagad'}
-                                {txn.method === 'rocket' && 'Rocket'}
+                              <div className="font-medium text-slate-300">
+                                {txn.method === 'bkash' && 'বিকাশ (bKash)'}
+                                {txn.method === 'nagad' && 'নগদ (Nagad)'}
+                                {txn.method === 'upay' && 'উপায় (Upay)'}
+                                {txn.method === 'rocket' && 'রকেট (Rocket)'}
+                                {txn.method === 'cellfin' && 'সেলফিন (CellFin)'}
+                                {txn.method === 'tap' && 'ট্যাপ (Tap)'}
+                                {txn.method === 'okwallet' && 'ওকে ওয়ালেট (OK Wallet)'}
+                                {txn.method === 'mcash' && 'এমক্যাশ (mCash)'}
+                                {txn.method === 'surecash' && 'শিওরক্যাশ (SureCash)'}
+                                {txn.method === 'other_mfs' && (txn.bankDetails?.bankName || 'অন্যান্য মোবাইল ব্যাংক')}
+                                {txn.method === 'bangla_qr' && 'Bangla QR'}
                                 {txn.method === 'bank' && 'ব্যাংক একাউন্ট'}
                                 {txn.method === 'wallet' && 'ওয়ালেট ব্যালেন্স'}
                                 {txn.method === 'system' && 'সিস্টেম / এডমিন'}
@@ -3956,17 +4593,12 @@ export const AdminPage: React.FC = () => {
                   addToast('সঠিক টাকার পরিমাণ দিন', 'error');
                   return;
                 }
+                const targetId = adjustTargetUser?.id || adjustUserId || 'user-1';
                 adminAdjustUserBalance(
-                  adjustUserId || 'user-1',
+                  targetId,
                   amt,
                   adjustType,
                   adjustNote.trim() || (adjustType === 'credit' ? 'এডমিন ক্যাশব্যাক / বোনাস' : 'এডমিন সমন্বয় কর্তন')
-                );
-                addToast(
-                  adjustType === 'credit'
-                    ? `৳${amt} গ্রাহকের ওয়ালেটে সফলভাবে যোগ করা হয়েছে!`
-                    : `৳${amt} গ্রাহকের ওয়ালেট থেকে কর্তন করা হয়েছে!`,
-                  'success'
                 );
                 setAdjustAmount('');
                 setAdjustNote('');
@@ -3974,6 +4606,23 @@ export const AdminPage: React.FC = () => {
               }}
               className="space-y-4"
             >
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
+                  কাস্টমার নির্বাচন করুন
+                </label>
+                <select
+                  value={adjustTargetUser?.id || adjustUserId}
+                  onChange={(e) => setAdjustUserId(e.target.value)}
+                  className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-bold text-white focus:outline-none focus:border-amber-500"
+                >
+                  {users.map((u) => (
+                    <option key={u.id} value={u.id}>
+                      {u.name} — {u.phone || u.email || u.id} ({formatPrice(u.balance || 0)})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div>
                 <label className="block text-xs font-bold text-slate-300 mb-1.5">
                   সমন্বয়ের ধরন নির্বাচন করুন
@@ -4039,9 +4688,9 @@ export const AdminPage: React.FC = () => {
               </div>
 
               <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-[11px] text-slate-400">
-                বর্তমান গ্রাহক: <span className="font-bold text-white">{currentUser?.name || 'লগইন গ্রাহক'}</span> ({currentUser?.phone})
+                নির্বাচিত গ্রাহক: <span className="font-bold text-white">{adjustTargetUser?.name || 'গ্রাহক'}</span> ({adjustTargetUser?.phone || adjustTargetUser?.email || 'N/A'})
                 <br />
-                বর্তমান ব্যালেন্স: <span className="font-bold text-amber-400">{formatPrice(currentUser?.balance || 0)}</span>
+                বর্তমান ব্যালেন্স: <span className="font-bold text-amber-400">{formatPrice(adjustTargetUser?.balance || 0)}</span>
               </div>
 
               <div className="flex gap-2.5 pt-2">
@@ -4424,6 +5073,541 @@ export const AdminPage: React.FC = () => {
         </div>
       )}
 
+      {/* Customer Account Detail Inspect Modal */}
+      {customerToInspect && (() => {
+        const liveCustomer = users.find((u) => u.id === customerToInspect.id) || customerToInspect;
+        const custOrders = getCustomerOrders(liveCustomer);
+        const totalSpent = custOrders.reduce((sum, ord) => sum + ord.total, 0);
+        const custTxns = allWalletTransactions.filter((t) => t.userId === liveCustomer.id);
+        const isOwner = isUserAdmin(liveCustomer);
+        const isBlocked = liveCustomer.accountStatus === 'blocked';
+
+        return (
+          <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+            <div className="bg-slate-900 border border-slate-700 w-full max-w-2xl rounded-3xl p-6 shadow-2xl space-y-5 my-8 max-h-[90vh] overflow-y-auto">
+              {/* Header */}
+              <div className="flex items-start justify-between gap-4 pb-4 border-b border-slate-800">
+                <div className="flex items-center gap-3.5">
+                  {liveCustomer.avatar ? (
+                    <img
+                      src={liveCustomer.avatar}
+                      alt={liveCustomer.name}
+                      className="w-14 h-14 rounded-2xl object-cover border-2 border-slate-700"
+                    />
+                  ) : (
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-black text-xl">
+                      {(liveCustomer.name || 'U').charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="text-lg font-black text-white">{liveCustomer.name}</h3>
+                      <span
+                        className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${
+                          isBlocked
+                            ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
+                            : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                        }`}
+                      >
+                        {isBlocked ? 'স্থগিত (Blocked)' : 'সক্রিয়'}
+                      </span>
+                      {isOwner && (
+                        <span className="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold">
+                          মূল অ্যাডমিন
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-xs text-slate-400 font-mono mt-0.5">
+                      ID: {liveCustomer.id} {liveCustomer.referralCode ? `• রেফার কোড: ${liveCustomer.referralCode}` : ''}
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setCustomerToInspect(null)}
+                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* KPI Strip */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="p-3 bg-slate-950/70 rounded-2xl border border-slate-800">
+                  <div className="text-[10px] text-slate-400 font-bold">ওয়ালেট ব্যালেন্স</div>
+                  <div className="text-base font-black text-amber-400 mt-0.5">
+                    {formatPrice(liveCustomer.balance || 0)}
+                  </div>
+                </div>
+                <div className="p-3 bg-slate-950/70 rounded-2xl border border-slate-800">
+                  <div className="text-[10px] text-slate-400 font-bold">মোট অর্ডার</div>
+                  <div className="text-base font-black text-white mt-0.5">{custOrders.length} টি</div>
+                </div>
+                <div className="p-3 bg-slate-950/70 rounded-2xl border border-slate-800">
+                  <div className="text-[10px] text-slate-400 font-bold">মোট কেনাকাটা</div>
+                  <div className="text-base font-black text-emerald-400 mt-0.5">{formatPrice(totalSpent)}</div>
+                </div>
+                <div className="p-3 bg-slate-950/70 rounded-2xl border border-slate-800">
+                  <div className="text-[10px] text-slate-400 font-bold">রেফারেল সংখ্যা</div>
+                  <div className="text-base font-black text-cyan-400 mt-0.5">
+                    {liveCustomer.referrals?.length || 0} জন
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact & Credentials */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 text-xs">
+                <div className="space-y-2">
+                  <div>
+                    <span className="text-[10px] font-bold text-slate-500 block">মোবাইল নম্বর</span>
+                    <span className="font-mono font-bold text-amber-300">{liveCustomer.phone || 'দেওয়া নেই'}</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-bold text-slate-500 block">ইমেইল</span>
+                    <span className="font-bold text-white">{liveCustomer.email || 'দেওয়া নেই'}</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-bold text-slate-500 block">পাসওয়ার্ড</span>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="font-mono text-slate-200">
+                        {showInspectedPassword ? (liveCustomer.password || 'সেট করা নেই (Google)') : '••••••••'}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setShowInspectedPassword((prev) => !prev)}
+                        className="text-slate-400 hover:text-white cursor-pointer"
+                        title="পাসওয়ার্ড দেখুন/লুকান"
+                      >
+                        {showInspectedPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <div>
+                    <span className="text-[10px] font-bold text-slate-500 block">মূল ঠিকানা</span>
+                    <span className="text-slate-200">
+                      {[liveCustomer.village, liveCustomer.thana, liveCustomer.district, liveCustomer.division]
+                        .filter(Boolean)
+                        .join(', ') || 'ঠিকানা যোগ করা হয়নি'}
+                    </span>
+                  </div>
+                  {liveCustomer.createdAt && (
+                    <div>
+                      <span className="text-[10px] font-bold text-slate-500 block">অ্যাকাউন্ট খোলার তারিখ</span>
+                      <span className="text-slate-300">
+                        {new Date(liveCustomer.createdAt).toLocaleString('bn-BD')}
+                      </span>
+                    </div>
+                  )}
+                  {liveCustomer.referredBy && (
+                    <div>
+                      <span className="text-[10px] font-bold text-slate-500 block">যার রেফারে জয়েন করেছেন</span>
+                      <span className="font-mono text-cyan-300">{liveCustomer.referredBy}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {liveCustomer.adminNote && (
+                <div className="p-3 bg-cyan-950/30 border border-cyan-500/30 rounded-xl text-xs text-cyan-200">
+                  <strong className="text-cyan-400">অ্যাডমিন নোট:</strong> {liveCustomer.adminNote}
+                </div>
+              )}
+
+              {/* Saved Delivery Addresses */}
+              {liveCustomer.addresses && liveCustomer.addresses.length > 0 && (
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold text-slate-300">সেভ করা ডেলিভারি ঠিকানা ({liveCustomer.addresses.length})</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {liveCustomer.addresses.map((addr) => (
+                      <div key={addr.id} className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs space-y-0.5">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-white">{addr.title || 'ঠিকানা'}</span>
+                          {addr.isDefault && (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">ডিফল্ট</span>
+                          )}
+                        </div>
+                        <div className="text-slate-300">{addr.recipientName || liveCustomer.name} • {addr.phone || liveCustomer.phone}</div>
+                        <div className="text-slate-400 text-[11px]">
+                          {[addr.address, addr.thana, addr.district, addr.division].filter(Boolean).join(', ')}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Order History */}
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold text-slate-300">অর্ডার ইতিহাস ({custOrders.length})</h4>
+                {custOrders.length === 0 ? (
+                  <div className="p-4 rounded-xl bg-slate-950/50 border border-slate-800 text-xs text-slate-500 text-center">
+                    এই কাস্টমারের কোনো অর্ডার এখনো নেই
+                  </div>
+                ) : (
+                  <div className="max-h-44 overflow-y-auto space-y-2 pr-1">
+                    {custOrders.map((ord) => (
+                      <div key={ord.id} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs">
+                        <div>
+                          <div className="font-bold text-white">#{ord.id} <span className="text-slate-400 font-normal">({ord.date})</span></div>
+                          <div className="text-[11px] text-slate-400">{ord.items.length} টি পণ্য • {ord.paymentMethod}</div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-emerald-400">{formatPrice(ord.total)}</span>
+                          <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] capitalize">{ord.status}</span>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedInvoiceOrder(ord)}
+                            className="px-2 py-1 rounded-lg bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 text-[10px] font-bold cursor-pointer"
+                          >
+                            ইনভয়েস
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Recent Wallet Transactions */}
+              {custTxns.length > 0 && (
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold text-slate-300">সাম্প্রতিক ওয়ালেট লেনদেন ({custTxns.length})</h4>
+                  <div className="max-h-36 overflow-y-auto space-y-1.5 pr-1">
+                    {custTxns.slice(0, 8).map((txn) => (
+                      <div key={txn.id} className="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-xs">
+                        <div>
+                          <span className="font-bold text-slate-200">{txn.type}</span>
+                          {txn.note && <span className="text-slate-400 ml-2 text-[11px]">• {txn.note}</span>}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-amber-400">{formatPrice(txn.amount)}</span>
+                          <span className="text-[10px] text-slate-400">{txn.status}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Footer Actions */}
+              <div className="flex flex-wrap items-center justify-end gap-2 pt-3 border-t border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCustomerToInspect(null);
+                    openEditCustomerModal(liveCustomer);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold cursor-pointer"
+                >
+                  প্রোফাইল এডিট করুন
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAdjustUserId(liveCustomer.id);
+                    setIsAdjustModalOpen(true);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-black cursor-pointer"
+                >
+                  ব্যালেন্স সমন্বয়
+                </button>
+                {!isOwner && (
+                  <button
+                    type="button"
+                    onClick={() => adminToggleUserBlock(liveCustomer.id)}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold cursor-pointer ${
+                      isBlocked
+                        ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                        : 'bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/30'
+                    }`}
+                  >
+                    {isBlocked ? 'অ্যাকাউন্ট সক্রিয় করুন' : 'অ্যাকাউন্ট ব্লক করুন'}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setCustomerToInspect(null)}
+                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold cursor-pointer"
+                >
+                  বন্ধ করুন
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Customer Create / Edit Modal */}
+      {isCustomerFormModalOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-3xl p-6 shadow-2xl my-8 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
+                  {customerToEdit ? <Edit3 className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
+                </div>
+                <div>
+                  <h3 className="font-black text-white text-base">
+                    {customerToEdit ? 'কাস্টমার অ্যাকাউন্ট এডিট করুন' : 'নতুন কাস্টমার অ্যাকাউন্ট তৈরি'}
+                  </h3>
+                  <p className="text-[11px] text-slate-400">
+                    {customerToEdit ? `ID: ${customerToEdit.id}` : 'অ্যাডমিন প্যানেল থেকে সরাসরি নতুন গ্রাহক যোগ করুন'}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsCustomerFormModalOpen(false);
+                  setCustomerToEdit(null);
+                }}
+                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (customerToEdit) {
+                  const updates: Partial<User> = {
+                    name: custFormName,
+                    phone: custFormPhone,
+                    email: custFormEmail,
+                    division: custFormDivision,
+                    district: custFormDistrict,
+                    thana: custFormThana,
+                    village: custFormVillage,
+                    adminNote: custFormAdminNote,
+                  };
+                  if (!isUserAdmin(customerToEdit)) {
+                    updates.role = custFormRole;
+                    updates.accountStatus = custFormStatus;
+                  }
+                  if (custFormPassword.trim()) {
+                    updates.password = custFormPassword.trim();
+                  }
+                  const ok = adminUpdateUser(customerToEdit.id, updates);
+                  if (ok) {
+                    setIsCustomerFormModalOpen(false);
+                    setCustomerToEdit(null);
+                  }
+                } else {
+                  const ok = adminCreateUser({
+                    name: custFormName,
+                    phone: custFormPhone,
+                    email: custFormEmail,
+                    password: custFormPassword.trim() || '123456',
+                    division: custFormDivision,
+                    district: custFormDistrict,
+                    thana: custFormThana,
+                    village: custFormVillage,
+                    role: custFormRole,
+                    adminNote: custFormAdminNote,
+                    balance: parseFloat(custFormInitialBalance) || 0,
+                  });
+                  if (ok) {
+                    setIsCustomerFormModalOpen(false);
+                  }
+                }
+              }}
+              className="space-y-3.5 text-xs"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">গ্রাহকের নাম *</label>
+                  <input
+                    type="text"
+                    required
+                    value={custFormName}
+                    onChange={(e) => setCustFormName(e.target.value)}
+                    placeholder="পূর্ণ নাম লিখুন"
+                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">মোবাইল নম্বর *</label>
+                  <input
+                    type="text"
+                    value={custFormPhone}
+                    onChange={(e) => setCustFormPhone(e.target.value)}
+                    placeholder="01XXXXXXXXX"
+                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white font-mono focus:border-cyan-400 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">ইমেইল (ঐচ্ছিক)</label>
+                  <input
+                    type="email"
+                    value={custFormEmail}
+                    onChange={(e) => setCustFormEmail(e.target.value)}
+                    placeholder="example@gmail.com"
+                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">
+                    {customerToEdit ? 'নতুন পাসওয়ার্ড (না বদলালে খালি রাখুন)' : 'পাসওয়ার্ড (ডিফল্ট: 123456)'}
+                  </label>
+                  <input
+                    type="text"
+                    value={custFormPassword}
+                    onChange={(e) => setCustFormPassword(e.target.value)}
+                    placeholder={customerToEdit ? 'নতুন পাসওয়ার্ড দিন...' : '123456'}
+                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white font-mono focus:border-cyan-400 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">বিভাগ</label>
+                  <select
+                    value={custFormDivision}
+                    onChange={(e) => {
+                      const nextDiv = e.target.value;
+                      setCustFormDivision(nextDiv);
+                      const divObj = BANGLADESH_DIVISIONS.find((d) => d.nameBn === nextDiv || d.nameEn === nextDiv);
+                      if (divObj && divObj.districts.length > 0) {
+                        setCustFormDistrict(divObj.districts[0]);
+                      }
+                    }}
+                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                  >
+                    {BANGLADESH_DIVISIONS.map((d) => (
+                      <option key={d.nameEn} value={d.nameBn}>
+                        {d.nameBn}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">জেলা</label>
+                  <select
+                    value={custFormDistrict}
+                    onChange={(e) => setCustFormDistrict(e.target.value)}
+                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                  >
+                    {!selectedCustomerDivisionObj.districts.includes(custFormDistrict) && custFormDistrict && (
+                      <option value={custFormDistrict}>{custFormDistrict}</option>
+                    )}
+                    {selectedCustomerDivisionObj.districts.map((dist) => (
+                      <option key={dist} value={dist}>
+                        {dist}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">থানা / উপজেলা</label>
+                  <input
+                    type="text"
+                    value={custFormThana}
+                    onChange={(e) => setCustFormThana(e.target.value)}
+                    placeholder="থানা / উপজেলা"
+                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">গ্রাম / বাসা / রোড নং</label>
+                  <input
+                    type="text"
+                    value={custFormVillage}
+                    onChange={(e) => setCustFormVillage(e.target.value)}
+                    placeholder="বিস্তারিত ঠিকানা"
+                    className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {!customerToEdit && (
+                  <div>
+                    <label className="block font-bold text-slate-300 mb-1">প্রাথমিক ব্যালেন্স (৳)</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={custFormInitialBalance}
+                      onChange={(e) => setCustFormInitialBalance(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                    />
+                  </div>
+                )}
+
+                {(!customerToEdit || !isUserAdmin(customerToEdit)) && (
+                  <>
+                    <div>
+                      <label className="block font-bold text-slate-300 mb-1">অ্যাকাউন্ট রোল</label>
+                      <select
+                        value={custFormRole}
+                        onChange={(e) => setCustFormRole(e.target.value as 'user' | 'admin')}
+                        className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                      >
+                        <option value="user">কাস্টমার (User)</option>
+                        <option value="admin">স্টাফ অ্যাডমিন (Admin)</option>
+                      </select>
+                    </div>
+                    {customerToEdit && (
+                      <div>
+                        <label className="block font-bold text-slate-300 mb-1">অ্যাকাউন্ট স্ট্যাটাস</label>
+                        <select
+                          value={custFormStatus}
+                          onChange={(e) => setCustFormStatus(e.target.value as 'active' | 'blocked')}
+                          className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                        >
+                          <option value="active">সক্রিয় (Active)</option>
+                          <option value="blocked">স্থগিত (Blocked)</option>
+                        </select>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-300 mb-1">অ্যাডমিন নোট (শুধু অ্যাডমিনের জন্য)</label>
+                <input
+                  type="text"
+                  value={custFormAdminNote}
+                  onChange={(e) => setCustFormAdminNote(e.target.value)}
+                  placeholder="যেমন: VIP কাস্টমার, নিয়মিত পাইকারি ক্রেতা..."
+                  className="w-full px-3.5 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:border-cyan-400 outline-none"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsCustomerFormModalOpen(false);
+                    setCustomerToEdit(null);
+                  }}
+                  className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold cursor-pointer"
+                >
+                  বাতিল
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black cursor-pointer"
+                >
+                  {customerToEdit ? 'পরিবর্তন সেভ করুন' : 'অ্যাকাউন্ট তৈরি করুন'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Universal In-App Delete Confirmation Modal (100% Reliable in iframe sandbox) */}
       {deleteConfirmation && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs">
@@ -4439,6 +5623,7 @@ export const AdminPage: React.FC = () => {
                   {deleteConfirmation.type === 'category' && 'ক্যাটাগরি মুছে ফেলতে চান?'}
                   {deleteConfirmation.type === 'order' && 'কাস্টমার অর্ডার মুছে ফেলতে চান?'}
                   {deleteConfirmation.type === 'banner' && 'ব্যানার মুছে ফেলতে চান?'}
+                  {deleteConfirmation.type === 'user' && 'কাস্টমার অ্যাকাউন্ট মুছে ফেলতে চান?'}
                   {(deleteConfirmation.type.startsWith('reset') || deleteConfirmation.type === 'factory-reset') &&
                     'রিসেট নিশ্চিত করুন'}
                 </h3>

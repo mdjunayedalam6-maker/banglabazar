@@ -328,7 +328,7 @@ export const CartPage: React.FC = () => {
                 <ShieldCheck className="w-3.5 h-3.5 text-[#00873E]" />
                 <span>{language === 'bn' ? '১০০% নিরাপদ ও সুরক্ষিত অর্ডার' : '100% Safe & Secure Checkout'}</span>
               </div>
-              <p>{language === 'bn' ? 'ক্যাশ অন ডেলিভারি ও Bangla QR পেমেন্ট সাপোর্ট' : 'Cash on Delivery & Bangla QR Payment Supported'}</p>
+              <p>{language === 'bn' ? 'নগদ, বিকাশ ও উপায় (পার্সোনাল সেন্ড মানি) পেমেন্ট সাপোর্ট' : 'Nagad, bKash & Upay (Personal Send Money) Supported'}</p>
             </div>
           </div>
         </div>

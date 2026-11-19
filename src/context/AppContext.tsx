@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useRef } from 'react';
 import { 
   Language, 
   PageView, 
@@ -27,6 +27,7 @@ import {
   INITIAL_ORDERS 
 } from '../data/mockData';
 import { DEFAULT_SITE_SETTINGS, DEFAULT_BANNER_SLIDES } from '../data/defaultSiteSettings';
+import { getPaymentMethodDisplayLabel } from '../data/paymentConfig';
 import { TRANSLATIONS, formatPrice as formatPriceUtil } from '../utils/translations';
 import {
   testSupabaseConnection,
@@ -46,12 +47,15 @@ import {
   deleteBannerSlideFromSupabase,
   fetchBannerSlidesFromSupabase,
   syncUserToSupabase,
+  deleteUserFromSupabase,
   syncProductsBatchToSupabase,
   updateAllProductsProfitMarginInSupabase,
   fetchUsersFromSupabase,
   supabase,
   SUPABASE_URL,
   SUPABASE_SETUP_SQL,
+  GOOGLE_CLIENT_ID,
+  checkSupabaseGoogleProviderStatus,
 } from '../lib/supabase';
 import { safeLocalStorage, safeSessionStorage } from '../utils/safeStorage';
 import { idbGet, idbSet } from '../utils/idbStorage';
@@ -111,7 +115,7 @@ interface AppContextType {
   addToast: (message: string, type?: 'success' | 'info' | 'error') => void;
   removeToast: (id: string) => void;
   loginUser: (identifier: string, password?: string) => boolean;
-  loginWithGoogle: () => Promise<void>;
+  loginWithGoogle: () => Promise<{ ok: boolean; reason?: 'provider_not_enabled' | 'popup_blocked' | 'error'; error?: string }>;
   registerUser: (userData: Partial<User>) => boolean;
   updateUserProfile: (userData: Partial<User>) => boolean;
   addDeliveryAddress: (addr: Omit<DeliveryAddress, 'id'>) => void;
@@ -143,7 +147,7 @@ interface AppContextType {
   // Customer Wallet Extensions
   allWalletTransactions: WalletTransaction[];
   depositToWallet: (amount: number, method: WalletPaymentMethod, senderNumber?: string, trxId?: string, note?: string) => Promise<{ success: boolean; message: string }>;
-  withdrawFromWallet: (amount: number, method: 'bkash' | 'nagad' | 'rocket' | 'bank', accountNumber: string, bankDetails?: any) => Promise<{ success: boolean; message: string }>;
+  withdrawFromWallet: (amount: number, method: WalletPaymentMethod, accountNumber: string, bankDetails?: any) => Promise<{ success: boolean; message: string }>;
   updateWalletTransactionStatus: (txnId: string, status: WalletTransactionStatus, reason?: string) => void;
   adminAdjustUserBalance: (userId: string, amount: number, type: 'credit' | 'debit', note: string) => void;
   // Hidden Admin Panel extensions
@@ -185,6 +189,12 @@ interface AppContextType {
   loginAdmin: (identifier?: string, password?: string) => boolean;
   logoutAdmin: () => void;
   isUserAdmin: (user?: User | null) => boolean;
+  // Admin Customer Account Management
+  users: User[];
+  adminCreateUser: (userData: Partial<User>) => boolean;
+  adminUpdateUser: (userId: string, updates: Partial<User>) => boolean;
+  adminDeleteUser: (userId: string) => boolean;
+  adminToggleUserBlock: (userId: string) => boolean;
   // Supabase Integration
   supabaseConnected: boolean;
   supabaseStatusMsg: string;
@@ -814,6 +824,224 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   });
 
+  const usersRef = useRef<User[]>(users);
+  useEffect(() => {
+    usersRef.current = users;
+  }, [users]);
+
+  const currentUserRef = useRef<User | null>(currentUser);
+  useEffect(() => {
+    currentUserRef.current = currentUser;
+  }, [currentUser]);
+
+  const activeReferralCodeRef = useRef<string | null>(activeReferralCode);
+  useEffect(() => {
+    activeReferralCodeRef.current = activeReferralCode;
+  }, [activeReferralCode]);
+
+  const languageRef = useRef<Language>(language);
+  useEffect(() => {
+    languageRef.current = language;
+  }, [language]);
+
+  // Helper to complete Google Login or Registration cleanly across OAuth callbacks & popups
+  const completeGoogleUserLogin = (
+    profile: { id?: string; email: string; name?: string; avatar?: string; phone?: string },
+    options?: { fromOAuthCallback?: boolean; silentIfAlreadyActive?: boolean }
+  ): User | null => {
+    const cleanEmail = (profile.email || '').trim().toLowerCase();
+    if (!cleanEmail && !profile.id) return null;
+
+    const latestUsers = usersRef.current;
+    const existingUser = latestUsers.find(
+      (u) =>
+        (profile.id && u.id === profile.id) ||
+        (cleanEmail && (u.email || '').trim().toLowerCase() === cleanEmail)
+    );
+
+    const isOwner =
+      isUserAdmin(existingUser) ||
+      cleanEmail === SECRET_ADMIN_CONFIG.email ||
+      cleanEmail === SECRET_ADMIN_CONFIG.secondaryEmail;
+
+    if (existingUser && !isOwner && existingUser.accountStatus === 'blocked') {
+      supabase.auth.signOut().catch(() => {});
+      addToast(
+        languageRef.current === 'bn'
+          ? 'আপনার অ্যাকাউন্টটি অ্যাডমিন কর্তৃক সাময়িকভাবে স্থগিত করা হয়েছে। সহায়তার জন্য যোগাযোগ করুন।'
+          : 'Your account has been suspended by admin.',
+        'error'
+      );
+      return null;
+    }
+
+    const alreadyLoggedInSame =
+      options?.silentIfAlreadyActive &&
+      currentUserRef.current &&
+      ((profile.id && currentUserRef.current.id === profile.id) ||
+        (cleanEmail && (currentUserRef.current.email || '').trim().toLowerCase() === cleanEmail));
+
+    const defaultAvatar =
+      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80';
+
+    let userObj: User;
+    let nextUsers: User[];
+    let isNewRegistration = false;
+
+    if (existingUser) {
+      userObj = {
+        ...existingUser,
+        name: existingUser.name || profile.name?.trim() || (cleanEmail ? cleanEmail.split('@')[0] : 'Customer'),
+        email: existingUser.email || cleanEmail,
+        avatar:
+          (existingUser.avatar && existingUser.avatar !== defaultAvatar
+            ? existingUser.avatar
+            : profile.avatar) ||
+          existingUser.avatar ||
+          defaultAvatar,
+        role: isOwner ? 'admin' : existingUser.role || 'user',
+        accountStatus: existingUser.accountStatus || 'active',
+      };
+      nextUsers = latestUsers.map((u) => (u.id === existingUser.id ? userObj : u));
+    } else {
+      isNewRegistration = true;
+      const newId = profile.id || `user-${Date.now()}`;
+      const displayName =
+        profile.name?.trim() || (cleanEmail ? cleanEmail.split('@')[0] : 'Google User');
+      const myReferralCode = generateUserReferralCode({
+        id: newId,
+        phone: profile.phone || '',
+        name: displayName,
+      });
+
+      const rawRefCode = (
+        activeReferralCodeRef.current ||
+        safeLocalStorage.getItem('oneroof_referrer_code') ||
+        ''
+      )
+        .trim()
+        .toUpperCase();
+
+      const matchedReferrer = rawRefCode
+        ? latestUsers.find(
+            (u) =>
+              (u.referralCode && u.referralCode.toUpperCase() === rawRefCode) ||
+              (u.phone && `BB-${u.phone.replace(/\D/g, '').slice(-6)}` === rawRefCode) ||
+              rawRefCode === 'BB-637253'
+          )
+        : undefined;
+
+      userObj = {
+        id: newId,
+        name: displayName,
+        email: cleanEmail,
+        phone: profile.phone || '',
+        password: '',
+        role: isOwner ? 'admin' : 'user',
+        accountStatus: 'active',
+        createdAt: new Date().toISOString(),
+        division: '',
+        district: '',
+        thana: '',
+        village: '',
+        avatar: profile.avatar || defaultAvatar,
+        balance: 0,
+        pendingWelcomeBonus: 50,
+        hasCompletedFirstOrder: false,
+        firstOrderBonusUnlocked: false,
+        referralCode: myReferralCode,
+        referredBy: matchedReferrer ? matchedReferrer.referralCode || rawRefCode : rawRefCode || undefined,
+        referrals: [],
+        walletTransactions: [],
+        addresses: [],
+      };
+
+      let updatedList = [...latestUsers];
+      if (matchedReferrer) {
+        const now = new Date();
+        const dateFormatted =
+          languageRef.current === 'bn'
+            ? `আজ, ${now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' })}`
+            : now.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+        const newRefRecord: ReferralRecord = {
+          friendId: userObj.id,
+          friendName: userObj.name,
+          friendPhone: userObj.phone ? maskPhoneNumber(userObj.phone) : cleanEmail,
+          date: dateFormatted,
+          firstOrderPlaced: false,
+          rewardClaimed: false,
+          bonusAmount: 30,
+        };
+        const updatedReferrer: User = {
+          ...matchedReferrer,
+          referrals: [newRefRecord, ...(matchedReferrer.referrals || [])],
+        };
+        updatedList = updatedList.map((u) => (u.id === updatedReferrer.id ? updatedReferrer : u));
+        syncUserToSupabase(updatedReferrer).catch(() => {});
+      }
+
+      nextUsers = [userObj, ...updatedList];
+    }
+
+    usersRef.current = nextUsers;
+    currentUserRef.current = userObj;
+    setUsers(nextUsers);
+    safeLocalStorage.setItem('oneroof_users', JSON.stringify(nextUsers));
+    setCurrentUser(userObj);
+    safeLocalStorage.setItem('oneroof_current_user', JSON.stringify(userObj));
+
+    if (isOwner || userObj.role === 'admin') {
+      setIsAdminAuthenticated(true);
+      safeSessionStorage.setItem('oneroof_admin_auth', 'true');
+    }
+
+    syncUserToSupabase(userObj).catch(() => {});
+    setIsAuthModalOpen(false);
+
+    if (!alreadyLoggedInSame) {
+      addToast(
+        isNewRegistration
+          ? languageRef.current === 'bn'
+            ? `অভিনন্দন ${userObj.name}! গুগল অ্যাকাউন্টে রেজিস্ট্রেশন সম্পন্ন হয়েছে এবং ৳৫০ ওয়েলকাম বোনাস যুক্ত হয়েছে!`
+            : `Welcome ${userObj.name}! Registered via Google with ৳50 welcome bonus!`
+          : languageRef.current === 'bn'
+          ? `স্বাগতম, ${userObj.name}! গুগল অ্যাকাউন্ট দিয়ে সফলভাবে লগইন হয়েছে।`
+          : `Welcome back, ${userObj.name}! Signed in with Google.`,
+        'success'
+      );
+    }
+
+    // Notify parent opener tab / other tabs & auto-close popup if this was an OAuth redirect tab
+    if (options?.fromOAuthCallback && typeof window !== 'undefined') {
+      try {
+        if ('BroadcastChannel' in window) {
+          const bc = new BroadcastChannel('oneroof_auth_sync');
+          bc.postMessage({ type: 'ONEROOF_GOOGLE_AUTH_SUCCESS', user: userObj, isNew: isNewRegistration });
+          bc.close();
+        }
+      } catch (_) {}
+
+      try {
+        if (window.opener && window.opener !== window) {
+          window.opener.postMessage(
+            { type: 'ONEROOF_GOOGLE_AUTH_SUCCESS', user: userObj, isNew: isNewRegistration },
+            '*'
+          );
+          window.history.replaceState({}, document.title, window.location.pathname);
+          setTimeout(() => {
+            try {
+              window.close();
+            } catch (_) {}
+          }, 300);
+        } else {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
+      } catch (_) {}
+    }
+
+    return userObj;
+  };
+
   // Customer-specific orders: strictly only orders placed by the current user
   const userOrders = useMemo(() => {
     if (!currentUser) return [];
@@ -1167,7 +1395,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             safeLocalStorage.setItem('oneroof_banner_slides', JSON.stringify(cleanSlides));
             idbSet('oneroof_cached_slides', cleanSlides).catch(() => {});
           }
-          if (remoteUsers && remoteUsers.length > 0) setUsers(remoteUsers);
+          if (remoteUsers && remoteUsers.length > 0) {
+            setUsers((prev) => {
+              const map = new Map<string, User>();
+              for (const localU of prev) {
+                map.set(localU.id, localU);
+              }
+              for (const remoteU of remoteUsers) {
+                map.set(remoteU.id, remoteU);
+              }
+              return Array.from(map.values());
+            });
+          }
           setIsProductsLoading(false);
           setInitialLoadingStep('সবকিছু প্রস্তুত, স্বাগতম!');
           setTimeout(() => {
@@ -1175,44 +1414,101 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           }, 250);
         }
 
-        // Setup real auth listener with error safety
+        // Handle OAuth URL callback parameters (Direct Google OAuth token or OAuth errors)
+        let isOAuthCallbackUrl = false;
         try {
+          if (typeof window !== 'undefined') {
+            const hashStr = window.location.hash || '';
+            const searchStr = window.location.search || '';
+            const hashParams = new URLSearchParams(hashStr.replace(/^#/, ''));
+            const searchParams = new URLSearchParams(searchStr);
+
+            const oauthErr = searchParams.get('error') || hashParams.get('error');
+            const oauthErrDesc = searchParams.get('error_description') || hashParams.get('error_description');
+            if (oauthErr) {
+              isOAuthCallbackUrl = true;
+              const errText = oauthErrDesc || oauthErr;
+              addToast(
+                languageRef.current === 'bn'
+                  ? `গুগল লগইন সম্পন্ন হয়নি: ${errText}`
+                  : `Google login error: ${errText}`,
+                'error'
+              );
+              if (window.opener && window.opener !== window) {
+                window.opener.postMessage({ type: 'ONEROOF_GOOGLE_AUTH_ERROR', error: errText }, '*');
+                setTimeout(() => {
+                  try { window.close(); } catch (_) {}
+                }, 800);
+              }
+              window.history.replaceState({}, document.title, window.location.pathname);
+            }
+
+            const googleAccessToken = hashParams.get('access_token');
+            const supabaseRefreshToken = hashParams.get('refresh_token');
+            if (googleAccessToken && !supabaseRefreshToken) {
+              isOAuthCallbackUrl = true;
+              fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: { Authorization: `Bearer ${googleAccessToken}` },
+              })
+                .then((r) => (r.ok ? r.json() : null))
+                .then((profile) => {
+                  if (isMounted && profile && profile.email) {
+                    completeGoogleUserLogin(
+                      {
+                        id: profile.sub ? `google-${profile.sub}` : undefined,
+                        email: profile.email,
+                        name: profile.name || profile.given_name || profile.email.split('@')[0],
+                        avatar: profile.picture || '',
+                      },
+                      { fromOAuthCallback: true }
+                    );
+                  }
+                })
+                .catch(() => {});
+            } else if (searchParams.get('code') || hashParams.get('access_token')) {
+              isOAuthCallbackUrl = true;
+            }
+          }
+        } catch (_) {}
+
+        // Setup real Supabase auth listener + initial session check
+        try {
+          supabase.auth
+            .getSession()
+            .then(({ data }) => {
+              if (!isMounted) return;
+              const sUser = data?.session?.user;
+              if (sUser && sUser.email && (isOAuthCallbackUrl || !currentUserRef.current)) {
+                completeGoogleUserLogin(
+                  {
+                    id: sUser.id,
+                    email: sUser.email,
+                    phone: sUser.phone || '',
+                    name: sUser.user_metadata?.full_name || sUser.user_metadata?.name || '',
+                    avatar: sUser.user_metadata?.avatar_url || sUser.user_metadata?.picture || '',
+                  },
+                  { fromOAuthCallback: isOAuthCallbackUrl, silentIfAlreadyActive: !isOAuthCallbackUrl }
+                );
+              }
+            })
+            .catch(() => {});
+
           const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
             if (!isMounted) return;
-            if (session?.user && event === 'SIGNED_IN') {
-              const email = session.user.email || '';
-              const phoneStr = session.user.phone || '';
-              const fullName = session.user.user_metadata?.full_name || '';
-              const avatarUrl = session.user.user_metadata?.avatar_url || '';
-              
-              setUsers(prev => {
-                const existingUser = prev.find(u => u.id === session.user.id);
-                const userObj: User = existingUser ? { ...existingUser } : {
-                  id: session.user.id,
-                  phone: phoneStr || email,
-                  email: email,
-                  name: fullName || (email ? email.split('@')[0] : 'User'),
-                  avatar: avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80',
-                  password: '', 
-                  division: '',
-                  district: '',
-                  thana: '',
-                  village: '',
-                  addresses: []
-                };
-                
-                setCurrentUser(userObj);
-                safeLocalStorage.setItem('oneroof_current_user', JSON.stringify(userObj));
-                
-                if (!existingUser) {
-                  const next = [...prev, userObj];
-                  syncUserToSupabase(userObj).catch(() => {});
-                  return next;
-                }
-                return prev;
-              });
-              
-              setIsAuthModalOpen(false);
+            if (session?.user && (event === 'SIGNED_IN' || (event === 'INITIAL_SESSION' && isOAuthCallbackUrl))) {
+              const sUser = session.user;
+              const email = sUser.email || '';
+              if (!email) return;
+              completeGoogleUserLogin(
+                {
+                  id: sUser.id,
+                  email,
+                  phone: sUser.phone || '',
+                  name: sUser.user_metadata?.full_name || sUser.user_metadata?.name || '',
+                  avatar: sUser.user_metadata?.avatar_url || sUser.user_metadata?.picture || '',
+                },
+                { fromOAuthCallback: isOAuthCallbackUrl, silentIfAlreadyActive: true }
+              );
             } else if (event === 'SIGNED_OUT') {
               setCurrentUser(null);
               safeLocalStorage.removeItem('oneroof_current_user');
@@ -1370,6 +1666,23 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                   });
                 }
               }
+            )
+            .on(
+              'postgres_changes',
+              { event: '*', schema: 'public', table: 'users' },
+              (payload) => {
+                if (!isMounted) return;
+                if (payload.eventType === 'INSERT' && payload.new?.data) {
+                  const newUser = payload.new.data as User;
+                  setUsers((prev) => (prev.some((u) => u.id === newUser.id) ? prev : [newUser, ...prev]));
+                } else if (payload.eventType === 'UPDATE' && payload.new?.data) {
+                  const updatedUser = payload.new.data as User;
+                  setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+                } else if (payload.eventType === 'DELETE' && payload.old?.id) {
+                  const deletedId = payload.old.id;
+                  setUsers((prev) => prev.filter((u) => u.id !== deletedId));
+                }
+              }
             );
 
           channel.subscribe((status) => {
@@ -1396,9 +1709,95 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     initSupabase();
 
+    // Cross-tab & OAuth popup sync listeners (postMessage, BroadcastChannel, localStorage)
+    const handlePostMessage = (event: MessageEvent) => {
+      if (!isMounted) return;
+      const origin = event.origin || '';
+      const sameOrigin = typeof window !== 'undefined' && origin === window.location.origin;
+      const trustedHost = origin.endsWith('.run.app') || origin.includes('localhost') || origin.includes('vercel.app');
+      if (!sameOrigin && !trustedHost) return;
+
+      if (event.data?.type === 'ONEROOF_GOOGLE_AUTH_SUCCESS' && event.data?.user) {
+        const incomingUser = event.data.user as User;
+        completeGoogleUserLogin(
+          {
+            id: incomingUser.id,
+            email: incomingUser.email,
+            name: incomingUser.name,
+            avatar: incomingUser.avatar,
+            phone: incomingUser.phone,
+          },
+          { silentIfAlreadyActive: true }
+        );
+      } else if (event.data?.type === 'ONEROOF_GOOGLE_AUTH_ERROR' && event.data?.error) {
+        addToast(
+          languageRef.current === 'bn'
+            ? `গুগল লগইন ব্যর্থ হয়েছে: ${event.data.error}`
+            : `Google login failed: ${event.data.error}`,
+          'error'
+        );
+      }
+    };
+
+    const handleStorageSync = (e: StorageEvent) => {
+      if (!isMounted) return;
+      if (e.key === 'oneroof_current_user' && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue) as User;
+          if (parsed && parsed.email) {
+            completeGoogleUserLogin(
+              {
+                id: parsed.id,
+                email: parsed.email,
+                name: parsed.name,
+                avatar: parsed.avatar,
+                phone: parsed.phone,
+              },
+              { silentIfAlreadyActive: true }
+            );
+          }
+        } catch (_) {}
+      }
+    };
+
+    let bc: BroadcastChannel | null = null;
+    try {
+      if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+        bc = new BroadcastChannel('oneroof_auth_sync');
+        bc.onmessage = (ev) => {
+          if (!isMounted) return;
+          if (ev.data?.type === 'ONEROOF_GOOGLE_AUTH_SUCCESS' && ev.data?.user) {
+            const incomingUser = ev.data.user as User;
+            completeGoogleUserLogin(
+              {
+                id: incomingUser.id,
+                email: incomingUser.email,
+                name: incomingUser.name,
+                avatar: incomingUser.avatar,
+                phone: incomingUser.phone,
+              },
+              { silentIfAlreadyActive: true }
+            );
+          }
+        };
+      }
+    } catch (_) {}
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('message', handlePostMessage);
+      window.addEventListener('storage', handleStorageSync);
+    }
+
     return () => {
       isMounted = false;
       clearTimeout(safetyTimer);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('message', handlePostMessage);
+        window.removeEventListener('storage', handleStorageSync);
+      }
+      try {
+        if (bc) bc.close();
+      } catch (_) {}
       try {
         if (authUnsub) authUnsub();
       } catch (_) {}
@@ -2838,40 +3237,120 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return newOrder;
   };
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (): Promise<{
+    ok: boolean;
+    reason?: 'provider_not_enabled' | 'popup_blocked' | 'error';
+    error?: string;
+  }> => {
     try {
+      const origin = typeof window !== 'undefined' ? window.location.origin : '';
+      const width = 500;
+      const height = 640;
+      const left = typeof window !== 'undefined' ? Math.max(0, (window.screen.width - width) / 2) : 100;
+      const top = typeof window !== 'undefined' ? Math.max(0, (window.screen.height - height) / 2) : 100;
+      const popupFeatures = `width=${width},height=${height},left=${left},top=${top},scrollbars=yes,resizable=yes`;
+
+      // Option 1: Direct Google OAuth 2.0 Client ID (if configured via VITE_GOOGLE_CLIENT_ID)
+      if (GOOGLE_CLIENT_ID) {
+        const params = new URLSearchParams({
+          client_id: GOOGLE_CLIENT_ID,
+          redirect_uri: origin,
+          response_type: 'token',
+          scope: 'openid email profile',
+          prompt: 'select_account',
+          include_granted_scopes: 'true',
+        });
+        const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
+        const authWindow = window.open(googleOAuthUrl, 'oneroof_google_oauth', popupFeatures);
+        if (!authWindow || authWindow.closed || typeof authWindow.closed === 'undefined') {
+          const isIframe = window.self !== window.top;
+          if (!isIframe) {
+            window.location.href = googleOAuthUrl;
+            return { ok: true };
+          }
+          addToast(
+            language === 'bn'
+              ? 'পপ-আপ ব্লক করা হয়েছে! অনুগ্রহ করে ব্রাউজারে পপ-আপ Allow করে আবার ক্লিক করুন।'
+              : 'Popup blocked! Please allow popups and try again.',
+            'error'
+          );
+          return { ok: false, reason: 'popup_blocked' };
+        }
+        addToast(
+          language === 'bn'
+            ? 'গুগল অ্যাকাউন্ট নির্বাচন উইন্ডো ওপেন হয়েছে। আপনার ইমেইল সিলেক্ট করুন।'
+            : 'Google account selector opened. Please choose your email.',
+          'info'
+        );
+        return { ok: true };
+      }
+
+      // Option 2: Supabase Google OAuth (verify provider status first to avoid broken JSON error page)
+      const googleEnabled = await checkSupabaseGoogleProviderStatus();
+      if (googleEnabled === false) {
+        addToast(
+          language === 'bn'
+            ? 'Supabase ড্যাশবোর্ডে Google Provider এখনো চালু করা হয়নি। প্রদর্শিত নির্দেশনা দেখে চালু করুন।'
+            : 'Google Provider is not enabled in Supabase Dashboard yet.',
+          'error'
+        );
+        return { ok: false, reason: 'provider_not_enabled' };
+      }
+
       // In iframe preview environments, opening OAuth inside the iframe causes Google to throw a 403 Forbidden
       // because Google prohibits accounts.google.com from running inside an iframe.
-      // skipBrowserRedirect: true allows opening the OAuth URL in a clean top-level popup/tab.
+      // skipBrowserRedirect: true opens the OAuth URL in a clean centered popup/tab with prompt=select_account.
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: window.location.origin,
-          skipBrowserRedirect: true
-        }
+          redirectTo: origin,
+          queryParams: {
+            prompt: 'select_account',
+            access_type: 'offline',
+          },
+          skipBrowserRedirect: true,
+        },
       });
       if (error) throw error;
 
       if (data?.url) {
-        const authWindow = window.open(data.url, '_blank', 'width=520,height=640');
+        const authWindow = window.open(data.url, 'oneroof_google_oauth', popupFeatures);
         if (!authWindow || authWindow.closed || typeof authWindow.closed === 'undefined') {
-          // Fallback if browser popup blocker prevented window.open
-          window.location.href = data.url;
-        } else {
+          const isIframe = window.self !== window.top;
+          if (!isIframe) {
+            window.location.href = data.url;
+            return { ok: true };
+          }
           addToast(
-            language === 'bn' 
-              ? 'গুগল লগইন উইন্ডো ওপেন হয়েছে। অনুগ্রহ করে লগইন সম্পন্ন করুন।' 
-              : 'Google login window opened. Please complete your login.',
-            'info'
+            language === 'bn'
+              ? 'পপ-আপ ব্লক করা হয়েছে! অনুগ্রহ করে ব্রাউজারে পপ-আপ Allow করে আবার ক্লিক করুন।'
+              : 'Popup blocked! Please allow popups and try again.',
+            'error'
           );
+          return { ok: false, reason: 'popup_blocked' };
         }
+        addToast(
+          language === 'bn'
+            ? 'গুগল অ্যাকাউন্ট নির্বাচন উইন্ডো ওপেন হয়েছে। আপনার ইমেইল সিলেক্ট করে লগইন/রেজিস্ট্রেশন করুন।'
+            : 'Google account selector opened. Select your email to sign in or register.',
+          'info'
+        );
+        return { ok: true };
       }
+      return { ok: false, reason: 'error', error: 'OAuth URL missing' };
     } catch (err: any) {
       console.error('Google login error:', err);
+      const msg = err?.message || '';
+      if (msg.toLowerCase().includes('not enabled') || msg.toLowerCase().includes('unsupported provider')) {
+        return { ok: false, reason: 'provider_not_enabled', error: msg };
+      }
       addToast(
-        language === 'bn' ? `গুগল লগইন ব্যর্থ হয়েছে: ${err.message || 'আবার চেষ্টা করুন'}` : `Google login failed: ${err.message || 'Please try again'}`,
+        language === 'bn'
+          ? `গুগল লগইন ব্যর্থ হয়েছে: ${msg || 'আবার চেষ্টা করুন'}`
+          : `Google login failed: ${msg || 'Please try again'}`,
         'error'
       );
+      return { ok: false, reason: 'error', error: msg };
     }
   };
 
@@ -2911,6 +3390,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
 
     const isOwner = isUserAdmin(user);
+    if (!isOwner && user.accountStatus === 'blocked') {
+      addToast(
+        language === 'bn'
+          ? 'আপনার অ্যাকাউন্টটি অ্যাডমিন কর্তৃক সাময়িকভাবে স্থগিত করা হয়েছে। সহায়তার জন্য যোগাযোগ করুন।'
+          : 'Your account has been suspended by admin.',
+        'error'
+      );
+      return false;
+    }
+
     const userToSet = isOwner && user.role !== 'admin' ? { ...user, role: 'admin' as const } : user;
     setCurrentUser(userToSet);
     if (isOwner || userToSet.role === 'admin') {
@@ -3005,6 +3494,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       phone: cleanPhone,
       password: userData.password || '',
       role: isAdmin ? 'admin' : 'user',
+      accountStatus: 'active',
+      createdAt: new Date().toISOString(),
       division: userData.division?.trim() || '',
       district: userData.district?.trim() || '',
       thana: userData.thana?.trim() || '',
@@ -3211,7 +3702,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const logoutUser = () => {
+    currentUserRef.current = null;
     setCurrentUser(null);
+    safeLocalStorage.removeItem('oneroof_current_user');
+    supabase.auth.signOut().catch(() => {});
     addToast(
       language === 'bn' ? 'লগআউট সম্পন্ন হয়েছে' : 'Logged out',
       'info'
@@ -3253,8 +3747,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       status: 'completed', // Instant deposit credit for immediate user satisfaction
       method,
       accountNumber: senderNumber || currentUser.phone,
-      trxId: trxId || `BQR${Math.floor(100000 + Math.random() * 900000)}`,
-      note: note || (method === 'bangla_qr' ? 'বাংলা কিউআর ডিপোজিট' : `${method.toUpperCase()} ডিপোজিট`),
+      trxId: trxId || `TRX${Math.floor(100000 + Math.random() * 900000)}`,
+      note: note || `${getPaymentMethodDisplayLabel(method, 'bn')} ডিপোজিট`,
     };
 
     const currentBal = currentUser.balance || 0;
@@ -3283,7 +3777,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const withdrawFromWallet = async (
     amount: number, 
-    method: 'bkash' | 'nagad' | 'rocket' | 'bank', 
+    method: WalletPaymentMethod, 
     accountNumber: string, 
     bankDetails?: any
   ): Promise<{ success: boolean; message: string }> => {
@@ -3339,7 +3833,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       method,
       accountNumber: accountNumber.trim(),
       bankDetails,
-      note: `${method === 'bank' ? 'ব্যাংক ট্রান্সফার' : method.toUpperCase()} একাউন্টে উত্তোলন অনুরোধ`,
+      note: `${getPaymentMethodDisplayLabel(method, 'bn', bankDetails?.bankName)} একাউন্টে উত্তোলন অনুরোধ`,
     };
 
     const newBalance = currentBal - amount;
@@ -3495,6 +3989,179 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     );
   };
 
+  // Admin Customer Account Management Actions
+  const adminCreateUser = (userData: Partial<User>): boolean => {
+    const cleanEmail = userData.email?.trim().toLowerCase() || '';
+    const cleanPhone = userData.phone?.trim() || '';
+    const cleanDigits = cleanPhone.replace(/[^0-9]/g, '');
+
+    if (!userData.name?.trim()) {
+      addToast('কাস্টমারের নাম লিখুন', 'error');
+      return false;
+    }
+    if (!cleanEmail && cleanDigits.length < 10) {
+      addToast('সঠিক মোবাইল নম্বর বা ইমেইল দিন', 'error');
+      return false;
+    }
+    if (cleanEmail && users.some((u) => (u.email || '').trim().toLowerCase() === cleanEmail)) {
+      addToast('এই ইমেইলে আগেই অ্যাকাউন্ট রয়েছে', 'error');
+      return false;
+    }
+    if (
+      cleanDigits.length >= 10 &&
+      users.some((u) => (u.phone || '').replace(/[^0-9]/g, '').endsWith(cleanDigits.slice(-10)))
+    ) {
+      addToast('এই মোবাইল নম্বরে আগেই অ্যাকাউন্ট রয়েছে', 'error');
+      return false;
+    }
+
+    const newUserId = `user-${Date.now()}`;
+    const myReferralCode = generateUserReferralCode({
+      id: newUserId,
+      phone: cleanPhone,
+      name: userData.name,
+    });
+    const fullAddr = [userData.village, userData.thana, userData.district, userData.division]
+      .filter(Boolean)
+      .join(', ');
+
+    const newUser: User = {
+      id: newUserId,
+      name: userData.name.trim(),
+      email: cleanEmail,
+      phone: cleanPhone,
+      password: userData.password || '123456',
+      role: userData.role === 'admin' ? 'admin' : 'user',
+      accountStatus: 'active',
+      createdAt: new Date().toISOString(),
+      adminNote: userData.adminNote?.trim() || '',
+      division: userData.division?.trim() || '',
+      district: userData.district?.trim() || '',
+      thana: userData.thana?.trim() || '',
+      village: userData.village?.trim() || '',
+      avatar:
+        userData.avatar ||
+        'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80',
+      balance: Number(userData.balance) || 0,
+      pendingWelcomeBonus: 50,
+      hasCompletedFirstOrder: false,
+      firstOrderBonusUnlocked: false,
+      referralCode: myReferralCode,
+      referrals: [],
+      walletTransactions: [],
+      addresses: fullAddr
+        ? [
+            {
+              id: `addr-${Date.now()}`,
+              title: 'মূল ঠিকানা',
+              recipientName: userData.name.trim(),
+              phone: cleanPhone,
+              division: userData.division?.trim() || '',
+              district: userData.district?.trim() || '',
+              thana: userData.thana?.trim() || '',
+              address: userData.village?.trim() || fullAddr,
+              isDefault: true,
+            },
+          ]
+        : [],
+    };
+
+    setUsers((prev) => [newUser, ...prev]);
+    syncUserToSupabase(newUser);
+    addToast(`নতুন কাস্টমার অ্যাকাউন্ট "${newUser.name}" তৈরি হয়েছে!`, 'success');
+    return true;
+  };
+
+  const adminUpdateUser = (userId: string, updates: Partial<User>): boolean => {
+    const target = users.find((u) => u.id === userId);
+    if (!target) {
+      addToast('কাস্টমার পাওয়া যায়নি', 'error');
+      return false;
+    }
+
+    if (updates.email !== undefined) {
+      const cleanEmail = updates.email.trim().toLowerCase();
+      if (
+        cleanEmail &&
+        users.some((u) => u.id !== userId && (u.email || '').trim().toLowerCase() === cleanEmail)
+      ) {
+        addToast('এই ইমেইল অন্য অ্যাকাউন্টে ব্যবহৃত হচ্ছে', 'error');
+        return false;
+      }
+    }
+
+    if (updates.phone !== undefined) {
+      const cleanDigits = updates.phone.replace(/[^0-9]/g, '');
+      if (
+        cleanDigits.length >= 10 &&
+        users.some(
+          (u) =>
+            u.id !== userId &&
+            (u.phone || '').replace(/[^0-9]/g, '').endsWith(cleanDigits.slice(-10))
+        )
+      ) {
+        addToast('এই মোবাইল নম্বর অন্য অ্যাকাউন্টে ব্যবহৃত হচ্ছে', 'error');
+        return false;
+      }
+    }
+
+    const updatedUser: User = {
+      ...target,
+      ...updates,
+      email: updates.email !== undefined ? updates.email.trim().toLowerCase() : target.email,
+      phone: updates.phone !== undefined ? updates.phone.trim() : target.phone,
+      name: updates.name !== undefined ? updates.name.trim() : target.name,
+    };
+
+    setUsers((prev) => prev.map((u) => (u.id === userId ? updatedUser : u)));
+    if (currentUser?.id === userId) {
+      setCurrentUser(updatedUser);
+    }
+    syncUserToSupabase(updatedUser);
+    addToast(`${updatedUser.name}-এর অ্যাকাউন্ট তথ্য আপডেট হয়েছে!`, 'success');
+    return true;
+  };
+
+  const adminToggleUserBlock = (userId: string): boolean => {
+    const target = users.find((u) => u.id === userId);
+    if (!target) return false;
+    if (isUserAdmin(target)) {
+      addToast('মূল অ্যাডমিন অ্যাকাউন্ট স্থগিত করা যাবে না', 'error');
+      return false;
+    }
+    const nextStatus: 'active' | 'blocked' =
+      target.accountStatus === 'blocked' ? 'active' : 'blocked';
+    const updatedUser: User = { ...target, accountStatus: nextStatus };
+    setUsers((prev) => prev.map((u) => (u.id === userId ? updatedUser : u)));
+    if (currentUser?.id === userId) {
+      setCurrentUser(updatedUser);
+    }
+    syncUserToSupabase(updatedUser);
+    addToast(
+      nextStatus === 'blocked'
+        ? `${target.name}-এর অ্যাকাউন্ট স্থগিত (Block) করা হয়েছে`
+        : `${target.name}-এর অ্যাকাউন্ট পুনরায় সক্রিয় করা হয়েছে`,
+      nextStatus === 'blocked' ? 'info' : 'success'
+    );
+    return true;
+  };
+
+  const adminDeleteUser = (userId: string): boolean => {
+    const target = users.find((u) => u.id === userId);
+    if (!target) return false;
+    if (isUserAdmin(target)) {
+      addToast('মূল অ্যাডমিন অ্যাকাউন্ট মুছে ফেলা যাবে না', 'error');
+      return false;
+    }
+    setUsers((prev) => prev.filter((u) => u.id !== userId));
+    if (currentUser?.id === userId) {
+      setCurrentUser(null);
+    }
+    deleteUserFromSupabase(userId).catch(() => {});
+    addToast(`"${target.name}" অ্যাকাউন্টটি মুছে ফেলা হয়েছে`, 'info');
+    return true;
+  };
+
   const formatPrice = (amount: number) => {
     return formatPriceUtil(amount, language);
   };
@@ -3598,6 +4265,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         loginAdmin,
         logoutAdmin,
         isUserAdmin,
+        users,
+        adminCreateUser,
+        adminUpdateUser,
+        adminDeleteUser,
+        adminToggleUserBlock,
         supabaseConnected,
         supabaseStatusMsg,
         checkSupabaseConnection,

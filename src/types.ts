@@ -180,7 +180,21 @@ export type OrderStatus = 'placed' | 'processing' | 'shipped' | 'out_for_deliver
 
 export type WalletTransactionType = 'deposit' | 'withdraw' | 'order_payment' | 'refund' | 'bonus' | 'admin_adjustment';
 export type WalletTransactionStatus = 'completed' | 'pending' | 'rejected';
-export type WalletPaymentMethod = 'bangla_qr' | 'bkash' | 'nagad' | 'rocket' | 'bank' | 'wallet' | 'system';
+export type WalletPaymentMethod =
+  | 'nagad'
+  | 'bkash'
+  | 'upay'
+  | 'rocket'
+  | 'cellfin'
+  | 'tap'
+  | 'okwallet'
+  | 'mcash'
+  | 'surecash'
+  | 'other_mfs'
+  | 'bangla_qr'
+  | 'bank'
+  | 'wallet'
+  | 'system';
 
 export interface WalletTransaction {
   id: string; // e.g. "TXN-84920"
@@ -214,7 +228,7 @@ export interface Order {
   shippingFee: number;
   discount: number;
   total: number;
-  paymentMethod: 'cod' | 'bangla_qr' | 'wallet' | 'bkash' | 'nagad' | 'rocket' | 'card';
+  paymentMethod: 'nagad' | 'bkash' | 'upay' | 'cod' | 'bangla_qr' | 'wallet' | 'rocket' | 'card';
   paymentStatus: 'paid' | 'pending';
   shippingAddress: {
     fullName: string;
@@ -274,6 +288,9 @@ export interface User {
   phone: string;
   password?: string;
   role?: 'admin' | 'user';
+  accountStatus?: 'active' | 'blocked';
+  createdAt?: string;
+  adminNote?: string;
   division: string;
   district: string;
   thana: string;

@@ -388,19 +388,19 @@ export const ProductDetailPage: React.FC = () => {
 
   const deliverySummaryText = selectedProduct.isFreeShipping
     ? language === 'bn'
-      ? 'ফ্রি ডেলিভারি · ক্যাশ অন ডেলিভারি'
-      : 'Free Delivery · Cash on Delivery'
+      ? 'ফ্রি ডেলিভারি · নগদ, বিকাশ ও উপায় পেমেন্ট'
+      : 'Free Delivery · Nagad, bKash & Upay'
     : selectedProduct.shippingFee !== undefined
     ? language === 'bn'
-      ? `ডেলিভারি চার্জ ${formatPrice(selectedProduct.shippingFee)} · ক্যাশ অন ডেলিভারি`
-      : `Delivery ${formatPrice(selectedProduct.shippingFee)} · Cash on Delivery`
+      ? `ডেলিভারি চার্জ ${formatPrice(selectedProduct.shippingFee)} · নগদ, বিকাশ ও উপায়`
+      : `Delivery ${formatPrice(selectedProduct.shippingFee)} · Nagad, bKash & Upay`
     : language === 'bn'
     ? `ঢাকা ${formatPrice(siteSettings.shippingFeeInsideDhaka ?? 60)} · বাইরে ${formatPrice(
         siteSettings.shippingFeeOutsideDhaka ?? 120
-      )} · ক্যাশ অন ডেলিভারি`
+      )} · নগদ, বিকাশ ও উপায়`
     : `Dhaka ${formatPrice(siteSettings.shippingFeeInsideDhaka ?? 60)} · Outside ${formatPrice(
         siteSettings.shippingFeeOutsideDhaka ?? 120
-      )} · COD`;
+      )} · Nagad, bKash & Upay`;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-32 md:py-7 space-y-6">
@@ -958,8 +958,8 @@ export const ProductDetailPage: React.FC = () => {
             {!description && filteredSpecs.length === 0 && !selectedProduct.warranty && (
               <p className="text-sm text-slate-500">
                 {language === 'bn'
-                  ? 'স্টকে আছে — ক্যাশ অন ডেলিভারিতে অর্ডার করুন।'
-                  : 'In stock and ready for Cash on Delivery.'}
+                  ? 'স্টকে আছে — এখনই নগদ, বিকাশ বা উপায় (পার্সোনাল) দিয়ে অর্ডার করুন।'
+                  : 'In stock — order now with Nagad, bKash or Upay (Personal).'}
               </p>
             )}
           </div>

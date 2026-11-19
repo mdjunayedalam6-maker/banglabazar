@@ -43,7 +43,7 @@ export const CustomerReferral: React.FC = () => {
   const referralCode = stats.referralCode;
 
   // Build full referral URL based on current origin
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://banglabazar.com';
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://banglabazarbd.vercel.app';
   const referralUrl = `${baseUrl}/?ref=${referralCode}`;
 
   const handleCopy = (text: string, type: 'code' | 'link') => {

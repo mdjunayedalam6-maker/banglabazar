@@ -19,6 +19,10 @@ import {
   ChevronUp,
   Loader2,
   ShieldCheck,
+  AlertCircle,
+  Copy,
+  Check,
+  ExternalLink,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BANGLADESH_DIVISIONS } from '../data/mockData';
@@ -62,6 +66,8 @@ export const AuthModal: React.FC = () => {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [googleAuthIssue, setGoogleAuthIssue] = useState<'provider_not_enabled' | 'popup_blocked' | 'error' | null>(null);
+  const [copiedRedirectUrl, setCopiedRedirectUrl] = useState(false);
   const [referralCodeInput, setReferralCodeInput] = useState<string>(
     () => activeReferralCode || ''
   );
@@ -231,12 +237,27 @@ export const AuthModal: React.FC = () => {
   };
 
   const handleGoogleClick = async () => {
+    setGoogleAuthIssue(null);
     setIsGoogleLoading(true);
     try {
-      await loginWithGoogle();
-    } finally {
-      setTimeout(() => setIsGoogleLoading(false), 2000);
+      const res = await loginWithGoogle();
+      if (res && !res.ok) {
+        setGoogleAuthIssue(res.reason || 'error');
+        setIsGoogleLoading(false);
+        return;
+      }
+      setTimeout(() => setIsGoogleLoading(false), 2500);
+    } catch {
+      setIsGoogleLoading(false);
     }
+  };
+
+  const handleCopyRedirectUrl = (urlToCopy: string) => {
+    try {
+      navigator.clipboard?.writeText(urlToCopy);
+      setCopiedRedirectUrl(true);
+      setTimeout(() => setCopiedRedirectUrl(false), 2000);
+    } catch {}
   };
 
   const passwordsMatch =
@@ -246,8 +267,9 @@ export const AuthModal: React.FC = () => {
 
   const hasEnteredOptionalAddress = Boolean(thana.trim() || village.trim());
   const isIframe = typeof window !== 'undefined' && window.self !== window.top;
+  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : '';
 
-  const renderSocialAuthButtons = () => (
+  const renderSocialAuthButtons = (mode: 'login' | 'register') => (
     <div className="pt-2">
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
@@ -255,7 +277,7 @@ export const AuthModal: React.FC = () => {
         </div>
         <div className="relative flex justify-center text-xs">
           <span className="px-3 bg-white text-slate-400 font-medium">
-            {language === 'bn' ? 'অথবা' : 'Or'}
+            {language === 'bn' ? 'অথবা ১-ক্লিকে গুগল দিয়ে' : 'Or 1-click via Google'}
           </span>
         </div>
       </div>
@@ -264,7 +286,7 @@ export const AuthModal: React.FC = () => {
         type="button"
         disabled={isGoogleLoading}
         onClick={handleGoogleClick}
-        className="mt-3 w-full min-h-[44px] flex items-center justify-center gap-2.5 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold rounded-xl text-xs transition-colors cursor-pointer disabled:opacity-70"
+        className="mt-3 w-full min-h-[46px] flex items-center justify-center gap-2.5 px-3 py-2.5 bg-white border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/40 text-slate-800 font-bold rounded-xl text-xs transition-all cursor-pointer disabled:opacity-70 shadow-2xs"
       >
         {isGoogleLoading ? (
           <Loader2 className="w-4 h-4 animate-spin text-[#00873E]" />
@@ -291,20 +313,84 @@ export const AuthModal: React.FC = () => {
         <span>
           {isGoogleLoading
             ? language === 'bn'
-              ? 'গুগল সংযুক্ত হচ্ছে...'
-              : 'Connecting to Google...'
+              ? 'গুগল অ্যাকাউন্ট নির্বাচন খুলছে...'
+              : 'Opening Google Account Picker...'
+            : mode === 'register'
+            ? language === 'bn'
+              ? 'গুগল (Gmail) দিয়ে রেজিস্ট্রেশন করুন'
+              : 'Register with Google'
             : language === 'bn'
-            ? 'গুগল দিয়ে দ্রুত এগিয়ে যান'
-            : 'Continue with Google'}
+            ? 'গুগল (Gmail) দিয়ে লগইন করুন'
+            : 'Sign in with Google'}
         </span>
       </button>
 
-      {isIframe && (
-        <p className="text-[11px] text-slate-400 text-center mt-2">
-          {language === 'bn'
-            ? 'গুগল লগইন নতুন ট্যাবে ওপেন হবে'
-            : 'Google sign-in opens in a new tab'}
-        </p>
+      <p className="text-[11px] text-slate-500 text-center mt-1.5">
+        {language === 'bn'
+          ? isIframe
+            ? 'ক্লিক করে আপনার ইমেইল সিলেক্ট করলেই অটো লগইন/রেজিস্ট্রেশন হবে (নতুন উইন্ডোতে)'
+            : 'ক্লিক করে আপনার গুগল ইমেইল সিলেক্ট করলেই অটো লগইন বা রেজিস্ট্রেশন হয়ে যাবে'
+          : 'Select your Google email to sign in or auto-register instantly'}
+      </p>
+
+      {googleAuthIssue === 'popup_blocked' && (
+        <div className="mt-2.5 p-3 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-900 flex items-start gap-2">
+          <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+          <div>
+            <div className="font-bold">
+              {language === 'bn' ? 'পপ-আপ ব্লক করা হয়েছে!' : 'Popup Blocked'}
+            </div>
+            <p className="mt-0.5">
+              {language === 'bn'
+                ? 'ব্রাউজারের অ্যাড্রেস বার থেকে Pop-up Allow করে পুনরায় গুগল বাটনে ক্লিক করুন।'
+                : 'Please allow popups in your browser and click Google sign-in again.'}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {googleAuthIssue === 'provider_not_enabled' && (
+        <div className="mt-2.5 p-3 rounded-xl bg-rose-50 border border-rose-200 text-[11px] text-rose-900 space-y-2">
+          <div className="flex items-start gap-2">
+            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+            <div>
+              <div className="font-bold">
+                {language === 'bn'
+                  ? 'Supabase-এ Google Provider এখনো চালু করা হয়নি'
+                  : 'Google Provider is not enabled in Supabase'}
+              </div>
+              <p className="mt-0.5 text-rose-800">
+                {language === 'bn'
+                  ? 'অ্যাডমিনকে Supabase Dashboard → Authentication → Providers → Google অন করতে হবে এবং নিচের Redirect URL যোগ করতে হবে:'
+                  : 'Enable Google in Supabase Auth Providers and add this Redirect URL:'}
+              </p>
+            </div>
+          </div>
+
+          {currentOrigin && (
+            <div className="flex items-center gap-1.5 bg-white border border-rose-200 rounded-lg px-2 py-1.5">
+              <span className="font-mono text-[10px] text-slate-700 truncate flex-1">{currentOrigin}</span>
+              <button
+                type="button"
+                onClick={() => handleCopyRedirectUrl(currentOrigin)}
+                className="px-2 py-1 rounded bg-rose-100 hover:bg-rose-200 text-rose-800 font-bold text-[10px] inline-flex items-center gap-1 cursor-pointer shrink-0"
+              >
+                {copiedRedirectUrl ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                <span>{copiedRedirectUrl ? 'কপিড' : 'কপি'}</span>
+              </button>
+            </div>
+          )}
+
+          <a
+            href="https://supabase.com/dashboard/project/ppwaosjmbdyocrmhnwak/auth/providers"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-bold text-rose-700 hover:underline"
+          >
+            <span>Supabase Google Provider সেটিংস খুলুন</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        </div>
       )}
     </div>
   );
@@ -458,7 +544,7 @@ export const AuthModal: React.FC = () => {
                 </button>
               </form>
 
-              {renderSocialAuthButtons()}
+              {renderSocialAuthButtons('login')}
 
               <div className="pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
                 <span>
@@ -845,7 +931,7 @@ export const AuthModal: React.FC = () => {
                 </span>
               </button>
 
-              {renderSocialAuthButtons()}
+              {renderSocialAuthButtons('register')}
 
               <div className="pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
                 <span>

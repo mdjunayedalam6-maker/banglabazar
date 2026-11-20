@@ -16,6 +16,8 @@ import {
   ZoomOut,
   Maximize2,
   ShieldCheck,
+  Coins,
+  MessageCircle,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { ProductCard } from '../components/ProductCard';
@@ -70,6 +72,9 @@ export const ProductDetailPage: React.FC = () => {
     formatPrice,
     addReview,
     addToast,
+    currentUser,
+    setIsAuthModalOpen,
+    getProductShareUrl,
   } = useApp();
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -236,9 +241,19 @@ export const ProductDetailPage: React.FC = () => {
   };
 
   const productShareUrl = useMemo(() => {
-    if (typeof window === 'undefined' || !selectedProduct) return '';
-    return `${window.location.origin}/?product=${encodeURIComponent(selectedProduct.id)}`;
+    if (!selectedProduct) return '';
+    return getProductShareUrl(selectedProduct.id);
+  }, [selectedProduct, currentUser, getProductShareUrl]);
+
+  const unitCommissionAmount = useMemo(() => {
+    if (!selectedProduct) return 0;
+    return Math.round(Number(selectedProduct.price || 0) * 0.02 * 100) / 100;
   }, [selectedProduct]);
+
+  const estimatedShareCommission = useMemo(() => {
+    if (!selectedProduct) return 0;
+    return Math.round(Number(selectedProduct.price || 0) * selectedQuantity * 0.02 * 100) / 100;
+  }, [selectedProduct, selectedQuantity]);
 
   const matchedCategory = useMemo(() => {
     if (!selectedProduct) return undefined;
@@ -870,6 +885,102 @@ export const ProductDetailPage: React.FC = () => {
                 <span>{t.buyNow}</span>
               </button>
             </div>
+
+            {/* Product Share & Earn 2% Commission Panel */}
+            <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-3.5 space-y-2.5">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-start gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-[#00873E] text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <Coins className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs sm:text-[13px] font-bold text-slate-900">
+                      {language === 'bn'
+                        ? 'এই প্রোডাক্টের লিংক শেয়ার করে ২% আয় করুন'
+                        : 'Share this product link & earn 2% commission'}
+                    </div>
+                    <p className="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                      {language === 'bn'
+                        ? 'আপনার লিংক থেকে যেকোনো সংখ্যক কাস্টমার কিনে অর্ডার ডেলিভারি হলে অটো ২% ওয়ালেটে যোগ হবে। অর্ডার বাতিল হলে কমিশন কেটে নেওয়া হবে।'
+                        : 'Earn 2% automatically per completed delivery from your link. Cancelled orders reverse the commission.'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="text-right shrink-0">
+                  <span className="text-[11px] text-slate-500 block">
+                    {language === 'bn' ? 'প্রতি সেলে আয়' : 'Est. earn'}
+                  </span>
+                  <span className="text-sm font-extrabold text-[#00873E] tabular-nums">
+                    +{formatPrice(selectedQuantity > 1 ? estimatedShareCommission : unitCommissionAmount)}
+                  </span>
+                </div>
+              </div>
+
+              {currentUser ? (
+                <div className="flex flex-wrap items-center gap-2 pt-0.5">
+                  <button
+                    type="button"
+                    onClick={copyProductLink}
+                    className={`min-h-[38px] px-3.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap ${
+                      copiedLink
+                        ? 'bg-[#062919] text-white'
+                        : 'bg-[#00873E] hover:bg-[#007033] text-white'
+                    }`}
+                  >
+                    {copiedLink ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>
+                      {copiedLink
+                        ? language === 'bn'
+                          ? 'আয়ের লিংক কপি হয়েছে'
+                          : 'Affiliate link copied'
+                        : language === 'bn'
+                        ? 'আমার আয়ের লিংক কপি'
+                        : 'Copy My Earn Link'}
+                    </span>
+                  </button>
+
+                  <a
+                    href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                      `${title}\nদাম: ${formatPrice(selectedProduct.price)}\nঅর্ডার করতে লিংকে ক্লিক করুন:\n${productShareUrl}`
+                    )}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="min-h-[38px] px-3 rounded-lg bg-white hover:bg-emerald-50 text-slate-800 border border-slate-200 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors whitespace-nowrap"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 text-[#00873E]" />
+                    <span>WhatsApp</span>
+                  </a>
+
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                      productShareUrl
+                    )}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="min-h-[38px] px-3 rounded-lg bg-white hover:bg-blue-50 text-slate-800 border border-slate-200 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors whitespace-nowrap"
+                  >
+                    <Share2 className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Facebook</span>
+                  </a>
+                </div>
+              ) : (
+                <div className="pt-0.5">
+                  <button
+                    type="button"
+                    onClick={() => setIsAuthModalOpen(true)}
+                    className="min-h-[38px] px-3.5 rounded-lg bg-[#00873E] hover:bg-[#007033] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <Share2 className="w-3.5 h-3.5" />
+                    <span>
+                      {language === 'bn'
+                        ? 'আয়ের লিংক পেতে লগইন / অ্যাকাউন্ট খুলুন'
+                        : 'Login to Generate 2% Earn Link'}
+                    </span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Concise Single-Line Delivery Summary */}
@@ -1347,13 +1458,39 @@ export const ProductDetailPage: React.FC = () => {
                 referrerPolicy="no-referrer"
                 className="w-14 h-14 object-cover rounded-lg border border-slate-200 shrink-0"
               />
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
                 <h4 className="text-xs font-bold text-slate-900 truncate">{title}</h4>
                 <p className="text-xs text-[#00873E] font-bold mt-0.5 tabular-nums">
                   {formatPrice(selectedProduct.price)}
+                  {currentUser && (
+                    <span className="text-slate-600 font-semibold">
+                      {' '}· {language === 'bn' ? `২% কমিশন: ${formatPrice(unitCommissionAmount)}` : `2% Earn: ${formatPrice(unitCommissionAmount)}`}
+                    </span>
+                  )}
                 </p>
               </div>
             </div>
+
+            {currentUser ? (
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                {language === 'bn'
+                  ? `এই লিংক থেকে যতজন ক্রেতা অর্ডার সম্পন্ন করে ডেলিভারি পাবেন, প্রত্যেকের জন্য ২% (${formatPrice(unitCommissionAmount)}) আপনার ওয়ালেটে যোগ হবে।`
+                  : `Every completed delivery from this link credits 2% (${formatPrice(unitCommissionAmount)}) to your wallet.`}
+              </p>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsShareModalOpen(false);
+                  setIsAuthModalOpen(true);
+                }}
+                className="w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-[#00873E] border border-emerald-200 rounded-xl text-xs font-bold cursor-pointer"
+              >
+                {language === 'bn'
+                  ? '২% কমিশন পেতে লগইন করে লিংক শেয়ার করুন'
+                  : 'Login first to attach your 2% tracking code'}
+              </button>
+            )}
 
             <div className="flex items-center gap-2">
               <input

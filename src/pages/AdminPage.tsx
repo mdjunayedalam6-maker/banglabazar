@@ -1397,6 +1397,41 @@ export const AdminPage: React.FC = () => {
                       </div>
                     </div>
 
+                    {/* Affiliate Share 2% Commission Attribution */}
+                    {ord.affiliateCommissions && ord.affiliateCommissions.length > 0 && (
+                      <div className="p-3 bg-emerald-950/35 border border-emerald-500/30 rounded-2xl space-y-1.5 text-xs">
+                        <div className="font-bold text-emerald-300 flex items-center justify-between">
+                          <span>প্রোডাক্ট শেয়ার কমিশন (২% অটো-সিস্টেম)</span>
+                          <span className="text-[11px] text-slate-400">
+                            ডেলিভারিতে অটো যোগ · বাতিলে অটো কর্তন
+                          </span>
+                        </div>
+                        {ord.affiliateCommissions.map((comm) => (
+                          <div
+                            key={comm.id}
+                            className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-300 pt-1 border-t border-emerald-500/20"
+                          >
+                            <span>
+                              শেয়ারকারী: <strong className="text-white">{comm.referrerName || comm.referrerCode}</strong> ({comm.referrerCode}) · বেস: {formatPrice(comm.commissionBaseAmount)}
+                            </span>
+                            <span className="font-bold tabular-nums">
+                              ২% কমিশন: <strong className="text-amber-300">{formatPrice(comm.commissionAmount)}</strong>{' '}
+                              ·{' '}
+                              {comm.status === 'credited' ? (
+                                <span className="text-emerald-400">ওয়ালেটে যোগ হয়েছে</span>
+                              ) : comm.status === 'deducted' ? (
+                                <span className="text-rose-400">বাতিল — ওয়ালেট থেকে কর্তন</span>
+                              ) : comm.status === 'cancelled' ? (
+                                <span className="text-slate-400">বাতিল (ক্রেডিট হয়নি)</span>
+                              ) : (
+                                <span className="text-amber-300">ডেলিভারির অপেক্ষায়</span>
+                              )}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
                     {/* Action Controls: Change Status, Print, Delete */}
                     <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-700/60">
                       <div className="flex items-center gap-2">
@@ -4258,7 +4293,12 @@ export const AdminPage: React.FC = () => {
                       </tr>
                     ) : (
                       filteredWalletTransactions.map((txn) => {
-                        const isCredit = txn.type === 'deposit' || txn.type === 'admin_adjustment';
+                        const isCredit =
+                          txn.type === 'deposit' ||
+                          txn.type === 'admin_adjustment' ||
+                          txn.type === 'commission' ||
+                          txn.type === 'refund' ||
+                          txn.type === 'bonus';
                         const isWithdraw = txn.type === 'withdraw';
                         return (
                           <tr key={txn.id} className="hover:bg-slate-900/50 transition-colors">
@@ -4307,6 +4347,18 @@ export const AdminPage: React.FC = () => {
                                 <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/30">
                                   <Sliders className="w-3 h-3" />
                                   <span>এডমিন সমন্বয়</span>
+                                </span>
+                              )}
+                              {txn.type === 'commission' && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                                  <ArrowDownLeft className="w-3 h-3" />
+                                  <span>২% শেয়ার কমিশন</span>
+                                </span>
+                              )}
+                              {txn.type === 'commission_reversal' && (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">
+                                  <ArrowUpRight className="w-3 h-3" />
+                                  <span>কমিশন কর্তন (বাতিল)</span>
                                 </span>
                               )}
                             </td>

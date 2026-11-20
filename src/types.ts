@@ -154,6 +154,7 @@ export interface CartItem {
   selectedSize?: string;
   selectedColor?: string;
   selectedImage?: string;
+  affiliateCode?: string;
 }
 
 export interface Coupon {
@@ -174,11 +175,20 @@ export interface OrderItem {
   variant?: Record<string, string>;
   selectedSize?: string;
   selectedColor?: string;
+  affiliateCode?: string;
 }
 
 export type OrderStatus = 'placed' | 'processing' | 'shipped' | 'out_for_delivery' | 'delivered' | 'cancelled' | 'forwarded_to_shopbase';
 
-export type WalletTransactionType = 'deposit' | 'withdraw' | 'order_payment' | 'refund' | 'bonus' | 'admin_adjustment';
+export type WalletTransactionType =
+  | 'deposit'
+  | 'withdraw'
+  | 'order_payment'
+  | 'refund'
+  | 'bonus'
+  | 'admin_adjustment'
+  | 'commission'
+  | 'commission_reversal';
 export type WalletTransactionStatus = 'completed' | 'pending' | 'rejected';
 export type WalletPaymentMethod =
   | 'nagad'
@@ -218,6 +228,28 @@ export interface WalletTransaction {
   rejectionReason?: string;
 }
 
+export type AffiliateCommissionStatus = 'pending' | 'credited' | 'deducted' | 'cancelled';
+
+export interface OrderAffiliateCommission {
+  id: string;
+  referrerId: string;
+  referrerCode: string;
+  referrerName?: string;
+  referrerPhone?: string;
+  productIds: string[];
+  productTitles: string[];
+  itemCount: number;
+  commissionBaseAmount: number;
+  commissionPercent: number; // 2
+  commissionAmount: number;
+  status: AffiliateCommissionStatus;
+  createdAt: string;
+  creditedAt?: string;
+  deductedAt?: string;
+  txnId?: string;
+  reversalTxnId?: string;
+}
+
 export interface Order {
   id: string;
   trackingNumber: string;
@@ -248,6 +280,7 @@ export interface Order {
   customerPhone?: string;
   isOfflineOrder?: boolean;
   syncedToCloud?: boolean;
+  affiliateCommissions?: OrderAffiliateCommission[];
   shopbaseDropship?: {
     forwarded: boolean;
     forwardedAt?: string;

@@ -55,7 +55,9 @@ export const CustomerWallet: React.FC = () => {
   const [isWithdrawing, setIsWithdrawing] = useState(false);
 
   // History Filter
-  const [historyFilter, setHistoryFilter] = useState<'all' | 'deposit' | 'withdraw' | 'order_payment'>('all');
+  const [historyFilter, setHistoryFilter] = useState<
+    'all' | 'commission' | 'deposit' | 'withdraw' | 'order_payment'
+  >('all');
   const [searchTxn, setSearchTxn] = useState('');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
@@ -79,7 +81,11 @@ export const CustomerWallet: React.FC = () => {
 
   // Filtered transactions
   const filteredTransactions = transactions.filter((t) => {
-    if (historyFilter !== 'all' && t.type !== historyFilter) return false;
+    if (historyFilter === 'commission') {
+      if (t.type !== 'commission' && t.type !== 'commission_reversal') return false;
+    } else if (historyFilter !== 'all' && t.type !== historyFilter) {
+      return false;
+    }
     if (searchTxn.trim()) {
       const q = searchTxn.toLowerCase();
       const idMatch = t.id.toLowerCase().includes(q);
@@ -305,30 +311,32 @@ export const CustomerWallet: React.FC = () => {
         </div>
       </div>
 
-      {/* Referral & Welcome Bonus Banner - Compact & Attractive */}
-      <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-emerald-50 border border-amber-300 flex items-center justify-between gap-3 shadow-2xs">
+      {/* Product Share 2% Commission & Referral Banner */}
+      <div className="p-3.5 sm:p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-9 h-9 rounded-xl bg-[#00873E] text-white flex items-center justify-center shrink-0">
             <Gift className="w-4 h-4" />
           </div>
           <div className="min-w-0">
-            <div className="text-xs font-black text-slate-900 flex items-center gap-1.5">
-              <span>রেফার ও আয়: প্রতি রেফারে ৳৩০</span>
-              <span className="text-[9px] font-black bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded-full">ক্যাশ</span>
+            <div className="text-xs font-bold text-slate-900">
+              {language === 'bn'
+                ? 'প্রোডাক্ট লিংক শেয়ারে ২% কমিশন আয়'
+                : 'Earn 2% Commission Sharing Product Links'}
             </div>
             <div className="text-[11px] text-slate-600 truncate">
-              {!currentUser.hasCompletedFirstOrder
-                ? '১ম অর্ডারে ৫০ টাকা বোনাস ওয়ালেটে যুক্ত হবে'
-                : 'বন্ধুর ১ম অর্ডারে সরাসরি ওয়ালেটে ৩০ টাকা জমা হবে'}
+              {language === 'bn'
+                ? 'অর্ডার ডেলিভারি হলে অটো ২% ওয়ালেটে যুক্ত হবে · চাইলে সহজেই উত্তোলন করুন'
+                : 'Auto-credited on delivery · Withdraw anytime to bKash/Nagad/Upay'}
             </div>
           </div>
         </div>
 
         <button
+          type="button"
           onClick={() => setProfileActiveTab('referral')}
-          className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs active:scale-95 shrink-0 cursor-pointer"
+          className="px-3.5 py-2 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors shrink-0 cursor-pointer whitespace-nowrap"
         >
-          <span>রেফার লিংক</span>
+          <span>{language === 'bn' ? 'শেয়ার ও আয়' : 'Share & Earn'}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
@@ -361,16 +369,18 @@ export const CustomerWallet: React.FC = () => {
           </div>
         </div>
 
-        {/* Filter Pills */}
+        {/* Filter Tabs */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
           {[
             { id: 'all', label: language === 'bn' ? 'সব লেনদেন' : 'All' },
+            { id: 'commission', label: language === 'bn' ? 'শেয়ার কমিশন (২%)' : '2% Commission' },
             { id: 'deposit', label: language === 'bn' ? 'ডিপোজিট' : 'Deposits' },
             { id: 'withdraw', label: language === 'bn' ? 'উত্তোলন' : 'Withdrawals' },
             { id: 'order_payment', label: language === 'bn' ? 'কেনাকাটা' : 'Orders' },
           ].map((pill) => (
             <button
               key={pill.id}
+              type="button"
               onClick={() => setHistoryFilter(pill.id as any)}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                 historyFilter === pill.id
@@ -406,7 +416,30 @@ export const CustomerWallet: React.FC = () => {
         ) : (
           <div className="divide-y divide-slate-100">
             {filteredTransactions.map((txn) => {
-              const isCredit = txn.type === 'deposit' || txn.type === 'refund' || txn.type === 'bonus';
+              const isCredit =
+                txn.type === 'deposit' ||
+                txn.type === 'refund' ||
+                txn.type === 'bonus' ||
+                txn.type === 'commission';
+
+              const txnTypeLabel =
+                txn.type === 'commission'
+                  ? language === 'bn'
+                    ? 'প্রোডাক্ট শেয়ার কমিশন (২%)'
+                    : '2% Product Share Commission'
+                  : txn.type === 'commission_reversal'
+                  ? language === 'bn'
+                    ? 'অর্ডার বাতিল — ২% কমিশন কর্তন'
+                    : 'Cancelled Order — Commission Deducted'
+                  : txn.type === 'deposit'
+                  ? 'টাকা ডিপোজিট'
+                  : txn.type === 'withdraw'
+                  ? 'টাকা উত্তোলন'
+                  : txn.type === 'order_payment'
+                  ? 'অর্ডার পেমেন্ট'
+                  : txn.type === 'bonus'
+                  ? 'বোনাস ক্রেডিট'
+                  : 'রিফান্ড / অ্যাডজাস্টমেন্ট';
 
               return (
                 <div key={txn.id} className="py-3.5 flex items-center justify-between gap-3 text-xs">
@@ -426,15 +459,7 @@ export const CustomerWallet: React.FC = () => {
 
                     <div className="min-w-0">
                       <div className="font-bold text-slate-900 flex items-center gap-2 flex-wrap">
-                        <span>
-                          {txn.type === 'deposit' 
-                            ? 'টাকা ডিপোজিট' 
-                            : txn.type === 'withdraw'
-                            ? 'টাকা উত্তোলন'
-                            : txn.type === 'order_payment'
-                            ? 'অর্ডার পেমেন্ট'
-                            : 'রিফান্ড / অ্যাডজাস্টমেন্ট'}
-                        </span>
+                        <span>{txnTypeLabel}</span>
                         
                         {/* Status Badge */}
                         <span className={`text-[10px] font-bold px-2 py-0.2 rounded-full border ${

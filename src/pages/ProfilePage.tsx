@@ -443,10 +443,10 @@ export const ProfilePage: React.FC = () => {
     },
     {
       id: 'referral',
-      labelBn: 'রেফার ও আয়',
-      labelEn: 'Refer & Earn',
+      labelBn: 'শেয়ার ও রেফার আয়',
+      labelEn: 'Share & Earn (2%)',
       icon: Gift,
-      meta: '৳৩০',
+      meta: '২% আয়',
     },
     {
       id: 'wishlist',
@@ -757,6 +757,8 @@ export const ProfilePage: React.FC = () => {
                               className={`text-xs font-semibold ${
                                 order.status === 'delivered'
                                   ? 'text-emerald-700'
+                                  : order.status === 'cancelled'
+                                  ? 'text-rose-600'
                                   : order.status === 'shipped'
                                   ? 'text-blue-700'
                                   : 'text-amber-700'
@@ -765,6 +767,8 @@ export const ProfilePage: React.FC = () => {
                               ·{' '}
                               {order.status === 'delivered'
                                 ? t.statusDelivered
+                                : order.status === 'cancelled'
+                                ? t.statusCancelled
                                 : order.status === 'shipped'
                                 ? t.statusShipped
                                 : t.statusProcessing}

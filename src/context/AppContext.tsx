@@ -6,6 +6,7 @@ import {
   Category, 
   CartItem, 
   Order, 
+  OrderItem,
   OrderStatus,
   User, 
   FilterState, 
@@ -18,7 +19,9 @@ import {
   WalletTransactionStatus,
   WalletPaymentMethod,
   ReferralRecord,
-  DeliveryAddress
+  DeliveryAddress,
+  OrderAffiliateCommission,
+  AffiliateCommissionStatus
 } from '../types';
 import { 
   PRODUCTS as INITIAL_PRODUCTS, 
@@ -65,6 +68,35 @@ interface Toast {
   id: string;
   message: string;
   type: 'success' | 'info' | 'error';
+}
+
+export interface AffiliateOrderSummary {
+  orderId: string;
+  date: string;
+  orderStatus: OrderStatus;
+  commissionStatus: AffiliateCommissionStatus;
+  productTitles: string[];
+  productIds: string[];
+  itemCount: number;
+  commissionBaseAmount: number;
+  commissionAmount: number;
+  buyerName: string;
+  buyerPhone: string;
+  createdAt: string;
+  creditedAt?: string;
+  deductedAt?: string;
+}
+
+export interface AffiliateStatsSummary {
+  referralCode: string;
+  totalSharedOrders: number;
+  pendingOrdersCount: number;
+  creditedOrdersCount: number;
+  cancelledOrDeductedCount: number;
+  pendingCommission: number;
+  creditedCommission: number;
+  deductedCommission: number;
+  entries: AffiliateOrderSummary[];
 }
 
 interface AppContextType {
@@ -141,6 +173,9 @@ interface AppContextType {
     totalEarnings: number;
     referralsList: ReferralRecord[];
   };
+  // Product Share & 2% Affiliate Commission Program
+  getProductShareUrl: (productId: string, referrerCodeOverride?: string) => string;
+  getUserAffiliateStats: (user?: User | null) => AffiliateStatsSummary;
   // Customer Wallet Extensions
   allWalletTransactions: WalletTransaction[];
   depositToWallet: (amount: number, method: WalletPaymentMethod, senderNumber?: string, trxId?: string, note?: string) => Promise<{ success: boolean; message: string }>;
@@ -678,6 +713,62 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return null;
   });
 
+  // Product-Share Affiliate Map: { [productId]: { referrerCode, capturedAt } }
+  const [affiliateProductMap, setAffiliateProductMap] = useState<
+    Record<string, { referrerCode: string; capturedAt: number }>
+  >(() => {
+    try {
+      const saved = safeLocalStorage.getItem('oneroof_affiliate_links');
+      const parsed = saved ? JSON.parse(saved) : {};
+      const validMap: Record<string, { referrerCode: string; capturedAt: number }> =
+        parsed && typeof parsed === 'object' ? { ...parsed } : {};
+
+      if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        const prodParam = params.get('product') || params.get('p') || params.get('id');
+        const affParam =
+          params.get('aff') ||
+          params.get('affiliate') ||
+          (prodParam ? params.get('ref') || params.get('referral') : null);
+        if (affParam && prodParam) {
+          const cleanAff = affParam.trim().toUpperCase();
+          const cleanProd = prodParam.trim();
+          const entry = { referrerCode: cleanAff, capturedAt: Date.now() };
+          validMap[cleanProd] = entry;
+          const cleanNum = cleanProd.replace(/\D/g, '');
+          if (cleanNum) validMap[`sbp-${cleanNum}`] = entry;
+          safeLocalStorage.setItem('oneroof_affiliate_links', JSON.stringify(validMap));
+        }
+      }
+      return validMap;
+    } catch {
+      return {};
+    }
+  });
+
+  const recordAffiliateAttribution = (productId: string, referrerCode: string, extraKeys: string[] = []) => {
+    const cleanCode = referrerCode.trim().toUpperCase();
+    const cleanId = productId.trim();
+    if (!cleanCode || !cleanId) return;
+    setAffiliateProductMap((prev) => {
+      const next = { ...prev };
+      const entry = { referrerCode: cleanCode, capturedAt: Date.now() };
+      next[cleanId] = entry;
+      const digits = cleanId.replace(/\D/g, '');
+      if (digits) {
+        next[digits] = entry;
+        next[`sbp-${digits}`] = entry;
+      }
+      for (const k of extraKeys) {
+        if (k && k.trim()) next[k.trim()] = entry;
+      }
+      try {
+        safeLocalStorage.setItem('oneroof_affiliate_links', JSON.stringify(next));
+      } catch (_) {}
+      return next;
+    });
+  };
+
   // Auto-detect referral code from URL search parameters on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -991,10 +1082,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           }
         }
 
+        const affParam =
+          params.get('aff') ||
+          params.get('affiliate') ||
+          (targetId ? params.get('ref') || params.get('referral') : null);
+
         if (targetId) {
           targetId = targetId.trim();
           const targetLower = targetId.toLowerCase();
           const cleanNum = targetId.replace(/\D/g, '');
+
+          if (affParam) {
+            recordAffiliateAttribution(targetId, affParam);
+          }
 
           // Check if already viewing this product
           if (
@@ -1003,6 +1103,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
              selectedProduct.sku?.toUpperCase() === targetId.toUpperCase() ||
              (cleanNum && selectedProduct.id.toLowerCase() === `sbp-${cleanNum}`))
           ) {
+            if (affParam) {
+              recordAffiliateAttribution(selectedProduct.id, affParam, [targetId]);
+            }
             if (currentPage !== 'product-detail') setCurrentPageState('product-detail');
             return;
           }
@@ -1017,6 +1120,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           });
 
           if (matchInState) {
+            if (affParam) {
+              recordAffiliateAttribution(matchInState.id, affParam, [targetId]);
+            }
             setSelectedProduct(matchInState);
             setCurrentPageState('product-detail');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1049,6 +1155,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                   if (data.price !== undefined && data.price !== null) p.price = Number(data.price);
                   if (data.original_price !== undefined && data.original_price !== null) p.originalPrice = Number(data.original_price);
                   if (!p.brand || p.brand.toLowerCase().includes('shopbase') || p.brand.toLowerCase().includes('oneroof')) p.brand = 'বাংলা বাজার';
+                  if (affParam) {
+                    recordAffiliateAttribution(p.id, affParam, [targetId!]);
+                  }
                   setSelectedProduct(p);
                   setCurrentPageState('product-detail');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1337,6 +1446,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                 } else if (payload.eventType === 'UPDATE' && payload.new?.data) {
                   const updatedUser = payload.new.data as User;
                   setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+                  setCurrentUser((curr) => (curr && curr.id === updatedUser.id ? updatedUser : curr));
                 } else if (payload.eventType === 'DELETE' && payload.old?.id) {
                   const deletedId = payload.old.id;
                   setUsers((prev) => prev.filter((u) => u.id !== deletedId));
@@ -1929,15 +2039,164 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     addToast(language === 'bn' ? 'ডিফল্ট ক্যাটাগরিগুলো রিস্টোর করা হয়েছে' : 'Default categories restored', 'info');
   };
 
-  // Order Admin Operations
+  // Order Admin Operations (includes automatic 2% product share commission credit & reversal)
+  const roundCurrency = (val: number): number => Math.round((Number(val) || 0) * 100) / 100;
+
+  const findAffiliateSharer = (
+    referrerId: string | undefined,
+    referrerCode: string | undefined,
+    userList: User[]
+  ): User | undefined => {
+    const cleanCode = (referrerCode || '').trim().toUpperCase();
+    return userList.find((u) => {
+      if (referrerId && u.id === referrerId) return true;
+      if (cleanCode) {
+        if (u.referralCode && u.referralCode.toUpperCase() === cleanCode) return true;
+        const phoneCode = u.phone ? `BB-${u.phone.replace(/\D/g, '').slice(-6)}` : '';
+        if (phoneCode && phoneCode === cleanCode) return true;
+        if (cleanCode === 'BB-637253' && isUserAdmin(u)) return true;
+      }
+      return false;
+    });
+  };
+
   const updateOrderStatus = (orderId: string, status: OrderStatus, paymentStatus?: 'paid' | 'pending') => {
+    const targetOrder = orders.find((o) => o.id === orderId);
+    const nowIso = new Date().toISOString();
+    const now = new Date();
+    const dateFormatted =
+      language === 'bn'
+        ? `আজ, ${now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' })}`
+        : now.toLocaleString('en-US', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+
+    let nextCommissions: OrderAffiliateCommission[] | undefined = targetOrder?.affiliateCommissions;
+    const updatedSharersMap = new Map<string, User>();
+    const generatedTxns: WalletTransaction[] = [];
+    let commissionSummaryNotice = '';
+
+    if (targetOrder && Array.isArray(targetOrder.affiliateCommissions) && targetOrder.affiliateCommissions.length > 0) {
+      if (status === 'delivered') {
+        nextCommissions = targetOrder.affiliateCommissions.map((comm) => {
+          if (comm.status === 'credited' || comm.commissionAmount <= 0) return comm;
+          const baseUser =
+            updatedSharersMap.get(comm.referrerId || comm.referrerCode) ||
+            findAffiliateSharer(comm.referrerId, comm.referrerCode, users);
+          if (!baseUser) return comm;
+
+          const commTxn: WalletTransaction = {
+            id: `COMM-${Math.floor(10000 + Math.random() * 90000)}`,
+            userId: baseUser.id,
+            userName: baseUser.name,
+            userPhone: baseUser.phone,
+            type: 'commission',
+            amount: comm.commissionAmount,
+            date: dateFormatted,
+            status: 'completed',
+            method: 'system',
+            note: `প্রোডাক্ট শেয়ার কমিশন (২%): অর্ডার #${targetOrder.id} ডেলিভারি সম্পন্ন`,
+          };
+
+          const updatedSharer: User = {
+            ...baseUser,
+            balance: roundCurrency((baseUser.balance || 0) + comm.commissionAmount),
+            walletTransactions: [commTxn, ...(baseUser.walletTransactions || [])],
+          };
+
+          updatedSharersMap.set(updatedSharer.id, updatedSharer);
+          generatedTxns.push(commTxn);
+          commissionSummaryNotice =
+            language === 'bn'
+              ? ` শেয়ারকারীর (${updatedSharer.name}) অ্যাকাউন্টে ২% কমিশন (৳${comm.commissionAmount}) যোগ হয়েছে।`
+              : ` Added 2% share commission (৳${comm.commissionAmount}) to ${updatedSharer.name}.`;
+
+          return {
+            ...comm,
+            referrerId: updatedSharer.id,
+            referrerName: updatedSharer.name,
+            status: 'credited' as const,
+            creditedAt: nowIso,
+            txnId: commTxn.id,
+          };
+        });
+      } else if (status === 'cancelled') {
+        nextCommissions = targetOrder.affiliateCommissions.map((comm) => {
+          if (comm.status === 'credited' && comm.commissionAmount > 0) {
+            const baseUser =
+              updatedSharersMap.get(comm.referrerId || comm.referrerCode) ||
+              findAffiliateSharer(comm.referrerId, comm.referrerCode, users);
+            if (!baseUser) {
+              return { ...comm, status: 'deducted' as const, deductedAt: nowIso };
+            }
+
+            const reversalTxn: WalletTransaction = {
+              id: `CREV-${Math.floor(10000 + Math.random() * 90000)}`,
+              userId: baseUser.id,
+              userName: baseUser.name,
+              userPhone: baseUser.phone,
+              type: 'commission_reversal',
+              amount: comm.commissionAmount,
+              date: dateFormatted,
+              status: 'completed',
+              method: 'system',
+              note: `অর্ডার #${targetOrder.id} বাতিল হওয়ায় ২% শেয়ার কমিশন অটোমেটিক কর্তন`,
+            };
+
+            const updatedSharer: User = {
+              ...baseUser,
+              balance: Math.max(0, roundCurrency((baseUser.balance || 0) - comm.commissionAmount)),
+              walletTransactions: [reversalTxn, ...(baseUser.walletTransactions || [])],
+            };
+
+            updatedSharersMap.set(updatedSharer.id, updatedSharer);
+            generatedTxns.push(reversalTxn);
+            commissionSummaryNotice =
+              language === 'bn'
+                ? ` অর্ডার বাতিল হওয়ায় ${updatedSharer.name}-এর অ্যাকাউন্ট থেকে ৳${comm.commissionAmount} কমিশন কেটে নেওয়া হয়েছে।`
+                : ` Deducted ৳${comm.commissionAmount} share commission from ${updatedSharer.name}.`;
+
+            return {
+              ...comm,
+              referrerId: updatedSharer.id,
+              referrerName: updatedSharer.name,
+              status: 'deducted' as const,
+              deductedAt: nowIso,
+              reversalTxnId: reversalTxn.id,
+            };
+          }
+          if (comm.status === 'pending') {
+            return { ...comm, status: 'cancelled' as const };
+          }
+          return comm;
+        });
+      }
+    }
+
+    if (updatedSharersMap.size > 0) {
+      setUsers((prev) =>
+        prev.map((u) => {
+          const updated = updatedSharersMap.get(u.id);
+          return updated ? updated : u;
+        })
+      );
+      if (currentUser && updatedSharersMap.has(currentUser.id)) {
+        setCurrentUser(updatedSharersMap.get(currentUser.id)!);
+      }
+      if (generatedTxns.length > 0) {
+        setAllWalletTransactions((prev) => [...generatedTxns, ...prev]);
+      }
+      updatedSharersMap.forEach((updatedSharer) => {
+        syncUserToSupabase(updatedSharer).catch(() => {});
+      });
+    }
+
     setOrders((prev) => {
       const next = prev.map((ord) => {
         if (ord.id === orderId) {
-          const updatedOrd = {
+          const updatedOrd: Order = {
             ...ord,
             status,
             ...(paymentStatus ? { paymentStatus } : {}),
+            ...(nextCommissions !== undefined ? { affiliateCommissions: nextCommissions } : {}),
           };
           syncOrderToSupabase(updatedOrd).catch(() => {});
           return updatedOrd;
@@ -1948,8 +2207,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       idbSet('oneroof_cached_orders', next).catch(() => {});
       return next;
     });
+
     addToast(
-      language === 'bn' ? `অর্ডার #${orderId} স্ট্যাটাস আপডেট হয়েছে!` : `Order #${orderId} status updated!`,
+      (language === 'bn' ? `অর্ডার #${orderId} স্ট্যাটাস আপডেট হয়েছে!` : `Order #${orderId} status updated!`) +
+        commissionSummaryNotice,
       'success'
     );
   };
@@ -2183,10 +2444,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     try {
       if (typeof window !== 'undefined' && window.history && page !== 'product-detail') {
         const url = new URL(window.location.href);
-        if (url.searchParams.has('product') || url.searchParams.has('p') || url.searchParams.has('id')) {
+        if (
+          url.searchParams.has('product') ||
+          url.searchParams.has('p') ||
+          url.searchParams.has('id') ||
+          url.searchParams.has('aff') ||
+          url.searchParams.has('affiliate')
+        ) {
           url.searchParams.delete('product');
           url.searchParams.delete('p');
           url.searchParams.delete('id');
+          url.searchParams.delete('aff');
+          url.searchParams.delete('affiliate');
           const newUrl = url.pathname + (url.search ? url.search : '') + (url.hash && !url.hash.includes('product') ? url.hash : '');
           window.history.pushState({}, '', newUrl);
         }
@@ -2240,6 +2509,47 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
   }, [selectedProduct?.id]);
 
+  const getAffiliateCodeForProduct = (product: Product): string | undefined => {
+    const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+    const now = Date.now();
+
+    // 1. Live URL query param check if currently viewing this product
+    if (typeof window !== 'undefined') {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const urlProd = params.get('product') || params.get('p') || params.get('id');
+        const urlAff = params.get('aff') || params.get('affiliate') || (urlProd ? params.get('ref') || params.get('referral') : null);
+        if (urlAff && urlProd) {
+          const urlCleanNum = urlProd.replace(/\D/g, '');
+          const prodCleanNum = product.id.replace(/\D/g, '');
+          if (
+            urlProd.toLowerCase() === product.id.toLowerCase() ||
+            (product.sku && urlProd.toLowerCase() === product.sku.toLowerCase()) ||
+            (urlCleanNum && prodCleanNum && urlCleanNum === prodCleanNum)
+          ) {
+            return urlAff.trim().toUpperCase();
+          }
+        }
+      } catch (_) {}
+    }
+
+    // 2. Stored attribution map (expires after 30 days)
+    const keysToTry = [product.id];
+    const cleanNum = product.id.replace(/\D/g, '');
+    if (cleanNum) {
+      keysToTry.push(cleanNum, `sbp-${cleanNum}`);
+    }
+    if (product.sku) keysToTry.push(product.sku);
+
+    for (const k of keysToTry) {
+      const entry = affiliateProductMap[k];
+      if (entry && entry.referrerCode && now - entry.capturedAt <= THIRTY_DAYS_MS) {
+        return entry.referrerCode.toUpperCase();
+      }
+    }
+    return undefined;
+  };
+
   const viewProductDetails = (product: Product) => {
     setSelectedProduct(product);
     setCurrentPageState('product-detail');
@@ -2247,6 +2557,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (typeof window !== 'undefined' && window.history) {
         const url = new URL(window.location.href);
         url.searchParams.set('product', product.id);
+        // Keep aff param only if URL was already opened with aff for this same product
+        const existingAff = getAffiliateCodeForProduct(product);
+        if (!existingAff) {
+          url.searchParams.delete('aff');
+          url.searchParams.delete('affiliate');
+        }
         window.history.pushState({ productId: product.id }, '', url.toString());
       }
     } catch (_) {}
@@ -2274,6 +2590,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const finalSize = selectedSize || variant?.['size'] || variant?.['Size'];
     const finalColor = selectedColor || variant?.['color'] || variant?.['Color'];
     const finalImage = selectedImage || product.images?.[0] || '';
+    const detectedAffCode = getAffiliateCodeForProduct(product);
 
     setCart((prev) => {
       const existingIndex = prev.findIndex(
@@ -2286,7 +2603,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
       if (existingIndex > -1) {
         const updated = [...prev];
-        updated[existingIndex].quantity += quantity;
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          quantity: updated[existingIndex].quantity + quantity,
+          affiliateCode: detectedAffCode || updated[existingIndex].affiliateCode,
+        };
         return updated;
       } else {
         return [
@@ -2297,7 +2618,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             selectedVariant: variant,
             selectedSize: finalSize,
             selectedColor: finalColor,
-            selectedImage: finalImage
+            selectedImage: finalImage,
+            ...(detectedAffCode ? { affiliateCode: detectedAffCode } : {}),
           }
         ];
       }
@@ -2459,6 +2781,88 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
   };
 
+  const getProductShareUrl = (productId: string, referrerCodeOverride?: string): string => {
+    const origin =
+      typeof window !== 'undefined' && window.location?.origin
+        ? window.location.origin
+        : 'https://banglabazarbd.vercel.app';
+    const rawCode =
+      referrerCodeOverride ||
+      (currentUser ? currentUser.referralCode || generateUserReferralCode(currentUser) : '');
+    const cleanCode = rawCode.trim().toUpperCase();
+    const base = `${origin}/?product=${encodeURIComponent(productId)}`;
+    return cleanCode ? `${base}&aff=${encodeURIComponent(cleanCode)}` : base;
+  };
+
+  const getUserAffiliateStats = (targetUser?: User | null): AffiliateStatsSummary => {
+    const u = targetUser || currentUser;
+    if (!u) {
+      return {
+        referralCode: 'BB-637253',
+        totalSharedOrders: 0,
+        pendingOrdersCount: 0,
+        creditedOrdersCount: 0,
+        cancelledOrDeductedCount: 0,
+        pendingCommission: 0,
+        creditedCommission: 0,
+        deductedCommission: 0,
+        entries: [],
+      };
+    }
+
+    const myCode = (u.referralCode || generateUserReferralCode(u)).trim().toUpperCase();
+    const entries: AffiliateOrderSummary[] = [];
+
+    for (const ord of orders) {
+      if (!Array.isArray(ord.affiliateCommissions) || ord.affiliateCommissions.length === 0) continue;
+      for (const comm of ord.affiliateCommissions) {
+        const matchesUser =
+          (comm.referrerId && comm.referrerId === u.id) ||
+          (comm.referrerCode && comm.referrerCode.trim().toUpperCase() === myCode);
+        if (!matchesUser) continue;
+
+        entries.push({
+          orderId: ord.id,
+          date: ord.date,
+          orderStatus: ord.status,
+          commissionStatus: comm.status,
+          productTitles: comm.productTitles || [],
+          productIds: comm.productIds || [],
+          itemCount: comm.itemCount || 1,
+          commissionBaseAmount: comm.commissionBaseAmount,
+          commissionAmount: comm.commissionAmount,
+          buyerName: ord.shippingAddress?.fullName || 'গ্রাহক',
+          buyerPhone: maskPhoneNumber(ord.customerPhone || ord.shippingAddress?.phone),
+          createdAt: comm.createdAt || ord.date,
+          creditedAt: comm.creditedAt,
+          deductedAt: comm.deductedAt,
+        });
+      }
+    }
+
+    const pendingList = entries.filter((e) => e.commissionStatus === 'pending');
+    const creditedList = entries.filter((e) => e.commissionStatus === 'credited');
+    const deductedOrCancelledList = entries.filter(
+      (e) => e.commissionStatus === 'deducted' || e.commissionStatus === 'cancelled'
+    );
+
+    return {
+      referralCode: myCode,
+      totalSharedOrders: entries.length,
+      pendingOrdersCount: pendingList.length,
+      creditedOrdersCount: creditedList.length,
+      cancelledOrDeductedCount: deductedOrCancelledList.length,
+      pendingCommission: roundCurrency(pendingList.reduce((sum, e) => sum + e.commissionAmount, 0)),
+      creditedCommission: roundCurrency(creditedList.reduce((sum, e) => sum + e.commissionAmount, 0)),
+      deductedCommission: roundCurrency(
+        deductedOrCancelledList
+          .filter((e) => e.commissionStatus === 'deducted')
+          .reduce((sum, e) => sum + e.commissionAmount, 0)
+      ),
+      entries,
+    };
+  };
+
   const addReview = (productId: string, rating: number, comment: string, name: string) => {
     const newRev: Review = {
       id: 'rev-' + Date.now(),
@@ -2578,22 +2982,94 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ? `আজ, ${now.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' })}` 
       : now.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
 
-    const newOrder: Order = {
-      id: `OR-${randomOrderNum}`,
-      trackingNumber: trackingNum,
-      date: dateFormatted,
-      status: 'placed',
-      items: cart.map((item) => ({
+    // Build 2% product-share affiliate commissions per sharer (multi-buyer unlimited; self-order blocked)
+    const nowIso = now.toISOString();
+    const buyerEmail = (currentUser?.email || shippingInfo?.email || '').trim().toLowerCase();
+    const buyerPhoneDigits = (currentUser?.phone || shippingInfo?.phone || '').replace(/[^0-9]/g, '');
+
+    const groupedByAff = new Map<
+      string,
+      { sharer?: User; code: string; items: { product: Product; quantity: number; title: string }[] }
+    >();
+
+    const resolvedOrderItems: OrderItem[] = cart.map((item) => {
+      const affCode = (item.affiliateCode || getAffiliateCodeForProduct(item.product) || '').trim().toUpperCase();
+      const itemTitle = language === 'bn' ? item.product.titleBn : item.product.titleEn;
+
+      if (affCode) {
+        const sharer = findAffiliateSharer(undefined, affCode, users);
+        const sharerEmail = (sharer?.email || '').trim().toLowerCase();
+        const sharerPhoneDigits = (sharer?.phone || '').replace(/[^0-9]/g, '');
+        const isSelfOrder = Boolean(
+          sharer &&
+            ((currentUser && sharer.id === currentUser.id) ||
+              (buyerEmail && sharerEmail && buyerEmail === sharerEmail) ||
+              (buyerPhoneDigits.length >= 10 &&
+                sharerPhoneDigits.length >= 10 &&
+                buyerPhoneDigits.slice(-10) === sharerPhoneDigits.slice(-10)))
+        );
+        const isOwnCode = Boolean(
+          currentUser?.referralCode && currentUser.referralCode.trim().toUpperCase() === affCode
+        );
+
+        if (!isSelfOrder && !isOwnCode) {
+          const groupKey = sharer?.id || affCode;
+          const existingGroup = groupedByAff.get(groupKey) || {
+            sharer,
+            code: sharer?.referralCode || affCode,
+            items: [],
+          };
+          existingGroup.items.push({ product: item.product, quantity: item.quantity, title: itemTitle });
+          groupedByAff.set(groupKey, existingGroup);
+        }
+      }
+
+      return {
         productId: item.product.id,
         sku: item.product.sku || (item.product.id ? `SBP-${item.product.id.replace(/\D/g, '') || item.product.id}` : undefined),
-        title: language === 'bn' ? item.product.titleBn : item.product.titleEn,
+        title: itemTitle,
         price: item.product.price,
         quantity: item.quantity,
         image: item.selectedImage || item.product.images?.[0] || '',
         variant: item.selectedVariant,
         selectedSize: item.selectedSize || item.selectedVariant?.['size'] || item.selectedVariant?.['Size'],
         selectedColor: item.selectedColor || item.selectedVariant?.['color'] || item.selectedVariant?.['Color'],
-      })),
+        ...(affCode ? { affiliateCode: affCode } : {}),
+      };
+    });
+
+    const affiliateCommissions: OrderAffiliateCommission[] = [];
+    groupedByAff.forEach((group) => {
+      const baseAmount = group.items.reduce(
+        (sum, entry) => sum + Number(entry.product.price || 0) * Number(entry.quantity || 1),
+        0
+      );
+      const commissionAmount = roundCurrency(baseAmount * 0.02);
+      if (commissionAmount > 0) {
+        affiliateCommissions.push({
+          id: `AFC-${randomOrderNum}-${Math.floor(100 + Math.random() * 900)}`,
+          referrerId: group.sharer?.id || '',
+          referrerCode: group.code,
+          referrerName: group.sharer?.name,
+          referrerPhone: group.sharer?.phone,
+          productIds: Array.from(new Set(group.items.map((i) => i.product.id))),
+          productTitles: group.items.map((i) => i.title),
+          itemCount: group.items.reduce((s, i) => s + i.quantity, 0),
+          commissionBaseAmount: baseAmount,
+          commissionPercent: 2,
+          commissionAmount,
+          status: 'pending',
+          createdAt: nowIso,
+        });
+      }
+    });
+
+    const newOrder: Order = {
+      id: `OR-${randomOrderNum}`,
+      trackingNumber: trackingNum,
+      date: dateFormatted,
+      status: 'placed',
+      items: resolvedOrderItems,
       subtotal: cartSubtotal,
       shippingFee: finalShippingFee,
       discount: cartDiscount,
@@ -2606,6 +3082,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       customerPhone: currentUser?.phone || shippingInfo?.phone || '',
       isOfflineOrder: typeof navigator !== 'undefined' && !navigator.onLine,
       syncedToCloud: typeof navigator !== 'undefined' ? navigator.onLine : false,
+      ...(affiliateCommissions.length > 0 ? { affiliateCommissions } : {}),
     };
 
     // Handle customer wallet balance deduction and first-order referral & welcome bonuses
@@ -3680,6 +4157,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setActiveReferralCode,
         applyReferralCode,
         getUserReferralStats,
+        getProductShareUrl,
+        getUserAffiliateStats,
         allWalletTransactions,
         depositToWallet,
         withdrawFromWallet,

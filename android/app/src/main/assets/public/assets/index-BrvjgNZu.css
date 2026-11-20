@@ -6899,6 +6899,10 @@
       background-color: var(--color-slate-800);
     }
 
+    .hover\:bg-slate-900:hover {
+      background-color: var(--color-slate-900);
+    }
+
     .hover\:bg-slate-900\/50:hover {
       background-color: #0f172b80;
     }

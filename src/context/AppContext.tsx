@@ -3093,8 +3093,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     if (currentUser) {
       const userBalanceBeforeBonus = paymentMethod === 'wallet'
-        ? Math.max(0, (currentUser.balance || 0) - finalTotal)
-        : (currentUser.balance || 0);
+        ? Math.max(0, roundCurrency((currentUser.balance || 0) - finalTotal))
+        : roundCurrency(currentUser.balance || 0);
 
       if (isFirstOrder) {
         // 1. UNLOCK ৳50 WELCOME BONUS FOR CUSTOMER
@@ -3134,7 +3134,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
         const userWithBonus: User = {
           ...currentUser,
-          balance: userBalanceBeforeBonus + welcomeBonusAmount,
+          balance: roundCurrency(userBalanceBeforeBonus + welcomeBonusAmount),
           pendingWelcomeBonus: 0,
           hasCompletedFirstOrder: true,
           firstOrderBonusUnlocked: true,
@@ -3217,7 +3217,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         );
       } else if (paymentMethod === 'wallet') {
         // Regular wallet payment deduction for non-first orders
-        if (currentUser.balance && currentUser.balance >= finalTotal) {
+        if (roundCurrency(currentUser.balance || 0) >= finalTotal) {
           const randomTxnNum = Math.floor(10000 + Math.random() * 90000);
           const walletPaymentTxn: WalletTransaction = {
             id: `TXN-${randomTxnNum}`,
@@ -3681,8 +3681,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       note: note || `${getPaymentMethodDisplayLabel(method, 'bn')} ডিপোজিট`,
     };
 
-    const currentBal = currentUser.balance || 0;
-    const newBalance = currentBal + amount;
+    const currentBal = roundCurrency(currentUser.balance || 0);
+    const newBalance = roundCurrency(currentBal + amount);
     const userTxns = [newTxn, ...(currentUser.walletTransactions || [])];
     const updatedUser: User = {
       ...currentUser,

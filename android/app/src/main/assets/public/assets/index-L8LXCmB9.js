@@ -67916,7 +67916,7 @@ const AppProvider = ({ children }) => {
       currentUser && (currentUser.hasCompletedFirstOrder !== true || orders.filter((o) => o.userId === currentUser.id).length === 0)
     );
     if (currentUser) {
-      const userBalanceBeforeBonus = paymentMethod === "wallet" ? Math.max(0, (currentUser.balance || 0) - finalTotal) : currentUser.balance || 0;
+      const userBalanceBeforeBonus = paymentMethod === "wallet" ? Math.max(0, roundCurrency((currentUser.balance || 0) - finalTotal)) : roundCurrency(currentUser.balance || 0);
       if (isFirstOrder) {
         const welcomeBonusAmount = 50;
         const randomBonusTxnNum = Math.floor(1e4 + Math.random() * 9e4);
@@ -67950,7 +67950,7 @@ const AppProvider = ({ children }) => {
         ] : [welcomeBonusTxn, ...currentUser.walletTransactions || []];
         const userWithBonus = {
           ...currentUser,
-          balance: userBalanceBeforeBonus + welcomeBonusAmount,
+          balance: roundCurrency(userBalanceBeforeBonus + welcomeBonusAmount),
           pendingWelcomeBonus: 0,
           hasCompletedFirstOrder: true,
           firstOrderBonusUnlocked: true,
@@ -68017,7 +68017,7 @@ const AppProvider = ({ children }) => {
           "success"
         );
       } else if (paymentMethod === "wallet") {
-        if (currentUser.balance && currentUser.balance >= finalTotal) {
+        if (roundCurrency(currentUser.balance || 0) >= finalTotal) {
           const randomTxnNum = Math.floor(1e4 + Math.random() * 9e4);
           const walletPaymentTxn = {
             id: `TXN-${randomTxnNum}`,
@@ -68388,8 +68388,8 @@ const AppProvider = ({ children }) => {
       trxId: trxId || `TRX${Math.floor(1e5 + Math.random() * 9e5)}`,
       note: note || `${getPaymentMethodDisplayLabel(method, "bn")} ডিপোজিট`
     };
-    const currentBal = currentUser.balance || 0;
-    const newBalance = currentBal + amount;
+    const currentBal = roundCurrency(currentUser.balance || 0);
+    const newBalance = roundCurrency(currentBal + amount);
     const userTxns = [newTxn, ...currentUser.walletTransactions || []];
     const updatedUser = {
       ...currentUser,
@@ -68958,7 +68958,7 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1G = [
+const __iconNode$1H = [
   ["path", { d: "M12 6.528V3a1 1 0 0 1 1-1h0", key: "11qiee" }],
   [
     "path",
@@ -68968,7 +68968,18 @@ const __iconNode$1G = [
     }
   ]
 ];
-const Apple = createLucideIcon("apple", __iconNode$1G);
+const Apple = createLucideIcon("apple", __iconNode$1H);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1G = [
+  ["path", { d: "M17 7 7 17", key: "15tmo1" }],
+  ["path", { d: "M17 17H7V7", key: "1org7z" }]
+];
+const ArrowDownLeft = createLucideIcon("arrow-down-left", __iconNode$1G);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -68976,10 +68987,10 @@ const Apple = createLucideIcon("apple", __iconNode$1G);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1F = [
-  ["path", { d: "M17 7 7 17", key: "15tmo1" }],
-  ["path", { d: "M17 17H7V7", key: "1org7z" }]
+  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
+  ["path", { d: "M19 12H5", key: "x3x0zl" }]
 ];
-const ArrowDownLeft = createLucideIcon("arrow-down-left", __iconNode$1F);
+const ArrowLeft = createLucideIcon("arrow-left", __iconNode$1F);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -68987,10 +68998,10 @@ const ArrowDownLeft = createLucideIcon("arrow-down-left", __iconNode$1F);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1E = [
-  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
-  ["path", { d: "M19 12H5", key: "x3x0zl" }]
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
 ];
-const ArrowLeft = createLucideIcon("arrow-left", __iconNode$1E);
+const ArrowRight = createLucideIcon("arrow-right", __iconNode$1E);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -68998,10 +69009,10 @@ const ArrowLeft = createLucideIcon("arrow-left", __iconNode$1E);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1D = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
+  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
+  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
 ];
-const ArrowRight = createLucideIcon("arrow-right", __iconNode$1D);
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$1D);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -69009,10 +69020,10 @@ const ArrowRight = createLucideIcon("arrow-right", __iconNode$1D);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1C = [
-  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
-  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
+  ["path", { d: "m5 12 7-7 7 7", key: "hav0vg" }],
+  ["path", { d: "M12 19V5", key: "x0mq9r" }]
 ];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$1C);
+const ArrowUp = createLucideIcon("arrow-up", __iconNode$1C);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -69020,10 +69031,10 @@ const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$1C);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1B = [
-  ["path", { d: "m5 12 7-7 7 7", key: "hav0vg" }],
-  ["path", { d: "M12 19V5", key: "x0mq9r" }]
+  ["path", { d: "M4.929 4.929 19.07 19.071", key: "196cmz" }],
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
 ];
-const ArrowUp = createLucideIcon("arrow-up", __iconNode$1B);
+const Ban = createLucideIcon("ban", __iconNode$1B);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -69031,10 +69042,11 @@ const ArrowUp = createLucideIcon("arrow-up", __iconNode$1B);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1A = [
-  ["path", { d: "M4.929 4.929 19.07 19.071", key: "196cmz" }],
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
+  ["rect", { width: "20", height: "12", x: "2", y: "6", rx: "2", key: "9lu3g6" }],
+  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
+  ["path", { d: "M6 12h.01M18 12h.01", key: "113zkx" }]
 ];
-const Ban = createLucideIcon("ban", __iconNode$1A);
+const Banknote = createLucideIcon("banknote", __iconNode$1A);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -75531,6 +75543,8 @@ const CheckoutPage = () => {
     currentUser,
     addDeliveryAddress,
     placeOrder,
+    depositToWallet,
+    setIsAuthModalOpen,
     language,
     t,
     formatPrice: formatPrice2,
@@ -75567,11 +75581,15 @@ const CheckoutPage = () => {
   );
   const [deliveryArea, setDeliveryArea] = reactExports.useState(initialLocation.area);
   const [checkoutStep, setCheckoutStep] = reactExports.useState("address");
-  const [paymentMethod, setPaymentMethod] = reactExports.useState("nagad");
+  const [paymentMethod, setPaymentMethod] = reactExports.useState("cod");
+  const [depositMethod, setDepositMethod] = reactExports.useState("nagad");
+  const [depositAmount, setDepositAmount] = reactExports.useState("");
   const [senderNumber, setSenderNumber] = reactExports.useState(
     (defaultSavedAddress == null ? void 0 : defaultSavedAddress.phone) || (currentUser == null ? void 0 : currentUser.phone) || ""
   );
   const [trxId, setTrxId] = reactExports.useState("");
+  const [showAddMoneyPanel, setShowAddMoneyPanel] = reactExports.useState(false);
+  const [isAddingMoney, setIsAddingMoney] = reactExports.useState(false);
   const [copiedKey, setCopiedKey] = reactExports.useState(null);
   const [isSubmitting, setIsSubmitting] = reactExports.useState(false);
   const applySavedAddress = (addr) => {
@@ -75614,6 +75632,7 @@ const CheckoutPage = () => {
       setSelectedAddressId(def.id);
       setFullName((prev) => prev || def.recipientName || currentUser.name || "");
       setPhone((prev) => prev || def.phone || currentUser.phone || "");
+      setSenderNumber((prev) => prev || def.phone || currentUser.phone || "");
       setDivision(loc.division);
       setDistrict(loc.district);
       setThana((prev) => prev || def.thana || currentUser.thana || "");
@@ -75624,6 +75643,7 @@ const CheckoutPage = () => {
       const loc = resolveDivisionAndDistrict(currentUser.division, currentUser.district);
       setFullName((prev) => prev || currentUser.name || "");
       setPhone((prev) => prev || currentUser.phone || "");
+      setSenderNumber((prev) => prev || currentUser.phone || "");
       if (currentUser.division || currentUser.district) {
         setDivision(loc.division);
         setDistrict(loc.district);
@@ -75710,14 +75730,25 @@ const CheckoutPage = () => {
     setCheckoutStep("payment");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-  const selectedAccount = getPersonalPaymentAccount(paymentMethod);
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (checkoutStep === "address") {
-      handleProceedToPayment();
+  const currentWalletBalance = Math.round(((currentUser == null ? void 0 : currentUser.balance) || 0) * 100) / 100;
+  const walletShortfall = Math.max(0, Math.round((calculatedTotal - currentWalletBalance) * 100) / 100);
+  const hasSufficientWalletBalance = Boolean(currentUser && currentWalletBalance >= calculatedTotal);
+  const selectedAccount = getPersonalPaymentAccount(depositMethod);
+  reactExports.useEffect(() => {
+    if (walletShortfall > 0) {
+      setDepositAmount(String(Math.ceil(walletShortfall)));
+    }
+  }, [walletShortfall]);
+  const handleWalletAddMoney = async () => {
+    if (!currentUser) {
+      setIsAuthModalOpen(true);
       return;
     }
-    if (!validateAddressFields()) return;
+    const amt = Number(depositAmount);
+    if (!amt || amt <= 0 || isNaN(amt)) {
+      addToast(language === "bn" ? "সঠিক টাকার পরিমাণ লিখুন" : "Enter a valid amount", "error");
+      return;
+    }
     const cleanSender = senderNumber.replace(/\D/g, "");
     if (!senderNumber.trim() || cleanSender.length < 11) {
       addToast(
@@ -75732,6 +75763,48 @@ const CheckoutPage = () => {
         "error"
       );
       return;
+    }
+    setIsAddingMoney(true);
+    try {
+      const res = await depositToWallet(
+        amt,
+        depositMethod,
+        senderNumber.trim(),
+        trxId.trim().toUpperCase(),
+        `চেকআউট থেকে ওয়ালেটে টাকা যোগ (${getPaymentMethodDisplayLabel(depositMethod, "bn")})`
+      );
+      if (res.success) {
+        setTrxId("");
+        setShowAddMoneyPanel(false);
+      }
+    } finally {
+      setIsAddingMoney(false);
+    }
+  };
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (checkoutStep === "address") {
+      handleProceedToPayment();
+      return;
+    }
+    if (!validateAddressFields()) return;
+    if (paymentMethod === "wallet") {
+      if (!currentUser) {
+        addToast(
+          language === "bn" ? "ওয়ালেট ব্যবহার করতে অনুগ্রহ করে প্রথমে লগইন করুন" : "Please login to pay using your wallet",
+          "error"
+        );
+        setIsAuthModalOpen(true);
+        return;
+      }
+      if (!hasSufficientWalletBalance) {
+        setShowAddMoneyPanel(true);
+        addToast(
+          language === "bn" ? `ওয়ালেটে পর্যাপ্ত টাকা নেই। আরও ${formatPrice2(walletShortfall)} যোগ করুন বা ক্যাশ অন ডেলিভারি বেছে নিন।` : `Insufficient wallet balance. Please add ${formatPrice2(walletShortfall)} or select Cash on Delivery.`,
+          "error"
+        );
+        return;
+      }
     }
     if (currentUser && isEditingAddress && saveAddressToProfile) {
       addDeliveryAddress({
@@ -75756,8 +75829,6 @@ const CheckoutPage = () => {
           thana: thana.trim() || void 0,
           address: thana.trim() ? `${address.trim()}, ${thana.trim()}` : address.trim(),
           deliverySpeed: "regular",
-          senderNumber: senderNumber.trim(),
-          trxId: trxId.trim().toUpperCase(),
           email: (currentUser == null ? void 0 : currentUser.email) || ""
         },
         paymentMethod,
@@ -76079,112 +76150,276 @@ const CheckoutPage = () => {
               )
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap items-center justify-between gap-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-sm sm:text-base font-bold text-slate-900", children: language === "bn" ? "পেমেন্ট মাধ্যম নির্বাচন করুন" : "Select Payment Method" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-500 mt-0.5", children: language === "bn" ? "সবগুলো পার্সোনাল অ্যাকাউন্ট — শুধুমাত্র সেন্ড মানি (Send Money) করুন" : "All accounts are Personal — use Send Money only" })
-              ] }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 gap-3", children: PERSONAL_PAYMENT_ACCOUNTS.map((acc) => {
-                const isSelected = paymentMethod === acc.id;
-                return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-500 mt-0.5", children: language === "bn" ? "ক্যাশ অন ডেলিভারি অথবা আপনার একাউন্ট ওয়ালেট ব্যালেন্স দিয়ে পেমেন্ট সম্পন্ন করুন" : "Complete your order using Cash on Delivery or your Wallet balance" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "button",
                   {
                     type: "button",
-                    onClick: () => setPaymentMethod(acc.id),
-                    className: `p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-3 ${isSelected ? acc.activeCardClass : "border-slate-200 hover:border-slate-300 bg-white"}`,
+                    onClick: () => setPaymentMethod("cod"),
+                    className: `p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${paymentMethod === "cod" ? "border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]" : "border-slate-200 hover:border-slate-300 bg-white"}`,
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "div",
                         {
-                          className: `w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${isSelected ? "border-slate-900 bg-slate-900" : "border-slate-300"}`,
-                          children: isSelected && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1.5 h-1.5 rounded-full bg-white" })
+                          className: `w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${paymentMethod === "cod" ? "border-[#00873E] bg-[#00873E]" : "border-slate-300"}`,
+                          children: paymentMethod === "cod" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1.5 h-1.5 rounded-full bg-white" })
                         }
                       ),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-1.5", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-bold text-slate-900", children: language === "bn" ? acc.nameBn : acc.nameEn }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-[10px] font-bold ${acc.accentText}`, children: language === "bn" ? acc.accountTypeBn : acc.accountTypeEn })
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Banknote, { className: "w-4 h-4 text-[#00873E] shrink-0" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-bold text-slate-900", children: language === "bn" ? "ক্যাশ অন ডেলিভারি" : "Cash on Delivery" })
                         ] }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[11px] font-mono font-semibold text-slate-600 mt-0.5 tabular-nums", children: acc.number })
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-600 mt-1 leading-relaxed", children: language === "bn" ? "পণ্য হাতে পেয়ে ডেলিভারি ম্যানের কাছে টাকা পরিশোধ করুন" : "Pay cash when you receive the product at your doorstep" })
                       ] })
                     ]
-                  },
-                  acc.id
-                );
-              }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
-                {
-                  className: `p-4 sm:p-5 rounded-xl border ${selectedAccount.accentBg} ${selectedAccount.accentBorder} space-y-4`,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200/70", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-[11px] font-bold block ${selectedAccount.accentText}`, children: language === "bn" ? `${selectedAccount.nameBn} পার্সোনাল অ্যাকাউন্ট (${selectedAccount.actionTypeBn})` : `${selectedAccount.nameEn} Personal Account (${selectedAccount.actionTypeEn})` }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-lg sm:text-xl font-black font-mono text-slate-900 tabular-nums mt-0.5", children: selectedAccount.formattedNumber })
-                      ] }),
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setPaymentMethod("wallet"),
+                    className: `p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${paymentMethod === "wallet" ? "border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]" : "border-slate-200 hover:border-slate-300 bg-white"}`,
+                    children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "div",
+                        {
+                          className: `w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${paymentMethod === "wallet" ? "border-[#00873E] bg-[#00873E]" : "border-slate-300"}`,
+                          children: paymentMethod === "wallet" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1.5 h-1.5 rounded-full bg-white" })
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(Wallet, { className: "w-4 h-4 text-[#00873E] shrink-0" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-bold text-slate-900", children: language === "bn" ? "ওয়ালেট পেমেন্ট" : "Wallet Balance" })
+                          ] }),
+                          currentUser && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-extrabold text-[#00873E] tabular-nums", children: formatPrice2(currentWalletBalance) })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-600 mt-1 leading-relaxed", children: currentUser ? language === "bn" ? "ওয়ালেটের ব্যালেন্স দিয়ে পেমেন্ট সম্পন্ন করুন · প্রয়োজনে টাকা অ্যাড করুন" : "Pay instantly from wallet · Add money if balance is low" : language === "bn" ? "ওয়ালেট পেমেন্টের জন্য একাউন্টে লগইন করুন" : "Sign in to pay from wallet or add funds" })
+                      ] })
+                    ]
+                  }
+                )
+              ] }),
+              paymentMethod === "cod" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/80 flex items-start gap-3 text-xs text-slate-700", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Truck, { className: "w-4 h-4 text-[#00873E] shrink-0 mt-0.5" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-slate-900", children: language === "bn" ? `ক্যাশ অন ডেলিভারি নির্বাচিত (${formatPrice2(calculatedTotal)})` : `Cash on Delivery Selected (${formatPrice2(calculatedTotal)})` }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-500", children: language === "bn" ? 'কোনো অগ্রিম পেমেন্টের প্রয়োজন নেই। সরাসরি "অর্ডার কনফার্ম করুন" বাটনে ক্লিক করুন।' : "No advance payment required. Click Confirm Order to complete." })
+                ] })
+              ] }),
+              paymentMethod === "wallet" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: !currentUser ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 rounded-xl bg-amber-50 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-0.5", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-bold text-slate-900", children: language === "bn" ? "ওয়ালেট ব্যবহারের জন্য লগইন প্রয়োজন" : "Login required for Wallet Payment" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-600", children: language === "bn" ? "লগইন করলে আপনার ওয়ালেট ব্যালেন্স দেখতে পারবেন ও টাকা অ্যাড করতে পারবেন।" : "Sign in to check your balance or add money to your wallet." })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setIsAuthModalOpen(true),
+                    className: "min-h-[40px] px-4 py-2 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl font-bold text-xs cursor-pointer shrink-0 whitespace-nowrap",
+                    children: t.login
+                  }
+                )
+              ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    className: `p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${hasSufficientWalletBalance ? "bg-emerald-50/70 border-emerald-200" : "bg-amber-50/80 border-amber-200"}`,
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 text-xs", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-slate-600", children: language === "bn" ? "আপনার ওয়ালেট ব্যালেন্স:" : "Your Wallet Balance:" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-sm font-black text-slate-900 tabular-nums", children: formatPrice2(currentWalletBalance) })
+                        ] }),
+                        hasSufficientWalletBalance ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[11px] text-[#00873E] font-semibold tabular-nums", children: language === "bn" ? `পেমেন্টের পর অবশিষ্ট থাকবে: ${formatPrice2(
+                          Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
+                        )}` : `Remaining balance after order: ${formatPrice2(
+                          Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
+                        )}` }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[11px] text-amber-800 font-semibold tabular-nums", children: language === "bn" ? `পর্যাপ্ত টাকা নেই — এই অর্ডারের জন্য আরও ${formatPrice2(
+                          walletShortfall
+                        )} প্রয়োজন` : `Insufficient balance — need ${formatPrice2(walletShortfall)} more` })
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "button",
                         {
                           type: "button",
-                          onClick: () => copyToClipboard(
-                            selectedAccount.number,
-                            `${selectedAccount.nameBn} নম্বর`,
-                            `checkout-${selectedAccount.id}`
-                          ),
-                          className: `min-h-[38px] px-3.5 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 cursor-pointer transition-colors ${selectedAccount.buttonClass}`,
-                          children: copiedKey === `checkout-${selectedAccount.id}` ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "w-3.5 h-3.5" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "কপি হয়েছে" : "Copied" })
-                          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { className: "w-3.5 h-3.5" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "নম্বর কপি করুন" : "Copy Number" })
-                          ] })
+                          onClick: () => setShowAddMoneyPanel((prev) => !prev),
+                          className: "min-h-[40px] px-3.5 py-2 bg-[#062919] hover:bg-slate-900 text-white rounded-xl text-xs font-bold inline-flex items-center justify-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap",
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3.5 h-3.5" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: showAddMoneyPanel ? language === "bn" ? "অ্যাড মানি বন্ধ করুন" : "Hide Add Money" : language === "bn" ? "ওয়ালেটে টাকা যোগ করুন" : "Add Money to Wallet" })
+                          ]
                         }
                       )
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-xs text-slate-700 space-y-1.5 bg-white/85 rounded-xl p-3.5 border border-slate-200/70", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-semibold text-slate-900 flex items-center gap-1.5", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(Smartphone, { className: `w-4 h-4 shrink-0 ${selectedAccount.accentText}` }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? `আপনার ${selectedAccount.nameBn} অ্যাপ থেকে উপরের পার্সোনাল নম্বরে ${formatPrice2(
-                          calculatedTotal
-                        )} সেন্ড মানি (Send Money) করুন।` : `Open your ${selectedAccount.nameEn} app and Send Money ${formatPrice2(
-                          calculatedTotal
-                        )} to the personal number above.` })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-500 pl-5.5", children: language === "bn" ? "পেমেন্ট সম্পন্ন হওয়ার পর নিচে প্রেরক নম্বর ও ট্রানজেকশন আইডি (TrxID) লিখে অর্ডার কনফার্ম করুন।" : "After sending, enter your sender number and TrxID below to confirm your order." })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-3", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-semibold text-slate-800 mb-1", children: language === "bn" ? `যে ${selectedAccount.nameBn} নম্বর থেকে পাঠিয়েছেন *` : `Sender ${selectedAccount.nameEn} Number *` }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "input",
-                          {
-                            type: "tel",
-                            required: true,
-                            value: senderNumber,
-                            onChange: (e) => setSenderNumber(e.target.value),
-                            placeholder: "01XXXXXXXXX",
-                            className: "w-full h-11 bg-white border border-slate-300 rounded-xl px-3.5 text-sm font-mono text-slate-900 outline-none focus:border-[#00873E]"
-                          }
-                        )
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-semibold text-slate-800 mb-1", children: language === "bn" ? "ট্রানজেকশন আইডি (TrxID) *" : "Transaction ID (TrxID) *" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "input",
-                          {
-                            type: "text",
-                            required: true,
-                            value: trxId,
-                            onChange: (e) => setTrxId(e.target.value.toUpperCase()),
-                            placeholder: "যেমন: 9H87G6F5",
-                            className: "w-full h-11 bg-white border border-slate-300 rounded-xl px-3.5 text-sm font-mono uppercase text-slate-900 outline-none focus:border-[#00873E]"
-                          }
-                        )
-                      ] })
+                    ]
+                  }
+                ),
+                (!hasSufficientWalletBalance || showAddMoneyPanel) && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 sm:p-5 rounded-xl border border-slate-200 bg-slate-50/70 space-y-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap items-center justify-between gap-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xs sm:text-sm font-bold text-slate-900", children: language === "bn" ? "ওয়ালেটে টাকা অ্যাড করুন (আগের পেমেন্ট অপশন)" : "Add Money to Wallet (Send Money)" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-500 mt-0.5", children: language === "bn" ? "নগদ, বিকাশ বা উপায় পার্সোনাল নম্বরে সেন্ড মানি করে সাথে সাথে ব্যালেন্স যোগ করুন" : "Send Money via Nagad, bKash, or Upay Personal to add balance instantly" })
+                  ] }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-semibold text-slate-800 mb-1", children: language === "bn" ? "অ্যাড করার পরিমাণ (টাকা)" : "Amount to Add (BDT)" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "input",
+                        {
+                          type: "number",
+                          min: "1",
+                          value: depositAmount,
+                          onChange: (e) => setDepositAmount(e.target.value),
+                          placeholder: String(Math.ceil(walletShortfall || calculatedTotal)),
+                          className: "w-full sm:w-44 h-10 bg-white border border-slate-300 rounded-xl px-3.5 text-sm font-mono font-bold text-slate-900 outline-none focus:border-[#00873E]"
+                        }
+                      ),
+                      [
+                        ...walletShortfall > 0 ? [Math.ceil(walletShortfall)] : [],
+                        500,
+                        1e3,
+                        2e3
+                      ].filter((v, idx, arr) => v > 0 && arr.indexOf(v) === idx).slice(0, 4).map((amt) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "button",
+                        {
+                          type: "button",
+                          onClick: () => setDepositAmount(String(amt)),
+                          className: `px-2.5 py-1.5 rounded-lg text-[11px] font-mono font-bold border cursor-pointer transition-colors ${depositAmount === String(amt) ? "bg-[#00873E] text-white border-[#00873E]" : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"}`,
+                          children: [
+                            "৳",
+                            amt
+                          ]
+                        },
+                        amt
+                      ))
                     ] })
-                  ]
-                }
-              )
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 gap-2.5", children: PERSONAL_PAYMENT_ACCOUNTS.map((acc) => {
+                    const isSelected = depositMethod === acc.id;
+                    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "button",
+                      {
+                        type: "button",
+                        onClick: () => setDepositMethod(acc.id),
+                        className: `p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${isSelected ? acc.activeCardClass : "border-slate-200 hover:border-slate-300 bg-white"}`,
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "div",
+                            {
+                              className: `w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${isSelected ? "border-slate-900 bg-slate-900" : "border-slate-300"}`,
+                              children: isSelected && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1.5 h-1.5 rounded-full bg-white" })
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-1", children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs sm:text-sm font-bold text-slate-900", children: language === "bn" ? acc.nameBn : acc.nameEn }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-[10px] font-bold ${acc.accentText}`, children: language === "bn" ? acc.accountTypeBn : acc.accountTypeEn })
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[11px] font-mono font-semibold text-slate-600 mt-0.5 tabular-nums", children: acc.number })
+                          ] })
+                        ]
+                      },
+                      acc.id
+                    );
+                  }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "div",
+                    {
+                      className: `p-4 rounded-xl border ${selectedAccount.accentBg} ${selectedAccount.accentBorder} space-y-3.5`,
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200/70", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "span",
+                              {
+                                className: `text-[11px] font-bold block ${selectedAccount.accentText}`,
+                                children: language === "bn" ? `${selectedAccount.nameBn} পার্সোনাল অ্যাকাউন্ট (${selectedAccount.actionTypeBn})` : `${selectedAccount.nameEn} Personal Account (${selectedAccount.actionTypeEn})`
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-lg font-black font-mono text-slate-900 tabular-nums mt-0.5", children: selectedAccount.formattedNumber })
+                          ] }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "button",
+                            {
+                              type: "button",
+                              onClick: () => copyToClipboard(
+                                selectedAccount.number,
+                                `${selectedAccount.nameBn} নম্বর`,
+                                `checkout-${selectedAccount.id}`
+                              ),
+                              className: `min-h-[36px] px-3 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 cursor-pointer transition-colors ${selectedAccount.buttonClass}`,
+                              children: copiedKey === `checkout-${selectedAccount.id}` ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "w-3.5 h-3.5" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "কপি হয়েছে" : "Copied" })
+                              ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { className: "w-3.5 h-3.5" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "নম্বর কপি করুন" : "Copy Number" })
+                              ] })
+                            }
+                          )
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-xs text-slate-700 bg-white/85 rounded-xl p-3 border border-slate-200/70 flex items-start gap-2", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            Smartphone,
+                            {
+                              className: `w-4 h-4 shrink-0 mt-0.5 ${selectedAccount.accentText}`
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? `আপনার ${selectedAccount.nameBn} অ্যাপ থেকে উপরের নম্বরে ৳${depositAmount || 0} সেন্ড মানি করে নিচে প্রেরক নম্বর ও TrxID দিন।` : `Send Money ৳${depositAmount || 0} via ${selectedAccount.nameEn} and enter Sender Number + TrxID below.` })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-3", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-semibold text-slate-800 mb-1", children: language === "bn" ? `যে ${selectedAccount.nameBn} নম্বর থেকে পাঠিয়েছেন` : `Sender ${selectedAccount.nameEn} Number` }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "input",
+                              {
+                                type: "tel",
+                                value: senderNumber,
+                                onChange: (e) => setSenderNumber(e.target.value),
+                                placeholder: "01XXXXXXXXX",
+                                className: "w-full h-10 bg-white border border-slate-300 rounded-xl px-3.5 text-xs font-mono text-slate-900 outline-none focus:border-[#00873E]"
+                              }
+                            )
+                          ] }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-semibold text-slate-800 mb-1", children: language === "bn" ? "ট্রানজেকশন আইডি (TrxID)" : "Transaction ID (TrxID)" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "input",
+                              {
+                                type: "text",
+                                value: trxId,
+                                onChange: (e) => setTrxId(e.target.value.toUpperCase()),
+                                placeholder: "যেমন: 9H87G6F5",
+                                className: "w-full h-10 bg-white border border-slate-300 rounded-xl px-3.5 text-xs font-mono uppercase text-slate-900 outline-none focus:border-[#00873E]"
+                              }
+                            )
+                          ] })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "button",
+                          {
+                            type: "button",
+                            disabled: isAddingMoney,
+                            onClick: handleWalletAddMoney,
+                            className: "w-full min-h-[42px] px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:opacity-50",
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-4 h-4" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: isAddingMoney ? language === "bn" ? "ব্যালেন্স যোগ হচ্ছে..." : "Adding Money..." : language === "bn" ? `ওয়ালেটে টাকা যোগ করুন • ৳${depositAmount || "0"}` : `Add ৳${depositAmount || "0"} to Wallet` })
+                            ]
+                          }
+                        )
+                      ]
+                    }
+                  )
+                ] })
+              ] }) })
             ] })
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "lg:col-span-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4 lg:sticky lg:top-24", children: [

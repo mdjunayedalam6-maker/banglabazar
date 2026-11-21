@@ -39908,986 +39908,6 @@ const SHOPBASE_ALL_PRODUCTS = [
     "descriptionEn": "আর্জেন্টিনা থ্রী পিস (আনস্টিজ - সেলাইবিহীন)।\n\n১০০% কটন ফেব্রিক্স - ডিজিটাল প্রিন্ট করা।\n\nথ্রী পিসঃ কামিজ - ওড়না - সেলয়ার।"
   }
 ];
-const KATUA_PRODUCTS = [
-  // 1. Premium Printed Cotton Katua Series (440 Tk)
-  {
-    id: "sbp-katua-print-01",
-    sku: "KTU-PRN-01",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - জেট ব্ল্যাক",
-    titleEn: "Premium Printed Cotton Katua - Jet Black",
-    descriptionBn: "প্রিমিয়াম ১০০% পিওর সুতি ফেব্রিক। ফ্যাশনেবল এথনিক চেস্ট প্রিন্ট ও আরামদায়ক কাটিং। গরমের জন্য অত্যন্ত উপযোগী ও ট্রেন্ডি পোশাক।\n\n• সাইজ: M (বডি ৩৮, লম্বা ২৮), L (বডি ৪০, লম্বা ২৯), XL (বডি ৪২, লম্বা ৩০), XXL (বডি ৪৪, লম্বা ৩১)\n• ফেব্রিক: ১০০% কম্বড প্রিমিয়াম কটন\n• ডেলিভারি: ঢাকা সিটিতে ৬০ টাকা, ঢাকার বাইরে ১২০ টাকা (ক্যাশ অন ডেলিভারি)",
-    descriptionEn: "Premium 100% combed cotton printed katua with traditional front embroidery style print. Breathable and comfortable for all-day wear.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 24,
-    images: [
-      "https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 45,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "ছেলেদের পোশাক", "shopbase", "cotton-katua"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-02",
-    sku: "KTU-PRN-02",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - পার্ল হোয়াইট",
-    titleEn: "Premium Printed Cotton Katua - Pearl White",
-    descriptionBn: "প্রিমিয়াম ১০০% পিওর সুতি ফেব্রিক। গর্জিয়াস গোল্ডেন ও কনট্রাস্ট প্রিন্ট ডিজাইন। যেকোনো উৎসব বা সাধারণ ব্যবহারের জন্য পারফেক্ট।",
-    descriptionEn: "Premium 100% soft cotton printed katua in pristine pearl white with subtle gold print accent.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 31,
-    images: [
-      "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 50,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "সাদা কাতুয়া"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-03",
-    sku: "KTU-PRN-03",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - রয়্যাল নেভি ব্লু",
-    titleEn: "Premium Printed Cotton Katua - Royal Navy Blue",
-    descriptionBn: "ক্লাসিক নেভি ব্লু কালারে আকর্ষণীয় ডিজাইনার প্রিন্ট। উন্নতমানের সুতি কাপড় যা পরতে দারুণ আরামদায়ক।",
-    descriptionEn: "Royal Navy Blue printed katua in 100% fine cotton. Distinctive collar styling and comfortable fit.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.7,
-    reviewCount: 19,
-    images: [
-      "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 40,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "navy-blue"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-04",
-    sku: "KTU-PRN-04",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - ডাস্টি পিঙ্ক",
-    titleEn: "Premium Printed Cotton Katua - Dusty Pink",
-    descriptionBn: "ট্রেন্ডি ডাস্টি পিঙ্ক কালারে মার্জিত প্রিন্টেড কাতুয়া। আভিজাত্যপূর্ণ ও ইউনিক আউটলুক প্রদান করে।",
-    descriptionEn: "Stylish dusty pink katua with ethnic geometric print. Export quality stitching.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 15,
-    images: [
-      "https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 35,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "pink"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-05",
-    sku: "KTU-PRN-05",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - অলিভ গ্রিন",
-    titleEn: "Premium Printed Cotton Katua - Olive Green",
-    descriptionBn: "ন্যাচারাল অলিভ গ্রিন শেডের প্রিমিয়াম কটন কাতুয়া। সফট ওয়াশ ফেব্রিক যা গরমে স্বস্তি এনে দেয়।",
-    descriptionEn: "Olive green premium cotton katua with stylish buttoned placket and gold print.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 28,
-    images: [
-      "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 38,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "olive"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-06",
-    sku: "KTU-PRN-06",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - ক্রিসমন মেরুন",
-    titleEn: "Premium Printed Cotton Katua - Crimson Maroon",
-    descriptionBn: "আকর্ষণীয় ডিপ মেরুন কালারে প্রিমিয়াম প্রিন্টেড কাতুয়া। আভিজাত্যপূর্ণ লুকের জন্য সেরা পছন্দ।",
-    descriptionEn: "Crimson maroon traditional katua crafted from soft combed cotton with designer print.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 22,
-    images: [
-      "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 42,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "maroon"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-07",
-    sku: "KTU-PRN-07",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - স্কাই ব্লু",
-    titleEn: "Premium Printed Cotton Katua - Sky Blue",
-    descriptionBn: "শান্ত ও স্নিগ্ধ আকাশি নীল রঙের কটন কাতুয়া। গরমে আরাম ও স্টাইল দুটোই নিশ্চিত করে।",
-    descriptionEn: "Refreshing sky blue katua in pure breathable cotton fabric.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.7,
-    reviewCount: 16,
-    images: [
-      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 30,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "sky-blue"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-08",
-    sku: "KTU-PRN-08",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - কফি ব্রাউন",
-    titleEn: "Premium Printed Cotton Katua - Coffee Brown",
-    descriptionBn: "স্মার্ট কফি ব্রাউন রঙের ট্রেন্ডি কাতুয়া। যেকোনো জিন্স বা পায়জামার সাথে চমৎকার মানিয়ে যায়।",
-    descriptionEn: "Coffee brown printed katua with contrasting ethnic design.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 18,
-    images: [
-      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 35,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "brown"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-09",
-    sku: "KTU-PRN-09",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - লাইট অ্যাশ গ্রে",
-    titleEn: "Premium Printed Cotton Katua - Light Ash Grey",
-    descriptionBn: "সোবার লাইট অ্যাশ রঙের কাতুয়া। অফিস, আড্ডা কিংবা ঘরোয়া আয়োজনে পরার মতো মার্জিত পোশাক।",
-    descriptionEn: "Light ash grey printed katua made with 100% fine cotton.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 20,
-    images: [
-      "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 40,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "grey"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-10",
-    sku: "KTU-PRN-10",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - ডার্ক চারকোল গ্রে",
-    titleEn: "Premium Printed Cotton Katua - Charcoal Dark Grey",
-    descriptionBn: "গাঢ় চারকোল গ্রে কালারের কাতুয়া। ডিসেন্ট প্রিন্ট ও আরামদায়ক ফিটিং।",
-    descriptionEn: "Charcoal dark grey printed katua. Modern regular fit with mandarin collar.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 14,
-    images: [
-      "https://images.unsplash.com/photo-1550246140-5119ae4790b8?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 35,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "charcoal"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-print-11",
-    sku: "KTU-PRN-11",
-    titleBn: "প্রিমিয়াম প্রিন্টেড কটন কাতুয়া - বিস্কুট বেইজ",
-    titleEn: "Premium Printed Cotton Katua - Biscuit Beige",
-    descriptionBn: "বিস্কুট বেইজ শেডের আকর্ষণীয় এথনিক কাতুয়া। নরম কটন ফিনিশিং ও লং-লাস্টিং প্রিন্ট।",
-    descriptionEn: "Biscuit beige printed katua with comfortable button placket and collar.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 440,
-    originalPrice: 750,
-    discountPercentage: 41,
-    rating: 4.7,
-    reviewCount: 12,
-    images: [
-      "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 28,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "mens-clothing", "beige"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  // 2. Premium Quality Designer & Embroidered Katua (500 Tk)
-  {
-    id: "sbp-katua-emb-12",
-    sku: "KTU-EMB-12",
-    titleBn: "প্রিমিয়াম কোয়ালিটি এমব্রয়ডারি ফ্লোরাল কাতুয়া - সাদা",
-    titleEn: "Premium Quality Embroidered Floral Katua - White",
-    descriptionBn: "বুটিক ডিজাইনার হোয়াইট কাতুয়া। সূক্ষ্ম কালারফুল ফ্লোরাল এমব্রয়ডারি ওয়ার্ক, প্রিমিয়াম বোতাম ও ১০০% পিওর সুতি ফেব্রিক।\n\n• সাইজ: M, L, XL, XXL\n• ফেব্রিক: ১০০% প্রিমিয়াম সুতি\n• ডেলিভারি: সারা দেশে ক্যাশ অন ডেলিভারি",
-    descriptionEn: "Designer white katua featuring delicate colorful floral thread embroidery on the chest and collar.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 500,
-    originalPrice: 850,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 38,
-    images: [
-      "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 45,
-    isFlashSale: true,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "embroidered", "এমব্রয়ডারি", "সাদা কাতুয়া"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-emb-13",
-    sku: "KTU-EMB-13",
-    titleBn: "প্রিমিয়াম কোয়ালিটি কাতুয়া ট্রি অব লাইফ আর্ট - সাদা",
-    titleEn: "Premium Quality Katua - Tree of Life Art (White)",
-    descriptionBn: "আর্টিস্টিক ট্রি অব লাইফ ও পাখি আর্টওয়ার্ক সহ হোয়াইট কাতুয়া। অত্যন্ত আকর্ষণীয় ও ইউনিক স্টাইলের পোশাক।",
-    descriptionEn: "Artistic Tree of Life print katua in clean white fabric with comfortable collar.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 500,
-    originalPrice: 850,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 42,
-    images: [
-      "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 40,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "tree-art", "সাদা"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-emb-14",
-    sku: "KTU-EMB-14",
-    titleBn: "প্রিমিয়াম কোয়ালিটি গোল্ডেন ট্রি কাতুয়া - সাদা",
-    titleEn: "Premium Quality Golden Tree Katua - White",
-    descriptionBn: "চকচকে গোল্ডেন ট্রি আর্টসহ প্রিমিয়াম হোয়াইট কাতুয়া। বিশেষ অনুষ্ঠান বা উৎসবের জন্য রাজকীয় পছন্দ।",
-    descriptionEn: "Golden tree printed katua in premium white cotton fabric. Exclusive design.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 500,
-    originalPrice: 850,
-    discountPercentage: 41,
-    rating: 5,
-    reviewCount: 47,
-    images: [
-      "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 48,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "golden-tree", "সাদা কাতুয়া"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-emb-15",
-    sku: "KTU-EMB-15",
-    titleBn: "প্রিমিয়াম কোয়ালিটি কাতুয়া ট্রি অ্যান্ড বার্ডস - ইয়েলো",
-    titleEn: "Premium Quality Katua - Tree & Birds (Yellow)",
-    descriptionBn: "প্যাস্টেল হলুদ রঙের কাপড়ে আর্টিস্টিক ট্রি ও বার্ডস প্রিন্ট ডিজাইন। উজ্জ্বল ও নজরকাড়া লুক।",
-    descriptionEn: "Vibrant pastel yellow katua with black artistic tree and birds motif.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 500,
-    originalPrice: 850,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 29,
-    images: [
-      "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 35,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "yellow", "হলুদ"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-emb-16",
-    sku: "KTU-EMB-16",
-    titleBn: "প্রিমিয়াম কোয়ালিটি নেক এমব্রয়ডারি কাতুয়া - বেবি পিঙ্ক",
-    titleEn: "Premium Quality Neck Embroidered Katua - Baby Pink",
-    descriptionBn: "বেবি পিঙ্ক কাপড়ে কালো সুতার নিখুঁত গলার এমব্রয়ডারি ডিজাইন। হাতায় চমৎকার বর্ডার কাজ।",
-    descriptionEn: "Baby pink katua with rich black neckline embroidery and sleeve border details.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 500,
-    originalPrice: 850,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 33,
-    images: [
-      "https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 40,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "pink-embroidery", "গোলাপী"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-emb-17",
-    sku: "KTU-EMB-17",
-    titleBn: "প্রিমিয়াম কোয়ালিটি কন্ট্রাস্ট নেক এমব্রয়ডারি কাতুয়া - পিওর হোয়াইট",
-    titleEn: "Premium Quality Contrast Embroidered Neck Katua - Pure White",
-    descriptionBn: "ধবধবে সাদা কাপড়ে কালো ট্র্যাডিশনাল এম্ব্রয়ডারি কাজ। ক্লাসিক লুকের সেরা সমন্বয়।",
-    descriptionEn: "Pure white katua with high-contrast black neck embroidery. Sophisticated and stylish.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 500,
-    originalPrice: 850,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 45,
-    images: [
-      "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 50,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "white-black-embroidery", "সাদা"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  // 3. Premium Solid Cotton Katua on Hanger Series (410 Tk)
-  {
-    id: "sbp-katua-solid-18",
-    sku: "KTU-SLD-18",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - সফট পিঙ্ক",
-    titleEn: "Premium Solid Cotton Katua - Soft Pink",
-    descriptionBn: "১০০% পিওর কটন সলিড রঙের প্রিমিয়াম কাতুয়া। পরিপাটি ম্যান্ডারিন কলার ও বোতাম প্যানেল।\n\n• সাইজ: M, L, XL, XXL\n• মূল্য: মাত্র ৪১০ টাকা (আসল মূল্য ৭০০ টাকা)",
-    descriptionEn: "Solid soft pink cotton katua with mandarin collar and full placket. Elegant minimalism.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 21,
-    images: [
-      "https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 45,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "solid-katua", "pink"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-19",
-    sku: "KTU-SLD-19",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - নেভি ব্লু",
-    titleEn: "Premium Solid Cotton Katua - Navy Blue",
-    descriptionBn: "ক্লাসিক নেভি ব্লু সলিড কাতুয়া। আরামদায়ক পিওর সুতি ফেব্রিক।",
-    descriptionEn: "Classic solid navy blue cotton katua for casual and semi-formal wear.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 26,
-    images: [
-      "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 50,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "navy-blue", "solid"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-20",
-    sku: "KTU-SLD-20",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - লাইট সিলভার গ্রে",
-    titleEn: "Premium Solid Cotton Katua - Light Silver Grey",
-    descriptionBn: "মার্জিত সিলভার অ্যাশ রঙের সলিড কটন কাতুয়া। গরমে পরার জন্য আদর্শ।",
-    descriptionEn: "Light silver grey solid cotton katua with smooth texture and comfortable fit.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.7,
-    reviewCount: 19,
-    images: [
-      "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 35,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "grey", "solid"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-21",
-    sku: "KTU-SLD-21",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - ডিপ মেরুন",
-    titleEn: "Premium Solid Cotton Katua - Deep Maroon",
-    descriptionBn: "আভিজাত্যপূর্ণ গাঢ় মেরুন সলিড কটন কাতুয়া। নিখুঁত সেলাই ও আরামদায়ক কাটিং।",
-    descriptionEn: "Deep maroon solid cotton katua. Rich colorfast fabric.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 30,
-    images: [
-      "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 45,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "maroon", "solid"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-22",
-    sku: "KTU-SLD-22",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - চকলেট ব্রাউন",
-    titleEn: "Premium Solid Cotton Katua - Chocolate Brown",
-    descriptionBn: "গভীর চকলেট ব্রাউন রঙের প্রিমিয়াম সলিড কাতুয়া। স্টাইলিশ ও রুচিশীল।",
-    descriptionEn: "Rich chocolate brown solid katua made from 100% fine cotton.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 22,
-    images: [
-      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 38,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "brown", "solid"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-23",
-    sku: "KTU-SLD-23",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - পিওর হোয়াইট",
-    titleEn: "Premium Solid Cotton Katua - Pure White",
-    descriptionBn: "এক রঙা ধবধবে সাদা সলিড কটন কাতুয়া। যেকোনো场合ে পরার মতো চিরন্তন ক্লাসিক।",
-    descriptionEn: "Pure white minimalist solid cotton katua with modern mandarin collar.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 40,
-    images: [
-      "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 55,
-    isFlashSale: true,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "white", "সাদা"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-24",
-    sku: "KTU-SLD-24",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - আলমন্ড ক্রিম",
-    titleEn: "Premium Solid Cotton Katua - Almond Cream",
-    descriptionBn: "বাদামি ক্রিম শেডের সফট কটন কাতুয়া। আরামদায়ক ও পরিপাটি লুক।",
-    descriptionEn: "Almond cream solid cotton katua. Neutral tone for versatile pairing.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.7,
-    reviewCount: 17,
-    images: [
-      "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 32,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "cream", "solid"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-25",
-    sku: "KTU-SLD-25",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - স্কাই ব্লু",
-    titleEn: "Premium Solid Cotton Katua - Sky Blue",
-    descriptionBn: "আকাশি নীল রঙের সলিড কাতুয়া। নরম কটন কাপড়ে তৈরি, গরমে দারুণ স্বস্তিদায়ক।",
-    descriptionEn: "Sky blue solid cotton katua with neat collar and placket construction.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 25,
-    images: [
-      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 40,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "sky-blue", "solid"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-26",
-    sku: "KTU-SLD-26",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - চারকোল ডার্ক গ্রে",
-    titleEn: "Premium Solid Cotton Katua - Charcoal Dark Grey",
-    descriptionBn: "ডার্ক চারকোল গ্রে কালারের স্মার্ট সলিড কাতুয়া।",
-    descriptionEn: "Charcoal dark grey solid katua made from export quality cotton.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 18,
-    images: [
-      "https://images.unsplash.com/photo-1550246140-5119ae4790b8?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 35,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "charcoal", "solid"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-27",
-    sku: "KTU-SLD-27",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - জেট ব্ল্যাক",
-    titleEn: "Premium Solid Cotton Katua - Jet Black",
-    descriptionBn: "গাঢ় কুচকুচে কালো রঙের ক্লাসিক সলিড কাতুয়া। আভিজাত্য ও স্টাইলের সেরা প্রতীক।",
-    descriptionEn: "Jet black solid katua. Timeless, bold, and crafted with 100% fine cotton.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.9,
-    reviewCount: 52,
-    images: [
-      "https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 60,
-    isFlashSale: true,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "black", "কালো"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-solid-28",
-    sku: "KTU-SLD-28",
-    titleBn: "প্রিমিয়াম সলিড কটন কাতুয়া - অলিভ গ্রিন",
-    titleEn: "Premium Solid Cotton Katua - Olive Green",
-    descriptionBn: "ট্রেন্ডি অলিভ গ্রিন সলিড কাতুয়া। হালকা ও বাতাস চলাচল উপযোগী সুতি কাপড়।",
-    descriptionEn: "Olive green solid cotton katua with neat finish and tailored look.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 410,
-    originalPrice: 700,
-    discountPercentage: 41,
-    rating: 4.8,
-    reviewCount: 27,
-    images: [
-      "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 42,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "olive", "solid"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  // 4. Premium Cotton Katua with Chest Pocket Series (420 Tk)
-  {
-    id: "sbp-katua-pocket-29",
-    sku: "KTU-PCK-29",
-    titleBn: "পকেটসহ প্রিমিয়াম কটন কাতুয়া - মেরুন",
-    titleEn: "Premium Cotton Katua with Pocket - Maroon",
-    descriptionBn: "স্টাইলিশ ফ্রন্ট চেস্ট পকেটসহ প্রিমিয়াম কটন কাতুয়া। ট্রেন্ডি বোতাম ও পরিপাটি লুক।\n\n• সাইজ: M, L, XL, XXL\n• ফিচার: বুক পকেট, কলার স্টাইল, ১০০% কটন\n• মূল্য: মাত্র ৪২০ টাকা (আসল মূল্য ৭২০ টাকা)",
-    descriptionEn: "Premium cotton katua featuring a functional chest pocket and classic buttoned collar.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 420,
-    originalPrice: 720,
-    discountPercentage: 42,
-    rating: 4.9,
-    reviewCount: 36,
-    images: [
-      "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 45,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "pocket-katua", "maroon"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-pocket-30",
-    sku: "KTU-PCK-30",
-    titleBn: "পকেটসহ প্রিমিয়াম কটন কাতুয়া - জেট ব্ল্যাক",
-    titleEn: "Premium Cotton Katua with Pocket - Jet Black",
-    descriptionBn: "কুচকুচে কালো রঙের পকেটওয়ালা কটন কাতুয়া। স্মার্ট লুক ও আরামদায়ক ব্যবহারের জন্য চমৎকার।",
-    descriptionEn: "Jet black cotton katua with chest pocket and stylish collar design.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 420,
-    originalPrice: 720,
-    discountPercentage: 42,
-    rating: 5,
-    reviewCount: 48,
-    images: [
-      "https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 55,
-    isFlashSale: true,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "pocket-katua", "black"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-pocket-31",
-    sku: "KTU-PCK-31",
-    titleBn: "পকেটসহ প্রিমিয়াম কটন কাতুয়া - রোজ পিঙ্ক",
-    titleEn: "Premium Cotton Katua with Pocket - Rose Pink",
-    descriptionBn: "সফট রোজ পিঙ্ক কালারের পকেটওয়ালা কাতুয়া। নরম কটন কাপড়ে তৈরি, গরমে দারুণ স্বস্তিদায়ক।",
-    descriptionEn: "Rose pink katua with front pocket detail in premium combed cotton.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 420,
-    originalPrice: 720,
-    discountPercentage: 42,
-    rating: 4.8,
-    reviewCount: 24,
-    images: [
-      "https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 35,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "pocket-katua", "pink"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-pocket-32",
-    sku: "KTU-PCK-32",
-    titleBn: "পকেটসহ প্রিমিয়াম কটন কাতুয়া - অলিভ গ্রিন",
-    titleEn: "Premium Cotton Katua with Pocket - Olive Green",
-    descriptionBn: "আকর্ষণীয় অলিভ গ্রিন কালারে চেস্ট পকেটসহ কাতুয়া। টেকসই সেলাই ও আরামদায়ক অনুভূতি।",
-    descriptionEn: "Olive green cotton katua with chest pocket. Easy casual wear.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 420,
-    originalPrice: 720,
-    discountPercentage: 42,
-    rating: 4.8,
-    reviewCount: 29,
-    images: [
-      "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 40,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "pocket-katua", "olive"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-pocket-33",
-    sku: "KTU-PCK-33",
-    titleBn: "পকেটসহ প্রিমিয়াম কটন কাতুয়া - বিস্কুট বেইজ",
-    titleEn: "Premium Cotton Katua with Pocket - Biscuit Beige",
-    descriptionBn: "বিস্কুট বেইজ শেডের প্রিমিয়াম কটন কাতুয়া। বুক পকেট থাকায় দরকারি ছোট জিনিস রাখা সুবিধাজনক।",
-    descriptionEn: "Biscuit beige cotton katua with functional chest pocket and tailored placket.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 420,
-    originalPrice: 720,
-    discountPercentage: 42,
-    rating: 4.7,
-    reviewCount: 20,
-    images: [
-      "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 32,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "pocket-katua", "beige"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-pocket-34",
-    sku: "KTU-PCK-34",
-    titleBn: "পকেটসহ প্রিমিয়াম কটন কাতুয়া - ডার্ক গ্রে",
-    titleEn: "Premium Cotton Katua with Pocket - Dark Grey",
-    descriptionBn: "চারকোল ডার্ক গ্রে কালারের বুক পকেটসহ প্রিমিয়াম কাতুয়া। পরিপাটি ও স্মার্ট লুক।",
-    descriptionEn: "Dark charcoal grey cotton katua featuring a front chest pocket.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 420,
-    originalPrice: 720,
-    discountPercentage: 42,
-    rating: 4.8,
-    reviewCount: 22,
-    images: [
-      "https://images.unsplash.com/photo-1550246140-5119ae4790b8?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 38,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "pocket-katua", "grey"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-pocket-35",
-    sku: "KTU-PCK-35",
-    titleBn: "পকেটসহ প্রিমিয়াম কটন কাতুয়া - ক্রিস্প হোয়াইট",
-    titleEn: "Premium Cotton Katua with Pocket - Crisp White",
-    descriptionBn: "সাদা রঙের প্রিমিয়াম পকেট কাতুয়া। পরিচ্ছন্ন, মার্জিত ও আভিজাত্যের প্রতীক।",
-    descriptionEn: "Crisp white cotton katua with chest pocket and neat stitching.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 420,
-    originalPrice: 720,
-    discountPercentage: 42,
-    rating: 4.9,
-    reviewCount: 44,
-    images: [
-      "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 50,
-    isFlashSale: false,
-    isFeatured: true,
-    isBestSeller: true,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "pocket-katua", "white"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  },
-  {
-    id: "sbp-katua-pocket-36",
-    sku: "KTU-PCK-36",
-    titleBn: "পকেটসহ প্রিমিয়াম কটন কাতুয়া - কফি ব্রাউন",
-    titleEn: "Premium Cotton Katua with Pocket - Coffee Brown",
-    descriptionBn: "চকলেট কফি ব্রাউন কালারের পকেটওয়ালা কাতুয়া। জিন্স ও গ্যাবার্ডিন প্যান্টের সাথে চমৎকার মানিয়ে যায়।",
-    descriptionEn: "Coffee brown cotton katua with pocket. Premium colorfast fabric.",
-    category: "mens-clothing",
-    subcategory: "katua",
-    brand: "Bangla Bazar",
-    price: 420,
-    originalPrice: 720,
-    discountPercentage: 42,
-    rating: 4.8,
-    reviewCount: 26,
-    images: [
-      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 36,
-    isFlashSale: false,
-    isFeatured: false,
-    isBestSeller: false,
-    isNewArrival: true,
-    tags: ["katua", "কাতুয়া", "pocket-katua", "brown"],
-    sizes: ["M", "L", "XL", "XXL"],
-    variants: [{ type: "size", options: ["M", "L", "XL", "XXL"] }]
-  }
-];
 const catWomensImg = "/assets/cat_womens_fashion_1794884632485-517mGEnV.jpg";
 const catMensImg = "/assets/cat_mens_fashion_1794884632766-WQ2dW_7V.jpg";
 const catBabyImg = "/assets/cat_baby_collection_1794884633393-Ct1SPAFB.jpg";
@@ -41118,729 +40138,7 @@ const CATEGORIES = [
   }
 ];
 const PRODUCTS = [
-  ...KATUA_PRODUCTS,
-  ...SHOPBASE_ALL_PRODUCTS,
-  {
-    id: "prod-1",
-    titleBn: "স্যামসাং গ্যালাক্সি A54 5G (8GB/128GB) অফিশিয়াল ওয়ারেন্টি",
-    titleEn: "Samsung Galaxy A54 5G (8GB/128GB) Official Warranty",
-    descriptionBn: "সুপার AMOLED 120Hz ডিসপ্লে, ফ্ল্যাগশিপ লেভেল 50MP OIS ক্যামেরা, এবং দীর্ঘস্থায়ী 5000mAh ব্যাটারি। বাংলাদেশে 1 বছরের অফিসিয়াল সার্ভিস ওয়ারেন্টি সহ।",
-    descriptionEn: "Super AMOLED 120Hz display, flagship level 50MP OIS camera, and long-lasting 5000mAh battery. Includes 1-year official warranty in Bangladesh.",
-    category: "electronics-gadgets",
-    subcategory: "gadgets",
-    brand: "Bangla Bazar",
-    price: 44990,
-    originalPrice: 49990,
-    discountPercentage: 10,
-    rating: 4.8,
-    reviewCount: 142,
-    images: [
-      "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 25,
-    isFlashSale: true,
-    flashSaleEnds: new Date(Date.now() + 864e5 * 2).toISOString(),
-    soldCount: 78,
-    isFeatured: true,
-    isBestSeller: true,
-    tags: ["mobile", "smartphone", "samsung", "5g", "electronics"],
-    variants: [
-      { type: "color", options: ["Awesome Graphite", "Awesome Lime", "Awesome Violet"] },
-      { type: "storage", options: ["128GB", "256GB"] }
-    ],
-    specifications: {
-      "ডিসপ্লে (Display)": "6.4 inch FHD+ Super AMOLED 120Hz",
-      "প্রসেসর (Processor)": "Exynos 1380 Octa-Core",
-      "র‍্যাম/রম (RAM/ROM)": "8GB RAM + 128GB Storage",
-      "ক্যামেরা (Camera)": "50MP + 12MP + 5MP / 32MP Front",
-      "ব্যাটারি (Battery)": "5000 mAh (25W Fast Charge)",
-      "ওয়ারেন্টি (Warranty)": "1 বছর অফিসিয়াল স্যামসাং বাংলাদেশ"
-    },
-    warranty: "1 বছর অফিসিয়াল স্যামসাং ব্র্যান্ড ওয়ারেন্টি",
-    deliveryTime: "ঢাকা সিটির মধ্যে 24-48 ঘণ্টা, ঢাকার বাইরে 2-4 দিন",
-    reviews: [
-      {
-        id: "rev-1",
-        userName: "তানভীর আহমেদ",
-        rating: 5,
-        date: "10 মে, 2026",
-        comment: "পণ্যটি এক কথায় অসাধারণ! অরিজিনাল প্যাকেজিং ও অফিসিয়াল ওয়ারেন্টি কার্ড পেয়েছি। বাংলা বাজার এর ডেলিভারি সার্ভিস খুবই দ্রুত ছিল।",
-        verifiedPurchase: true
-      },
-      {
-        id: "rev-2",
-        userName: "সাদিয়া জাহান",
-        rating: 4.5,
-        date: "2 মে, 2026",
-        comment: "ক্যামেরা কোয়ালিটি চমৎকার, ব্যাটারি ব্যাকআপ সারাদিন চলে যায়। দারুণ শপিং অভিজ্ঞতা।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-2",
-    titleBn: "প্রিমিয়াম জ্যাকার্ড সুতি পাঞ্জাবি - ডিপ রয়্যাল ব্লু (ঈদ স্পেশাল)",
-    titleEn: "Premium Jacquard Cotton Panjabi - Deep Royal Blue",
-    descriptionBn: "উচ্চমানের 100% কম্বড কটন জ্যাকার্ড ফেব্রিক, নিখুঁত মেটালিক বাটন ও ক্লাসিক চাইনিজ কলার কাটিং। উৎসব ও যেকোনো জমকালো আয়োজনের জন্য উপযুক্ত।",
-    descriptionEn: "High-grade 100% combed cotton jacquard fabric, elegant metallic buttons, and a classic mandarin collar. Ideal for celebrations and special occasions.",
-    category: "fashion",
-    subcategory: "punjabi",
-    brand: "Bangla Bazar",
-    price: 2450,
-    originalPrice: 3200,
-    discountPercentage: 23,
-    rating: 4.9,
-    reviewCount: 98,
-    images: [
-      "https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 40,
-    isFlashSale: true,
-    soldCount: 112,
-    isFeatured: true,
-    isBestSeller: true,
-    tags: ["fashion", "panjabi", "eid", "men", "cotton"],
-    variants: [
-      { type: "size", options: ["M (40)", "L (42)", "XL (44)", "XXL (46)"] },
-      { type: "color", options: ["Royal Blue", "Emerald Green", "Maroon"] }
-    ],
-    specifications: {
-      "ফেব্রিক (Fabric)": "100% Combed Jacquard Cotton",
-      "কলার (Collar)": "Mandarin Embroidered Collar",
-      "ফিটিং (Fitting)": "Slim / Semi-Slim Fit",
-      "উৎপাদন (Origin)": "Made in Bangladesh"
-    },
-    warranty: "সাইজ না মিললে 7 দিনের মধ্যে ফ্রি এক্সচেঞ্জ সুবিধা",
-    deliveryTime: "24-72 ঘণ্টা সমগ্র বাংলাদেশ",
-    reviews: [
-      {
-        id: "rev-3",
-        userName: "মাহমুদুল হাসান",
-        rating: 5,
-        date: "12 এপ্রিল, 2026",
-        comment: "কাপড়ের মান সত্যি অসাধারণ। সাইজ একদম পারফেক্ট হয়েছে এবং কালার ছবিতে যেমন ছিল ঠিক তেমনই।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-3",
-    titleBn: "ওয়ালটন ডিরেক্ট কুল নন-ফ্রস্ট রেফ্রিজারেটর 255 লিটার (ইনভার্টার)",
-    titleEn: "Walton Direct Cool Refrigerator 255L (Inverter Technology)",
-    descriptionBn: "সর্বাধুনিক ইনভার্টার কম্প্রেসর প্রযুক্তির কারণে 70% পর্যন্ত বিদ্যুৎ সাশ্রয়ী। ফাস্টার কুলিং ও ন্যানো হেলথ কেয়ার সমৃদ্ধ। 10 বছরের কম্প্রেসর গ্যারান্টি।",
-    descriptionEn: "Saves up to 70% electricity with advanced inverter compressor technology. Fast cooling with Nano Healthcare protection and 10-year warranty.",
-    category: "home-living",
-    brand: "Bangla Bazar",
-    price: 38900,
-    originalPrice: 42500,
-    discountPercentage: 8,
-    rating: 4.7,
-    reviewCount: 64,
-    images: [
-      "https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 12,
-    isFlashSale: false,
-    soldCount: 35,
-    isFeatured: true,
-    isNewArrival: false,
-    tags: ["refrigerator", "walton", "home", "appliances"],
-    variants: [
-      { type: "color", options: ["Floral Maroon", "Deep Silver", "Mirror Black"] }
-    ],
-    specifications: {
-      "ক্যাপাসিটি (Capacity)": "255 Liters",
-      "কম্প্রেসর (Compressor)": "Intelligent Inverter (R600a)",
-      "ডিজাইন (Design)": "Tempered Glass Door with Lock",
-      "ওয়ারেন্টি (Warranty)": "10 বছর কম্প্রেসর রিপ্লেসমেন্ট গ্যারান্টি"
-    },
-    warranty: "10 বছর কম্প্রেসর, 2 বছর স্পেয়ার পার্টস, 1 বছর ফ্রি সার্ভিস",
-    deliveryTime: "হোম ডেলিভারি ও ইন্সটলেশন 2-3 কর্মদিবস",
-    reviews: [
-      {
-        id: "rev-4",
-        userName: "মোস্তফা কামাল",
-        rating: 5,
-        date: "8 মার্চ, 2026",
-        comment: "ওয়ালটনের ফ্রিজ সবসময়ই নির্ভরযোগ্য। বিদ্যুৎ বিল আসলেই অনেক কম আসে। বাসায় এনে ফ্রি ইন্সটল করে দিয়ে গেছে।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-4",
-    titleBn: "প্রাণ প্রিমিয়াম চিনিগুঁড়া পোলাও চাল (5 কেজি প্যাক)",
-    titleEn: "PRAN Premium Chinigura Aromatic Rice (5 kg Pack)",
-    descriptionBn: "সুগন্ধি খাঁটি উত্তরবঙ্গের চিনিগুঁড়া চাল। বিরিয়ানি, পোলাও, ফিরনি এবং পায়েস রান্নার জন্য অতুলনীয় সুবাস ও স্বাদ।",
-    descriptionEn: "Pure aromatic Chinigura rice harvested from northern Bangladesh. Perfect fragrant aroma for biryani, pulao, firni, and special feasts.",
-    category: "grocery",
-    brand: "Bangla Bazar",
-    price: 780,
-    originalPrice: 850,
-    discountPercentage: 8,
-    rating: 4.9,
-    reviewCount: 310,
-    images: [
-      "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 150,
-    isFlashSale: false,
-    soldCount: 890,
-    isFeatured: true,
-    isBestSeller: true,
-    tags: ["grocery", "rice", "chinigura", "pran", "pulao"],
-    variants: [
-      { type: "weight", options: ["1 Kg", "2 Kg", "5 Kg", "10 Kg"] }
-    ],
-    specifications: {
-      "ব্র্যান্ড (Brand)": "PRAN Grocery Essentials",
-      "ওজন (Weight)": "5 KG Sealed Poly Pack",
-      "মেয়াদ (Expiry)": "24 Months from packaging",
-      "গুণমান (Quality)": "100% Sorted Aromatic Grain"
-    },
-    warranty: "100% খাঁটি পণ্যের নিশ্চয়তা ও ইন্সট্যান্ট রিটার্ন সুবিধা",
-    deliveryTime: "এক্সপ্রেস গ্রোসারি ডেলিভারি (ঢাকার ভেতর 3-4 ঘণ্টা)",
-    reviews: [
-      {
-        id: "rev-5",
-        userName: "ফারহানা আহমেদ",
-        rating: 5,
-        date: "15 মে, 2026",
-        comment: "রান্না করার পর পুরো ঘর সুগন্ধে ভরে গিয়েছিল। দানাগুলো একদম অটুট ও ফ্রেশ।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-5",
-    titleBn: "শাওমি রেডমি ওয়াচ 4 - AMOLED আল্ট্রা লার্জ ডিসপ্লে ও ব্লুটুথ কলিং",
-    titleEn: 'Xiaomi Redmi Watch 4 - 1.97" AMOLED Bluetooth Calling Smartwatch',
-    descriptionBn: "1.97 ইঞ্চি আল্ট্রা লার্জ অ্যামোলেড ডিসপ্লে, 20 দিন ব্যাটারি লাইফ, স্টেইনলেস স্টিল রোটেটিং ক্রাউন এবং হার্ট রেট ও SpO2 হেলথ সেন্সর।",
-    descriptionEn: "1.97-inch ultra-large AMOLED display, up to 20-day battery life, sleek metallic frame with rotating crown, and continuous SpO2/Heart rate monitoring.",
-    category: "electronics-gadgets",
-    brand: "Bangla Bazar",
-    price: 9890,
-    originalPrice: 11990,
-    discountPercentage: 18,
-    rating: 4.8,
-    reviewCount: 88,
-    images: [
-      "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 35,
-    isFlashSale: true,
-    soldCount: 92,
-    isFeatured: true,
-    isNewArrival: true,
-    tags: ["smartwatch", "xiaomi", "gadget", "wearable"],
-    variants: [
-      { type: "color", options: ["Obsidian Black", "Silver Grey", "Mint Green"] }
-    ],
-    specifications: {
-      "ডিসপ্লে (Display)": '1.97" AMOLED 60Hz 600 nits',
-      "ব্যাটারি (Battery)": "470 mAh (Up to 20 days)",
-      "কলিং (Calling)": "Bluetooth Phone Calling with Mic & Speaker",
-      "ওয়াটার রেজিস্ট্যান্স (Water)": "5ATM Water Resistant (50m)"
-    },
-    warranty: "6 মাসের অফিসিয়াল ব্র্যান্ড রিপ্লেসমেন্ট ওয়ারেন্টি",
-    deliveryTime: "24-48 ঘণ্টার মধ্যে হোম ডেলিভারি",
-    reviews: [
-      {
-        id: "rev-6",
-        userName: "রাশেদ কবির",
-        rating: 5,
-        date: "1 মে, 2026",
-        comment: "ডিসপ্লে ব্রাইটনেস অসাধারণ, রোদেও একদম পরিষ্কার দেখা যায়। কলিং ফিচার বেশ কার্যকর।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-6",
-    titleBn: "অ্যাপেক্স ভেনচুরিনো জেনুইন লেদার ফরমাল শুজ (পুরুষ)",
-    titleEn: "Apex Venturino Genuine Leather Formal Shoes for Men",
-    descriptionBn: "খাঁটি জেনুইন কাও লেদার দিয়ে তৈরি আরামদায়ক প্রিমিয়াম ফরমাল জুতো। কুশনিং ইনসোল এবং অ্যান্টি-স্লিপ রাবার সোল দীর্ঘক্ষণ ব্যবহারে পূর্ণ আরাম দেয়।",
-    descriptionEn: "Handcrafted with premium genuine cow leather, anti-slip durable rubber sole, and padded inner sole for maximum walking comfort.",
-    category: "fashion",
-    brand: "Bangla Bazar",
-    price: 4990,
-    originalPrice: 5990,
-    discountPercentage: 17,
-    rating: 4.6,
-    reviewCount: 45,
-    images: [
-      "https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 20,
-    isFlashSale: false,
-    soldCount: 54,
-    isFeatured: false,
-    isBestSeller: true,
-    tags: ["shoes", "apex", "formal", "leather", "men"],
-    variants: [
-      { type: "size", options: ["39", "40", "41", "42", "43", "44"] },
-      { type: "color", options: ["Burnished Black", "Deep Tan Brown"] }
-    ],
-    specifications: {
-      "উপাদান (Upper)": "100% Genuine Cowhide Leather",
-      "সোল (Sole)": "Durable Grip Rubber Sole",
-      "ইনসোল (Insole)": "Memory Foam Cushion Pad",
-      "ব্র্যান্ড (Brand)": "Apex Footwear Bangladesh"
-    },
-    warranty: "3 মাসের ম্যানুফ্যাকচারিং ওয়ারেন্টি",
-    deliveryTime: "48 ঘণ্টার মধ্যে ডেলিভারি",
-    reviews: [
-      {
-        id: "rev-7",
-        userName: "শামসুল হক",
-        rating: 5,
-        date: "20 এপ্রিল, 2026",
-        comment: "অফিসে সারাদিন পরেও পায়ে কোনো ব্যথা অনুভূত হয় না। চামড়ার ফিনিশিং চমৎকার।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-7",
-    titleBn: "ল’রিয়েল প্যারিস রিভাইটালাইফ হায়ালুরোনিক অ্যাসিড সিরাম (30 মিলি)",
-    titleEn: "L’Oréal Paris Revitalift 1.5% Hyaluronic Acid Hydrating Serum (30ml)",
-    descriptionBn: "ত্বকের গভীরে আর্দ্রতা ফিরিয়ে আনে এবং ফাইন লাইন কমিয়ে ত্বককে করে তোলে কোমল, মসৃণ ও দীপ্তিময়। চর্মরোগ বিশেষজ্ঞ দ্বারা পরীক্ষিত।",
-    descriptionEn: "Intensely hydrates, plumps skin, and visibly reduces fine lines with 1.5% pure Hyaluronic Acid. Dermatologist validated and lightweight.",
-    category: "beauty",
-    brand: "Bangla Bazar",
-    price: 1890,
-    originalPrice: 2400,
-    discountPercentage: 21,
-    rating: 4.9,
-    reviewCount: 168,
-    images: [
-      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1608248597358-1f6e2b1fa4a2?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 50,
-    isFlashSale: true,
-    soldCount: 220,
-    isFeatured: true,
-    isBestSeller: true,
-    tags: ["serum", "beauty", "skincare", "loreal"],
-    specifications: {
-      "ভলিউম (Volume)": "30ml Dropper Bottle",
-      "উপাদান (Key)": "1.5% Pure Hyaluronic Acid",
-      "ত্বকের ধরন (Skin)": "All Skin Types (Hypoallergenic)",
-      "উৎপাদন (Origin)": "Imported from France / L’Oréal Official"
-    },
-    warranty: "100% অরিজিনাল অথেনটিক প্রোডাক্ট গ্যারান্টি",
-    deliveryTime: "1-2 কর্মদিবস",
-    reviews: [
-      {
-        id: "rev-8",
-        userName: "নাবিলা ইসলাম",
-        rating: 5,
-        date: "5 মে, 2026",
-        comment: "আমার ড্রাই স্কিনের জন্য এটা ম্যাজিকের মতো কাজ করেছে। একদম হালকা, কোনো স্টিকি ভাব নেই।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-8",
-    titleBn: "হুমায়ূন আহমেদ রচনা সমগ্র (হার্ডকভার সংকলন - 1 থেকে 4 খণ্ড)",
-    titleEn: "Humayun Ahmed Complete Selected Works (Hardcover Vol 1-4)",
-    descriptionBn: "কথা সাহিত্যিক হুমায়ূন আহমেদের তুমুল জনপ্রিয় হিমু, মিসির আলি এবং কালজয়ী উপন্যাসসমূহের প্রিমিয়াম বাঁধাই সংকলন। বইপ্রেমীদের সংগ্রহের জন্য সেরা উপহার।",
-    descriptionEn: "Premium hardcover collector’s edition featuring the best masterpieces, Himu, Misir Ali, and timeless novels of legendary author Humayun Ahmed.",
-    category: "books",
-    brand: "Bangla Bazar",
-    price: 3200,
-    originalPrice: 4e3,
-    discountPercentage: 20,
-    rating: 5,
-    reviewCount: 215,
-    images: [
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 30,
-    isFlashSale: false,
-    soldCount: 310,
-    isFeatured: true,
-    isNewArrival: false,
-    tags: ["books", "humayun ahmed", "novel", "bangla"],
-    specifications: {
-      "লেখক (Author)": "হুমায়ূন আহমেদ (Humayun Ahmed)",
-      "বাঁধাই (Binding)": "Hardcover with Gold Foil Lettering",
-      "পৃষ্ঠা সংখ্যা (Pages)": "1680 Pages Total",
-      "ভাষা (Language)": "বাংলা (Bengali)"
-    },
-    warranty: "প্রিন্টিং বা বাইন্ডিং ত্রুটিতে শতভাগ ফ্রি রিপ্লেসমেন্ট",
-    deliveryTime: "সমগ্র বাংলাদেশে হোম ডেলিভারি 2-3 দিন",
-    reviews: [
-      {
-        id: "rev-9",
-        userName: "আসিফুর রহমান",
-        rating: 5,
-        date: "28 এপ্রিল, 2026",
-        comment: "বাইন্ডিং কোয়ালিটি এবং কাগজের মান অত্যন্ত উন্নত। যেকোনো বইপ্রেমীর বুকশেলফে রাখার মতো এক সেট।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-9",
-    titleBn: "মিয়া এয়ার ফ্রায়ার 4.5 লিটার ডিজিটাল টাচ প্যানেল (তেলহীন রান্না)",
-    titleEn: "Miyako Digital Air Fryer 4.5L - Rapid Air Circulation",
-    descriptionBn: "85% কম তেলে ক্রিস্পি ও স্বাস্থ্যকর খাবার তৈরির সুবিধা। 8টি প্রি-সেট স্মার্ট কুকিং মোড, নন-স্টিক বাস্কেট ও সহজ পরিষ্কারযোগ্য।",
-    descriptionEn: "Cook crispy, delicious meals with up to 85% less oil. Features 8 smart preset modes, digital LED touch display, and dishwasher-safe basket.",
-    category: "home-living",
-    brand: "Bangla Bazar",
-    price: 6450,
-    originalPrice: 7800,
-    discountPercentage: 17,
-    rating: 4.7,
-    reviewCount: 79,
-    images: [
-      "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1585515320310-259814833e62?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 18,
-    isFlashSale: true,
-    soldCount: 65,
-    isFeatured: false,
-    isNewArrival: true,
-    tags: ["airfryer", "kitchen", "home", "healthy", "miyako"],
-    specifications: {
-      "ক্যাপাসিটি (Capacity)": "4.5 Liters Family Size",
-      "পাওয়ার (Power)": "1400 Watts Rapid Heat",
-      "তাপমাত্রা (Temp)": "80°C to 200°C Adjustable",
-      "ডিসপ্লে (Display)": "Digital Touch Screen LED"
-    },
-    warranty: "1 বছরের অফিসিয়াল সার্ভিস ওয়ারেন্টি",
-    deliveryTime: "24-48 ঘণ্টা",
-    reviews: [
-      {
-        id: "rev-10",
-        userName: "নাজমা আক্তার",
-        rating: 5,
-        date: "3 মে, 2026",
-        comment: "চিকেন ফ্রাই ও ফ্রেঞ্চ ফ্রাই একদম দোকানের মতো মুচমুচে হয় তেল ছাড়াই। পরিবারে সবাই খুব খুশি।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-10",
-    titleBn: "সোনি WH-1000XM5 ওয়্যারলেস নয়েজ ক্যানসেলিং হেডফোন",
-    titleEn: "Sony WH-1000XM5 Wireless Noise Canceling Headphones",
-    descriptionBn: "বিশ্বসেরা ইন্ডাস্ট্রি লিডিং নয়েজ ক্যানসেলেশন, আল্ট্রা কম্ফোর্ট ডিজাইন, 30 ঘণ্টা ব্যাটারি লাইফ ও ক্রিস্টাল ক্লিয়ার অডিও কলিং।",
-    descriptionEn: "Industry leading noise cancellation, supreme comfort lightweight fit, 30-hour battery life, and crystal clear hands-free calls.",
-    category: "electronics-gadgets",
-    brand: "Bangla Bazar",
-    price: 36990,
-    originalPrice: 42e3,
-    discountPercentage: 12,
-    rating: 4.9,
-    reviewCount: 112,
-    images: [
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 15,
-    isFlashSale: true,
-    soldCount: 42,
-    isFeatured: true,
-    isNewArrival: true,
-    tags: ["sony", "headphone", "audio", "electronics"],
-    variants: [
-      { type: "color", options: ["Black", "Silver Platinum", "Midnight Blue"] }
-    ],
-    specifications: {
-      "ড্রাইভার (Driver)": "30mm Carbon Fiber Composite",
-      "ব্যাটারি (Battery)": "Up to 30 hours (3 min charge = 3 hrs play)",
-      "মাইক্রোফোন (Mic)": "8 Microphones with AI Noise Reduction",
-      "কানেক্টিভিটি (Connectivity)": "Bluetooth 5.2 + LDAC High-Res"
-    },
-    warranty: "1 বছরের ইন্টারন্যাশনাল ওয়ারেন্টি সাপোর্ট",
-    deliveryTime: "24-48 ঘণ্টার এক্সপ্রেস ডেলিভারি",
-    reviews: [
-      {
-        id: "rev-11",
-        userName: "সৈকত চৌধুরী",
-        rating: 5,
-        date: "12 মে, 2026",
-        comment: "সাউন্ড কোয়ালিটি অতুলনীয়! এর নয়েজ ক্যানসেলেশন অন করলে বাইরের কোনো শব্দই শোনা যায় না। জাস্ট পারফেক্ট।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-11",
-    titleBn: "খাঁটি সুন্দরবনের প্রাকৃতিক মধু (500 গ্রাম জার)",
-    titleEn: "Pure Sundarbans Natural Wild Honey (500g Glass Jar)",
-    descriptionBn: "সুন্দরবনের গভীর অরণ্যের বুনো মৌচাক থেকে সংগৃহীত 100% প্রাকৃতিক ও ভেজালমুক্ত মধু। রোগ প্রতিরোধ ক্ষমতা বাড়াতে দারুণ কার্যকর।",
-    descriptionEn: "100% natural, unprocessed raw honey collected by traditional honey hunters of the Sundarbans mangrove forest.",
-    category: "grocery",
-    brand: "Bangla Bazar",
-    price: 650,
-    originalPrice: 750,
-    discountPercentage: 13,
-    rating: 4.9,
-    reviewCount: 195,
-    images: [
-      "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 80,
-    isFlashSale: false,
-    soldCount: 410,
-    isFeatured: false,
-    isBestSeller: true,
-    tags: ["honey", "organic", "grocery", "sundarbans"],
-    variants: [
-      { type: "weight", options: ["250g", "500g", "1kg"] }
-    ],
-    specifications: {
-      "উৎস (Origin)": "সুন্দরবনের খলসী ফুলের প্রাকৃতিক মধু",
-      "ওজন (Net)": "500 Grams Food Grade Glass Jar",
-      "ভেজাল পরীক্ষা (Purity)": "ল্যাব টেস্টে শতভাগ প্রাকৃতিক প্রমাণিত"
-    },
-    warranty: "ভেজাল প্রমাণে 10 গুণ টাকা ফেরত গ্যারান্টি",
-    deliveryTime: "24-72 ঘণ্টা সমগ্র বাংলাদেশ",
-    reviews: [
-      {
-        id: "rev-12",
-        userName: "ড. জামান",
-        rating: 5,
-        date: "8 মে, 2026",
-        comment: "মধুর ঘ্রাণ এবং ঘনত্বেই খাঁটি ভাব বোঝা যায়। খাঁটি মধু কেনার জন্য নির্ভরযোগ্য প্ল্যাটফর্ম।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-12",
-    titleBn: "প্যাম্পার্স অ্যাক্টিভ বেবি প্যান্টস ডায়াপার (লার্জ - 50 পিস)",
-    titleEn: "Pampers Active Baby Pants Diaper (Large - 50 Pcs)",
-    descriptionBn: "12 ঘণ্টা পর্যন্ত শোষণ ক্ষমতা সম্পন্ন নরম ও শ্বাসপ্রশ্বাসযোগ্য কটন লেয়ার। শিশুর সংবেদনশীল ত্বকে কোনো র‍্যাশ বা অস্বস্তি হতে দেয় না।",
-    descriptionEn: "Up to 12 hours leakage absorption with ultra-soft breathable cottony waist bands. Gentle on baby’s sensitive skin.",
-    category: "baby-collection",
-    brand: "Bangla Bazar",
-    price: 1650,
-    originalPrice: 1900,
-    discountPercentage: 13,
-    rating: 4.8,
-    reviewCount: 134,
-    images: [
-      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 45,
-    isFlashSale: false,
-    soldCount: 190,
-    isFeatured: false,
-    isNewArrival: false,
-    tags: ["baby", "diaper", "pampers", "kids"],
-    variants: [
-      { type: "size", options: ["M (7-12kg)", "L (9-14kg)", "XL (12-17kg)"] }
-    ],
-    specifications: {
-      "প্যাক সাইজ (Pack)": "50 Diaper Pants",
-      "সুরক্ষা (Protection)": "Up to 12 Hours Magic Gel Lock",
-      "সাইজ (Size)": "Large (L) for 9-14 KG baby"
-    },
-    warranty: "100% অরিজিনাল ইমপোর্টেড প্রোডাক্ট",
-    deliveryTime: "24-48 ঘণ্টা",
-    reviews: [
-      {
-        id: "rev-13",
-        userName: "রোকসানা পারভীন",
-        rating: 5,
-        date: "2 মে, 2026",
-        comment: "আমার বাচ্চার জন্য সবসময় এটাই ব্যবহার করি। কোনো লিকেজ নেই, খুবই স্বস্তিদায়ক।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-13",
-    titleBn: "প্রিমিয়াম সেমি-তসর সিল্ক এম্ব্রয়ডারি পাঞ্জাবি - অফ হোয়াইট (উৎসব কালেকশন)",
-    titleEn: "Premium Semi-Tussar Silk Embroidered Panjabi - Off White",
-    descriptionBn: "উৎসব ও বিয়ের অনুষ্ঠানের জন্য ঐতিহ্যবাহী কাটিং ও আধুনিক এম্ব্রয়ডারি কাজের অপূর্ব মেলবন্ধন। আরামদায়ক ও রাজকীয় লুক।",
-    descriptionEn: "Exquisite blend of traditional hand-embroidery and modern festive styling on fine semi-tussar silk cotton fabric.",
-    category: "fashion",
-    brand: "Bangla Bazar",
-    price: 3250,
-    originalPrice: 4200,
-    discountPercentage: 23,
-    rating: 4.9,
-    reviewCount: 76,
-    images: [
-      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 25,
-    isFlashSale: true,
-    soldCount: 88,
-    isFeatured: true,
-    isBestSeller: true,
-    tags: ["fashion", "panjabi", "silk", "eid", "festive", "men"],
-    variants: [
-      { type: "size", options: ["M (40)", "L (42)", "XL (44)", "XXL (46)"] },
-      { type: "color", options: ["Off White", "Golden Beige", "Cream"] }
-    ],
-    specifications: {
-      "ফেব্রিক (Fabric)": "Semi-Tussar Silk Cotton Blend",
-      "কলার ও প্লাকেট (Collar)": "Hand Embroidered Floral Motif",
-      "ফিটিং (Fitting)": "Classic Festive Fit"
-    },
-    warranty: "সাইজ এক্সচেঞ্জ সুবিধা 7 দিনের মধ্যে",
-    deliveryTime: "24-72 ঘণ্টার মধ্যে ডেলিভারি",
-    reviews: [
-      {
-        id: "rev-14",
-        userName: "তানভীর আহমেদ",
-        rating: 5,
-        date: "20 মে, 2026",
-        comment: "পণ্যটি হাতে পেয়ে খুবই সন্তুষ্ট। কাপড়ের ফিনিশিং এবং এম্ব্রয়ডারি সত্যিই নিখুঁত।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-14",
-    titleBn: "হ্যান্ডলুম খাঁটি সুতি কাবলি পাঞ্জাবি সেট - জেট ব্ল্যাক (পায়জামা সহ)",
-    titleEn: "Handloom Pure Cotton Kabli Panjabi Set - Jet Black (With Trouser)",
-    descriptionBn: "100% খাঁটি হ্যান্ডলুম সুতি কাপড়ে তৈরি প্রিমিয়াম কাবলি সেট। শ্বাসপ্রশ্বাসযোগ্য ফেব্রিক, ক্লাসিক বাটন ওয়ার্ক ও ম্যাচিং পাজামা।",
-    descriptionEn: "Premium two-piece Kabli set crafted from 100% breathable handloom cotton with matching trousers.",
-    category: "fashion",
-    brand: "Bangla Bazar",
-    price: 2850,
-    originalPrice: 3500,
-    discountPercentage: 19,
-    rating: 4.8,
-    reviewCount: 52,
-    images: [
-      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 30,
-    isFlashSale: false,
-    soldCount: 65,
-    isFeatured: true,
-    tags: ["fashion", "panjabi", "kabli", "black", "cotton", "men"],
-    variants: [
-      { type: "size", options: ["M (40)", "L (42)", "XL (44)", "XXL (46)"] },
-      { type: "color", options: ["Jet Black", "Navy Blue", "Olive"] }
-    ],
-    specifications: {
-      "ফেব্রিক (Fabric)": "100% Handloom Combed Cotton",
-      "সেট (Set)": "কাবলি পাঞ্জাবি ও ম্যাচিং পাজামা (2 পিস)",
-      "ফিটিং (Fitting)": "Regular Fit"
-    },
-    warranty: "100% কালার ও কোয়ালিটি গ্যারান্টি",
-    deliveryTime: "24-48 ঘণ্টার দ্রুত ডেলিভারি",
-    reviews: [
-      {
-        id: "rev-15",
-        userName: "রাকিবুজ্জামান",
-        rating: 5,
-        date: "25 মে, 2026",
-        comment: "কালো কাবলিটার গেটআপ অসাধারণ। গরমে পরার জন্য খুবই আরামদায়ক।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-15",
-    titleBn: "ঘানিভাঙা খাঁটি সরিষার তেল (1 লিটার কাঁচের বোতল - কোল্ড প্রেসড)",
-    titleEn: "Cold Pressed Pure Mustard Oil (1 Liter Glass Bottle)",
-    descriptionBn: "ঐতিহ্যবাহী কাঠের ঘানিতে ভাঙা 100% খাঁটি ঝাঁঝালো সরিষার তেল। কোনো প্রকার কেমিক্যাল বা কৃত্রিম গন্ধ ছাড়া প্রাকৃতিক উপায়ে সংগৃহীত।",
-    descriptionEn: "100% pure cold-pressed unrefined mustard oil with natural strong pungency and rich aroma.",
-    category: "grocery",
-    brand: "Bangla Bazar",
-    price: 360,
-    originalPrice: 420,
-    discountPercentage: 14,
-    rating: 4.9,
-    reviewCount: 142,
-    images: [
-      "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 120,
-    isFlashSale: false,
-    soldCount: 380,
-    isFeatured: true,
-    isBestSeller: true,
-    tags: ["grocery", "mustard-oil", "organic", "pure", "oil"],
-    variants: [
-      { type: "weight", options: ["500 ml", "1 Liter", "2 Liter", "5 Liter"] }
-    ],
-    specifications: {
-      "প্রক্রিয়া (Process)": "ঐতিহ্যবাহী কাঠের ঘানি (Wood Cold-Pressed)",
-      "উপাদান (Ingredient)": "100% দেশি মাঘী সরিষা দানা",
-      "প্যাকিং (Packing)": "Food Grade Glass Bottle"
-    },
-    warranty: "শতভাগ খাঁটি নিশ্চয়তা ও ল্যাব টেস্ট সার্টিফায়েড",
-    deliveryTime: "এক্সপ্রেস হোম ডেলিভারি (ঢাকার ভেতর 3-4 ঘণ্টা)",
-    reviews: [
-      {
-        id: "rev-16",
-        userName: "শায়লা শারমিন",
-        rating: 5,
-        date: "12 জুন, 2026",
-        comment: "তেলের ঝাঁঝ এবং ঘ্রাণ অসাধারণ। ভর্তা ও রান্নায় সত্যিকারের দেশি সরিষার স্বাদ পাওয়া যায়।",
-        verifiedPurchase: true
-      }
-    ]
-  },
-  {
-    id: "prod-16",
-    titleBn: "পাবনার ঐতিহ্যবাহী গাওয়া প্রিমিয়াম ঘি (500 গ্রাম জার)",
-    titleEn: "Traditional Pabna Cow Milk Pure Ghee (500g Glass Jar)",
-    descriptionBn: "খাঁটি গাভীর দুধের মাখন থেকে তৈরি দানাদার সুগন্ধি গাওয়া ঘি। কোনো প্রিজারভেটিভ বা আর্টিফিশিয়াল ফ্লেভার নেই।",
-    descriptionEn: "Pure aromatic clarified butter (desi ghee) crafted from fresh cow milk in traditional style.",
-    category: "grocery",
-    brand: "Bangla Bazar",
-    price: 890,
-    originalPrice: 990,
-    discountPercentage: 10,
-    rating: 5,
-    reviewCount: 98,
-    images: [
-      "https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&auto=format&fit=crop&q=80"
-    ],
-    stock: 60,
-    isFlashSale: true,
-    soldCount: 210,
-    isFeatured: true,
-    tags: ["grocery", "ghee", "dairy", "organic", "pure"],
-    variants: [
-      { type: "weight", options: ["250g", "500g", "1kg"] }
-    ],
-    specifications: {
-      "উৎস (Origin)": "পাবনা অঞ্চলের খামার থেকে সংগৃহীত খাঁটি দুধ",
-      "টেক্সচার (Texture)": "স্বাভাবিক দানাদার সুগন্ধি গোল্ডেন ঘি"
-    },
-    warranty: "100% খাঁটি উপাদান গ্যারান্টি",
-    deliveryTime: "24-48 ঘণ্টার মধ্যে হোম ডেলিভারি",
-    reviews: [
-      {
-        id: "rev-17",
-        userName: "আরিফুল ইসলাম",
-        rating: 5,
-        date: "15 জুন, 2026",
-        comment: "দানাদার টেক্সচার ও মন মাতানো সুবাস। ভাত কিংবা ক্ষীরে দিলে পুরো অন্যরকম স্বাদ হয়।",
-        verifiedPurchase: true
-      }
-    ]
-  }
+  ...SHOPBASE_ALL_PRODUCTS
 ];
 const BANGLADESH_DIVISIONS = [
   {
@@ -42078,8 +40376,8 @@ const PERSONAL_PAYMENT_ACCOUNTS = [
     accountTypeEn: "Personal",
     actionTypeBn: "সেন্ড মানি",
     actionTypeEn: "Send Money",
-    number: "01884196205",
-    formattedNumber: "01884-196205",
+    number: "01929637253",
+    formattedNumber: "01929-637253",
     accentBg: "bg-pink-50",
     accentText: "text-pink-700",
     accentBorder: "border-pink-200",
@@ -65625,6 +63923,16 @@ const deduplicateProducts = (list) => {
   }
   return result;
 };
+const isShopbaseUploadedProduct = (p) => {
+  if (!p || !p.id) return false;
+  const idLower = String(p.id).toLowerCase();
+  if (idLower.startsWith("sbp-katua-") || /^prod-\d+$/i.test(idLower)) return false;
+  if (p.sourceUrl && p.sourceUrl.toLowerCase().includes("shopbasebd.com")) return true;
+  if (Array.isArray(p.images) && p.images.some((img) => typeof img === "string" && img.toLowerCase().includes("shopbasebd.com"))) {
+    return true;
+  }
+  return /^sbp-\d+$/i.test(p.id);
+};
 const AppContext = reactExports.createContext(void 0);
 const generateUserReferralCode = (user) => {
   if (user.phone) {
@@ -65717,12 +64025,16 @@ const AppProvider = ({ children }) => {
       if (saved !== null) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          const validSaved = parsed.filter((p) => !deletedIds.has(p.id));
-          return deduplicateProducts(validSaved);
+          const validSaved = parsed.filter(
+            (p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p)
+          );
+          if (validSaved.length > 0) {
+            return deduplicateProducts(validSaved);
+          }
         }
       }
       const initialClean = deduplicateProducts(
-        PRODUCTS.filter((p) => !deletedIds.has(p.id))
+        PRODUCTS.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
       );
       try {
         safeLocalStorage.setItem("oneroof_products", JSON.stringify(initialClean.slice(0, 100)));
@@ -65730,7 +64042,7 @@ const AppProvider = ({ children }) => {
       }
       return initialClean;
     } catch {
-      return deduplicateProducts(PRODUCTS);
+      return deduplicateProducts(PRODUCTS.filter(isShopbaseUploadedProduct));
     }
   });
   const MAIN_11_ORDER = [
@@ -66006,7 +64318,8 @@ const AppProvider = ({ children }) => {
   const [cart, setCart] = reactExports.useState(() => {
     try {
       const saved = safeLocalStorage.getItem("oneroof_cart");
-      return saved ? JSON.parse(saved) : [];
+      const parsed = saved ? JSON.parse(saved) : [];
+      return Array.isArray(parsed) ? parsed.filter((item) => isShopbaseUploadedProduct(item == null ? void 0 : item.product)) : [];
     } catch {
       return [];
     }
@@ -66014,7 +64327,10 @@ const AppProvider = ({ children }) => {
   const [wishlist, setWishlist] = reactExports.useState(() => {
     try {
       const saved = safeLocalStorage.getItem("oneroof_wishlist");
-      return saved ? JSON.parse(saved) : [];
+      const parsed = saved ? JSON.parse(saved) : [];
+      return Array.isArray(parsed) ? parsed.filter(
+        (id) => typeof id === "string" && !/^prod-\d+$/i.test(id) && !/^sbp-katua-/i.test(id)
+      ) : [];
     } catch {
       return [];
     }
@@ -66140,12 +64456,12 @@ const AppProvider = ({ children }) => {
       idbGet("oneroof_cached_orders")
     ]).then(([cachedProducts, cachedCategories, cachedSlides, cachedSettings, cachedOrders]) => {
       if (!isMounted) return;
-      const CATALOG_SYNC_VERSION = "bb_shopbase_full_v3_13768";
+      const CATALOG_SYNC_VERSION = "bb_shopbase_only_v4_13716";
       const savedCatalogVer = safeLocalStorage.getItem("oneroof_catalog_version");
       if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length >= 13700 && savedCatalogVer === CATALOG_SYNC_VERSION) {
         const deletedIds = getDeletedProductIds();
         const cleanCached = deduplicateProducts(
-          cachedProducts.filter((p) => !deletedIds.has(p.id))
+          cachedProducts.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
         );
         setProducts(cleanCached);
         setIsProductsLoading(false);
@@ -66158,19 +64474,27 @@ const AppProvider = ({ children }) => {
           if (Array.isArray(localProducts) && localProducts.length > 0) {
             const deletedIds = getDeletedProductIds();
             const clean = deduplicateProducts(
-              localProducts.filter((p) => !deletedIds.has(p.id))
+              localProducts.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
             );
             setProducts(clean);
             idbSet("oneroof_cached_products", clean).catch(() => {
             });
             safeLocalStorage.setItem("oneroof_catalog_version", CATALOG_SYNC_VERSION);
+            try {
+              safeLocalStorage.setItem("oneroof_products", JSON.stringify(clean.slice(0, 100)));
+            } catch (_) {
+            }
             setIsProductsLoading(false);
           }
         }).catch((err) => {
           console.warn("Local products.json load notice:", err);
           if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 0) {
             const deletedIds = getDeletedProductIds();
-            setProducts(deduplicateProducts(cachedProducts.filter((p) => !deletedIds.has(p.id))));
+            setProducts(
+              deduplicateProducts(
+                cachedProducts.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
+              )
+            );
             setIsProductsLoading(false);
           }
         });
@@ -66313,9 +64637,13 @@ const AppProvider = ({ children }) => {
           fetchProductsFromSupabase((batchProducts) => {
             if (isMounted && batchProducts && batchProducts.length > 0) {
               setProducts((prev) => {
-                const map = new Map(prev.map((p) => [p.id, p]));
+                const map = new Map(
+                  prev.filter(isShopbaseUploadedProduct).map((p) => [p.id, p])
+                );
                 for (const p of batchProducts) {
-                  map.set(p.id, p);
+                  if (isShopbaseUploadedProduct(p)) {
+                    map.set(p.id, p);
+                  }
                 }
                 return Array.from(map.values());
               });
@@ -66331,12 +64659,14 @@ const AppProvider = ({ children }) => {
           if (remoteProducts && Array.isArray(remoteProducts) && remoteProducts.length > 0) {
             const deletedIds = getDeletedProductIds();
             const cleanRemote = deduplicateProducts(
-              remoteProducts.filter((p) => !deletedIds.has(p.id))
+              remoteProducts.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
             );
             setProducts((prev) => {
               const mergedMap = /* @__PURE__ */ new Map();
               for (const localP of prev) {
-                if (!deletedIds.has(localP.id)) mergedMap.set(localP.id, localP);
+                if (!deletedIds.has(localP.id) && isShopbaseUploadedProduct(localP)) {
+                  mergedMap.set(localP.id, localP);
+                }
               }
               for (const remoteP of cleanRemote) {
                 mergedMap.set(remoteP.id, remoteP);
@@ -66350,7 +64680,7 @@ const AppProvider = ({ children }) => {
               }
               return merged;
             });
-            const ghostIds = remoteProducts.filter((p) => deletedIds.has(p.id)).map((p) => p.id);
+            const ghostIds = remoteProducts.filter((p) => deletedIds.has(p.id) || !isShopbaseUploadedProduct(p)).map((p) => p.id);
             if (ghostIds.length > 0) {
               deleteMultipleProductsFromSupabase(ghostIds).catch(() => {
               });
@@ -75588,7 +73918,6 @@ const CheckoutPage = () => {
     (defaultSavedAddress == null ? void 0 : defaultSavedAddress.phone) || (currentUser == null ? void 0 : currentUser.phone) || ""
   );
   const [trxId, setTrxId] = reactExports.useState("");
-  const [showAddMoneyPanel, setShowAddMoneyPanel] = reactExports.useState(false);
   const [isAddingMoney, setIsAddingMoney] = reactExports.useState(false);
   const [copiedKey, setCopiedKey] = reactExports.useState(null);
   const [isSubmitting, setIsSubmitting] = reactExports.useState(false);
@@ -75775,7 +74104,6 @@ const CheckoutPage = () => {
       );
       if (res.success) {
         setTrxId("");
-        setShowAddMoneyPanel(false);
       }
     } finally {
       setIsAddingMoney(false);
@@ -75791,16 +74119,15 @@ const CheckoutPage = () => {
     if (paymentMethod === "wallet") {
       if (!currentUser) {
         addToast(
-          language === "bn" ? "ওয়ালেট ব্যবহার করতে অনুগ্রহ করে প্রথমে লগইন করুন" : "Please login to pay using your wallet",
+          language === "bn" ? "ওয়ালেট ব্যবহার করতে লগইন করুন" : "Please login to use wallet",
           "error"
         );
         setIsAuthModalOpen(true);
         return;
       }
       if (!hasSufficientWalletBalance) {
-        setShowAddMoneyPanel(true);
         addToast(
-          language === "bn" ? `ওয়ালেটে পর্যাপ্ত টাকা নেই। আরও ${formatPrice2(walletShortfall)} যোগ করুন বা ক্যাশ অন ডেলিভারি বেছে নিন।` : `Insufficient wallet balance. Please add ${formatPrice2(walletShortfall)} or select Cash on Delivery.`,
+          language === "bn" ? `আরও ${formatPrice2(walletShortfall)} ওয়ালেটে যোগ করুন` : `Please add ${formatPrice2(walletShortfall)} to wallet`,
           "error"
         );
         return;
@@ -76149,32 +74476,27 @@ const CheckoutPage = () => {
                 }
               )
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-sm sm:text-base font-bold text-slate-900", children: language === "bn" ? "পেমেন্ট মাধ্যম নির্বাচন করুন" : "Select Payment Method" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-500 mt-0.5", children: language === "bn" ? "ক্যাশ অন ডেলিভারি অথবা আপনার একাউন্ট ওয়ালেট ব্যালেন্স দিয়ে পেমেন্ট সম্পন্ন করুন" : "Complete your order using Cash on Delivery or your Wallet balance" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs space-y-3.5", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-sm sm:text-base font-bold text-slate-900", children: language === "bn" ? "পেমেন্ট মাধ্যম" : "Payment Method" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2.5", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "button",
                   {
                     type: "button",
                     onClick: () => setPaymentMethod("cod"),
-                    className: `p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${paymentMethod === "cod" ? "border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]" : "border-slate-200 hover:border-slate-300 bg-white"}`,
+                    className: `p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${paymentMethod === "cod" ? "border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]" : "border-slate-200 hover:border-slate-300 bg-white"}`,
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "div",
                         {
-                          className: `w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${paymentMethod === "cod" ? "border-[#00873E] bg-[#00873E]" : "border-slate-300"}`,
+                          className: `w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${paymentMethod === "cod" ? "border-[#00873E] bg-[#00873E]" : "border-slate-300"}`,
                           children: paymentMethod === "cod" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1.5 h-1.5 rounded-full bg-white" })
                         }
                       ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Banknote, { className: "w-4 h-4 text-[#00873E] shrink-0" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(Banknote, { className: "w-4 h-4 text-[#00873E] shrink-0" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-bold text-slate-900", children: language === "bn" ? "ক্যাশ অন ডেলিভারি" : "Cash on Delivery" })
-                        ] }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-600 mt-1 leading-relaxed", children: language === "bn" ? "পণ্য হাতে পেয়ে ডেলিভারি ম্যানের কাছে টাকা পরিশোধ করুন" : "Pay cash when you receive the product at your doorstep" })
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-bold text-slate-900 block leading-tight", children: language === "bn" ? "ক্যাশ অন ডেলিভারি" : "Cash on Delivery" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] text-slate-500", children: language === "bn" ? "পণ্য হাতে পেয়ে টাকা দিন" : "Pay on delivery" })
                       ] })
                     ]
                   }
@@ -76184,242 +74506,145 @@ const CheckoutPage = () => {
                   {
                     type: "button",
                     onClick: () => setPaymentMethod("wallet"),
-                    className: `p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${paymentMethod === "wallet" ? "border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]" : "border-slate-200 hover:border-slate-300 bg-white"}`,
+                    className: `p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${paymentMethod === "wallet" ? "border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]" : "border-slate-200 hover:border-slate-300 bg-white"}`,
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         "div",
                         {
-                          className: `w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${paymentMethod === "wallet" ? "border-[#00873E] bg-[#00873E]" : "border-slate-300"}`,
+                          className: `w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${paymentMethod === "wallet" ? "border-[#00873E] bg-[#00873E]" : "border-slate-300"}`,
                           children: paymentMethod === "wallet" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1.5 h-1.5 rounded-full bg-white" })
                         }
                       ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Wallet, { className: "w-4 h-4 text-[#00873E] shrink-0" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
                         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(Wallet, { className: "w-4 h-4 text-[#00873E] shrink-0" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-bold text-slate-900", children: language === "bn" ? "ওয়ালেট পেমেন্ট" : "Wallet Balance" })
-                          ] }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-bold text-slate-900 leading-tight", children: language === "bn" ? "ওয়ালেট পেমেন্ট" : "Wallet" }),
                           currentUser && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-extrabold text-[#00873E] tabular-nums", children: formatPrice2(currentWalletBalance) })
                         ] }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-600 mt-1 leading-relaxed", children: currentUser ? language === "bn" ? "ওয়ালেটের ব্যালেন্স দিয়ে পেমেন্ট সম্পন্ন করুন · প্রয়োজনে টাকা অ্যাড করুন" : "Pay instantly from wallet · Add money if balance is low" : language === "bn" ? "ওয়ালেট পেমেন্টের জন্য একাউন্টে লগইন করুন" : "Sign in to pay from wallet or add funds" })
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] text-slate-500", children: currentUser ? language === "bn" ? "ওয়ালেট ব্যালেন্স" : "Wallet balance" : language === "bn" ? "লগইন প্রয়োজন" : "Login required" })
                       ] })
                     ]
                   }
                 )
               ] }),
-              paymentMethod === "cod" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/80 flex items-start gap-3 text-xs text-slate-700", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Truck, { className: "w-4 h-4 text-[#00873E] shrink-0 mt-0.5" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-slate-900", children: language === "bn" ? `ক্যাশ অন ডেলিভারি নির্বাচিত (${formatPrice2(calculatedTotal)})` : `Cash on Delivery Selected (${formatPrice2(calculatedTotal)})` }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-500", children: language === "bn" ? 'কোনো অগ্রিম পেমেন্টের প্রয়োজন নেই। সরাসরি "অর্ডার কনফার্ম করুন" বাটনে ক্লিক করুন।' : "No advance payment required. Click Confirm Order to complete." })
-                ] })
-              ] }),
-              paymentMethod === "wallet" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: !currentUser ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 rounded-xl bg-amber-50 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-0.5", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-bold text-slate-900", children: language === "bn" ? "ওয়ালেট ব্যবহারের জন্য লগইন প্রয়োজন" : "Login required for Wallet Payment" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-600", children: language === "bn" ? "লগইন করলে আপনার ওয়ালেট ব্যালেন্স দেখতে পারবেন ও টাকা অ্যাড করতে পারবেন।" : "Sign in to check your balance or add money to your wallet." })
-                ] }),
+              paymentMethod === "wallet" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: !currentUser ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between gap-3 text-xs", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-slate-800", children: language === "bn" ? "ওয়ালেট ব্যবহার করতে লগইন করুন" : "Login to use wallet" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "button",
                   {
                     type: "button",
                     onClick: () => setIsAuthModalOpen(true),
-                    className: "min-h-[40px] px-4 py-2 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl font-bold text-xs cursor-pointer shrink-0 whitespace-nowrap",
+                    className: "min-h-[36px] px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl font-bold text-xs cursor-pointer shrink-0",
                     children: t.login
                   }
                 )
-              ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  "div",
-                  {
-                    className: `p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${hasSufficientWalletBalance ? "bg-emerald-50/70 border-emerald-200" : "bg-amber-50/80 border-amber-200"}`,
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 text-xs", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-slate-600", children: language === "bn" ? "আপনার ওয়ালেট ব্যালেন্স:" : "Your Wallet Balance:" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-sm font-black text-slate-900 tabular-nums", children: formatPrice2(currentWalletBalance) })
-                        ] }),
-                        hasSufficientWalletBalance ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[11px] text-[#00873E] font-semibold tabular-nums", children: language === "bn" ? `পেমেন্টের পর অবশিষ্ট থাকবে: ${formatPrice2(
-                          Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
-                        )}` : `Remaining balance after order: ${formatPrice2(
-                          Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
-                        )}` }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[11px] text-amber-800 font-semibold tabular-nums", children: language === "bn" ? `পর্যাপ্ত টাকা নেই — এই অর্ডারের জন্য আরও ${formatPrice2(
-                          walletShortfall
-                        )} প্রয়োজন` : `Insufficient balance — need ${formatPrice2(walletShortfall)} more` })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "button",
-                        {
-                          type: "button",
-                          onClick: () => setShowAddMoneyPanel((prev) => !prev),
-                          className: "min-h-[40px] px-3.5 py-2 bg-[#062919] hover:bg-slate-900 text-white rounded-xl text-xs font-bold inline-flex items-center justify-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3.5 h-3.5" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: showAddMoneyPanel ? language === "bn" ? "অ্যাড মানি বন্ধ করুন" : "Hide Add Money" : language === "bn" ? "ওয়ালেটে টাকা যোগ করুন" : "Add Money to Wallet" })
-                          ]
-                        }
-                      )
-                    ]
-                  }
-                ),
-                (!hasSufficientWalletBalance || showAddMoneyPanel) && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 sm:p-5 rounded-xl border border-slate-200 bg-slate-50/70 space-y-4", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap items-center justify-between gap-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xs sm:text-sm font-bold text-slate-900", children: language === "bn" ? "ওয়ালেটে টাকা অ্যাড করুন (আগের পেমেন্ট অপশন)" : "Add Money to Wallet (Send Money)" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] text-slate-500 mt-0.5", children: language === "bn" ? "নগদ, বিকাশ বা উপায় পার্সোনাল নম্বরে সেন্ড মানি করে সাথে সাথে ব্যালেন্স যোগ করুন" : "Send Money via Nagad, bKash, or Upay Personal to add balance instantly" })
-                  ] }) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-semibold text-slate-800 mb-1", children: language === "bn" ? "অ্যাড করার পরিমাণ (টাকা)" : "Amount to Add (BDT)" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "input",
-                        {
-                          type: "number",
-                          min: "1",
-                          value: depositAmount,
-                          onChange: (e) => setDepositAmount(e.target.value),
-                          placeholder: String(Math.ceil(walletShortfall || calculatedTotal)),
-                          className: "w-full sm:w-44 h-10 bg-white border border-slate-300 rounded-xl px-3.5 text-sm font-mono font-bold text-slate-900 outline-none focus:border-[#00873E]"
-                        }
-                      ),
-                      [
-                        ...walletShortfall > 0 ? [Math.ceil(walletShortfall)] : [],
-                        500,
-                        1e3,
-                        2e3
-                      ].filter((v, idx, arr) => v > 0 && arr.indexOf(v) === idx).slice(0, 4).map((amt) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "button",
-                        {
-                          type: "button",
-                          onClick: () => setDepositAmount(String(amt)),
-                          className: `px-2.5 py-1.5 rounded-lg text-[11px] font-mono font-bold border cursor-pointer transition-colors ${depositAmount === String(amt) ? "bg-[#00873E] text-white border-[#00873E]" : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"}`,
-                          children: [
-                            "৳",
-                            amt
-                          ]
-                        },
-                        amt
-                      ))
-                    ] })
+              ] }) : hasSufficientWalletBalance ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-3.5 py-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200 flex items-center justify-between gap-2 text-xs", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-slate-700", children: [
+                  language === "bn" ? "ওয়ালেট ব্যালেন্স:" : "Balance:",
+                  " ",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "font-bold text-slate-900 tabular-nums", children: formatPrice2(currentWalletBalance) })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-[#00873E] tabular-nums", children: language === "bn" ? `অবশিষ্ট: ${formatPrice2(
+                  Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
+                )}` : `Left: ${formatPrice2(
+                  Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
+                )}` })
+              ] }) : (
+                /* Insufficient Balance -> Show Add Money (ONLY bKash, Nagad, Upay Personal Send Money 01929637253) */
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3.5 sm:p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-3", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2 text-xs", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-bold text-slate-900", children: language === "bn" ? "টাকা অ্যাড করুন" : "Add Money" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-amber-800 tabular-nums", children: language === "bn" ? `আরও ${formatPrice2(walletShortfall)} প্রয়োজন` : `Need ${formatPrice2(walletShortfall)} more` })
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 gap-2.5", children: PERSONAL_PAYMENT_ACCOUNTS.map((acc) => {
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-white border border-slate-200", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] text-slate-500 block leading-tight", children: language === "bn" ? "সেন্ড মানি (পার্সোনাল)" : "Send Money (Personal)" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-sm sm:text-base font-black font-mono text-slate-900 tabular-nums", children: selectedAccount.number })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "button",
+                      {
+                        type: "button",
+                        onClick: () => copyToClipboard(
+                          selectedAccount.number,
+                          language === "bn" ? "নম্বর" : "Number",
+                          "checkout-send-money"
+                        ),
+                        className: `min-h-[34px] px-3 rounded-lg text-xs font-bold inline-flex items-center gap-1 cursor-pointer transition-colors ${selectedAccount.buttonClass}`,
+                        children: copiedKey === "checkout-send-money" ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "w-3.5 h-3.5" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "কপি" : "Copied" })
+                        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { className: "w-3.5 h-3.5" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "কপি" : "Copy" })
+                        ] })
+                      }
+                    )
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-2", children: PERSONAL_PAYMENT_ACCOUNTS.map((acc) => {
                     const isSelected = depositMethod === acc.id;
                     return /* @__PURE__ */ jsxRuntimeExports.jsxs(
                       "button",
                       {
                         type: "button",
                         onClick: () => setDepositMethod(acc.id),
-                        className: `p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${isSelected ? acc.activeCardClass : "border-slate-200 hover:border-slate-300 bg-white"}`,
+                        className: `py-2 px-2 rounded-xl border text-center transition-all cursor-pointer ${isSelected ? acc.activeCardClass : "border-slate-200 hover:border-slate-300 bg-white"}`,
                         children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            "div",
-                            {
-                              className: `w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${isSelected ? "border-slate-900 bg-slate-900" : "border-slate-300"}`,
-                              children: isSelected && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1.5 h-1.5 rounded-full bg-white" })
-                            }
-                          ),
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-1", children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs sm:text-sm font-bold text-slate-900", children: language === "bn" ? acc.nameBn : acc.nameEn }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-[10px] font-bold ${acc.accentText}`, children: language === "bn" ? acc.accountTypeBn : acc.accountTypeEn })
-                            ] }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[11px] font-mono font-semibold text-slate-600 mt-0.5 tabular-nums", children: acc.number })
-                          ] })
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-bold text-slate-900 block", children: language === "bn" ? acc.nameBn : acc.nameEn }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-[10px] font-semibold ${acc.accentText}`, children: language === "bn" ? acc.actionTypeBn : acc.actionTypeEn })
                         ]
                       },
                       acc.id
                     );
                   }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-3 gap-2", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "input",
+                      {
+                        type: "number",
+                        min: "1",
+                        value: depositAmount,
+                        onChange: (e) => setDepositAmount(e.target.value),
+                        placeholder: language === "bn" ? "টাকা (৳)" : "Amount (৳)",
+                        className: "w-full h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs font-mono font-bold text-slate-900 outline-none focus:border-[#00873E]"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "input",
+                      {
+                        type: "tel",
+                        value: senderNumber,
+                        onChange: (e) => setSenderNumber(e.target.value),
+                        placeholder: language === "bn" ? "প্রেরক নম্বর" : "Sender No.",
+                        className: "w-full h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs font-mono text-slate-900 outline-none focus:border-[#00873E]"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "input",
+                      {
+                        type: "text",
+                        value: trxId,
+                        onChange: (e) => setTrxId(e.target.value.toUpperCase()),
+                        placeholder: "TrxID",
+                        className: "w-full h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs font-mono uppercase text-slate-900 outline-none focus:border-[#00873E]"
+                      }
+                    )
+                  ] }),
                   /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                    "div",
+                    "button",
                     {
-                      className: `p-4 rounded-xl border ${selectedAccount.accentBg} ${selectedAccount.accentBorder} space-y-3.5`,
+                      type: "button",
+                      disabled: isAddingMoney,
+                      onClick: handleWalletAddMoney,
+                      className: "w-full min-h-[40px] px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50",
                       children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200/70", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(
-                              "span",
-                              {
-                                className: `text-[11px] font-bold block ${selectedAccount.accentText}`,
-                                children: language === "bn" ? `${selectedAccount.nameBn} পার্সোনাল অ্যাকাউন্ট (${selectedAccount.actionTypeBn})` : `${selectedAccount.nameEn} Personal Account (${selectedAccount.actionTypeEn})`
-                              }
-                            ),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-lg font-black font-mono text-slate-900 tabular-nums mt-0.5", children: selectedAccount.formattedNumber })
-                          ] }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            "button",
-                            {
-                              type: "button",
-                              onClick: () => copyToClipboard(
-                                selectedAccount.number,
-                                `${selectedAccount.nameBn} নম্বর`,
-                                `checkout-${selectedAccount.id}`
-                              ),
-                              className: `min-h-[36px] px-3 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 cursor-pointer transition-colors ${selectedAccount.buttonClass}`,
-                              children: copiedKey === `checkout-${selectedAccount.id}` ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                                /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "w-3.5 h-3.5" }),
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "কপি হয়েছে" : "Copied" })
-                              ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                                /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { className: "w-3.5 h-3.5" }),
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "নম্বর কপি করুন" : "Copy Number" })
-                              ] })
-                            }
-                          )
-                        ] }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-xs text-slate-700 bg-white/85 rounded-xl p-3 border border-slate-200/70 flex items-start gap-2", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            Smartphone,
-                            {
-                              className: `w-4 h-4 shrink-0 mt-0.5 ${selectedAccount.accentText}`
-                            }
-                          ),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? `আপনার ${selectedAccount.nameBn} অ্যাপ থেকে উপরের নম্বরে ৳${depositAmount || 0} সেন্ড মানি করে নিচে প্রেরক নম্বর ও TrxID দিন।` : `Send Money ৳${depositAmount || 0} via ${selectedAccount.nameEn} and enter Sender Number + TrxID below.` })
-                        ] }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-3", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-semibold text-slate-800 mb-1", children: language === "bn" ? `যে ${selectedAccount.nameBn} নম্বর থেকে পাঠিয়েছেন` : `Sender ${selectedAccount.nameEn} Number` }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(
-                              "input",
-                              {
-                                type: "tel",
-                                value: senderNumber,
-                                onChange: (e) => setSenderNumber(e.target.value),
-                                placeholder: "01XXXXXXXXX",
-                                className: "w-full h-10 bg-white border border-slate-300 rounded-xl px-3.5 text-xs font-mono text-slate-900 outline-none focus:border-[#00873E]"
-                              }
-                            )
-                          ] }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-semibold text-slate-800 mb-1", children: language === "bn" ? "ট্রানজেকশন আইডি (TrxID)" : "Transaction ID (TrxID)" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(
-                              "input",
-                              {
-                                type: "text",
-                                value: trxId,
-                                onChange: (e) => setTrxId(e.target.value.toUpperCase()),
-                                placeholder: "যেমন: 9H87G6F5",
-                                className: "w-full h-10 bg-white border border-slate-300 rounded-xl px-3.5 text-xs font-mono uppercase text-slate-900 outline-none focus:border-[#00873E]"
-                              }
-                            )
-                          ] })
-                        ] }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                          "button",
-                          {
-                            type: "button",
-                            disabled: isAddingMoney,
-                            onClick: handleWalletAddMoney,
-                            className: "w-full min-h-[42px] px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:opacity-50",
-                            children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-4 h-4" }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: isAddingMoney ? language === "bn" ? "ব্যালেন্স যোগ হচ্ছে..." : "Adding Money..." : language === "bn" ? `ওয়ালেটে টাকা যোগ করুন • ৳${depositAmount || "0"}` : `Add ৳${depositAmount || "0"} to Wallet` })
-                            ]
-                          }
-                        )
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-3.5 h-3.5" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: isAddingMoney ? language === "bn" ? "যোগ হচ্ছে..." : "Adding..." : language === "bn" ? `টাকা অ্যাড করুন · ৳${depositAmount || "0"}` : `Add Money · ৳${depositAmount || "0"}` })
                       ]
                     }
                   )
                 ] })
-              ] }) })
+              ) })
             ] })
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "lg:col-span-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4 lg:sticky lg:top-24", children: [

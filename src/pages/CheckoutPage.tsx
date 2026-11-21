@@ -11,7 +11,6 @@ import {
   Copy,
   Check,
   Edit3,
-  Smartphone,
   Wallet,
   Banknote,
   Plus,
@@ -136,7 +135,6 @@ export const CheckoutPage: React.FC = () => {
     defaultSavedAddress?.phone || currentUser?.phone || ''
   );
   const [trxId, setTrxId] = useState<string>('');
-  const [showAddMoneyPanel, setShowAddMoneyPanel] = useState<boolean>(false);
   const [isAddingMoney, setIsAddingMoney] = useState<boolean>(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -344,7 +342,6 @@ export const CheckoutPage: React.FC = () => {
       );
       if (res.success) {
         setTrxId('');
-        setShowAddMoneyPanel(false);
       }
     } finally {
       setIsAddingMoney(false);
@@ -362,20 +359,17 @@ export const CheckoutPage: React.FC = () => {
     if (paymentMethod === 'wallet') {
       if (!currentUser) {
         addToast(
-          language === 'bn'
-            ? 'ওয়ালেট ব্যবহার করতে অনুগ্রহ করে প্রথমে লগইন করুন'
-            : 'Please login to pay using your wallet',
+          language === 'bn' ? 'ওয়ালেট ব্যবহার করতে লগইন করুন' : 'Please login to use wallet',
           'error'
         );
         setIsAuthModalOpen(true);
         return;
       }
       if (!hasSufficientWalletBalance) {
-        setShowAddMoneyPanel(true);
         addToast(
           language === 'bn'
-            ? `ওয়ালেটে পর্যাপ্ত টাকা নেই। আরও ${formatPrice(walletShortfall)} যোগ করুন বা ক্যাশ অন ডেলিভারি বেছে নিন।`
-            : `Insufficient wallet balance. Please add ${formatPrice(walletShortfall)} or select Cash on Delivery.`,
+            ? `আরও ${formatPrice(walletShortfall)} ওয়ালেটে যোগ করুন`
+            : `Please add ${formatPrice(walletShortfall)} to wallet`,
           'error'
         );
         return;
@@ -781,410 +775,237 @@ export const CheckoutPage: React.FC = () => {
                 </button>
               </div>
 
-              {/* Step 2: Payment Method Card (ONLY Cash on Delivery & Wallet Payment; Previous MFS options inside Wallet Add Money) */}
-              <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-xs space-y-4">
-                <div>
-                  <h2 className="text-sm sm:text-base font-bold text-slate-900">
-                    {language === 'bn' ? 'পেমেন্ট মাধ্যম নির্বাচন করুন' : 'Select Payment Method'}
-                  </h2>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
-                    {language === 'bn'
-                      ? 'ক্যাশ অন ডেলিভারি অথবা আপনার একাউন্ট ওয়ালেট ব্যালেন্স দিয়ে পেমেন্ট সম্পন্ন করুন'
-                      : 'Complete your order using Cash on Delivery or your Wallet balance'}
-                  </p>
-                </div>
+              {/* Step 2: Compact Payment Method Card */}
+              <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs space-y-3.5">
+                <h2 className="text-sm sm:text-base font-bold text-slate-900">
+                  {language === 'bn' ? 'পেমেন্ট মাধ্যম' : 'Payment Method'}
+                </h2>
 
-                {/* Primary Payment Selector: Cash on Delivery OR Wallet */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {/* Option 1: Cash on Delivery */}
+                {/* Compact 2-Option Selector: COD & Wallet */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('cod')}
-                    className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${
+                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
                       paymentMethod === 'cod'
                         ? 'border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]'
                         : 'border-slate-200 hover:border-slate-300 bg-white'
                     }`}
                   >
                     <div
-                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${
+                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
                         paymentMethod === 'cod' ? 'border-[#00873E] bg-[#00873E]' : 'border-slate-300'
                       }`}
                     >
                       {paymentMethod === 'cod' && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
                     </div>
+                    <Banknote className="w-4 h-4 text-[#00873E] shrink-0" />
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <Banknote className="w-4 h-4 text-[#00873E] shrink-0" />
-                        <span className="text-sm font-bold text-slate-900">
-                          {language === 'bn' ? 'ক্যাশ অন ডেলিভারি' : 'Cash on Delivery'}
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">
-                        {language === 'bn'
-                          ? 'পণ্য হাতে পেয়ে ডেলিভারি ম্যানের কাছে টাকা পরিশোধ করুন'
-                          : 'Pay cash when you receive the product at your doorstep'}
-                      </p>
+                      <span className="text-sm font-bold text-slate-900 block leading-tight">
+                        {language === 'bn' ? 'ক্যাশ অন ডেলিভারি' : 'Cash on Delivery'}
+                      </span>
+                      <span className="text-[11px] text-slate-500">
+                        {language === 'bn' ? 'পণ্য হাতে পেয়ে টাকা দিন' : 'Pay on delivery'}
+                      </span>
                     </div>
                   </button>
 
-                  {/* Option 2: Wallet Balance Payment */}
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('wallet')}
-                    className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${
+                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
                       paymentMethod === 'wallet'
                         ? 'border-[#00873E] bg-emerald-50/70 ring-1 ring-[#00873E]'
                         : 'border-slate-200 hover:border-slate-300 bg-white'
                     }`}
                   >
                     <div
-                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${
+                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
                         paymentMethod === 'wallet' ? 'border-[#00873E] bg-[#00873E]' : 'border-slate-300'
                       }`}
                     >
                       {paymentMethod === 'wallet' && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
                     </div>
+                    <Wallet className="w-4 h-4 text-[#00873E] shrink-0" />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <Wallet className="w-4 h-4 text-[#00873E] shrink-0" />
-                          <span className="text-sm font-bold text-slate-900">
-                            {language === 'bn' ? 'ওয়ালেট পেমেন্ট' : 'Wallet Balance'}
-                          </span>
-                        </div>
+                        <span className="text-sm font-bold text-slate-900 leading-tight">
+                          {language === 'bn' ? 'ওয়ালেট পেমেন্ট' : 'Wallet'}
+                        </span>
                         {currentUser && (
                           <span className="text-xs font-extrabold text-[#00873E] tabular-nums">
                             {formatPrice(currentWalletBalance)}
                           </span>
                         )}
                       </div>
-                      <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">
+                      <span className="text-[11px] text-slate-500">
                         {currentUser
                           ? language === 'bn'
-                            ? 'ওয়ালেটের ব্যালেন্স দিয়ে পেমেন্ট সম্পন্ন করুন · প্রয়োজনে টাকা অ্যাড করুন'
-                            : 'Pay instantly from wallet · Add money if balance is low'
+                            ? 'ওয়ালেট ব্যালেন্স'
+                            : 'Wallet balance'
                           : language === 'bn'
-                          ? 'ওয়ালেট পেমেন্টের জন্য একাউন্টে লগইন করুন'
-                          : 'Sign in to pay from wallet or add funds'}
-                      </p>
+                          ? 'লগইন প্রয়োজন'
+                          : 'Login required'}
+                      </span>
                     </div>
                   </button>
                 </div>
 
-                {/* Details for COD */}
-                {paymentMethod === 'cod' && (
-                  <div className="p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/80 flex items-start gap-3 text-xs text-slate-700">
-                    <Truck className="w-4 h-4 text-[#00873E] shrink-0 mt-0.5" />
-                    <div className="space-y-1">
-                      <p className="font-semibold text-slate-900">
-                        {language === 'bn'
-                          ? `ক্যাশ অন ডেলিভারি নির্বাচিত (${formatPrice(calculatedTotal)})`
-                          : `Cash on Delivery Selected (${formatPrice(calculatedTotal)})`}
-                      </p>
-                      <p className="text-[11px] text-slate-500">
-                        {language === 'bn'
-                          ? 'কোনো অগ্রিম পেমেন্টের প্রয়োজন নেই। সরাসরি "অর্ডার কনফার্ম করুন" বাটনে ক্লিক করুন।'
-                          : 'No advance payment required. Click Confirm Order to complete.'}
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Details for Wallet Payment & Add Money (Previous MFS Options) */}
+                {/* Wallet Section (Minimal; Add Money shows ONLY if balance < order total) */}
                 {paymentMethod === 'wallet' && (
-                  <div className="space-y-4">
+                  <div>
                     {!currentUser ? (
-                      <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-                        <div className="space-y-0.5">
-                          <div className="font-bold text-slate-900">
-                            {language === 'bn'
-                              ? 'ওয়ালেট ব্যবহারের জন্য লগইন প্রয়োজন'
-                              : 'Login required for Wallet Payment'}
-                          </div>
-                          <p className="text-[11px] text-slate-600">
-                            {language === 'bn'
-                              ? 'লগইন করলে আপনার ওয়ালেট ব্যালেন্স দেখতে পারবেন ও টাকা অ্যাড করতে পারবেন।'
-                              : 'Sign in to check your balance or add money to your wallet.'}
-                          </p>
-                        </div>
+                      <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between gap-3 text-xs">
+                        <span className="font-semibold text-slate-800">
+                          {language === 'bn' ? 'ওয়ালেট ব্যবহার করতে লগইন করুন' : 'Login to use wallet'}
+                        </span>
                         <button
                           type="button"
                           onClick={() => setIsAuthModalOpen(true)}
-                          className="min-h-[40px] px-4 py-2 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl font-bold text-xs cursor-pointer shrink-0 whitespace-nowrap"
+                          className="min-h-[36px] px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl font-bold text-xs cursor-pointer shrink-0"
                         >
                           {t.login}
                         </button>
                       </div>
+                    ) : hasSufficientWalletBalance ? (
+                      <div className="px-3.5 py-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200 flex items-center justify-between gap-2 text-xs">
+                        <span className="text-slate-700">
+                          {language === 'bn' ? 'ওয়ালেট ব্যালেন্স:' : 'Balance:'}{' '}
+                          <strong className="font-bold text-slate-900 tabular-nums">
+                            {formatPrice(currentWalletBalance)}
+                          </strong>
+                        </span>
+                        <span className="font-semibold text-[#00873E] tabular-nums">
+                          {language === 'bn'
+                            ? `অবশিষ্ট: ${formatPrice(
+                                Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
+                              )}`
+                            : `Left: ${formatPrice(
+                                Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
+                              )}`}
+                        </span>
+                      </div>
                     ) : (
-                      <>
-                        {/* Balance Status Strip */}
-                        <div
-                          className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
-                            hasSufficientWalletBalance
-                              ? 'bg-emerald-50/70 border-emerald-200'
-                              : 'bg-amber-50/80 border-amber-200'
-                          }`}
-                        >
-                          <div className="space-y-1 text-xs">
-                            <div className="flex items-center gap-2">
-                              <span className="text-slate-600">
-                                {language === 'bn' ? 'আপনার ওয়ালেট ব্যালেন্স:' : 'Your Wallet Balance:'}
-                              </span>
-                              <strong className="text-sm font-black text-slate-900 tabular-nums">
-                                {formatPrice(currentWalletBalance)}
-                              </strong>
-                            </div>
-                            {hasSufficientWalletBalance ? (
-                              <div className="text-[11px] text-[#00873E] font-semibold tabular-nums">
-                                {language === 'bn'
-                                  ? `পেমেন্টের পর অবশিষ্ট থাকবে: ${formatPrice(
-                                      Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
-                                    )}`
-                                  : `Remaining balance after order: ${formatPrice(
-                                      Math.round((currentWalletBalance - calculatedTotal) * 100) / 100
-                                    )}`}
-                              </div>
-                            ) : (
-                              <div className="text-[11px] text-amber-800 font-semibold tabular-nums">
-                                {language === 'bn'
-                                  ? `পর্যাপ্ত টাকা নেই — এই অর্ডারের জন্য আরও ${formatPrice(
-                                      walletShortfall
-                                    )} প্রয়োজন`
-                                  : `Insufficient balance — need ${formatPrice(walletShortfall)} more`}
-                              </div>
-                            )}
-                          </div>
+                      /* Insufficient Balance -> Show Add Money (ONLY bKash, Nagad, Upay Personal Send Money 01929637253) */
+                      <div className="p-3.5 sm:p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                          <span className="font-bold text-slate-900">
+                            {language === 'bn' ? 'টাকা অ্যাড করুন' : 'Add Money'}
+                          </span>
+                          <span className="font-semibold text-amber-800 tabular-nums">
+                            {language === 'bn'
+                              ? `আরও ${formatPrice(walletShortfall)} প্রয়োজন`
+                              : `Need ${formatPrice(walletShortfall)} more`}
+                          </span>
+                        </div>
 
+                        {/* Shared Personal Send Money Number Bar */}
+                        <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-white border border-slate-200">
+                          <div className="min-w-0">
+                            <span className="text-[11px] text-slate-500 block leading-tight">
+                              {language === 'bn'
+                                ? 'সেন্ড মানি (পার্সোনাল)'
+                                : 'Send Money (Personal)'}
+                            </span>
+                            <strong className="text-sm sm:text-base font-black font-mono text-slate-900 tabular-nums">
+                              {selectedAccount.number}
+                            </strong>
+                          </div>
                           <button
                             type="button"
-                            onClick={() => setShowAddMoneyPanel((prev) => !prev)}
-                            className="min-h-[40px] px-3.5 py-2 bg-[#062919] hover:bg-slate-900 text-white rounded-xl text-xs font-bold inline-flex items-center justify-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap"
+                            onClick={() =>
+                              copyToClipboard(
+                                selectedAccount.number,
+                                language === 'bn' ? 'নম্বর' : 'Number',
+                                'checkout-send-money'
+                              )
+                            }
+                            className={`min-h-[34px] px-3 rounded-lg text-xs font-bold inline-flex items-center gap-1 cursor-pointer transition-colors ${selectedAccount.buttonClass}`}
                           >
-                            <Plus className="w-3.5 h-3.5" />
-                            <span>
-                              {showAddMoneyPanel
-                                ? language === 'bn'
-                                  ? 'অ্যাড মানি বন্ধ করুন'
-                                  : 'Hide Add Money'
-                                : language === 'bn'
-                                ? 'ওয়ালেটে টাকা যোগ করুন'
-                                : 'Add Money to Wallet'}
-                            </span>
+                            {copiedKey === 'checkout-send-money' ? (
+                              <>
+                                <Check className="w-3.5 h-3.5" />
+                                <span>{language === 'bn' ? 'কপি' : 'Copied'}</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3.5 h-3.5" />
+                                <span>{language === 'bn' ? 'কপি' : 'Copy'}</span>
+                              </>
+                            )}
                           </button>
                         </div>
 
-                        {/* Add Money Panel (Auto-shown if insufficient balance, or toggled manually) */}
-                        {(!hasSufficientWalletBalance || showAddMoneyPanel) && (
-                          <div className="p-4 sm:p-5 rounded-xl border border-slate-200 bg-slate-50/70 space-y-4">
-                            <div className="flex flex-wrap items-center justify-between gap-2">
-                              <div>
-                                <h3 className="text-xs sm:text-sm font-bold text-slate-900">
-                                  {language === 'bn'
-                                    ? 'ওয়ালেটে টাকা অ্যাড করুন (আগের পেমেন্ট অপশন)'
-                                    : 'Add Money to Wallet (Send Money)'}
-                                </h3>
-                                <p className="text-[11px] text-slate-500 mt-0.5">
-                                  {language === 'bn'
-                                    ? 'নগদ, বিকাশ বা উপায় পার্সোনাল নম্বরে সেন্ড মানি করে সাথে সাথে ব্যালেন্স যোগ করুন'
-                                    : 'Send Money via Nagad, bKash, or Upay Personal to add balance instantly'}
-                                </p>
-                              </div>
-                            </div>
-
-                            {/* Deposit Amount Input */}
-                            <div>
-                              <label className="block text-xs font-semibold text-slate-800 mb-1">
-                                {language === 'bn' ? 'অ্যাড করার পরিমাণ (টাকা)' : 'Amount to Add (BDT)'}
-                              </label>
-                              <div className="flex flex-wrap items-center gap-2">
-                                <input
-                                  type="number"
-                                  min="1"
-                                  value={depositAmount}
-                                  onChange={(e) => setDepositAmount(e.target.value)}
-                                  placeholder={String(Math.ceil(walletShortfall || calculatedTotal))}
-                                  className="w-full sm:w-44 h-10 bg-white border border-slate-300 rounded-xl px-3.5 text-sm font-mono font-bold text-slate-900 outline-none focus:border-[#00873E]"
-                                />
-                                {[
-                                  ...(walletShortfall > 0 ? [Math.ceil(walletShortfall)] : []),
-                                  500,
-                                  1000,
-                                  2000,
-                                ]
-                                  .filter((v, idx, arr) => v > 0 && arr.indexOf(v) === idx)
-                                  .slice(0, 4)
-                                  .map((amt) => (
-                                    <button
-                                      key={amt}
-                                      type="button"
-                                      onClick={() => setDepositAmount(String(amt))}
-                                      className={`px-2.5 py-1.5 rounded-lg text-[11px] font-mono font-bold border cursor-pointer transition-colors ${
-                                        depositAmount === String(amt)
-                                          ? 'bg-[#00873E] text-white border-[#00873E]'
-                                          : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
-                                      }`}
-                                    >
-                                      ৳{amt}
-                                    </button>
-                                  ))}
-                              </div>
-                            </div>
-
-                            {/* Previous 3 Personal Payment Options: Nagad, bKash, Upay */}
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                              {PERSONAL_PAYMENT_ACCOUNTS.map((acc) => {
-                                const isSelected = depositMethod === acc.id;
-                                return (
-                                  <button
-                                    key={acc.id}
-                                    type="button"
-                                    onClick={() => setDepositMethod(acc.id)}
-                                    className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
-                                      isSelected
-                                        ? acc.activeCardClass
-                                        : 'border-slate-200 hover:border-slate-300 bg-white'
-                                    }`}
-                                  >
-                                    <div
-                                      className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                                        isSelected
-                                          ? 'border-slate-900 bg-slate-900'
-                                          : 'border-slate-300'
-                                      }`}
-                                    >
-                                      {isSelected && (
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                                      )}
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                      <div className="flex items-center justify-between gap-1">
-                                        <span className="text-xs sm:text-sm font-bold text-slate-900">
-                                          {language === 'bn' ? acc.nameBn : acc.nameEn}
-                                        </span>
-                                        <span className={`text-[10px] font-bold ${acc.accentText}`}>
-                                          {language === 'bn' ? acc.accountTypeBn : acc.accountTypeEn}
-                                        </span>
-                                      </div>
-                                      <div className="text-[11px] font-mono font-semibold text-slate-600 mt-0.5 tabular-nums">
-                                        {acc.number}
-                                      </div>
-                                    </div>
-                                  </button>
-                                );
-                              })}
-                            </div>
-
-                            {/* Active Account Send Money Box */}
-                            <div
-                              className={`p-4 rounded-xl border ${selectedAccount.accentBg} ${selectedAccount.accentBorder} space-y-3.5`}
-                            >
-                              <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200/70">
-                                <div>
-                                  <span
-                                    className={`text-[11px] font-bold block ${selectedAccount.accentText}`}
-                                  >
-                                    {language === 'bn'
-                                      ? `${selectedAccount.nameBn} পার্সোনাল অ্যাকাউন্ট (${selectedAccount.actionTypeBn})`
-                                      : `${selectedAccount.nameEn} Personal Account (${selectedAccount.actionTypeEn})`}
-                                  </span>
-                                  <div className="text-lg font-black font-mono text-slate-900 tabular-nums mt-0.5">
-                                    {selectedAccount.formattedNumber}
-                                  </div>
-                                </div>
-
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    copyToClipboard(
-                                      selectedAccount.number,
-                                      `${selectedAccount.nameBn} নম্বর`,
-                                      `checkout-${selectedAccount.id}`
-                                    )
-                                  }
-                                  className={`min-h-[36px] px-3 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 cursor-pointer transition-colors ${selectedAccount.buttonClass}`}
-                                >
-                                  {copiedKey === `checkout-${selectedAccount.id}` ? (
-                                    <>
-                                      <Check className="w-3.5 h-3.5" />
-                                      <span>{language === 'bn' ? 'কপি হয়েছে' : 'Copied'}</span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <Copy className="w-3.5 h-3.5" />
-                                      <span>{language === 'bn' ? 'নম্বর কপি করুন' : 'Copy Number'}</span>
-                                    </>
-                                  )}
-                                </button>
-                              </div>
-
-                              <div className="text-xs text-slate-700 bg-white/85 rounded-xl p-3 border border-slate-200/70 flex items-start gap-2">
-                                <Smartphone
-                                  className={`w-4 h-4 shrink-0 mt-0.5 ${selectedAccount.accentText}`}
-                                />
-                                <span>
-                                  {language === 'bn'
-                                    ? `আপনার ${selectedAccount.nameBn} অ্যাপ থেকে উপরের নম্বরে ৳${
-                                        depositAmount || 0
-                                      } সেন্ড মানি করে নিচে প্রেরক নম্বর ও TrxID দিন।`
-                                    : `Send Money ৳${depositAmount || 0} via ${
-                                        selectedAccount.nameEn
-                                      } and enter Sender Number + TrxID below.`}
-                                </span>
-                              </div>
-
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                  <label className="block text-xs font-semibold text-slate-800 mb-1">
-                                    {language === 'bn'
-                                      ? `যে ${selectedAccount.nameBn} নম্বর থেকে পাঠিয়েছেন`
-                                      : `Sender ${selectedAccount.nameEn} Number`}
-                                  </label>
-                                  <input
-                                    type="tel"
-                                    value={senderNumber}
-                                    onChange={(e) => setSenderNumber(e.target.value)}
-                                    placeholder="01XXXXXXXXX"
-                                    className="w-full h-10 bg-white border border-slate-300 rounded-xl px-3.5 text-xs font-mono text-slate-900 outline-none focus:border-[#00873E]"
-                                  />
-                                </div>
-                                <div>
-                                  <label className="block text-xs font-semibold text-slate-800 mb-1">
-                                    {language === 'bn'
-                                      ? 'ট্রানজেকশন আইডি (TrxID)'
-                                      : 'Transaction ID (TrxID)'}
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={trxId}
-                                    onChange={(e) => setTrxId(e.target.value.toUpperCase())}
-                                    placeholder="যেমন: 9H87G6F5"
-                                    className="w-full h-10 bg-white border border-slate-300 rounded-xl px-3.5 text-xs font-mono uppercase text-slate-900 outline-none focus:border-[#00873E]"
-                                  />
-                                </div>
-                              </div>
-
+                        {/* ONLY 3 Mobile Banks: Nagad, bKash, Upay */}
+                        <div className="grid grid-cols-3 gap-2">
+                          {PERSONAL_PAYMENT_ACCOUNTS.map((acc) => {
+                            const isSelected = depositMethod === acc.id;
+                            return (
                               <button
+                                key={acc.id}
                                 type="button"
-                                disabled={isAddingMoney}
-                                onClick={handleWalletAddMoney}
-                                className="w-full min-h-[42px] px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:opacity-50"
+                                onClick={() => setDepositMethod(acc.id)}
+                                className={`py-2 px-2 rounded-xl border text-center transition-all cursor-pointer ${
+                                  isSelected
+                                    ? acc.activeCardClass
+                                    : 'border-slate-200 hover:border-slate-300 bg-white'
+                                }`}
                               >
-                                <Plus className="w-4 h-4" />
-                                <span>
-                                  {isAddingMoney
-                                    ? language === 'bn'
-                                      ? 'ব্যালেন্স যোগ হচ্ছে...'
-                                      : 'Adding Money...'
-                                    : language === 'bn'
-                                    ? `ওয়ালেটে টাকা যোগ করুন • ৳${depositAmount || '0'}`
-                                    : `Add ৳${depositAmount || '0'} to Wallet`}
+                                <span className="text-xs font-bold text-slate-900 block">
+                                  {language === 'bn' ? acc.nameBn : acc.nameEn}
+                                </span>
+                                <span className={`text-[10px] font-semibold ${acc.accentText}`}>
+                                  {language === 'bn' ? acc.actionTypeBn : acc.actionTypeEn}
                                 </span>
                               </button>
-                            </div>
-                          </div>
-                        )}
-                      </>
+                            );
+                          })}
+                        </div>
+
+                        {/* Compact Inputs */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                          <input
+                            type="number"
+                            min="1"
+                            value={depositAmount}
+                            onChange={(e) => setDepositAmount(e.target.value)}
+                            placeholder={language === 'bn' ? 'টাকা (৳)' : 'Amount (৳)'}
+                            className="w-full h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs font-mono font-bold text-slate-900 outline-none focus:border-[#00873E]"
+                          />
+                          <input
+                            type="tel"
+                            value={senderNumber}
+                            onChange={(e) => setSenderNumber(e.target.value)}
+                            placeholder={language === 'bn' ? 'প্রেরক নম্বর' : 'Sender No.'}
+                            className="w-full h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs font-mono text-slate-900 outline-none focus:border-[#00873E]"
+                          />
+                          <input
+                            type="text"
+                            value={trxId}
+                            onChange={(e) => setTrxId(e.target.value.toUpperCase())}
+                            placeholder="TrxID"
+                            className="w-full h-10 bg-white border border-slate-300 rounded-xl px-3 text-xs font-mono uppercase text-slate-900 outline-none focus:border-[#00873E]"
+                          />
+                        </div>
+
+                        <button
+                          type="button"
+                          disabled={isAddingMoney}
+                          onClick={handleWalletAddMoney}
+                          className="w-full min-h-[40px] px-4 bg-[#00873E] hover:bg-[#007033] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>
+                            {isAddingMoney
+                              ? language === 'bn'
+                                ? 'যোগ হচ্ছে...'
+                                : 'Adding...'
+                              : language === 'bn'
+                              ? `টাকা অ্যাড করুন · ৳${depositAmount || '0'}`
+                              : `Add Money · ৳${depositAmount || '0'}`}
+                          </span>
+                        </button>
+                      </div>
                     )}
                   </div>
                 )}

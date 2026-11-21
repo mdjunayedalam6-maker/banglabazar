@@ -376,6 +376,21 @@ export const deduplicateProducts = (list: Product[]): Product[] => {
   return result;
 };
 
+// Strictly allow Shopbase BD uploaded products only (purge legacy demo/mock products)
+export const isShopbaseUploadedProduct = (p?: Product | null): boolean => {
+  if (!p || !p.id) return false;
+  const idLower = String(p.id).toLowerCase();
+  if (idLower.startsWith('sbp-katua-') || /^prod-\d+$/i.test(idLower)) return false;
+  if (p.sourceUrl && p.sourceUrl.toLowerCase().includes('shopbasebd.com')) return true;
+  if (
+    Array.isArray(p.images) &&
+    p.images.some((img) => typeof img === 'string' && img.toLowerCase().includes('shopbasebd.com'))
+  ) {
+    return true;
+  }
+  return /^sbp-\d+$/i.test(p.id);
+};
+
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 // Generate unique, clean referral code for any user
@@ -473,7 +488,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [currentPage, setCurrentPageState] = useState<PageView>('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  // Persistent Products: Cleanly loads without resurrecting deleted items
+  // Persistent Products: Strictly ShopbaseBD products only, without resurrecting deleted items
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       const deletedIds = getDeletedProductIds();
@@ -481,19 +496,23 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (saved !== null) {
         const parsed: Product[] = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          const validSaved = parsed.filter((p) => !deletedIds.has(p.id));
-          return deduplicateProducts(validSaved);
+          const validSaved = parsed.filter(
+            (p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p)
+          );
+          if (validSaved.length > 0) {
+            return deduplicateProducts(validSaved);
+          }
         }
       }
       const initialClean = deduplicateProducts(
-        INITIAL_PRODUCTS.filter((p) => !deletedIds.has(p.id))
+        INITIAL_PRODUCTS.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
       );
       try {
         safeLocalStorage.setItem('oneroof_products', JSON.stringify(initialClean.slice(0, 100)));
       } catch (_) {}
       return initialClean;
     } catch {
-      return deduplicateProducts(INITIAL_PRODUCTS);
+      return deduplicateProducts(INITIAL_PRODUCTS.filter(isShopbaseUploadedProduct));
     }
   });
 
@@ -825,7 +844,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const saved = safeLocalStorage.getItem('oneroof_cart');
-      return saved ? JSON.parse(saved) : [];
+      const parsed = saved ? JSON.parse(saved) : [];
+      return Array.isArray(parsed)
+        ? parsed.filter((item: CartItem) => isShopbaseUploadedProduct(item?.product))
+        : [];
     } catch {
       return [];
     }
@@ -834,7 +856,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [wishlist, setWishlist] = useState<string[]>(() => {
     try {
       const saved = safeLocalStorage.getItem('oneroof_wishlist');
-      return saved ? JSON.parse(saved) : [];
+      const parsed = saved ? JSON.parse(saved) : [];
+      return Array.isArray(parsed)
+        ? parsed.filter(
+            (id: string) =>
+              typeof id === 'string' && !/^prod-\d+$/i.test(id) && !/^sbp-katua-/i.test(id)
+          )
+        : [];
     } catch {
       return [];
     }
@@ -991,7 +1019,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     ])
       .then(([cachedProducts, cachedCategories, cachedSlides, cachedSettings, cachedOrders]) => {
         if (!isMounted) return;
-        const CATALOG_SYNC_VERSION = 'bb_shopbase_full_v3_13768';
+        const CATALOG_SYNC_VERSION = 'bb_shopbase_only_v4_13716';
         const savedCatalogVer = safeLocalStorage.getItem('oneroof_catalog_version');
         if (
           cachedProducts &&
@@ -1001,12 +1029,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         ) {
           const deletedIds = getDeletedProductIds();
           const cleanCached = deduplicateProducts(
-            cachedProducts.filter((p) => !deletedIds.has(p.id))
+            cachedProducts.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
           );
           setProducts(cleanCached);
           setIsProductsLoading(false);
         } else {
-          // Immediately load all 13,768+ products from website/app bundled /products.json
+          // Immediately load ShopbaseBD products from website/app bundled /products.json
           fetch('/products.json')
             .then((res) => {
               if (!res.ok) throw new Error('Status ' + res.status);
@@ -1017,11 +1045,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
               if (Array.isArray(localProducts) && localProducts.length > 0) {
                 const deletedIds = getDeletedProductIds();
                 const clean = deduplicateProducts(
-                  localProducts.filter((p) => !deletedIds.has(p.id))
+                  localProducts.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
                 );
                 setProducts(clean);
                 idbSet('oneroof_cached_products', clean).catch(() => {});
                 safeLocalStorage.setItem('oneroof_catalog_version', CATALOG_SYNC_VERSION);
+                try {
+                  safeLocalStorage.setItem('oneroof_products', JSON.stringify(clean.slice(0, 100)));
+                } catch (_) {}
                 setIsProductsLoading(false);
               }
             })
@@ -1029,7 +1060,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
               console.warn('Local products.json load notice:', err);
               if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 0) {
                 const deletedIds = getDeletedProductIds();
-                setProducts(deduplicateProducts(cachedProducts.filter((p) => !deletedIds.has(p.id))));
+                setProducts(
+                  deduplicateProducts(
+                    cachedProducts.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
+                  )
+                );
                 setIsProductsLoading(false);
               }
             });
@@ -1208,9 +1243,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           fetchProductsFromSupabase((batchProducts) => {
             if (isMounted && batchProducts && batchProducts.length > 0) {
               setProducts((prev) => {
-                const map = new Map(prev.map((p) => [p.id, p]));
+                const map = new Map(
+                  prev.filter(isShopbaseUploadedProduct).map((p) => [p.id, p])
+                );
                 for (const p of batchProducts) {
-                  map.set(p.id, p);
+                  if (isShopbaseUploadedProduct(p)) {
+                    map.set(p.id, p);
+                  }
                 }
                 return Array.from(map.values());
               });
@@ -1227,12 +1266,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           if (remoteProducts && Array.isArray(remoteProducts) && remoteProducts.length > 0) {
             const deletedIds = getDeletedProductIds();
             const cleanRemote = deduplicateProducts(
-              remoteProducts.filter((p) => !deletedIds.has(p.id))
+              remoteProducts.filter((p) => !deletedIds.has(p.id) && isShopbaseUploadedProduct(p))
             );
             setProducts((prev) => {
               const mergedMap = new Map<string, Product>();
               for (const localP of prev) {
-                if (!deletedIds.has(localP.id)) mergedMap.set(localP.id, localP);
+                if (!deletedIds.has(localP.id) && isShopbaseUploadedProduct(localP)) {
+                  mergedMap.set(localP.id, localP);
+                }
               }
               for (const remoteP of cleanRemote) {
                 mergedMap.set(remoteP.id, remoteP);
@@ -1245,9 +1286,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
               return merged;
             });
 
-            // Auto-clean any products in Supabase that were previously marked as deleted
+            // Auto-clean any products in Supabase that were deleted or are non-ShopbaseBD mock items
             const ghostIds = remoteProducts
-              .filter((p) => deletedIds.has(p.id))
+              .filter((p) => deletedIds.has(p.id) || !isShopbaseUploadedProduct(p))
               .map((p) => p.id);
             if (ghostIds.length > 0) {
               deleteMultipleProductsFromSupabase(ghostIds).catch(() => {});

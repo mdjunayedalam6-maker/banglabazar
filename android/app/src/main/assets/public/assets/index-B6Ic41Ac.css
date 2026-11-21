@@ -1226,6 +1226,10 @@
     min-height: 30px;
   }
 
+  .min-h-\[34px\] {
+    min-height: 34px;
+  }
+
   .min-h-\[36px\] {
     min-height: 36px;
   }
@@ -3993,16 +3997,6 @@
   @supports (color: color-mix(in lab, red, red)) {
     .bg-white\/80 {
       background-color: color-mix(in oklab, var(--color-white) 80%, transparent);
-    }
-  }
-
-  .bg-white\/85 {
-    background-color: #ffffffd9;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-white\/85 {
-      background-color: color-mix(in oklab, var(--color-white) 85%, transparent);
     }
   }
 
@@ -6897,10 +6891,6 @@
 
     .hover\:bg-slate-800:hover {
       background-color: var(--color-slate-800);
-    }
-
-    .hover\:bg-slate-900:hover {
-      background-color: var(--color-slate-900);
     }
 
     .hover\:bg-slate-900\/50:hover {

@@ -205,10 +205,20 @@ export const CustomerReferral: React.FC = () => {
 
           {/* How 2% Commission Works */}
           <div className="p-5 bg-white rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
-            <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-              <HelpCircle className="w-4 h-4 text-[#00873E]" />
-              <span>কীভাবে ২% কমিশন কাজ করে</span>
-            </h3>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                <HelpCircle className="w-4 h-4 text-[#00873E]" />
+                <span>কীভাবে ২% কমিশন কাজ করে</span>
+              </h3>
+              <button
+                type="button"
+                onClick={() => setProfileActiveTab('rules')}
+                className="text-xs font-bold text-[#00873E] hover:text-[#006B31] inline-flex items-center gap-1 cursor-pointer"
+              >
+                <span>সব নিয়ম, শর্ত ও নোটিশ পড়ুন</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/60">
                 <div className="font-bold text-slate-900">১. প্রোডাক্ট লিংক শেয়ার করুন</div>

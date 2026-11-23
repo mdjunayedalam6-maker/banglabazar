@@ -53,6 +53,22 @@ export interface SiteSettings {
     lastSyncTime?: string;
     totalSyncedProducts?: number;
   };
+  customerNotices?: CustomerRuleNotice[];
+}
+
+export type CustomerNoticeCategory = 'notice' | 'rule' | 'condition';
+
+export interface CustomerRuleNotice {
+  id: string;
+  category: CustomerNoticeCategory;
+  titleBn: string;
+  titleEn?: string;
+  contentBn: string;
+  contentEn?: string;
+  image?: string;
+  isPinned?: boolean;
+  createdAt: string;
+  updatedAt?: string;
 }
 
 export interface AdminBannerSlide {

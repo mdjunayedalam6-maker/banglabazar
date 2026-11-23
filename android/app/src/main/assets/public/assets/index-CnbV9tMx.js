@@ -40223,6 +40223,44 @@ const techBannerImg = "/assets/banner_smart_tech_1794884631007-DSxuMUTG.jpg";
 const homeBannerImg = "/assets/banner_home_living_1794884630792-lVVemito.jpg";
 const bagsJewelryBannerImg = "/assets/banner_bags_jewelry_1794884631748-DUaL75Tr.jpg";
 const winterBannerImg = "/assets/banner_winter_flash_1794884632066-e2UEC3Le.jpg";
+const DEFAULT_CUSTOMER_NOTICES = [
+  {
+    id: "notice-affiliate-2-percent",
+    category: "rule",
+    isPinned: true,
+    titleBn: "প্রোডাক্ট শেয়ার করে ২% কমিশন আয়ের নিয়মাবলী",
+    titleEn: "2% Product Share Commission Rules",
+    contentBn: '১. প্রথমে আপনার অ্যাকাউন্টে লগইন করে যেকোনো পণ্যের পেজ বা প্রোফাইলের "শেয়ার ও রেফার আয়" অংশ থেকে আপনার ইউনিক শেয়ার লিংক (?product=...&aff=...) কপি করুন।\n২. সেই লিংক ফেসবুক, হোয়াটসঅ্যাপ, মেসেঞ্জার বা যেকোনো মাধ্যমে বন্ধু বা ক্রেতাদের সাথে শেয়ার করুন।\n৩. আপনার একটি লিংক থেকে যতজন মানুষ পণ্য অর্ডার করবে (যেমন ৫ জন বা তার বেশি), প্রত্যেকের পণ্যের মূল্যের ২% করে আলাদা কমিশন আপনার হিসাবের খাতায় যুক্ত হবে।\n৪. কাস্টমার পণ্য হাতে পেয়ে অর্ডার সম্পূর্ণ (Delivered) হলে কমিশনের টাকা অটোমেটিক আপনার ওয়ালেট ব্যালেন্সে যোগ হয়ে যাবে।',
+    createdAt: "2026-11-23T06:00:00.000Z"
+  },
+  {
+    id: "condition-cancel-self-order",
+    category: "condition",
+    isPinned: true,
+    titleBn: "কমিশন বাতিল, কর্তন ও সেলফ-অর্ডার সংক্রান্ত শর্তাবলী",
+    titleEn: "Commission Reversal & Self-Order Conditions",
+    contentBn: "• অর্ডার দেওয়ার পর কাস্টমার অর্ডার বাতিল (Cancel) করলে বা রিটার্ন করলে উক্ত অর্ডারের ২% কমিশন আপনার অ্যাকাউন্ট/ওয়ালেট থেকে অটোমেটিক কেটে নেওয়া হবে।\n• ডেলিভারি চার্জের ওপর কোনো কমিশন প্রযোজ্য নয় — শুধুমাত্র প্রোডাক্টের দামের (Product Subtotal) ওপর ২% কমিশন হিসাব করা হবে।\n• নিজের শেয়ার করা লিংক ব্যবহার করে নিজে অর্ডার করলে (Self-Order) কমিশন যুক্ত হবে না। শুধুমাত্র অন্য ক্রেতার সম্পন্ন করা অর্ডারেই কমিশন কার্যকর হবে।",
+    createdAt: "2026-11-23T05:30:00.000Z"
+  },
+  {
+    id: "rule-referral-welcome-bonus",
+    category: "rule",
+    isPinned: false,
+    titleBn: "বন্ধু রেফার (৳৩০) ও ওয়েলকাম বোনাস (৳৫০) নিয়ম",
+    titleEn: "Friend Referral & Welcome Bonus Rules",
+    contentBn: "• নতুন গ্রাহক হিসেবে রেজিস্ট্রেশন করলে আপনার অ্যাকাউন্টে ৳৫০ ওয়েলকাম বোনাস আনলক করার সুযোগ থাকে (১ম অর্ডার সম্পন্ন হওয়ার পর ২য় অর্ডারে ব্যবহারযোগ্য)।\n• আপনার প্রোফাইলের BB-XXXXXX রেফার কোড বা লিংক দিয়ে কোনো বন্ধু অ্যাকাউন্ট খুলে তার ১ম অর্ডার সম্পন্ন করলে আপনি প্রতি বন্ধুর জন্য ৳৩০ রেফার বোনাস পাবেন।",
+    createdAt: "2026-11-23T05:00:00.000Z"
+  },
+  {
+    id: "notice-wallet-withdraw-payment",
+    category: "notice",
+    isPinned: false,
+    titleBn: "পেমেন্ট, ওয়ালেট রিচার্জ ও টাকা উত্তোলনের জরুরি নোটিশ",
+    titleEn: "Payment, Wallet Top-Up & Withdrawal Notice",
+    contentBn: "• অর্ডার করার সময় আপনি ক্যাশ অন ডেলিভারি অথবা ওয়ালেট ব্যালেন্স দিয়ে সরাসরি পেমেন্ট করতে পারবেন।\n• ওয়ালেটে পর্যাপ্ত টাকা না থাকলে বিকাশ, নগদ বা উপায় থেকে 01929637253 (পার্সোনাল) নম্বরে Send Money করে TrxID সাবমিট করে টাকা অ্যাড করতে পারবেন।\n• প্রোডাক্ট শেয়ার ও রেফার থেকে আয় করা টাকা দিয়ে কেনাকাটা করতে পারবেন অথবা ওয়ালেট থেকে সর্বনিম্ন ৳৫০ হলে বিকাশ, নগদ, উপায় বা রকেটে ক্যাশআউট/উত্তোলন রিকোয়েস্ট পাঠাতে পারবেন।",
+    createdAt: "2026-11-23T04:30:00.000Z"
+  }
+];
 const DEFAULT_SITE_SETTINGS = {
   primaryColor: "#00873E",
   accentColor: "#DC2626",
@@ -40259,9 +40297,10 @@ const DEFAULT_SITE_SETTINGS = {
     profitMargin: 5,
     autoSync: true,
     autoForwardOrders: true,
-    lastSyncTime: "আজকের লাইভ সিঙ্ক সফল (১৩,৭৬৮টি পণ্য যুক্ত)",
-    totalSyncedProducts: 13768
-  }
+    lastSyncTime: "আজকের লাইভ সিঙ্ক সফল (১৩,৭১৬টি পণ্য যুক্ত)",
+    totalSyncedProducts: 13716
+  },
+  customerNotices: DEFAULT_CUSTOMER_NOTICES
 };
 const DEFAULT_BANNER_SLIDES = [
   {
@@ -65560,6 +65599,51 @@ const AppProvider = ({ children }) => {
     });
     addToast(language === "bn" ? "ডিফল্ট সেটিংস ও কালার রিস্টোর করা হয়েছে" : "Default settings restored", "info");
   };
+  const customerNotices = reactExports.useMemo(() => {
+    return Array.isArray(siteSettings.customerNotices) ? siteSettings.customerNotices : DEFAULT_CUSTOMER_NOTICES;
+  }, [siteSettings.customerNotices]);
+  const persistCustomerNotices = (nextNotices) => {
+    setSiteSettings((prev) => {
+      const merged = { ...prev, customerNotices: nextNotices };
+      safeLocalStorage.setItem("oneroof_site_settings", JSON.stringify(merged));
+      idbSet("oneroof_cached_site_settings", merged).catch(() => {
+      });
+      syncSiteSettingsToSupabase(merged).catch(() => {
+      });
+      return merged;
+    });
+  };
+  const addCustomerNotice = (notice) => {
+    const newNotice = {
+      ...notice,
+      id: `notice-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    persistCustomerNotices([newNotice, ...customerNotices]);
+    addToast(
+      language === "bn" ? "নতুন নিয়ম/নোটিশ সফলভাবে আপলোড হয়েছে!" : "Notice published!",
+      "success"
+    );
+  };
+  const updateCustomerNotice = (id, updates) => {
+    const updated = customerNotices.map(
+      (n) => n.id === id ? { ...n, ...updates, updatedAt: (/* @__PURE__ */ new Date()).toISOString() } : n
+    );
+    persistCustomerNotices(updated);
+    addToast(language === "bn" ? "তথ্য সফলভাবে আপডেট হয়েছে!" : "Updated successfully!", "success");
+  };
+  const deleteCustomerNotice = (id) => {
+    const updated = customerNotices.filter((n) => n.id !== id);
+    persistCustomerNotices(updated);
+    addToast(language === "bn" ? "নিয়ম/নোটিশ মুছে ফেলা হয়েছে" : "Notice deleted", "info");
+  };
+  const resetCustomerNoticesToDefault = () => {
+    persistCustomerNotices(DEFAULT_CUSTOMER_NOTICES);
+    addToast(
+      language === "bn" ? "ডিফল্ট নিয়ম ও শর্তাবলী ফিরিয়ে আনা হয়েছে" : "Default rules restored",
+      "info"
+    );
+  };
   const globalProfitMargin = siteSettings.globalProfitMargin || ((_a = siteSettings.shopbaseConfig) == null ? void 0 : _a.profitMargin) || 5;
   const updateGlobalProfitMargin = async (newMargin) => {
     try {
@@ -67123,6 +67207,11 @@ const AppProvider = ({ children }) => {
         siteSettings,
         updateSiteSettings,
         resetSiteSettings,
+        customerNotices,
+        addCustomerNotice,
+        updateCustomerNotice,
+        deleteCustomerNotice,
+        resetCustomerNoticesToDefault,
         bannerSlides,
         updateBannerSlides,
         addBannerSlide,
@@ -67288,7 +67377,7 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1H = [
+const __iconNode$1J = [
   ["path", { d: "M12 6.528V3a1 1 0 0 1 1-1h0", key: "11qiee" }],
   [
     "path",
@@ -67298,7 +67387,29 @@ const __iconNode$1H = [
     }
   ]
 ];
-const Apple = createLucideIcon("apple", __iconNode$1H);
+const Apple = createLucideIcon("apple", __iconNode$1J);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1I = [
+  ["path", { d: "M17 7 7 17", key: "15tmo1" }],
+  ["path", { d: "M17 17H7V7", key: "1org7z" }]
+];
+const ArrowDownLeft = createLucideIcon("arrow-down-left", __iconNode$1I);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1H = [
+  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
+  ["path", { d: "M19 12H5", key: "x3x0zl" }]
+];
+const ArrowLeft = createLucideIcon("arrow-left", __iconNode$1H);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67306,10 +67417,10 @@ const Apple = createLucideIcon("apple", __iconNode$1H);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1G = [
-  ["path", { d: "M17 7 7 17", key: "15tmo1" }],
-  ["path", { d: "M17 17H7V7", key: "1org7z" }]
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
 ];
-const ArrowDownLeft = createLucideIcon("arrow-down-left", __iconNode$1G);
+const ArrowRight = createLucideIcon("arrow-right", __iconNode$1G);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67317,10 +67428,10 @@ const ArrowDownLeft = createLucideIcon("arrow-down-left", __iconNode$1G);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1F = [
-  ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
-  ["path", { d: "M19 12H5", key: "x3x0zl" }]
+  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
+  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
 ];
-const ArrowLeft = createLucideIcon("arrow-left", __iconNode$1F);
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$1F);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67328,10 +67439,10 @@ const ArrowLeft = createLucideIcon("arrow-left", __iconNode$1F);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1E = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
+  ["path", { d: "m5 12 7-7 7 7", key: "hav0vg" }],
+  ["path", { d: "M12 19V5", key: "x0mq9r" }]
 ];
-const ArrowRight = createLucideIcon("arrow-right", __iconNode$1E);
+const ArrowUp = createLucideIcon("arrow-up", __iconNode$1E);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67339,10 +67450,10 @@ const ArrowRight = createLucideIcon("arrow-right", __iconNode$1E);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1D = [
-  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
-  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
+  ["path", { d: "M4.929 4.929 19.07 19.071", key: "196cmz" }],
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
 ];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$1D);
+const Ban = createLucideIcon("ban", __iconNode$1D);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67350,10 +67461,11 @@ const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$1D);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1C = [
-  ["path", { d: "m5 12 7-7 7 7", key: "hav0vg" }],
-  ["path", { d: "M12 19V5", key: "x0mq9r" }]
+  ["rect", { width: "20", height: "12", x: "2", y: "6", rx: "2", key: "9lu3g6" }],
+  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
+  ["path", { d: "M6 12h.01M18 12h.01", key: "113zkx" }]
 ];
-const ArrowUp = createLucideIcon("arrow-up", __iconNode$1C);
+const Banknote = createLucideIcon("banknote", __iconNode$1C);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67361,29 +67473,6 @@ const ArrowUp = createLucideIcon("arrow-up", __iconNode$1C);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1B = [
-  ["path", { d: "M4.929 4.929 19.07 19.071", key: "196cmz" }],
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
-];
-const Ban = createLucideIcon("ban", __iconNode$1B);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$1A = [
-  ["rect", { width: "20", height: "12", x: "2", y: "6", rx: "2", key: "9lu3g6" }],
-  ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }],
-  ["path", { d: "M6 12h.01M18 12h.01", key: "113zkx" }]
-];
-const Banknote = createLucideIcon("banknote", __iconNode$1A);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$1z = [
   ["path", { d: "M10.268 21a2 2 0 0 0 3.464 0", key: "vwvbt9" }],
   [
     "path",
@@ -67393,14 +67482,14 @@ const __iconNode$1z = [
     }
   ]
 ];
-const Bell = createLucideIcon("bell", __iconNode$1z);
+const Bell = createLucideIcon("bell", __iconNode$1B);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1y = [
+const __iconNode$1A = [
   ["path", { d: "M10 12h4", key: "a56b0p" }],
   ["path", { d: "M10 8h4", key: "1sr2af" }],
   ["path", { d: "M14 21v-3a2 2 0 0 0-4 0v3", key: "1rgiei" }],
@@ -67413,14 +67502,14 @@ const __iconNode$1y = [
   ],
   ["path", { d: "M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16", key: "16ra0t" }]
 ];
-const Building2 = createLucideIcon("building-2", __iconNode$1y);
+const Building2 = createLucideIcon("building-2", __iconNode$1A);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1x = [
+const __iconNode$1z = [
   [
     "path",
     {
@@ -67430,47 +67519,73 @@ const __iconNode$1x = [
   ],
   ["circle", { cx: "12", cy: "13", r: "3", key: "1vg3eu" }]
 ];
-const Camera = createLucideIcon("camera", __iconNode$1x);
+const Camera = createLucideIcon("camera", __iconNode$1z);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1w = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$1w);
+const __iconNode$1y = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$1y);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1v = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$1v);
+const __iconNode$1x = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$1x);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1u = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
-const ChevronLeft = createLucideIcon("chevron-left", __iconNode$1u);
+const __iconNode$1w = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
+const ChevronLeft = createLucideIcon("chevron-left", __iconNode$1w);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1t = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-const ChevronRight = createLucideIcon("chevron-right", __iconNode$1t);
+const __iconNode$1v = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
+const ChevronRight = createLucideIcon("chevron-right", __iconNode$1v);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1s = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$1s);
+const __iconNode$1u = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$1u);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1t = [
+  ["path", { d: "M10.88 21.94 15.46 14", key: "xkve6t" }],
+  ["path", { d: "M21.17 8H12", key: "19dcdn" }],
+  ["path", { d: "M3.95 6.06 8.54 14", key: "g8jz9m" }],
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["circle", { cx: "12", cy: "12", r: "4", key: "4exip2" }]
+];
+const Chromium = createLucideIcon("chromium", __iconNode$1t);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1s = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+];
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$1s);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67478,13 +67593,10 @@ const ChevronUp = createLucideIcon("chevron-up", __iconNode$1s);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1r = [
-  ["path", { d: "M10.88 21.94 15.46 14", key: "xkve6t" }],
-  ["path", { d: "M21.17 8H12", key: "19dcdn" }],
-  ["path", { d: "M3.95 6.06 8.54 14", key: "g8jz9m" }],
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["circle", { cx: "12", cy: "12", r: "4", key: "4exip2" }]
+  ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
+  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
 ];
-const Chromium = createLucideIcon("chromium", __iconNode$1r);
+const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$1r);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67493,10 +67605,9 @@ const Chromium = createLucideIcon("chromium", __iconNode$1r);
  */
 const __iconNode$1q = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
-  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$1q);
+const CircleCheck = createLucideIcon("circle-check", __iconNode$1q);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67504,10 +67615,11 @@ const CircleAlert = createLucideIcon("circle-alert", __iconNode$1q);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1p = [
-  ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
-  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$1p);
+const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$1p);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67516,9 +67628,10 @@ const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$1p);
  */
 const __iconNode$1o = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
+  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$1o);
+const CircleX = createLucideIcon("circle-x", __iconNode$1o);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67526,11 +67639,10 @@ const CircleCheck = createLucideIcon("circle-check", __iconNode$1o);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1n = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
-  ["path", { d: "M12 17h.01", key: "p32p05" }]
+  ["path", { d: "M12 6v6l4 2", key: "mmk7yg" }],
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
 ];
-const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$1n);
+const Clock = createLucideIcon("clock", __iconNode$1n);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67538,11 +67650,12 @@ const CircleQuestionMark = createLucideIcon("circle-question-mark", __iconNode$1
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1m = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
-  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
+  ["circle", { cx: "8", cy: "8", r: "6", key: "3yglwk" }],
+  ["path", { d: "M18.09 10.37A6 6 0 1 1 10.34 18", key: "t5s6rm" }],
+  ["path", { d: "M7 6h1v4", key: "1obek4" }],
+  ["path", { d: "m16.71 13.88.7.71-2.82 2.82", key: "1rbuyh" }]
 ];
-const CircleX = createLucideIcon("circle-x", __iconNode$1m);
+const Coins = createLucideIcon("coins", __iconNode$1m);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67550,10 +67663,10 @@ const CircleX = createLucideIcon("circle-x", __iconNode$1m);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1l = [
-  ["path", { d: "M12 6v6l4 2", key: "mmk7yg" }],
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }]
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
 ];
-const Clock = createLucideIcon("clock", __iconNode$1l);
+const Copy = createLucideIcon("copy", __iconNode$1l);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67561,12 +67674,11 @@ const Clock = createLucideIcon("clock", __iconNode$1l);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1k = [
-  ["circle", { cx: "8", cy: "8", r: "6", key: "3yglwk" }],
-  ["path", { d: "M18.09 10.37A6 6 0 1 1 10.34 18", key: "t5s6rm" }],
-  ["path", { d: "M7 6h1v4", key: "1obek4" }],
-  ["path", { d: "m16.71 13.88.7.71-2.82 2.82", key: "1rbuyh" }]
+  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
+  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
+  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
 ];
-const Coins = createLucideIcon("coins", __iconNode$1k);
+const Database = createLucideIcon("database", __iconNode$1k);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67574,10 +67686,10 @@ const Coins = createLucideIcon("coins", __iconNode$1k);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1j = [
-  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
-  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+  ["line", { x1: "12", x2: "12", y1: "2", y2: "22", key: "7eqyqh" }],
+  ["path", { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6", key: "1b0p4s" }]
 ];
-const Copy = createLucideIcon("copy", __iconNode$1j);
+const DollarSign = createLucideIcon("dollar-sign", __iconNode$1j);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67585,11 +67697,11 @@ const Copy = createLucideIcon("copy", __iconNode$1j);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1i = [
-  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
-  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
-  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
+  ["path", { d: "M12 15V3", key: "m9g1x1" }],
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
+  ["path", { d: "m7 10 5 5 5-5", key: "brsn70" }]
 ];
-const Database = createLucideIcon("database", __iconNode$1i);
+const Download = createLucideIcon("download", __iconNode$1i);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67597,10 +67709,11 @@ const Database = createLucideIcon("database", __iconNode$1i);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1h = [
-  ["line", { x1: "12", x2: "12", y1: "2", y2: "22", key: "7eqyqh" }],
-  ["path", { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6", key: "1b0p4s" }]
+  ["circle", { cx: "12", cy: "12", r: "1", key: "41hilf" }],
+  ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
+  ["circle", { cx: "12", cy: "19", r: "1", key: "lyex9k" }]
 ];
-const DollarSign = createLucideIcon("dollar-sign", __iconNode$1h);
+const EllipsisVertical = createLucideIcon("ellipsis-vertical", __iconNode$1h);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67608,11 +67721,11 @@ const DollarSign = createLucideIcon("dollar-sign", __iconNode$1h);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1g = [
-  ["path", { d: "M12 15V3", key: "m9g1x1" }],
-  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
-  ["path", { d: "m7 10 5 5 5-5", key: "brsn70" }]
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
 ];
-const Download = createLucideIcon("download", __iconNode$1g);
+const ExternalLink = createLucideIcon("external-link", __iconNode$1g);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67620,30 +67733,6 @@ const Download = createLucideIcon("download", __iconNode$1g);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1f = [
-  ["circle", { cx: "12", cy: "12", r: "1", key: "41hilf" }],
-  ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
-  ["circle", { cx: "12", cy: "19", r: "1", key: "lyex9k" }]
-];
-const EllipsisVertical = createLucideIcon("ellipsis-vertical", __iconNode$1f);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$1e = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
-];
-const ExternalLink = createLucideIcon("external-link", __iconNode$1e);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$1d = [
   [
     "path",
     {
@@ -67661,14 +67750,14 @@ const __iconNode$1d = [
   ],
   ["path", { d: "m2 2 20 20", key: "1ooewy" }]
 ];
-const EyeOff = createLucideIcon("eye-off", __iconNode$1d);
+const EyeOff = createLucideIcon("eye-off", __iconNode$1f);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1c = [
+const __iconNode$1e = [
   [
     "path",
     {
@@ -67678,7 +67767,34 @@ const __iconNode$1c = [
   ],
   ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
 ];
-const Eye = createLucideIcon("eye", __iconNode$1c);
+const Eye = createLucideIcon("eye", __iconNode$1e);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1d = [
+  [
+    "path",
+    { d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z", key: "1jg4f8" }
+  ]
+];
+const Facebook = createLucideIcon("facebook", __iconNode$1d);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1c = [
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "M10 9H8", key: "b1mrlr" }],
+  ["path", { d: "M16 13H8", key: "t4e002" }],
+  ["path", { d: "M16 17H8", key: "z1uh3a" }]
+];
+const FileText = createLucideIcon("file-text", __iconNode$1c);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67688,10 +67804,13 @@ const Eye = createLucideIcon("eye", __iconNode$1c);
 const __iconNode$1b = [
   [
     "path",
-    { d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z", key: "1jg4f8" }
+    {
+      d: "M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4",
+      key: "1slcih"
+    }
   ]
 ];
-const Facebook = createLucideIcon("facebook", __iconNode$1b);
+const Flame = createLucideIcon("flame", __iconNode$1b);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67699,36 +67818,6 @@ const Facebook = createLucideIcon("facebook", __iconNode$1b);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1a = [
-  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
-  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "M10 9H8", key: "b1mrlr" }],
-  ["path", { d: "M16 13H8", key: "t4e002" }],
-  ["path", { d: "M16 17H8", key: "z1uh3a" }]
-];
-const FileText = createLucideIcon("file-text", __iconNode$1a);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$19 = [
-  [
-    "path",
-    {
-      d: "M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4",
-      key: "1slcih"
-    }
-  ]
-];
-const Flame = createLucideIcon("flame", __iconNode$19);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$18 = [
   [
     "path",
     {
@@ -67737,14 +67826,14 @@ const __iconNode$18 = [
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$18);
+const Funnel = createLucideIcon("funnel", __iconNode$1a);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$17 = [
+const __iconNode$19 = [
   ["rect", { x: "3", y: "8", width: "18", height: "4", rx: "1", key: "bkv52" }],
   ["path", { d: "M12 8v13", key: "1c76mn" }],
   ["path", { d: "M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7", key: "6wjy6b" }],
@@ -67756,7 +67845,33 @@ const __iconNode$17 = [
     }
   ]
 ];
-const Gift = createLucideIcon("gift", __iconNode$17);
+const Gift = createLucideIcon("gift", __iconNode$19);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$18 = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20", key: "13o1zl" }],
+  ["path", { d: "M2 12h20", key: "9i4pu4" }]
+];
+const Globe = createLucideIcon("globe", __iconNode$18);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$17 = [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
+  ["path", { d: "M3 9h18", key: "1pudct" }],
+  ["path", { d: "M3 15h18", key: "5xshup" }],
+  ["path", { d: "M9 3v18", key: "fh3hqa" }],
+  ["path", { d: "M15 3v18", key: "14nvp0" }]
+];
+const Grid3x3 = createLucideIcon("grid-3x3", __iconNode$17);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67764,32 +67879,6 @@ const Gift = createLucideIcon("gift", __iconNode$17);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$16 = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20", key: "13o1zl" }],
-  ["path", { d: "M2 12h20", key: "9i4pu4" }]
-];
-const Globe = createLucideIcon("globe", __iconNode$16);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$15 = [
-  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }],
-  ["path", { d: "M3 9h18", key: "1pudct" }],
-  ["path", { d: "M3 15h18", key: "5xshup" }],
-  ["path", { d: "M9 3v18", key: "fh3hqa" }],
-  ["path", { d: "M15 3v18", key: "14nvp0" }]
-];
-const Grid3x3 = createLucideIcon("grid-3x3", __iconNode$15);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$14 = [
   [
     "path",
     {
@@ -67798,14 +67887,14 @@ const __iconNode$14 = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$14);
+const Heart = createLucideIcon("heart", __iconNode$16);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$13 = [
+const __iconNode$15 = [
   ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
   [
     "path",
@@ -67815,7 +67904,31 @@ const __iconNode$13 = [
     }
   ]
 ];
-const House = createLucideIcon("house", __iconNode$13);
+const House = createLucideIcon("house", __iconNode$15);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$14 = [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
+  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
+  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
+];
+const Image$1 = createLucideIcon("image", __iconNode$14);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$13 = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M12 16v-4", key: "1dtifu" }],
+  ["path", { d: "M12 8h.01", key: "e9boi3" }]
+];
+const Info = createLucideIcon("info", __iconNode$13);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67823,11 +67936,11 @@ const House = createLucideIcon("house", __iconNode$13);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$12 = [
-  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
-  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
-  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
+  ["rect", { width: "20", height: "20", x: "2", y: "2", rx: "5", ry: "5", key: "2e1cvw" }],
+  ["path", { d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z", key: "9exkf1" }],
+  ["line", { x1: "17.5", x2: "17.51", y1: "6.5", y2: "6.5", key: "r4j83e" }]
 ];
-const Image$1 = createLucideIcon("image", __iconNode$12);
+const Instagram = createLucideIcon("instagram", __iconNode$12);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67835,30 +67948,6 @@ const Image$1 = createLucideIcon("image", __iconNode$12);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$11 = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "M12 16v-4", key: "1dtifu" }],
-  ["path", { d: "M12 8h.01", key: "e9boi3" }]
-];
-const Info = createLucideIcon("info", __iconNode$11);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$10 = [
-  ["rect", { width: "20", height: "20", x: "2", y: "2", rx: "5", ry: "5", key: "2e1cvw" }],
-  ["path", { d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z", key: "9exkf1" }],
-  ["line", { x1: "17.5", x2: "17.51", y1: "6.5", y2: "6.5", key: "r4j83e" }]
-];
-const Instagram = createLucideIcon("instagram", __iconNode$10);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$$ = [
   [
     "path",
     {
@@ -67868,14 +67957,14 @@ const __iconNode$$ = [
   ],
   ["circle", { cx: "16.5", cy: "7.5", r: ".5", fill: "currentColor", key: "w0ekpg" }]
 ];
-const KeyRound = createLucideIcon("key-round", __iconNode$$);
+const KeyRound = createLucideIcon("key-round", __iconNode$11);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$_ = [
+const __iconNode$10 = [
   [
     "path",
     {
@@ -67885,14 +67974,14 @@ const __iconNode$_ = [
   ],
   ["path", { d: "M20.054 15.987H3.946", key: "14rxg9" }]
 ];
-const Laptop = createLucideIcon("laptop", __iconNode$_);
+const Laptop = createLucideIcon("laptop", __iconNode$10);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$Z = [
+const __iconNode$$ = [
   [
     "path",
     {
@@ -67915,27 +68004,27 @@ const __iconNode$Z = [
     }
   ]
 ];
-const Layers = createLucideIcon("layers", __iconNode$Z);
+const Layers = createLucideIcon("layers", __iconNode$$);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$Y = [
+const __iconNode$_ = [
   ["rect", { width: "7", height: "7", x: "3", y: "3", rx: "1", key: "1g98yp" }],
   ["rect", { width: "7", height: "7", x: "14", y: "3", rx: "1", key: "6d4xhi" }],
   ["rect", { width: "7", height: "7", x: "14", y: "14", rx: "1", key: "nxv5o0" }],
   ["rect", { width: "7", height: "7", x: "3", y: "14", rx: "1", key: "1bb6yr" }]
 ];
-const LayoutGrid = createLucideIcon("layout-grid", __iconNode$Y);
+const LayoutGrid = createLucideIcon("layout-grid", __iconNode$_);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$X = [
+const __iconNode$Z = [
   ["path", { d: "M3 5h.01", key: "18ugdj" }],
   ["path", { d: "M3 12h.01", key: "nlz23k" }],
   ["path", { d: "M3 19h.01", key: "noohij" }],
@@ -67943,15 +68032,37 @@ const __iconNode$X = [
   ["path", { d: "M8 12h13", key: "1za7za" }],
   ["path", { d: "M8 19h13", key: "m83p4d" }]
 ];
-const List = createLucideIcon("list", __iconNode$X);
+const List = createLucideIcon("list", __iconNode$Z);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$W = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]];
-const LoaderCircle = createLucideIcon("loader-circle", __iconNode$W);
+const __iconNode$Y = [["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]];
+const LoaderCircle = createLucideIcon("loader-circle", __iconNode$Y);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$X = [
+  ["rect", { width: "18", height: "11", x: "3", y: "11", rx: "2", ry: "2", key: "1w4ew1" }],
+  ["path", { d: "M7 11V7a5 5 0 0 1 9.9-1", key: "1mm8w8" }]
+];
+const LockOpen = createLucideIcon("lock-open", __iconNode$X);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$W = [
+  ["rect", { width: "18", height: "11", x: "3", y: "11", rx: "2", ry: "2", key: "1w4ew1" }],
+  ["path", { d: "M7 11V7a5 5 0 0 1 10 0v4", key: "fwvmzm" }]
+];
+const Lock = createLucideIcon("lock", __iconNode$W);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67959,10 +68070,11 @@ const LoaderCircle = createLucideIcon("loader-circle", __iconNode$W);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$V = [
-  ["rect", { width: "18", height: "11", x: "3", y: "11", rx: "2", ry: "2", key: "1w4ew1" }],
-  ["path", { d: "M7 11V7a5 5 0 0 1 9.9-1", key: "1mm8w8" }]
+  ["path", { d: "m10 17 5-5-5-5", key: "1bsop3" }],
+  ["path", { d: "M15 12H3", key: "6jk70r" }],
+  ["path", { d: "M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4", key: "u53s6r" }]
 ];
-const LockOpen = createLucideIcon("lock-open", __iconNode$V);
+const LogIn = createLucideIcon("log-in", __iconNode$V);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67970,10 +68082,11 @@ const LockOpen = createLucideIcon("lock-open", __iconNode$V);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$U = [
-  ["rect", { width: "18", height: "11", x: "3", y: "11", rx: "2", ry: "2", key: "1w4ew1" }],
-  ["path", { d: "M7 11V7a5 5 0 0 1 10 0v4", key: "fwvmzm" }]
+  ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
+  ["path", { d: "M21 12H9", key: "dn1m92" }],
+  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
 ];
-const Lock = createLucideIcon("lock", __iconNode$U);
+const LogOut = createLucideIcon("log-out", __iconNode$U);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67981,11 +68094,10 @@ const Lock = createLucideIcon("lock", __iconNode$U);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$T = [
-  ["path", { d: "m10 17 5-5-5-5", key: "1bsop3" }],
-  ["path", { d: "M15 12H3", key: "6jk70r" }],
-  ["path", { d: "M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4", key: "u53s6r" }]
+  ["path", { d: "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7", key: "132q7q" }],
+  ["rect", { x: "2", y: "4", width: "20", height: "16", rx: "2", key: "izxlao" }]
 ];
-const LogIn = createLucideIcon("log-in", __iconNode$T);
+const Mail = createLucideIcon("mail", __iconNode$T);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -67993,29 +68105,6 @@ const LogIn = createLucideIcon("log-in", __iconNode$T);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$S = [
-  ["path", { d: "m16 17 5-5-5-5", key: "1bji2h" }],
-  ["path", { d: "M21 12H9", key: "dn1m92" }],
-  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }]
-];
-const LogOut = createLucideIcon("log-out", __iconNode$S);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$R = [
-  ["path", { d: "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7", key: "132q7q" }],
-  ["rect", { x: "2", y: "4", width: "20", height: "16", rx: "2", key: "izxlao" }]
-];
-const Mail = createLucideIcon("mail", __iconNode$R);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$Q = [
   [
     "path",
     {
@@ -68025,14 +68114,14 @@ const __iconNode$Q = [
   ],
   ["circle", { cx: "12", cy: "10", r: "3", key: "ilqhr7" }]
 ];
-const MapPin = createLucideIcon("map-pin", __iconNode$Q);
+const MapPin = createLucideIcon("map-pin", __iconNode$S);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$P = [
+const __iconNode$R = [
   [
     "path",
     {
@@ -68043,7 +68132,32 @@ const __iconNode$P = [
   ["path", { d: "M15 5.764v15", key: "1pn4in" }],
   ["path", { d: "M9 3.236v15", key: "1uimfh" }]
 ];
-const Map$1 = createLucideIcon("map", __iconNode$P);
+const Map$1 = createLucideIcon("map", __iconNode$R);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$Q = [
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "m21 3-7 7", key: "1l2asr" }],
+  ["path", { d: "m3 21 7-7", key: "tjx5ai" }],
+  ["path", { d: "M9 21H3v-6", key: "wtvkvv" }]
+];
+const Maximize2 = createLucideIcon("maximize-2", __iconNode$Q);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$P = [
+  ["path", { d: "M4 5h16", key: "1tepv9" }],
+  ["path", { d: "M4 12h16", key: "1lakjw" }],
+  ["path", { d: "M4 19h16", key: "1djgab" }]
+];
+const Menu = createLucideIcon("menu", __iconNode$P);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -68051,31 +68165,6 @@ const Map$1 = createLucideIcon("map", __iconNode$P);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$O = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "m21 3-7 7", key: "1l2asr" }],
-  ["path", { d: "m3 21 7-7", key: "tjx5ai" }],
-  ["path", { d: "M9 21H3v-6", key: "wtvkvv" }]
-];
-const Maximize2 = createLucideIcon("maximize-2", __iconNode$O);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$N = [
-  ["path", { d: "M4 5h16", key: "1tepv9" }],
-  ["path", { d: "M4 12h16", key: "1lakjw" }],
-  ["path", { d: "M4 19h16", key: "1djgab" }]
-];
-const Menu = createLucideIcon("menu", __iconNode$N);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$M = [
   [
     "path",
     {
@@ -68084,14 +68173,14 @@ const __iconNode$M = [
     }
   ]
 ];
-const MessageCircle = createLucideIcon("message-circle", __iconNode$M);
+const MessageCircle = createLucideIcon("message-circle", __iconNode$O);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$L = [
+const __iconNode$N = [
   [
     "path",
     {
@@ -68100,14 +68189,14 @@ const __iconNode$L = [
     }
   ]
 ];
-const MessageSquare = createLucideIcon("message-square", __iconNode$L);
+const MessageSquare = createLucideIcon("message-square", __iconNode$N);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$K = [
+const __iconNode$M = [
   ["path", { d: "M12 16h.01", key: "1drbdi" }],
   ["path", { d: "M12 8v4", key: "1got3b" }],
   [
@@ -68118,14 +68207,14 @@ const __iconNode$K = [
     }
   ]
 ];
-const OctagonAlert = createLucideIcon("octagon-alert", __iconNode$K);
+const OctagonAlert = createLucideIcon("octagon-alert", __iconNode$M);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$J = [
+const __iconNode$L = [
   ["path", { d: "m16 16 2 2 4-4", key: "gfu2re" }],
   [
     "path",
@@ -68138,14 +68227,14 @@ const __iconNode$J = [
   ["polyline", { points: "3.29 7 12 12 20.71 7", key: "ousv84" }],
   ["line", { x1: "12", x2: "12", y1: "22", y2: "12", key: "a4e8g8" }]
 ];
-const PackageCheck = createLucideIcon("package-check", __iconNode$J);
+const PackageCheck = createLucideIcon("package-check", __iconNode$L);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$I = [
+const __iconNode$K = [
   [
     "path",
     {
@@ -68157,14 +68246,14 @@ const __iconNode$I = [
   ["polyline", { points: "3.29 7 12 12 20.71 7", key: "ousv84" }],
   ["path", { d: "m7.5 4.27 9 5.15", key: "1c824w" }]
 ];
-const Package = createLucideIcon("package", __iconNode$I);
+const Package = createLucideIcon("package", __iconNode$K);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$H = [
+const __iconNode$J = [
   [
     "path",
     {
@@ -68177,25 +68266,25 @@ const __iconNode$H = [
   ["circle", { cx: "6.5", cy: "12.5", r: ".5", fill: "currentColor", key: "qy21gx" }],
   ["circle", { cx: "8.5", cy: "7.5", r: ".5", fill: "currentColor", key: "fotxhn" }]
 ];
-const Palette = createLucideIcon("palette", __iconNode$H);
+const Palette = createLucideIcon("palette", __iconNode$J);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$G = [
+const __iconNode$I = [
   ["rect", { x: "14", y: "3", width: "5", height: "18", rx: "1", key: "kaeet6" }],
   ["rect", { x: "5", y: "3", width: "5", height: "18", rx: "1", key: "1wsw3u" }]
 ];
-const Pause = createLucideIcon("pause", __iconNode$G);
+const Pause = createLucideIcon("pause", __iconNode$I);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$F = [
+const __iconNode$H = [
   ["path", { d: "M13 21h8", key: "1jsn5i" }],
   [
     "path",
@@ -68205,14 +68294,14 @@ const __iconNode$F = [
     }
   ]
 ];
-const PenLine = createLucideIcon("pen-line", __iconNode$F);
+const PenLine = createLucideIcon("pen-line", __iconNode$H);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$E = [
+const __iconNode$G = [
   [
     "path",
     {
@@ -68222,26 +68311,26 @@ const __iconNode$E = [
   ],
   ["path", { d: "m15 5 4 4", key: "1mk7zo" }]
 ];
-const Pencil = createLucideIcon("pencil", __iconNode$E);
+const Pencil = createLucideIcon("pencil", __iconNode$G);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$D = [
+const __iconNode$F = [
   ["line", { x1: "19", x2: "5", y1: "5", y2: "19", key: "1x9vlm" }],
   ["circle", { cx: "6.5", cy: "6.5", r: "2.5", key: "4mh3h7" }],
   ["circle", { cx: "17.5", cy: "17.5", r: "2.5", key: "1mdrzq" }]
 ];
-const Percent = createLucideIcon("percent", __iconNode$D);
+const Percent = createLucideIcon("percent", __iconNode$F);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$C = [
+const __iconNode$E = [
   ["path", { d: "M13 2a9 9 0 0 1 9 9", key: "1itnx2" }],
   ["path", { d: "M13 6a5 5 0 0 1 5 5", key: "11nki7" }],
   [
@@ -68252,7 +68341,40 @@ const __iconNode$C = [
     }
   ]
 ];
-const PhoneCall = createLucideIcon("phone-call", __iconNode$C);
+const PhoneCall = createLucideIcon("phone-call", __iconNode$E);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$D = [
+  [
+    "path",
+    {
+      d: "M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384",
+      key: "9njp5v"
+    }
+  ]
+];
+const Phone = createLucideIcon("phone", __iconNode$D);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$C = [
+  ["path", { d: "M12 17v5", key: "bb1du9" }],
+  [
+    "path",
+    {
+      d: "M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z",
+      key: "1nkz8b"
+    }
+  ]
+];
+const Pin = createLucideIcon("pin", __iconNode$C);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -68263,12 +68385,12 @@ const __iconNode$B = [
   [
     "path",
     {
-      d: "M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384",
-      key: "9njp5v"
+      d: "M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z",
+      key: "10ikf1"
     }
   ]
 ];
-const Phone = createLucideIcon("phone", __iconNode$B);
+const Play = createLucideIcon("play", __iconNode$B);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -68276,15 +68398,10 @@ const Phone = createLucideIcon("phone", __iconNode$B);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$A = [
-  [
-    "path",
-    {
-      d: "M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z",
-      key: "10ikf1"
-    }
-  ]
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "M12 5v14", key: "s699le" }]
 ];
-const Play = createLucideIcon("play", __iconNode$A);
+const Plus = createLucideIcon("plus", __iconNode$A);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -68292,17 +68409,6 @@ const Play = createLucideIcon("play", __iconNode$A);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$z = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "M12 5v14", key: "s699le" }]
-];
-const Plus = createLucideIcon("plus", __iconNode$z);
-/**
- * @license lucide-react v0.546.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$y = [
   [
     "path",
     {
@@ -68313,7 +68419,20 @@ const __iconNode$y = [
   ["path", { d: "M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6", key: "1itne7" }],
   ["rect", { x: "6", y: "14", width: "12", height: "8", rx: "1", key: "1ue0tg" }]
 ];
-const Printer = createLucideIcon("printer", __iconNode$y);
+const Printer = createLucideIcon("printer", __iconNode$z);
+/**
+ * @license lucide-react v0.546.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$y = [
+  ["path", { d: "M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8", key: "v9h5vc" }],
+  ["path", { d: "M21 3v5h-5", key: "1q7to0" }],
+  ["path", { d: "M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16", key: "3uifl3" }],
+  ["path", { d: "M8 16H3v5", key: "1cv678" }]
+];
+const RefreshCw = createLucideIcon("refresh-cw", __iconNode$y);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -68321,12 +68440,10 @@ const Printer = createLucideIcon("printer", __iconNode$y);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$x = [
-  ["path", { d: "M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8", key: "v9h5vc" }],
-  ["path", { d: "M21 3v5h-5", key: "1q7to0" }],
-  ["path", { d: "M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16", key: "3uifl3" }],
-  ["path", { d: "M8 16H3v5", key: "1cv678" }]
+  ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
+  ["path", { d: "M3 3v5h5", key: "1xhq8a" }]
 ];
-const RefreshCw = createLucideIcon("refresh-cw", __iconNode$x);
+const RotateCcw = createLucideIcon("rotate-ccw", __iconNode$x);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -68334,10 +68451,18 @@ const RefreshCw = createLucideIcon("refresh-cw", __iconNode$x);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$w = [
-  ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
-  ["path", { d: "M3 3v5h5", key: "1xhq8a" }]
+  ["path", { d: "M15 12h-5", key: "r7krc0" }],
+  ["path", { d: "M15 8h-5", key: "1khuty" }],
+  ["path", { d: "M19 17V5a2 2 0 0 0-2-2H4", key: "zz82l3" }],
+  [
+    "path",
+    {
+      d: "M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3",
+      key: "1ph1d7"
+    }
+  ]
 ];
-const RotateCcw = createLucideIcon("rotate-ccw", __iconNode$w);
+const ScrollText = createLucideIcon("scroll-text", __iconNode$w);
 /**
  * @license lucide-react v0.546.0 - ISC
  *
@@ -75691,9 +75816,23 @@ ${referralUrl}`
         ] })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 bg-white rounded-2xl border border-slate-200/80 shadow-xs space-y-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CircleQuestionMark, { className: "w-4 h-4 text-[#00873E]" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "কীভাবে ২% কমিশন কাজ করে" })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(CircleQuestionMark, { className: "w-4 h-4 text-[#00873E]" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "কীভাবে ২% কমিশন কাজ করে" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "button",
+            {
+              type: "button",
+              onClick: () => setProfileActiveTab("rules"),
+              className: "text-xs font-bold text-[#00873E] hover:text-[#006B31] inline-flex items-center gap-1 cursor-pointer",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "সব নিয়ম, শর্ত ও নোটিশ পড়ুন" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-3.5 h-3.5" })
+              ]
+            }
+          )
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-3 text-xs", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3.5 rounded-xl bg-slate-50 border border-slate-200/60", children: [
@@ -76118,6 +76257,251 @@ ${prodUrl}`
     ] })
   ] });
 };
+const CustomerRulesNotices = () => {
+  const {
+    customerNotices,
+    language,
+    setProfileActiveTab,
+    setCurrentPage
+  } = useApp();
+  const [categoryFilter, setCategoryFilter] = reactExports.useState("all");
+  const [failedImages, setFailedImages] = reactExports.useState({});
+  const sortedNotices = reactExports.useMemo(() => {
+    const filtered = categoryFilter === "all" ? customerNotices : customerNotices.filter((n) => n.category === categoryFilter);
+    return [...filtered].sort((a, b) => {
+      if (Boolean(a.isPinned) !== Boolean(b.isPinned)) {
+        return a.isPinned ? -1 : 1;
+      }
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+  }, [customerNotices, categoryFilter]);
+  const counts = reactExports.useMemo(() => {
+    return {
+      all: customerNotices.length,
+      notice: customerNotices.filter((n) => n.category === "notice").length,
+      rule: customerNotices.filter((n) => n.category === "rule").length,
+      condition: customerNotices.filter((n) => n.category === "condition").length
+    };
+  }, [customerNotices]);
+  const getCategoryMeta = (cat) => {
+    switch (cat) {
+      case "notice":
+        return {
+          labelBn: "জরুরি নোটিশ",
+          labelEn: "Notice",
+          textClass: "text-amber-800",
+          icon: Bell
+        };
+      case "rule":
+        return {
+          labelBn: "আয়ের নিয়ম",
+          labelEn: "Earning Rule",
+          textClass: "text-[#00873E]",
+          icon: CircleCheck
+        };
+      case "condition":
+        return {
+          labelBn: "শর্তাবলী",
+          labelEn: "Condition",
+          textClass: "text-rose-700",
+          icon: CircleAlert
+        };
+    }
+  };
+  const formatNoticeDate = (iso) => {
+    try {
+      return new Date(iso).toLocaleDateString(language === "bn" ? "bn-BD" : "en-US", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+      });
+    } catch {
+      return "";
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "rounded-3xl bg-white border border-slate-200/80 shadow-xs overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-gradient-to-br from-[#062919] via-[#0B4626] to-[#046A31] p-6 sm:p-8 text-white", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row md:items-center justify-between gap-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2.5 max-w-2xl", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-300", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Coins, { className: "w-4 h-4 shrink-0" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "গ্রাহক আয় নির্দেশিকা" : "Customer Earning Guide" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl sm:text-2xl font-black tracking-tight leading-snug", children: language === "bn" ? "বাংলা বাজার থেকে যেভাবে আয় করবেন ও টাকা তুলবেন" : "How to Earn Commission & Withdraw from Bangla Bazar" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs sm:text-sm text-emerald-100/90 leading-relaxed", children: language === "bn" ? "কোনো ইনভেস্টমেন্ট ছাড়াই প্রোডাক্টের লিংক শেয়ার করে প্রতি সফল অর্ডারে ২% কমিশন ও বন্ধুদের রেফার করে নিয়মিত আয় করুন।" : "Earn 2% commission on every completed order from your shared product links plus ৳30 friend referral bonuses with zero investment." })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2.5 shrink-0", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "button",
+            {
+              type: "button",
+              onClick: () => setProfileActiveTab("referral"),
+              className: "min-h-[44px] px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl inline-flex items-center gap-1.5 transition-colors cursor-pointer",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Share2, { className: "w-4 h-4" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "শেয়ার লিংক নিন" : "Get Share Links" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "button",
+            {
+              type: "button",
+              onClick: () => setProfileActiveTab("wallet"),
+              className: "min-h-[44px] px-4 py-2.5 bg-white/15 hover:bg-white/25 text-white font-bold text-xs rounded-xl inline-flex items-center gap-1.5 border border-white/20 transition-colors cursor-pointer",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Wallet, { className: "w-4 h-4" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "ওয়ালেট ও উত্তোলন" : "Wallet & Cashout" })
+              ]
+            }
+          )
+        ] })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-black text-[#00873E] tabular-nums", children: "ধাপ ০১" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Share2, { className: "w-4 h-4 text-[#00873E] shrink-0" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-sm text-slate-900", children: "যেকোনো প্রোডাক্টের পার্সোনাল লিংক শেয়ার করুন" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-slate-600 leading-relaxed", children: [
+            "লগইন থাকা অবস্থায় যেকোনো পণ্যের পেজ বা প্রোফাইলের ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-slate-800", children: "শেয়ার ও রেফার আয়" }),
+            " ট্যাব থেকে আপনার ইউনিক শেয়ার লিংক কপি করুন এবং ফেসবুক, হোয়াটসঅ্যাপ বা মেসেঞ্জারে পাঠান।"
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-black text-[#00873E] tabular-nums", children: "ধাপ ০২" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Coins, { className: "w-4 h-4 text-amber-600 shrink-0" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-sm text-slate-900", children: "একই লিংক থেকে আনলিমিটেড ২% কমিশন পান" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-slate-600 leading-relaxed", children: [
+            "আপনার শেয়ার করা একটি লিংক থেকে যদি ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-slate-800", children: "৫ জন বা তার বেশি" }),
+            " কাস্টমার অর্ডার করে, তবে প্রত্যেকের পণ্যের দামের ওপর ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-slate-800", children: "২% করে" }),
+            " কমিশন আপনার একাউন্টে হিসাব হবে।"
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-black text-[#00873E] tabular-nums", children: "ধাপ ০৩" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ShieldCheck, { className: "w-4 h-4 text-emerald-600 shrink-0" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-sm text-slate-900", children: "ডেলিভারিতে অটো যোগ ও বাতিল হলে অটো কর্তন" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-slate-600 leading-relaxed", children: [
+            "কাস্টমার পণ্য হাতে পেয়ে অর্ডার সম্পূর্ণ (",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-slate-800", children: "Delivered" }),
+            ") হলে কমিশন অটোমেটিক আপনার ওয়ালেটে যোগ হবে। আর অর্ডার বাতিল (",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-slate-800", children: "Cancelled" }),
+            ") হলে সেই ২% কমিশন অটোমেটিক কেটে নেওয়া হবে।"
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-black text-[#00873E] tabular-nums", children: "ধাপ ০৪" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Gift, { className: "w-4 h-4 text-[#00873E] shrink-0" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-sm text-slate-900", children: "বন্ধু রেফার (৳৩০) ও টাকা উত্তোলন (সর্বনিম্ন ৳৫০)" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-slate-600 leading-relaxed", children: [
+            "আপনার রেফার কোডে বন্ধু ১ম অর্ডার করলে ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-slate-800", children: "৳৩০ বোনাস" }),
+            " পাবেন। ওয়ালেটে ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-slate-800", children: "৳৫০+" }),
+            " জমলেই বিকাশ, নগদ, উপায় বা রকেটে তুলতে অথবা পণ্য কিনতে পারবেন।"
+          ] })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "rounded-3xl bg-white border border-slate-200/80 shadow-xs overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-[#00873E] shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollText, { className: "w-5 h-5" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-base sm:text-lg font-bold text-slate-900", children: language === "bn" ? "অফিশিয়াল নিয়ম, শর্ত ও নোটিশ বোর্ড" : "Official Rules, Conditions & Notices" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-slate-500 mt-0.5 tabular-nums", children: language === "bn" ? `মোট ${counts.all}টি প্রকাশিত বিজ্ঞপ্তি ও নীতিমালা` : `${counts.all} published policies & notices` })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            type: "button",
+            onClick: () => setCurrentPage("shop"),
+            className: "min-h-[40px] px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 transition-colors cursor-pointer self-start sm:self-auto",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ShoppingBag, { className: "w-3.5 h-3.5 text-[#00873E]" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language === "bn" ? "শপ ব্রাউজ করুন" : "Browse Shop" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-3.5 h-3.5" })
+            ]
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-5 sm:px-6 pt-4 pb-2 flex items-center gap-2 overflow-x-auto scrollbar-none", children: [
+        { id: "all", label: `সবগুলো (${counts.all})` },
+        { id: "notice", label: `নোটিশ (${counts.notice})` },
+        { id: "rule", label: `আয়ের নিয়ম (${counts.rule})` },
+        { id: "condition", label: `শর্তাবলী (${counts.condition})` }
+      ].map((tab) => {
+        const isSelected = categoryFilter === tab.id;
+        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "button",
+            onClick: () => setCategoryFilter(tab.id),
+            className: `min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap shrink-0 transition-colors cursor-pointer tabular-nums ${isSelected ? "bg-[#00873E] text-white" : "bg-slate-100 hover:bg-slate-200 text-slate-700"}`,
+            children: tab.label
+          },
+          tab.id
+        );
+      }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-5 sm:p-6 space-y-4", children: sortedNotices.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "py-12 text-center space-y-2 border border-dashed border-slate-200 rounded-2xl bg-slate-50/50", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollText, { className: "w-9 h-9 mx-auto text-slate-300" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-bold text-slate-700", children: language === "bn" ? "এই বিভাগে কোনো নিয়ম বা নোটিশ নেই" : "No notices or rules found in this section" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-slate-500", children: language === "bn" ? "নতুন আপডেট প্রকাশিত হলে এখানে স্বয়ংক্রিয়ভাবে দেখা যাবে।" : "New notices published by admin will appear here automatically." })
+      ] }) : sortedNotices.map((item) => {
+        const meta = getCategoryMeta(item.category);
+        const CatIcon = meta.icon;
+        const showImage = Boolean(item.image && !failedImages[item.id]);
+        return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "article",
+          {
+            className: "p-5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white transition-colors space-y-3",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2 text-xs", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 font-bold", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(CatIcon, { className: `w-4 h-4 shrink-0 ${meta.textClass}` }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: meta.textClass, children: language === "bn" ? meta.labelBn : meta.labelEn }),
+                  item.isPinned && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-slate-300", children: "·" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 text-amber-700 font-bold", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Pin, { className: "w-3.5 h-3.5" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "গুরুত্বপূর্ণ" })
+                    ] })
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("time", { className: "text-[11px] text-slate-500 tabular-nums", children: formatNoticeDate(item.updatedAt || item.createdAt) })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-bold text-slate-900 leading-snug", children: language === "bn" ? item.titleBn : item.titleEn || item.titleBn }),
+              showImage && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl overflow-hidden border border-slate-200 bg-white max-w-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  src: item.image,
+                  alt: item.titleBn,
+                  referrerPolicy: "no-referrer",
+                  onError: () => setFailedImages((prev) => ({ ...prev, [item.id]: true })),
+                  className: "w-full max-h-80 object-cover"
+                }
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line", children: language === "bn" ? item.contentBn : item.contentEn || item.contentBn })
+            ]
+          },
+          item.id
+        );
+      }) })
+    ] })
+  ] });
+};
 async function compressImageFile(file, maxWidth = 1200, maxHeight = 1200, quality = 0.82) {
   return new Promise((resolve) => {
     if (!file.type.startsWith("image/")) {
@@ -76198,6 +76582,7 @@ const ProfilePage = () => {
     viewProductDetails,
     profileActiveTab,
     setProfileActiveTab,
+    customerNotices,
     addToast,
     setIsAuthModalOpen,
     openTrackOrder,
@@ -76523,6 +76908,13 @@ const ProfilePage = () => {
       meta: "২% আয়"
     },
     {
+      id: "rules",
+      labelBn: "নিয়ম, শর্ত ও নোটিশ",
+      labelEn: "Rules & Notices",
+      icon: ScrollText,
+      meta: `${customerNotices.length}`
+    },
+    {
       id: "wishlist",
       labelBn: t.wishlist,
       labelEn: "Wishlist",
@@ -76727,6 +77119,7 @@ const ProfilePage = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-9 space-y-6", ref: profileSectionRef, children: [
         activeTab === "wallet" && /* @__PURE__ */ jsxRuntimeExports.jsx(CustomerWallet, {}),
         activeTab === "referral" && /* @__PURE__ */ jsxRuntimeExports.jsx(CustomerReferral, {}),
+        activeTab === "rules" && /* @__PURE__ */ jsxRuntimeExports.jsx(CustomerRulesNotices, {}),
         activeTab === "orders" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-between", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-lg sm:text-xl font-bold text-slate-900 tabular-nums", children: [
             t.myOrders,
@@ -80300,9 +80693,24 @@ const AdminPage = () => {
     adminCreateUser,
     adminUpdateUser,
     adminDeleteUser,
-    adminToggleUserBlock
+    adminToggleUserBlock,
+    customerNotices,
+    addCustomerNotice,
+    updateCustomerNotice,
+    deleteCustomerNotice,
+    resetCustomerNoticesToDefault
   } = useApp();
   const [activeTab, setActiveTab] = reactExports.useState("overview");
+  const [noticeCategory, setNoticeCategory] = reactExports.useState("notice");
+  const [noticeTitleBn, setNoticeTitleBn] = reactExports.useState("");
+  const [noticeContentBn, setNoticeContentBn] = reactExports.useState("");
+  const [noticeImage, setNoticeImage] = reactExports.useState("");
+  const [noticeIsPinned, setNoticeIsPinned] = reactExports.useState(false);
+  const [isUploadingNoticeImage, setIsUploadingNoticeImage] = reactExports.useState(false);
+  const [noticeToEdit, setNoticeToEdit] = reactExports.useState(null);
+  const [noticeAdminFilter, setNoticeAdminFilter] = reactExports.useState("all");
+  const [noticeAdminSearch, setNoticeAdminSearch] = reactExports.useState("");
+  const noticeFileInputRef = reactExports.useRef(null);
   const [walletTxnSearch, setWalletTxnSearch] = reactExports.useState("");
   const [walletTxnFilter, setWalletTxnFilter] = reactExports.useState("all");
   const [isAdjustModalOpen, setIsAdjustModalOpen] = reactExports.useState(false);
@@ -80625,6 +81033,21 @@ const AdminPage = () => {
             setIsCustomerFormModalOpen(false);
           }
         }
+        break;
+      case "notice":
+        if (deleteConfirmation.id) {
+          deleteCustomerNotice(deleteConfirmation.id);
+          if ((noticeToEdit == null ? void 0 : noticeToEdit.id) === deleteConfirmation.id) {
+            setNoticeToEdit(null);
+            setNoticeTitleBn("");
+            setNoticeContentBn("");
+            setNoticeImage("");
+            setNoticeIsPinned(false);
+          }
+        }
+        break;
+      case "reset-notices":
+        resetCustomerNoticesToDefault();
         break;
       case "reset-products":
         resetProductsToDefault();
@@ -81042,6 +81465,7 @@ const AdminPage = () => {
         { id: "categories", label: "ক্যাটাগরি ম্যানেজমেন্ট", icon: Layers, count: categories.length },
         { id: "design", label: "কালার, থিম ও ডিজাইন", icon: Palette },
         { id: "banners", label: "ব্যানার স্লাইডার কন্ট্রোল", icon: Image$1 },
+        { id: "notices", label: "নিয়ম, শর্ত ও নোটিশ", icon: ScrollText, count: customerNotices.length },
         { id: "security", label: "পিন ও ব্যাকআপ", icon: KeyRound },
         { id: "supabase", label: "Supabase ব্যাকএন্ড", icon: Database, badge: supabaseConnected ? "সংযুক্ত" : void 0 }
       ].map((tab) => {
@@ -84304,6 +84728,370 @@ const AdminPage = () => {
             ] }, txn.id);
           }) })
         ] }) }) })
+      ] }),
+      activeTab === "notices" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-slate-800/80 rounded-2xl border border-slate-700/80 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-lg font-black text-white flex items-center gap-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollText, { className: "w-5 h-5 text-amber-400" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "কাস্টমার নিয়ম, শর্তাবলী ও নোটিশ ম্যানেজমেন্ট" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-slate-400 mt-1", children: 'এখান থেকে যেকোনো নতুন নিয়ম, শর্ত বা জরুরি নোটিশ আপলোড, এডিট ও ডিলিট করলে কাস্টমারের প্রোফাইলে ("নিয়ম, শর্ত ও নোটিশ") সরাসরি লাইভ দেখা যাবে।' })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "button",
+            {
+              type: "button",
+              onClick: () => setDeleteConfirmation({
+                type: "reset-notices",
+                name: "ডিফল্ট নিয়ম ও শর্তাবলী পুনরুদ্ধার",
+                details: "বর্তমান তালিকা পরিবর্তন হয়ে শুরুর ডিফল্ট ৪টি নিয়ম ও নোটিশ ফিরে আসবে।"
+              }),
+              className: "min-h-[40px] px-4 py-2 bg-slate-900 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 whitespace-nowrap cursor-pointer self-start sm:self-auto",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(RotateCcw, { className: "w-3.5 h-3.5" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "ডিফল্ট নিয়ম ফিরিয়ে আনুন" })
+              ]
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-12 gap-6 items-start", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "form",
+            {
+              onSubmit: (e) => {
+                e.preventDefault();
+                const cleanTitle = noticeTitleBn.trim();
+                const cleanContent = noticeContentBn.trim();
+                if (!cleanTitle || !cleanContent) {
+                  addToast("শিরোনাম এবং বিস্তারিত বিবরণ অবশ্যই লিখতে হবে", "error");
+                  return;
+                }
+                if (noticeToEdit) {
+                  updateCustomerNotice(noticeToEdit.id, {
+                    category: noticeCategory,
+                    titleBn: cleanTitle,
+                    contentBn: cleanContent,
+                    image: noticeImage.trim() || void 0,
+                    isPinned: noticeIsPinned
+                  });
+                  setNoticeToEdit(null);
+                } else {
+                  addCustomerNotice({
+                    category: noticeCategory,
+                    titleBn: cleanTitle,
+                    contentBn: cleanContent,
+                    image: noticeImage.trim() || void 0,
+                    isPinned: noticeIsPinned
+                  });
+                }
+                setNoticeTitleBn("");
+                setNoticeContentBn("");
+                setNoticeImage("");
+                setNoticeIsPinned(false);
+              },
+              className: "lg:col-span-5 bg-slate-800/80 rounded-2xl border border-slate-700/80 p-5 space-y-4",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between border-b border-slate-700/70 pb-3", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-sm font-black text-white flex items-center gap-2", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { className: "w-4 h-4 text-emerald-400" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: noticeToEdit ? "নিয়ম / নোটিশ এডিট করুন" : "নতুন নিয়ম, শর্ত বা নোটিশ আপলোড করুন" })
+                  ] }),
+                  noticeToEdit && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "button",
+                    {
+                      type: "button",
+                      onClick: () => {
+                        setNoticeToEdit(null);
+                        setNoticeTitleBn("");
+                        setNoticeContentBn("");
+                        setNoticeImage("");
+                        setNoticeIsPinned(false);
+                      },
+                      className: "text-xs text-slate-400 hover:text-white font-bold cursor-pointer",
+                      children: "বাতিল"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-bold text-slate-300", children: "ধরন নির্বাচন করুন" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-2", children: [
+                    { id: "notice", label: "নোটিশ" },
+                    { id: "rule", label: "আয়ের নিয়ম" },
+                    { id: "condition", label: "শর্তাবলী" }
+                  ].map((opt) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "button",
+                    {
+                      type: "button",
+                      onClick: () => setNoticeCategory(opt.id),
+                      className: `min-h-[40px] py-2 px-2.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${noticeCategory === opt.id ? "bg-amber-500 text-slate-950 border-amber-400" : "bg-slate-900 text-slate-300 border-slate-700 hover:border-slate-500"}`,
+                      children: opt.label
+                    },
+                    opt.id
+                  )) })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-bold text-slate-300", children: "শিরোনাম *" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "input",
+                    {
+                      type: "text",
+                      required: true,
+                      value: noticeTitleBn,
+                      onChange: (e) => setNoticeTitleBn(e.target.value),
+                      placeholder: "যেমন: প্রোডাক্ট শেয়ার কমিশন সংক্রান্ত নতুন ঘোষণা",
+                      className: "w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-bold text-slate-300", children: "বিস্তারিত বিবরণ *" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "textarea",
+                    {
+                      required: true,
+                      rows: 6,
+                      value: noticeContentBn,
+                      onChange: (e) => setNoticeContentBn(e.target.value),
+                      placeholder: "কাস্টমারদের জন্য নিয়ম, শর্ত বা নোটিশটি বিস্তারিত লিখুন...",
+                      className: "w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 leading-relaxed"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-xs font-bold text-slate-300", children: "নোটিশ / ব্যানার ছবি (ঐচ্ছিক)" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "input",
+                    {
+                      ref: noticeFileInputRef,
+                      type: "file",
+                      accept: "image/*",
+                      className: "hidden",
+                      onChange: async (e) => {
+                        var _a2;
+                        const file = (_a2 = e.target.files) == null ? void 0 : _a2[0];
+                        if (!file) return;
+                        setIsUploadingNoticeImage(true);
+                        try {
+                          const compressed = await compressImageFile(file, 1e3, 1e3, 0.8);
+                          if (compressed) {
+                            setNoticeImage(compressed);
+                            addToast("ছবি যুক্ত করা হয়েছে!", "success");
+                          }
+                        } catch {
+                          addToast("ছবি প্রসেস করতে সমস্যা হয়েছে", "error");
+                        } finally {
+                          setIsUploadingNoticeImage(false);
+                          e.target.value = "";
+                        }
+                      }
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "button",
+                      {
+                        type: "button",
+                        disabled: isUploadingNoticeImage,
+                        onClick: () => {
+                          var _a2;
+                          return (_a2 = noticeFileInputRef.current) == null ? void 0 : _a2.click();
+                        },
+                        className: "min-h-[40px] px-3.5 py-2 bg-slate-900 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-bold text-slate-200 inline-flex items-center gap-1.5 cursor-pointer disabled:opacity-50",
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { className: "w-3.5 h-3.5 text-amber-400" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: isUploadingNoticeImage ? "প্রসেস হচ্ছে..." : "ছবি আপলোড করুন" })
+                        ]
+                      }
+                    ),
+                    noticeImage && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "button",
+                      {
+                        type: "button",
+                        onClick: () => setNoticeImage(""),
+                        className: "min-h-[40px] px-3 py-2 bg-rose-950/60 hover:bg-rose-900 text-rose-300 border border-rose-800/60 rounded-xl text-xs font-bold cursor-pointer",
+                        children: "ছবি সরান"
+                      }
+                    )
+                  ] }),
+                  noticeImage && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl overflow-hidden border border-slate-700 bg-slate-950", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "img",
+                    {
+                      src: noticeImage,
+                      alt: "Notice preview",
+                      className: "w-full max-h-44 object-cover"
+                    }
+                  ) })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex items-center gap-2.5 text-xs text-slate-300 font-bold cursor-pointer pt-1", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "input",
+                    {
+                      type: "checkbox",
+                      checked: noticeIsPinned,
+                      onChange: (e) => setNoticeIsPinned(e.target.checked),
+                      className: "w-4 h-4 rounded accent-amber-500 cursor-pointer"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "সবার উপরে গুরুত্বপূর্ণ হিসেবে পিন করে রাখুন" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "submit",
+                    className: "w-full min-h-[44px] py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer",
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheckBig, { className: "w-4 h-4" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: noticeToEdit ? "পরিবর্তন সেভ করুন" : "প্রকাশ ও আপলোড করুন" })
+                    ]
+                  }
+                )
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-7 space-y-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-slate-800/80 rounded-2xl border border-slate-700/80 p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex-1", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "input",
+                  {
+                    type: "text",
+                    value: noticeAdminSearch,
+                    onChange: (e) => setNoticeAdminSearch(e.target.value),
+                    placeholder: "শিরোনাম বা বিবরণ খুঁজুন...",
+                    className: "w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-1.5 overflow-x-auto scrollbar-none", children: [
+                { id: "all", label: "সবগুলো" },
+                { id: "notice", label: "নোটিশ" },
+                { id: "rule", label: "নিয়ম" },
+                { id: "condition", label: "শর্ত" }
+              ].map((f) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  type: "button",
+                  onClick: () => setNoticeAdminFilter(f.id),
+                  className: `px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer ${noticeAdminFilter === f.id ? "bg-amber-500 text-slate-950" : "bg-slate-900 text-slate-300 border border-slate-700 hover:text-white"}`,
+                  children: f.label
+                },
+                f.id
+              )) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: (() => {
+              const q = noticeAdminSearch.trim().toLowerCase();
+              const filtered = customerNotices.filter((n) => noticeAdminFilter === "all" || n.category === noticeAdminFilter).filter(
+                (n) => !q || n.titleBn.toLowerCase().includes(q) || n.contentBn.toLowerCase().includes(q)
+              ).sort((a, b) => {
+                if (Boolean(a.isPinned) !== Boolean(b.isPinned)) return a.isPinned ? -1 : 1;
+                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+              });
+              if (filtered.length === 0) {
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-slate-800/60 border border-slate-700 rounded-2xl p-10 text-center space-y-2", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollText, { className: "w-9 h-9 mx-auto text-slate-500" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-bold text-slate-300", children: "কোনো নিয়ম বা নোটিশ পাওয়া যায়নি" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-slate-500", children: "বাম পাশের ফর্ম ব্যবহার করে নতুন নিয়ম, শর্ত বা নোটিশ আপলোড করুন।" })
+                ] });
+              }
+              return filtered.map((item) => {
+                const catLabel = item.category === "notice" ? "নোটিশ" : item.category === "rule" ? "আয়ের নিয়ম" : "শর্তাবলী";
+                const catColor = item.category === "notice" ? "text-amber-400" : item.category === "rule" ? "text-emerald-400" : "text-rose-400";
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    className: "bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 sm:p-5 space-y-3",
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-3", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1 min-w-0 flex-1", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2 text-xs font-bold", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: catColor, children: catLabel }),
+                            item.isPinned && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-slate-600", children: "·" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 text-amber-300", children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(Pin, { className: "w-3 h-3" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "পিন করা" })
+                              ] })
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-slate-600", children: "·" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] font-normal text-slate-400 tabular-nums", children: new Date(item.updatedAt || item.createdAt).toLocaleDateString("bn-BD", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric"
+                            }) })
+                          ] }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-sm sm:text-base font-bold text-white leading-snug", children: item.titleBn })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1.5 shrink-0", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                            "button",
+                            {
+                              type: "button",
+                              onClick: () => updateCustomerNotice(item.id, { isPinned: !item.isPinned }),
+                              title: item.isPinned ? "আনপিন করুন" : "পিন করুন",
+                              className: `min-h-[36px] px-2.5 py-1.5 rounded-lg text-xs font-bold border transition-colors cursor-pointer inline-flex items-center gap-1 ${item.isPinned ? "bg-amber-500/20 text-amber-300 border-amber-500/40" : "bg-slate-900 text-slate-400 border-slate-700 hover:text-white"}`,
+                              children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(Pin, { className: "w-3.5 h-3.5" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item.isPinned ? "পিন্ড" : "পিন" })
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                            "button",
+                            {
+                              type: "button",
+                              onClick: () => {
+                                setNoticeToEdit(item);
+                                setNoticeCategory(item.category);
+                                setNoticeTitleBn(item.titleBn);
+                                setNoticeContentBn(item.contentBn);
+                                setNoticeImage(item.image || "");
+                                setNoticeIsPinned(Boolean(item.isPinned));
+                              },
+                              className: "min-h-[36px] px-2.5 py-1.5 bg-slate-900 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-bold inline-flex items-center gap-1 cursor-pointer",
+                              children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(PenLine, { className: "w-3.5 h-3.5" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "এডিট" })
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                            "button",
+                            {
+                              type: "button",
+                              onClick: () => setDeleteConfirmation({
+                                type: "notice",
+                                id: item.id,
+                                name: item.titleBn,
+                                details: `${catLabel} · কাস্টমার প্রোফাইল থেকেও মুছে যাবে`
+                              }),
+                              className: "min-h-[36px] px-2.5 py-1.5 bg-rose-950/70 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-800/60 rounded-lg text-xs font-bold inline-flex items-center gap-1 transition-colors cursor-pointer",
+                              children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { className: "w-3.5 h-3.5" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "ডিলিট" })
+                              ]
+                            }
+                          )
+                        ] })
+                      ] }),
+                      item.image && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl overflow-hidden border border-slate-700 bg-slate-950 max-w-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "img",
+                        {
+                          src: item.image,
+                          alt: item.titleBn,
+                          className: "w-full max-h-48 object-cover"
+                        }
+                      ) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-slate-300 leading-relaxed whitespace-pre-line", children: item.contentBn })
+                    ]
+                  },
+                  item.id
+                );
+              });
+            })() })
+          ] })
+        ] })
       ] })
     ] }),
     isAdjustModalOpen && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-slate-900 border border-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl animate-in fade-in zoom-in-95 duration-200", children: [
@@ -85377,6 +86165,7 @@ const AdminPage = () => {
             deleteConfirmation.type === "order" && "কাস্টমার অর্ডার মুছে ফেলতে চান?",
             deleteConfirmation.type === "banner" && "ব্যানার মুছে ফেলতে চান?",
             deleteConfirmation.type === "user" && "কাস্টমার অ্যাকাউন্ট মুছে ফেলতে চান?",
+            deleteConfirmation.type === "notice" && "নিয়ম / নোটিশ মুছে ফেলতে চান?",
             (deleteConfirmation.type.startsWith("reset") || deleteConfirmation.type === "factory-reset") && "রিসেট নিশ্চিত করুন"
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-slate-400 mt-1", children: "আপনি কি নিশ্চিতভাবে এই আইটেমটি স্থায়ীভাবে ডিলিট করতে চান?" })

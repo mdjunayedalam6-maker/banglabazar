@@ -51,10 +51,13 @@ import {
   Mail,
   MapPin,
   Lock,
-  EyeOff
+  EyeOff,
+  ScrollText,
+  Pin,
+  Bell
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { Product, Category, Order, OrderStatus, AdminBannerSlide, User } from '../types';
+import { Product, Category, Order, OrderStatus, AdminBannerSlide, User, CustomerRuleNotice, CustomerNoticeCategory } from '../types';
 import { BANGLADESH_DIVISIONS } from '../data/mockData';
 import { ProductEditModal } from '../components/admin/ProductEditModal';
 import { OrderInvoiceModal } from '../components/admin/OrderInvoiceModal';
@@ -108,12 +111,29 @@ export const AdminPage: React.FC = () => {
     adminCreateUser,
     adminUpdateUser,
     adminDeleteUser,
-    adminToggleUserBlock
+    adminToggleUserBlock,
+    customerNotices,
+    addCustomerNotice,
+    updateCustomerNotice,
+    deleteCustomerNotice,
+    resetCustomerNoticesToDefault
   } = useApp();
 
   const [activeTab, setActiveTab] = useState<
-    'overview' | 'orders' | 'customers' | 'products' | 'categories' | 'design' | 'banners' | 'security' | 'supabase' | 'shopbase' | 'wallet'
+    'overview' | 'orders' | 'customers' | 'products' | 'categories' | 'design' | 'banners' | 'notices' | 'security' | 'supabase' | 'shopbase' | 'wallet'
   >('overview');
+
+  // Rules, Conditions & Notices admin state
+  const [noticeCategory, setNoticeCategory] = useState<CustomerNoticeCategory>('notice');
+  const [noticeTitleBn, setNoticeTitleBn] = useState('');
+  const [noticeContentBn, setNoticeContentBn] = useState('');
+  const [noticeImage, setNoticeImage] = useState('');
+  const [noticeIsPinned, setNoticeIsPinned] = useState(false);
+  const [isUploadingNoticeImage, setIsUploadingNoticeImage] = useState(false);
+  const [noticeToEdit, setNoticeToEdit] = useState<CustomerRuleNotice | null>(null);
+  const [noticeAdminFilter, setNoticeAdminFilter] = useState<'all' | CustomerNoticeCategory>('all');
+  const [noticeAdminSearch, setNoticeAdminSearch] = useState('');
+  const noticeFileInputRef = useRef<HTMLInputElement>(null);
 
   // Wallet admin state
   const [walletTxnSearch, setWalletTxnSearch] = useState('');
@@ -434,7 +454,7 @@ export const AdminPage: React.FC = () => {
 
   // Universal Delete Confirmation Dialog State (100% Reliable in iframe sandbox)
   const [deleteConfirmation, setDeleteConfirmation] = useState<{
-    type: 'product' | 'category' | 'order' | 'banner' | 'user' | 'reset-products' | 'reset-categories' | 'reset-settings' | 'factory-reset' | 'bulk-products';
+    type: 'product' | 'category' | 'order' | 'banner' | 'user' | 'notice' | 'reset-notices' | 'reset-products' | 'reset-categories' | 'reset-settings' | 'factory-reset' | 'bulk-products';
     id?: string;
     name: string;
     details?: string;
@@ -500,6 +520,23 @@ export const AdminPage: React.FC = () => {
             setIsCustomerFormModalOpen(false);
           }
         }
+        break;
+
+      case 'notice':
+        if (deleteConfirmation.id) {
+          deleteCustomerNotice(deleteConfirmation.id);
+          if (noticeToEdit?.id === deleteConfirmation.id) {
+            setNoticeToEdit(null);
+            setNoticeTitleBn('');
+            setNoticeContentBn('');
+            setNoticeImage('');
+            setNoticeIsPinned(false);
+          }
+        }
+        break;
+
+      case 'reset-notices':
+        resetCustomerNoticesToDefault();
         break;
 
       case 'reset-products':
@@ -1001,6 +1038,7 @@ export const AdminPage: React.FC = () => {
             { id: 'categories', label: 'ক্যাটাগরি ম্যানেজমেন্ট', icon: Layers, count: categories.length },
             { id: 'design', label: 'কালার, থিম ও ডিজাইন', icon: Palette },
             { id: 'banners', label: 'ব্যানার স্লাইডার কন্ট্রোল', icon: ImageIcon },
+            { id: 'notices', label: 'নিয়ম, শর্ত ও নোটিশ', icon: ScrollText, count: customerNotices.length },
             { id: 'security', label: 'পিন ও ব্যাকআপ', icon: KeyRound },
             { id: 'supabase', label: 'Supabase ব্যাকএন্ড', icon: Database, badge: supabaseConnected ? 'সংযুক্ত' : undefined },
           ].map((tab) => {
@@ -4493,6 +4531,419 @@ export const AdminPage: React.FC = () => {
             </div>
           </div>
         )}
+
+        {/* TAB: RULES, CONDITIONS & NOTICES */}
+        {activeTab === 'notices' && (
+          <div className="space-y-6">
+            {/* Header Bar */}
+            <div className="bg-slate-800/80 rounded-2xl border border-slate-700/80 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-lg font-black text-white flex items-center gap-2">
+                  <ScrollText className="w-5 h-5 text-amber-400" />
+                  <span>কাস্টমার নিয়ম, শর্তাবলী ও নোটিশ ম্যানেজমেন্ট</span>
+                </h2>
+                <p className="text-xs text-slate-400 mt-1">
+                  এখান থেকে যেকোনো নতুন নিয়ম, শর্ত বা জরুরি নোটিশ আপলোড, এডিট ও ডিলিট করলে কাস্টমারের প্রোফাইলে ("নিয়ম, শর্ত ও নোটিশ") সরাসরি লাইভ দেখা যাবে।
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() =>
+                  setDeleteConfirmation({
+                    type: 'reset-notices',
+                    name: 'ডিফল্ট নিয়ম ও শর্তাবলী পুনরুদ্ধার',
+                    details: 'বর্তমান তালিকা পরিবর্তন হয়ে শুরুর ডিফল্ট ৪টি নিয়ম ও নোটিশ ফিরে আসবে।',
+                  })
+                }
+                className="min-h-[40px] px-4 py-2 bg-slate-900 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 whitespace-nowrap cursor-pointer self-start sm:self-auto"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>ডিফল্ট নিয়ম ফিরিয়ে আনুন</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              {/* Left Form: Upload or Edit Notice/Rule */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const cleanTitle = noticeTitleBn.trim();
+                  const cleanContent = noticeContentBn.trim();
+                  if (!cleanTitle || !cleanContent) {
+                    addToast('শিরোনাম এবং বিস্তারিত বিবরণ অবশ্যই লিখতে হবে', 'error');
+                    return;
+                  }
+                  if (noticeToEdit) {
+                    updateCustomerNotice(noticeToEdit.id, {
+                      category: noticeCategory,
+                      titleBn: cleanTitle,
+                      contentBn: cleanContent,
+                      image: noticeImage.trim() || undefined,
+                      isPinned: noticeIsPinned,
+                    });
+                    setNoticeToEdit(null);
+                  } else {
+                    addCustomerNotice({
+                      category: noticeCategory,
+                      titleBn: cleanTitle,
+                      contentBn: cleanContent,
+                      image: noticeImage.trim() || undefined,
+                      isPinned: noticeIsPinned,
+                    });
+                  }
+                  setNoticeTitleBn('');
+                  setNoticeContentBn('');
+                  setNoticeImage('');
+                  setNoticeIsPinned(false);
+                }}
+                className="lg:col-span-5 bg-slate-800/80 rounded-2xl border border-slate-700/80 p-5 space-y-4"
+              >
+                <div className="flex items-center justify-between border-b border-slate-700/70 pb-3">
+                  <h3 className="text-sm font-black text-white flex items-center gap-2">
+                    <Plus className="w-4 h-4 text-emerald-400" />
+                    <span>
+                      {noticeToEdit ? 'নিয়ম / নোটিশ এডিট করুন' : 'নতুন নিয়ম, শর্ত বা নোটিশ আপলোড করুন'}
+                    </span>
+                  </h3>
+                  {noticeToEdit && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setNoticeToEdit(null);
+                        setNoticeTitleBn('');
+                        setNoticeContentBn('');
+                        setNoticeImage('');
+                        setNoticeIsPinned(false);
+                      }}
+                      className="text-xs text-slate-400 hover:text-white font-bold cursor-pointer"
+                    >
+                      বাতিল
+                    </button>
+                  )}
+                </div>
+
+                {/* Type Selector */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-bold text-slate-300">ধরন নির্বাচন করুন</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {(
+                      [
+                        { id: 'notice', label: 'নোটিশ' },
+                        { id: 'rule', label: 'আয়ের নিয়ম' },
+                        { id: 'condition', label: 'শর্তাবলী' },
+                      ] as const
+                    ).map((opt) => (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => setNoticeCategory(opt.id)}
+                        className={`min-h-[40px] py-2 px-2.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
+                          noticeCategory === opt.id
+                            ? 'bg-amber-500 text-slate-950 border-amber-400'
+                            : 'bg-slate-900 text-slate-300 border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Title */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-bold text-slate-300">শিরোনাম *</label>
+                  <input
+                    type="text"
+                    required
+                    value={noticeTitleBn}
+                    onChange={(e) => setNoticeTitleBn(e.target.value)}
+                    placeholder="যেমন: প্রোডাক্ট শেয়ার কমিশন সংক্রান্ত নতুন ঘোষণা"
+                    className="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-bold text-slate-300">বিস্তারিত বিবরণ *</label>
+                  <textarea
+                    required
+                    rows={6}
+                    value={noticeContentBn}
+                    onChange={(e) => setNoticeContentBn(e.target.value)}
+                    placeholder="কাস্টমারদের জন্য নিয়ম, শর্ত বা নোটিশটি বিস্তারিত লিখুন..."
+                    className="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 leading-relaxed"
+                  />
+                </div>
+
+                {/* Optional Image Upload */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-slate-300">
+                    নোটিশ / ব্যানার ছবি (ঐচ্ছিক)
+                  </label>
+                  <input
+                    ref={noticeFileInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      setIsUploadingNoticeImage(true);
+                      try {
+                        const compressed = await compressImageFile(file, 1000, 1000, 0.8);
+                        if (compressed) {
+                          setNoticeImage(compressed);
+                          addToast('ছবি যুক্ত করা হয়েছে!', 'success');
+                        }
+                      } catch {
+                        addToast('ছবি প্রসেস করতে সমস্যা হয়েছে', 'error');
+                      } finally {
+                        setIsUploadingNoticeImage(false);
+                        e.target.value = '';
+                      }
+                    }}
+                  />
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      disabled={isUploadingNoticeImage}
+                      onClick={() => noticeFileInputRef.current?.click()}
+                      className="min-h-[40px] px-3.5 py-2 bg-slate-900 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-bold text-slate-200 inline-flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                    >
+                      <Upload className="w-3.5 h-3.5 text-amber-400" />
+                      <span>
+                        {isUploadingNoticeImage ? 'প্রসেস হচ্ছে...' : 'ছবি আপলোড করুন'}
+                      </span>
+                    </button>
+                    {noticeImage && (
+                      <button
+                        type="button"
+                        onClick={() => setNoticeImage('')}
+                        className="min-h-[40px] px-3 py-2 bg-rose-950/60 hover:bg-rose-900 text-rose-300 border border-rose-800/60 rounded-xl text-xs font-bold cursor-pointer"
+                      >
+                        ছবি সরান
+                      </button>
+                    )}
+                  </div>
+                  {noticeImage && (
+                    <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
+                      <img
+                        src={noticeImage}
+                        alt="Notice preview"
+                        className="w-full max-h-44 object-cover"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Pin checkbox */}
+                <label className="flex items-center gap-2.5 text-xs text-slate-300 font-bold cursor-pointer pt-1">
+                  <input
+                    type="checkbox"
+                    checked={noticeIsPinned}
+                    onChange={(e) => setNoticeIsPinned(e.target.checked)}
+                    className="w-4 h-4 rounded accent-amber-500 cursor-pointer"
+                  />
+                  <span>সবার উপরে গুরুত্বপূর্ণ হিসেবে পিন করে রাখুন</span>
+                </label>
+
+                <button
+                  type="submit"
+                  className="w-full min-h-[44px] py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                >
+                  <CheckCircle className="w-4 h-4" />
+                  <span>{noticeToEdit ? 'পরিবর্তন সেভ করুন' : 'প্রকাশ ও আপলোড করুন'}</span>
+                </button>
+              </form>
+
+              {/* Right Column: Published Rules & Notices List */}
+              <div className="lg:col-span-7 space-y-4">
+                {/* Filter & Search */}
+                <div className="bg-slate-800/80 rounded-2xl border border-slate-700/80 p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+                  <div className="relative flex-1">
+                    <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      value={noticeAdminSearch}
+                      onChange={(e) => setNoticeAdminSearch(e.target.value)}
+                      placeholder="শিরোনাম বা বিবরণ খুঁজুন..."
+                      className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                    />
+                  </div>
+                  <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+                    {(
+                      [
+                        { id: 'all', label: 'সবগুলো' },
+                        { id: 'notice', label: 'নোটিশ' },
+                        { id: 'rule', label: 'নিয়ম' },
+                        { id: 'condition', label: 'শর্ত' },
+                      ] as const
+                    ).map((f) => (
+                      <button
+                        key={f.id}
+                        type="button"
+                        onClick={() => setNoticeAdminFilter(f.id)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap cursor-pointer ${
+                          noticeAdminFilter === f.id
+                            ? 'bg-amber-500 text-slate-950'
+                            : 'bg-slate-900 text-slate-300 border border-slate-700 hover:text-white'
+                        }`}
+                      >
+                        {f.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Items List */}
+                <div className="space-y-3">
+                  {(() => {
+                    const q = noticeAdminSearch.trim().toLowerCase();
+                    const filtered = customerNotices
+                      .filter((n) => noticeAdminFilter === 'all' || n.category === noticeAdminFilter)
+                      .filter(
+                        (n) =>
+                          !q ||
+                          n.titleBn.toLowerCase().includes(q) ||
+                          n.contentBn.toLowerCase().includes(q)
+                      )
+                      .sort((a, b) => {
+                        if (Boolean(a.isPinned) !== Boolean(b.isPinned)) return a.isPinned ? -1 : 1;
+                        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                      });
+
+                    if (filtered.length === 0) {
+                      return (
+                        <div className="bg-slate-800/60 border border-slate-700 rounded-2xl p-10 text-center space-y-2">
+                          <ScrollText className="w-9 h-9 mx-auto text-slate-500" />
+                          <p className="text-sm font-bold text-slate-300">কোনো নিয়ম বা নোটিশ পাওয়া যায়নি</p>
+                          <p className="text-xs text-slate-500">
+                            বাম পাশের ফর্ম ব্যবহার করে নতুন নিয়ম, শর্ত বা নোটিশ আপলোড করুন।
+                          </p>
+                        </div>
+                      );
+                    }
+
+                    return filtered.map((item) => {
+                      const catLabel =
+                        item.category === 'notice'
+                          ? 'নোটিশ'
+                          : item.category === 'rule'
+                            ? 'আয়ের নিয়ম'
+                            : 'শর্তাবলী';
+                      const catColor =
+                        item.category === 'notice'
+                          ? 'text-amber-400'
+                          : item.category === 'rule'
+                            ? 'text-emerald-400'
+                            : 'text-rose-400';
+
+                      return (
+                        <div
+                          key={item.id}
+                          className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 sm:p-5 space-y-3"
+                        >
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div className="space-y-1 min-w-0 flex-1">
+                              <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
+                                <span className={catColor}>{catLabel}</span>
+                                {item.isPinned && (
+                                  <>
+                                    <span className="text-slate-600">·</span>
+                                    <span className="inline-flex items-center gap-1 text-amber-300">
+                                      <Pin className="w-3 h-3" />
+                                      <span>পিন করা</span>
+                                    </span>
+                                  </>
+                                )}
+                                <span className="text-slate-600">·</span>
+                                <span className="text-[11px] font-normal text-slate-400 tabular-nums">
+                                  {new Date(item.updatedAt || item.createdAt).toLocaleDateString('bn-BD', {
+                                    day: 'numeric',
+                                    month: 'short',
+                                    year: 'numeric',
+                                  })}
+                                </span>
+                              </div>
+                              <h4 className="text-sm sm:text-base font-bold text-white leading-snug">
+                                {item.titleBn}
+                              </h4>
+                            </div>
+
+                            {/* Admin Actions */}
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  updateCustomerNotice(item.id, { isPinned: !item.isPinned })
+                                }
+                                title={item.isPinned ? 'আনপিন করুন' : 'পিন করুন'}
+                                className={`min-h-[36px] px-2.5 py-1.5 rounded-lg text-xs font-bold border transition-colors cursor-pointer inline-flex items-center gap-1 ${
+                                  item.isPinned
+                                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                                    : 'bg-slate-900 text-slate-400 border-slate-700 hover:text-white'
+                                }`}
+                              >
+                                <Pin className="w-3.5 h-3.5" />
+                                <span>{item.isPinned ? 'পিন্ড' : 'পিন'}</span>
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setNoticeToEdit(item);
+                                  setNoticeCategory(item.category);
+                                  setNoticeTitleBn(item.titleBn);
+                                  setNoticeContentBn(item.contentBn);
+                                  setNoticeImage(item.image || '');
+                                  setNoticeIsPinned(Boolean(item.isPinned));
+                                }}
+                                className="min-h-[36px] px-2.5 py-1.5 bg-slate-900 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-bold inline-flex items-center gap-1 cursor-pointer"
+                              >
+                                <Edit3 className="w-3.5 h-3.5" />
+                                <span>এডিট</span>
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setDeleteConfirmation({
+                                    type: 'notice',
+                                    id: item.id,
+                                    name: item.titleBn,
+                                    details: `${catLabel} · কাস্টমার প্রোফাইল থেকেও মুছে যাবে`,
+                                  })
+                                }
+                                className="min-h-[36px] px-2.5 py-1.5 bg-rose-950/70 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-800/60 rounded-lg text-xs font-bold inline-flex items-center gap-1 transition-colors cursor-pointer"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                                <span>ডিলিট</span>
+                              </button>
+                            </div>
+                          </div>
+
+                          {item.image && (
+                            <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-950 max-w-md">
+                              <img
+                                src={item.image}
+                                alt={item.titleBn}
+                                className="w-full max-h-48 object-cover"
+                              />
+                            </div>
+                          )}
+
+                          <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-line">
+                            {item.contentBn}
+                          </p>
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Manual Customer Balance Adjustment Modal */}
@@ -5556,6 +6007,7 @@ export const AdminPage: React.FC = () => {
                   {deleteConfirmation.type === 'order' && 'কাস্টমার অর্ডার মুছে ফেলতে চান?'}
                   {deleteConfirmation.type === 'banner' && 'ব্যানার মুছে ফেলতে চান?'}
                   {deleteConfirmation.type === 'user' && 'কাস্টমার অ্যাকাউন্ট মুছে ফেলতে চান?'}
+                  {deleteConfirmation.type === 'notice' && 'নিয়ম / নোটিশ মুছে ফেলতে চান?'}
                   {(deleteConfirmation.type.startsWith('reset') || deleteConfirmation.type === 'factory-reset') &&
                     'রিসেট নিশ্চিত করুন'}
                 </h3>

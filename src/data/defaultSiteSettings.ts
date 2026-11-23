@@ -1,9 +1,60 @@
-import { SiteSettings, AdminBannerSlide } from '../types';
+import { SiteSettings, AdminBannerSlide, CustomerRuleNotice } from '../types';
 import fashionBannerImg from '../assets/images/banner_festive_fashion_1794884629707.jpg';
 import techBannerImg from '../assets/images/banner_smart_tech_1794884631007.jpg';
 import homeBannerImg from '../assets/images/banner_home_living_1794884630792.jpg';
 import bagsJewelryBannerImg from '../assets/images/banner_bags_jewelry_1794884631748.jpg';
 import winterBannerImg from '../assets/images/banner_winter_flash_1794884632066.jpg';
+
+export const DEFAULT_CUSTOMER_NOTICES: CustomerRuleNotice[] = [
+  {
+    id: 'notice-affiliate-2-percent',
+    category: 'rule',
+    isPinned: true,
+    titleBn: 'প্রোডাক্ট শেয়ার করে ২% কমিশন আয়ের নিয়মাবলী',
+    titleEn: '2% Product Share Commission Rules',
+    contentBn:
+      '১. প্রথমে আপনার অ্যাকাউন্টে লগইন করে যেকোনো পণ্যের পেজ বা প্রোফাইলের "শেয়ার ও রেফার আয়" অংশ থেকে আপনার ইউনিক শেয়ার লিংক (?product=...&aff=...) কপি করুন।\n' +
+      '২. সেই লিংক ফেসবুক, হোয়াটসঅ্যাপ, মেসেঞ্জার বা যেকোনো মাধ্যমে বন্ধু বা ক্রেতাদের সাথে শেয়ার করুন।\n' +
+      '৩. আপনার একটি লিংক থেকে যতজন মানুষ পণ্য অর্ডার করবে (যেমন ৫ জন বা তার বেশি), প্রত্যেকের পণ্যের মূল্যের ২% করে আলাদা কমিশন আপনার হিসাবের খাতায় যুক্ত হবে।\n' +
+      '৪. কাস্টমার পণ্য হাতে পেয়ে অর্ডার সম্পূর্ণ (Delivered) হলে কমিশনের টাকা অটোমেটিক আপনার ওয়ালেট ব্যালেন্সে যোগ হয়ে যাবে।',
+    createdAt: '2026-11-23T06:00:00.000Z',
+  },
+  {
+    id: 'condition-cancel-self-order',
+    category: 'condition',
+    isPinned: true,
+    titleBn: 'কমিশন বাতিল, কর্তন ও সেলফ-অর্ডার সংক্রান্ত শর্তাবলী',
+    titleEn: 'Commission Reversal & Self-Order Conditions',
+    contentBn:
+      '• অর্ডার দেওয়ার পর কাস্টমার অর্ডার বাতিল (Cancel) করলে বা রিটার্ন করলে উক্ত অর্ডারের ২% কমিশন আপনার অ্যাকাউন্ট/ওয়ালেট থেকে অটোমেটিক কেটে নেওয়া হবে।\n' +
+      '• ডেলিভারি চার্জের ওপর কোনো কমিশন প্রযোজ্য নয় — শুধুমাত্র প্রোডাক্টের দামের (Product Subtotal) ওপর ২% কমিশন হিসাব করা হবে।\n' +
+      '• নিজের শেয়ার করা লিংক ব্যবহার করে নিজে অর্ডার করলে (Self-Order) কমিশন যুক্ত হবে না। শুধুমাত্র অন্য ক্রেতার সম্পন্ন করা অর্ডারেই কমিশন কার্যকর হবে।',
+    createdAt: '2026-11-23T05:30:00.000Z',
+  },
+  {
+    id: 'rule-referral-welcome-bonus',
+    category: 'rule',
+    isPinned: false,
+    titleBn: 'বন্ধু রেফার (৳৩০) ও ওয়েলকাম বোনাস (৳৫০) নিয়ম',
+    titleEn: 'Friend Referral & Welcome Bonus Rules',
+    contentBn:
+      '• নতুন গ্রাহক হিসেবে রেজিস্ট্রেশন করলে আপনার অ্যাকাউন্টে ৳৫০ ওয়েলকাম বোনাস আনলক করার সুযোগ থাকে (১ম অর্ডার সম্পন্ন হওয়ার পর ২য় অর্ডারে ব্যবহারযোগ্য)।\n' +
+      '• আপনার প্রোফাইলের BB-XXXXXX রেফার কোড বা লিংক দিয়ে কোনো বন্ধু অ্যাকাউন্ট খুলে তার ১ম অর্ডার সম্পন্ন করলে আপনি প্রতি বন্ধুর জন্য ৳৩০ রেফার বোনাস পাবেন।',
+    createdAt: '2026-11-23T05:00:00.000Z',
+  },
+  {
+    id: 'notice-wallet-withdraw-payment',
+    category: 'notice',
+    isPinned: false,
+    titleBn: 'পেমেন্ট, ওয়ালেট রিচার্জ ও টাকা উত্তোলনের জরুরি নোটিশ',
+    titleEn: 'Payment, Wallet Top-Up & Withdrawal Notice',
+    contentBn:
+      '• অর্ডার করার সময় আপনি ক্যাশ অন ডেলিভারি অথবা ওয়ালেট ব্যালেন্স দিয়ে সরাসরি পেমেন্ট করতে পারবেন।\n' +
+      '• ওয়ালেটে পর্যাপ্ত টাকা না থাকলে বিকাশ, নগদ বা উপায় থেকে 01929637253 (পার্সোনাল) নম্বরে Send Money করে TrxID সাবমিট করে টাকা অ্যাড করতে পারবেন।\n' +
+      '• প্রোডাক্ট শেয়ার ও রেফার থেকে আয় করা টাকা দিয়ে কেনাকাটা করতে পারবেন অথবা ওয়ালেট থেকে সর্বনিম্ন ৳৫০ হলে বিকাশ, নগদ, উপায় বা রকেটে ক্যাশআউট/উত্তোলন রিকোয়েস্ট পাঠাতে পারবেন।',
+    createdAt: '2026-11-23T04:30:00.000Z',
+  },
+];
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   primaryColor: '#00873E',
@@ -41,9 +92,10 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     profitMargin: 5,
     autoSync: true,
     autoForwardOrders: true,
-    lastSyncTime: 'আজকের লাইভ সিঙ্ক সফল (১৩,৭৬৮টি পণ্য যুক্ত)',
-    totalSyncedProducts: 13768,
+    lastSyncTime: 'আজকের লাইভ সিঙ্ক সফল (১৩,৭১৬টি পণ্য যুক্ত)',
+    totalSyncedProducts: 13716,
   },
+  customerNotices: DEFAULT_CUSTOMER_NOTICES,
 };
 
 export const DEFAULT_BANNER_SLIDES: AdminBannerSlide[] = [

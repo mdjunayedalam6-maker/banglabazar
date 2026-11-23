@@ -28,12 +28,14 @@ import {
   Loader2,
   RotateCcw,
   Star,
+  ScrollText,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BANGLADESH_DIVISIONS } from '../data/mockData';
 import { DeliveryAddress, OrderStatus } from '../types';
 import { CustomerWallet } from '../components/CustomerWallet';
 import { CustomerReferral } from '../components/CustomerReferral';
+import { CustomerRulesNotices } from '../components/CustomerRulesNotices';
 import { compressImageFile } from '../utils/imageCompressor';
 
 const DEFAULT_FALLBACK_AVATAR =
@@ -64,6 +66,7 @@ export const ProfilePage: React.FC = () => {
     viewProductDetails,
     profileActiveTab,
     setProfileActiveTab,
+    customerNotices,
     addToast,
     setIsAuthModalOpen,
     openTrackOrder,
@@ -408,7 +411,7 @@ export const ProfilePage: React.FC = () => {
   };
 
   const navItems: {
-    id: 'settings' | 'addresses' | 'orders' | 'wallet' | 'referral' | 'wishlist';
+    id: 'settings' | 'addresses' | 'orders' | 'wallet' | 'referral' | 'rules' | 'wishlist';
     labelBn: string;
     labelEn: string;
     icon: React.ComponentType<{ className?: string }>;
@@ -447,6 +450,13 @@ export const ProfilePage: React.FC = () => {
       labelEn: 'Share & Earn (2%)',
       icon: Gift,
       meta: '২% আয়',
+    },
+    {
+      id: 'rules',
+      labelBn: 'নিয়ম, শর্ত ও নোটিশ',
+      labelEn: 'Rules & Notices',
+      icon: ScrollText,
+      meta: `${customerNotices.length}`,
     },
     {
       id: 'wishlist',
@@ -680,6 +690,9 @@ export const ProfilePage: React.FC = () => {
 
           {/* Tab: Referral */}
           {activeTab === 'referral' && <CustomerReferral />}
+
+          {/* Tab: Rules & Notices */}
+          {activeTab === 'rules' && <CustomerRulesNotices />}
 
           {/* Tab: Orders */}
           {activeTab === 'orders' && (

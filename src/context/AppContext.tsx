@@ -21,7 +21,8 @@ import {
   ReferralRecord,
   DeliveryAddress,
   OrderAffiliateCommission,
-  AffiliateCommissionStatus
+  AffiliateCommissionStatus,
+  CustomerRuleNotice
 } from '../types';
 import { 
   PRODUCTS as INITIAL_PRODUCTS, 
@@ -29,7 +30,7 @@ import {
   INITIAL_USER, 
   INITIAL_ORDERS 
 } from '../data/mockData';
-import { DEFAULT_SITE_SETTINGS, DEFAULT_BANNER_SLIDES } from '../data/defaultSiteSettings';
+import { DEFAULT_SITE_SETTINGS, DEFAULT_BANNER_SLIDES, DEFAULT_CUSTOMER_NOTICES } from '../data/defaultSiteSettings';
 import { getPaymentMethodDisplayLabel } from '../data/paymentConfig';
 import { TRANSLATIONS, formatPrice as formatPriceUtil } from '../utils/translations';
 import {
@@ -159,8 +160,8 @@ interface AppContextType {
   cartTotal: number;
   cartItemsCount: number;
   openCategory: (catSlug: string) => void;
-  profileActiveTab: 'overview' | 'orders' | 'wallet' | 'referral' | 'wishlist' | 'addresses' | 'settings';
-  setProfileActiveTab: (tab: 'overview' | 'orders' | 'wallet' | 'referral' | 'wishlist' | 'addresses' | 'settings') => void;
+  profileActiveTab: 'overview' | 'orders' | 'wallet' | 'referral' | 'rules' | 'wishlist' | 'addresses' | 'settings';
+  setProfileActiveTab: (tab: 'overview' | 'orders' | 'wallet' | 'referral' | 'rules' | 'wishlist' | 'addresses' | 'settings') => void;
   // Referral & Welcome Bonus Program
   activeReferralCode: string | null;
   setActiveReferralCode: (code: string | null) => void;
@@ -186,6 +187,11 @@ interface AppContextType {
   siteSettings: SiteSettings;
   updateSiteSettings: (newSettings: Partial<SiteSettings>) => void;
   resetSiteSettings: () => void;
+  customerNotices: CustomerRuleNotice[];
+  addCustomerNotice: (notice: Omit<CustomerRuleNotice, 'id' | 'createdAt' | 'updatedAt'>) => void;
+  updateCustomerNotice: (id: string, updates: Partial<CustomerRuleNotice>) => void;
+  deleteCustomerNotice: (id: string) => void;
+  resetCustomerNoticesToDefault: () => void;
   bannerSlides: AdminBannerSlide[];
   updateBannerSlides: (slides: AdminBannerSlide[]) => void;
   addBannerSlide: (slide: AdminBannerSlide) => void;
@@ -713,7 +719,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   });
 
   const [lastPlacedOrder, setLastPlacedOrder] = useState<Order | null>(null);
-  const [profileActiveTab, setProfileActiveTab] = useState<'overview' | 'orders' | 'wallet' | 'referral' | 'wishlist' | 'addresses' | 'settings'>('orders');
+  const [profileActiveTab, setProfileActiveTab] = useState<'overview' | 'orders' | 'wallet' | 'referral' | 'rules' | 'wishlist' | 'addresses' | 'settings'>('orders');
 
   // Referral Program State
   const [activeReferralCode, setActiveReferralCode] = useState<string | null>(() => {
@@ -2285,6 +2291,60 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     idbSet('oneroof_cached_site_settings', DEFAULT_SITE_SETTINGS).catch(() => {});
     syncSiteSettingsToSupabase(DEFAULT_SITE_SETTINGS).catch(() => {});
     addToast(language === 'bn' ? 'ডিফল্ট সেটিংস ও কালার রিস্টোর করা হয়েছে' : 'Default settings restored', 'info');
+  };
+
+  // Customer Rules, Conditions & Notices Operations (stored in siteSettings -> Supabase realtime)
+  const customerNotices: CustomerRuleNotice[] = useMemo(() => {
+    return Array.isArray(siteSettings.customerNotices)
+      ? siteSettings.customerNotices
+      : DEFAULT_CUSTOMER_NOTICES;
+  }, [siteSettings.customerNotices]);
+
+  const persistCustomerNotices = (nextNotices: CustomerRuleNotice[]) => {
+    setSiteSettings((prev) => {
+      const merged: SiteSettings = { ...prev, customerNotices: nextNotices };
+      safeLocalStorage.setItem('oneroof_site_settings', JSON.stringify(merged));
+      idbSet('oneroof_cached_site_settings', merged).catch(() => {});
+      syncSiteSettingsToSupabase(merged).catch(() => {});
+      return merged;
+    });
+  };
+
+  const addCustomerNotice = (
+    notice: Omit<CustomerRuleNotice, 'id' | 'createdAt' | 'updatedAt'>
+  ) => {
+    const newNotice: CustomerRuleNotice = {
+      ...notice,
+      id: `notice-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      createdAt: new Date().toISOString(),
+    };
+    persistCustomerNotices([newNotice, ...customerNotices]);
+    addToast(
+      language === 'bn' ? 'নতুন নিয়ম/নোটিশ সফলভাবে আপলোড হয়েছে!' : 'Notice published!',
+      'success'
+    );
+  };
+
+  const updateCustomerNotice = (id: string, updates: Partial<CustomerRuleNotice>) => {
+    const updated = customerNotices.map((n) =>
+      n.id === id ? { ...n, ...updates, updatedAt: new Date().toISOString() } : n
+    );
+    persistCustomerNotices(updated);
+    addToast(language === 'bn' ? 'তথ্য সফলভাবে আপডেট হয়েছে!' : 'Updated successfully!', 'success');
+  };
+
+  const deleteCustomerNotice = (id: string) => {
+    const updated = customerNotices.filter((n) => n.id !== id);
+    persistCustomerNotices(updated);
+    addToast(language === 'bn' ? 'নিয়ম/নোটিশ মুছে ফেলা হয়েছে' : 'Notice deleted', 'info');
+  };
+
+  const resetCustomerNoticesToDefault = () => {
+    persistCustomerNotices(DEFAULT_CUSTOMER_NOTICES);
+    addToast(
+      language === 'bn' ? 'ডিফল্ট নিয়ম ও শর্তাবলী ফিরিয়ে আনা হয়েছে' : 'Default rules restored',
+      'info'
+    );
   };
 
   const globalProfitMargin = siteSettings.globalProfitMargin || siteSettings.shopbaseConfig?.profitMargin || 5;
@@ -4208,6 +4268,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         siteSettings,
         updateSiteSettings,
         resetSiteSettings,
+        customerNotices,
+        addCustomerNotice,
+        updateCustomerNotice,
+        deleteCustomerNotice,
+        resetCustomerNoticesToDefault,
         bannerSlides,
         updateBannerSlides,
         addBannerSlide,
